@@ -103,10 +103,13 @@
                             <br>
                             <div class="row">
                                 <div class="col-md-4 text-left">
-                                    <label>Fecha Nacimiento(*)</label>
+                                    <label>Género(*)</label>
                                 </div>
                                 <div class="col-md-5">
-                                    <input v-model="egresado.fecha" type="date" class="form-control">
+                                    <select class="form-control" v-model="egresado.genero">
+                                        <option value="M">Masculino</option>
+                                        <option value="F">Femenino</option>
+                                    </select>
                                 </div>
                             </div>
                             <br>
@@ -171,12 +174,12 @@
                         <div class="card-header text-center bg-secondary">
                             <h4 class="title">EGRESADOS</h4>  
                         </div>
-                    <div class="card-body">
+                    <div class="card-body" style="font-size: 11px">
                         <div class="content table-responsive table-full-width">
                             <v-client-table :data="egresados" :columns="columns" :options="options">
                                 <div slot="Acciones" slot-scope="props">
                                 <button class="btn btn-danger" data-toggle="tooltip" v-on:click="deleteEgresado(props.row.IDEgresado)" data-placement="left" title="Eliminar"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                                <button data-target="#exampleModal" class="btn btn-info" data-toggle="modal" v-on:click="edit(props.row.IDEgresado,props.row.Codigo,props.row.DNI,props.row.Paterno,props.row.Materno,props.row.Celular,props.row.Ingreso,props.row.Egreso,props.row.Nombre,props.row.FechaNac,props.row.Correo,props.row.IDEscuela)" data-placement="left" title="Editar"><i class="fas fa-edit" style="color: white" aria-hidden="true"></i></button>
+                                <button data-target="#exampleModal" class="btn btn-info" data-toggle="modal" v-on:click="edit(props.row.IDEgresado,props.row.Codigo,props.row.DNI,props.row.Paterno,props.row.Materno,props.row.Celular,props.row.Ingreso,props.row.Egreso,props.row.Nombre,props.row.Genero,props.row.Correo,props.row.IDEscuela)" data-placement="left" title="Editar"><i class="fas fa-edit" style="color: white" aria-hidden="true"></i></button>
                                 </div>
                             </v-client-table>
                         </div>
@@ -198,7 +201,7 @@
                 paterno:null,
                 materno:null,
                 celular:null,
-                fecha:null,
+                genero:null,
                 ingreso:null,
                 egreso:null,
                 escuela:null,
@@ -215,11 +218,12 @@
                 Celular:null,
                 Ingreso:null,
                 Egreso:null,
-                FechaNac:null,
+                Genero:null,
                 Nombre:null,
                 Correo:null,
+                Escuela:null,
             }],
-            columns: ["Codigo","DNI","Nombre","Paterno","Celular","Correo","Ingreso","Egreso","Acciones"],
+            columns: ["Escuela","Codigo","DNI","Nombre","Paterno","Celular","Correo","Genero","Ingreso","Egreso","Acciones"],
             options: {
 				headings:
 				{
@@ -231,9 +235,10 @@
                     Egreso:"Egreso",
                     Nombre:"Nombre",
                     Correo:"Correo",
+                    Escuela:"Escuela",
 				},
-				sortable    : ["Codigo","DNI","Nombre","Paterno","Celular","Correo","Ingreso","Egreso"],
-				filterable  : ["Codigo","DNI","Nombre","Paterno","Celular","Correo","Ingreso","Egreso"]
+				sortable    : ["Escuela","Codigo","DNI","Nombre","Paterno","Celular","Correo","Ingreso","Egreso"],
+				filterable  : ["Escuela","Codigo","DNI","Nombre","Paterno","Celular","Correo","Ingreso","Egreso"]
             },
             escuelas:[],
         }
@@ -297,7 +302,7 @@
             if(e == 1)
             {
                 if(this.egresado.nombre == null || this.egresado.paterno == null || this.egresado.materno == null 
-                || this.egresado.fecha == null || this.egresado.ingreso == null || this.egresado.egreso == null)
+                || this.egresado.genero == null || this.egresado.ingreso == null || this.egresado.egreso == null)
                 {
                     swal({
                         type: 'error',
@@ -336,7 +341,7 @@
             else if(e == 2)
             {
                 if(this.egresado.nombre == null || this.egresado.paterno == null || this.egresado.materno == null 
-                || this.egresado.fecha == null || this.egresado.ingreso == null || this.egresado.egreso == null)
+                || this.egresado.genero == null || this.egresado.ingreso == null || this.egresado.egreso == null)
                 {
                     swal({
                         type: 'error',
@@ -418,7 +423,7 @@
                      }
                 });
 		},
-		edit(id,cod,dni,p,m,c,i,e,n,f,co,es)
+		edit(id,cod,dni,p,m,c,i,e,n,g,co,es)
 		{
             $('#editar').show();
             $('#add').hide();
@@ -429,7 +434,7 @@
             this.egresado.paterno       = p;
             this.egresado.materno       = m;
             this.egresado.celular       = c;
-            this.egresado.fecha         = f;
+            this.egresado.genero        = g;
             this.egresado.ingreso       = i;
             this.egresado.egreso        = e;
             this.egresado.correo        = co;

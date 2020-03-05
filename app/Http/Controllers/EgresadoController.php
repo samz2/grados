@@ -14,7 +14,8 @@ class EgresadoController extends Controller
      */
     public function index()
     {
-        $egresados  = Egresado::all();
+        $egresados  =   Egresado::join("escuela","egresado.IDEscuela","escuela.IDEscuela")
+                        ->select("egresado.*","escuela.Escuela")->get();
         return compact("egresados");
     }
 
@@ -48,7 +49,7 @@ class EgresadoController extends Controller
             $egresado->Paterno      = strtoupper($request->egresado["paterno"]);
             $egresado->Materno      = strtoupper($request->egresado["materno"]);
             $egresado->Celular      = $request->egresado["celular"];
-            $egresado->FechaNac     = $request->egresado["fecha"];
+            $egresado->Genero       = $request->egresado["genero"];
             $egresado->Ingreso      = $request->egresado["ingreso"];
             $egresado->Egreso       = $request->egresado["egreso"];
             $egresado->DNI          = $request->egresado["dni"];
@@ -101,17 +102,17 @@ class EgresadoController extends Controller
     public function update(Request $request)
     {
         $egresado = Egresado::where("IDEgresado",$request->egresado["IDEgresado"])->update([
-            "Codigo"   => $request->egresado["codigo"],
-            "Nombre"   => strtoupper($request->egresado["nombre"]),
+            "Codigo"    => $request->egresado["codigo"],
+            "Nombre"    => strtoupper($request->egresado["nombre"]),
             "Paterno"   => strtoupper($request->egresado["paterno"]),
             "Materno"   => strtoupper($request->egresado["materno"]),
             "Celular"   => $request->egresado["celular"],
-            "FechaNac"   => $request->egresado["fecha"],
+            "Genero"    => $request->egresado["genero"],
             "Ingreso"   => $request->egresado["ingreso"],
-            "Egreso"   => $request->egresado["egreso"],
-            "DNI"   => $request->egresado["dni"],
-            "Correo"   => strtolower($request->egresado["correo"]),
-            "IDEscuela"   => $request->egresado["escuela"],
+            "Egreso"    => $request->egresado["egreso"],
+            "DNI"       => $request->egresado["dni"],
+            "Correo"    => strtolower($request->egresado["correo"]),
+            "IDEscuela" => $request->egresado["escuela"],
         ]);
         $title  = "OK";
         $msj    = "Egresado registrado correctamente";

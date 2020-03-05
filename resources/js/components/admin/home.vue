@@ -60,51 +60,8 @@
               <a href="#" class="small-box-footer">Mas <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-success">
-              <div class="inner">
-                <h3>65</h3>
-
-                <p>Notificaciones</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-social-skype"></i>
-              </div>
-              <a href="#" class="small-box-footer">Mas <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
           <!-- ./col -->
         </div>
-        <!-- <div class="row text-justify-center">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header" style="background-color: blue;color: white">
-                        <h3>USUARIOS</h3>
-                    </div>
-                    <div class="card-body">
-                        <div class="col-md-12">
-                            <label for="">Usuario</label>
-                            <input type="text" v-model="user.user" class="form-control">
-                        </div>
-                        <div class="col-md-12">
-                            <label for="">Tipo</label>
-                            <select class="form-control" v-model="user.tipo">
-                                <option value="1">Administrador</option>
-                                <option value="2">Invitado</option>
-                            </select>
-                        </div>
-                        <div class="col-md-12">
-                            <label for="">Nombre</label>
-                            <input type="text" v-model="user.nombre" class="form-control">
-                        </div>
-                        <div class="col-md-12 text-center">
-                            <button class="btn btn-outline-success" @click="agregar()">Agregar <i class="fa fa-save"></i></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> -->
     </div>
 </template>
 
@@ -113,11 +70,11 @@
     data() {
         return {
             user: {
-				user:null,
-				nombre:null,
-				tipo:null,
-			},
-			
+              user:null,
+              nombre:null,
+              tipo:null,
+			      },
+            tipo:null
 		}
 	},
 	mounted()
@@ -129,7 +86,7 @@
 		
     },
     methods: {
-        agregar()
+    agregar()
 		{
 			axios.post("addUser",{
 				user:this.user
