@@ -1,0 +1,180 @@
+<template>
+    <div class="container">
+        <div class="row">
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-info">
+              <div class="inner">
+                <h3>150</h3>
+
+                <p>Trámites</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-bag"></i>
+              </div>
+              <a href="#" class="small-box-footer">Mas <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-success">
+              <div class="inner">
+                <h3>53<sup style="font-size: 20px">%</sup></h3>
+
+                <p>Egresados</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-stats-bars"></i>
+              </div>
+              <a href="#" class="small-box-footer">Mas <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-warning">
+              <div class="inner">
+                <h3>44</h3>
+
+                <p>Bachilleres</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-university"></i>
+              </div>
+              <a href="#" class="small-box-footer">Mas <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-danger">
+              <div class="inner">
+                <h3>65</h3>
+
+                <p>Titulados</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-pie-graph"></i>
+              </div>
+              <a href="#" class="small-box-footer">Mas <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-success">
+              <div class="inner">
+                <h3>65</h3>
+
+                <p>Notificaciones</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-social-skype"></i>
+              </div>
+              <a href="#" class="small-box-footer">Mas <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <!-- ./col -->
+        </div>
+        <!-- <div class="row text-justify-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header" style="background-color: blue;color: white">
+                        <h3>USUARIOS</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="col-md-12">
+                            <label for="">Usuario</label>
+                            <input type="text" v-model="user.user" class="form-control">
+                        </div>
+                        <div class="col-md-12">
+                            <label for="">Tipo</label>
+                            <select class="form-control" v-model="user.tipo">
+                                <option value="1">Administrador</option>
+                                <option value="2">Invitado</option>
+                            </select>
+                        </div>
+                        <div class="col-md-12">
+                            <label for="">Nombre</label>
+                            <input type="text" v-model="user.nombre" class="form-control">
+                        </div>
+                        <div class="col-md-12 text-center">
+                            <button class="btn btn-outline-success" @click="agregar()">Agregar <i class="fa fa-save"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+    </div>
+</template>
+
+<script>
+    export default {
+    data() {
+        return {
+            user: {
+				user:null,
+				nombre:null,
+				tipo:null,
+			},
+			
+		}
+	},
+	mounted()
+	{
+		
+	},
+	created()
+    {
+		
+    },
+    methods: {
+        agregar()
+		{
+			axios.post("addUser",{
+				user:this.user
+			}).then(data=>{
+				console.log(data);
+                // setTimeout(() => {
+                //     location.reload();
+                // }, 1500);
+			}).catch(error=>{
+				console.log(error);	
+			})
+		},
+		getAutenticacion()
+        {
+            this.$Progress.start();
+            axios.get("autenticacion")
+            .then(data=>
+            {
+                this.tipo = data.data.id;
+                this.$Progress.finish();
+            }
+            ).catch(error=>{
+                console.log(error);
+            });
+            
+        },
+		getMatriculados()
+		{
+			this.$Progress.start();
+			axios.get("getNummatriculados")
+			.then(data=>
+			{
+				this.matriculados = data.data.cantidad;
+				this.$Progress.finish();
+				console.log(data.data);
+			}
+			).catch(error=>
+			{
+				console.log(error);
+			})
+		},
+
+		
+    }
+}
+
+</script>
+
