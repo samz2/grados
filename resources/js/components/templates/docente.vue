@@ -5,84 +5,126 @@
 				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
-							<button  class="btn btn-outline-primary" @click="ocultar('1')">
-							Docente <i class="fa fa-plus"></i>
-							</button>
-							<button  class="btn btn-outline-primary" @click="ocultar('2')">
-								<i class="fa fa-minus"></i>
-							</button>
+							<button data-target="#exampleModal" class="btn btn-outline-secondary" data-toggle="modal" data-placement="left" >Docente <i class="fa fa-plus"></i></button>
 						</div>
 					</div>
 				</div>
-	            <div class="card card-default"  id="objetivo">
-	                <div class="card-header text-center" style="background-color: #2FA3C6; color: white;">
-	                    <h4 class="title">DOCENTE</h4>  
-	                </div>
-					<div class="card-body">
-                        <div class="row">
-                            <!-- <div class="col-md-2">
-                                <div class="form-group">
-                                    <label>Código (*)</label>
-                                    <input v-model="egresado.codigo" maxlength="10" onKeyPress="return soloNumeros(event)" class="form-control">
+	            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                        <div class="modal-header text-center bg-secondary">
+                            <h5 class="modal-titler" id="exampleModalLabel">Datos Docente</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-12 text-center"><b>Datos Personales</b></div>
+                                
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-md-4 text-left">
+                                        <label>DNI(*)</label>
                                 </div>
-                            </div> -->
-                            <div class="col-md-2" id="dni">
-                                <div class="form-group">
-                                    <label>DNI (*)</label>
+                                <div class="col-md-3">
                                     <input v-model="docente.dni" maxlength="8" onKeyPress="return soloNumeros(event)" class="form-control">
-                                </div>
+                                </div>    
                             </div>
-                            <div class="col-md-2" id="aux">
-                                <div class="form-group">
-                                    <label>DNI (*)</label>
-                                    <input v-model="docente.dni" maxlength="8" readonly class="form-control">
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="form-group">
+                            <br>
+                            
+                            <div class="row">
+                                <div class="col-md-4 text-left">
                                     <label>Nombre(*)</label>
-                                    <input v-model="docente.nombres" maxlength="50" class="form-control">
+                                </div>
+                                <div class="col-md-5">
+                                    <input v-model="docente.nombres" maxlength="50" class="form-control" onKeyPress="return sololetras(event)">
                                 </div>
                             </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label>Apellidos (*)</label>
-                                    <input v-model="docente.apellidos" maxlength="50" class="form-control">
+                            <br>
+                            <div class="row">
+                                <div class="col-md-4 text-left">
+                                    <label>Apellidos(*)</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input v-model="docente.apellidos" maxlength="100" onKeyPress="return sololetras(event)" class="form-control">
                                 </div>
                             </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
+                            <br>
+                            <div class="row">
+                                <div class="col-md-4 text-left">
                                     <label>Celular(*)</label>
-                                    <input v-model="docente.celular" maxlength="9" class="form-control">
+                                </div>
+                                <div class="col-md-4">
+                                    <input v-model="docente.celular" maxlength="9" onKeyPress="return soloNumeros(event)" class="form-control">
                                 </div>
                             </div>
-                            <div class="col-md-2">
-                                <div class="form-group">
+                            <br>
+                            <div class="row">
+                                <div class="col-md-12 text-center"><b>Datos Académicos</b></div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-md-4 text-left">
+                                        <label>Código (*)</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <input v-model="docente.codigo" maxlength="10" class="form-control">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-4 text-left">
+                                    <label>Categoria(*)</label>
+                                </div>
+                                <div class="col-md-4">
+                                    <select class="form-control" v-model="docente.categoria">
+                                        <option value="PRINCIPAL">PRINCIPAL</option>
+                                        <option value="ASOCIADO">ASOCIADO</option>
+                                        <option value="AUXILIAR">AUXILIAR</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-4 text-left">
+                                    <label>Dedicación(*)</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <select class="form-control" v-model="docente.dedicacion">
+                                        <option value="TC">TIEMPO COMPLETO</option>
+                                        <option value="DE">DEDICACIÓN EXCLUSIVA</option>
+                                        <option value="TP">TIEMPO PARCIAL</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-4 text-left">
                                     <label>Escuela(*)</label>
+                                </div>
+                                <div class="col-md-7">
                                     <select v-model="docente.escuela" class="form-control">
                                         <option v-for="e in escuelas" :key="e.IDEscuela" :value="e.IDEscuela">{{e.Escuela}}</option>
                                     </select>
                                 </div>
-                            </div>
-                            
-                        <div class="row text-left">
-                            <div class="col-md-3"  id="add">
-                                <button @click="addDocente()" class="btn btn-outline-success">Agregar <i class="fa fa-save"></i></button>
-                            </div>
-                            <div class="col-md-3" id="editar">
-                                <button @click="editDocente()"  class="btn btn-outline-success">Editar <i class="fa fa-edit"></i></button>
-                            </div>
+                            </div>      
+                        <div class="modal-footer">
+                            <button @click="addDocente(1)" id="add" class="btn btn-outline-success" data-dismiss="modal">Agregar <i class="fa fa-save"></i></button>
+                            <button @click="addDocente(2)" id="editar" class="btn btn-outline-success" data-dismiss="modal">Editar <i class="fa fa-pencil"></i></button>
+                            <button type="button" class="btn btn-outline-secondary" @click="load()" data-dismiss="modal">Cerrar <i class="fa fa-close"></i></button>
                         </div>
-                        <div class="clearfix"></div>
-	                </div>
-				</div>
-			</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- final modal -->
         </div>
-        </div>
+        
             <div class="row">
                 <div class="col-md-12">
-                    <div class="card card-default">
-                            <div class="card-header text-center" style="background-color: #2FA3C6; color: white;">
+                    <div class="card card-secondary">
+                            <div class="card-header text-center">
                                 <h4 class="title">DOCENTES</h4>  
                             </div>
                         <div class="card-body">
@@ -97,6 +139,8 @@
                     </div>
                 </div>
             </div>
+        </div>    
+        </div>
     </div>
 </template>
 <script>
@@ -109,6 +153,9 @@
                 apellidos:null,
                 celular:null,
                 escuela:null,
+                codigo:null,
+                dedicacion:null,
+                categoria:null,
 			},
             escuelas:[],
             docentes	:[{
@@ -135,30 +182,13 @@
         }
 	},
 	created(){
-        this.Fecha();
         this.getDatos();
         this.getEscuelas();
 	},
 	mounted(){
-        $('#objetivo').hide();
         $('#editar').hide();
-        $('#grado').hide();
-        $('#aux').hide();
 	},
     methods: {
-        Fecha()
-        {
-            axios.get("getAnios")
-            .then(data=>
-            {
-                this.anios = data.data.anios;
-                this.$Progress.finish();
-            }
-            ).catch(error=>{
-                console.log(error);
-            })
-              
-        },
 		getDatos()
         {
             this.$Progress.start();
@@ -184,16 +214,17 @@
             });
         },
         
-		addDocente()
+		addDocente(e)
 		{
             if(this.docente.nombres == null || this.docente.apellidos == null || this.docente.celular == null 
-            || this.docente.escuela == null)
+            || this.docente.escuela == null || this.docente.codigo == null || this.docente.dedicacion == null
+            || this.docente.categoria == null || this.docente.dni == null)
             {
                 swal({
 					type: 'error',
 					title: 'Llenar los datos obligatorios',
 				});
-            }else{
+            }else if(e == 1){
                 this.$Progress.start();
                 axios.post("addDocente",{
                     docente:this.docente
@@ -206,9 +237,32 @@
                         timer: 2000
                     });
                     this.$Progress.finish();
-                    setTimeout(() => {
-                        location.reload();
-                    }, 1500);
+                    this.getDatos();
+                    this.load();
+                    }).catch(error=>{
+                    console.log(error);	
+                    swal({
+                        type: 'error',
+                        title: 'Error',
+                        text: 'Comuniquese con un administrador',
+                        showConfirmButton: true,
+                    });
+                })
+            }else if(e == 3){
+                this.$Progress.start();
+                axios.post("updateDocente",{
+                    docente:this.docente
+                }).then(data=>{
+                    swal({
+                        type: data.data.type,
+                        title: data.data.title,
+                        text: data.data.text,
+                        showConfirmButton: false,
+                        timer: 2000
+                    });
+                    this.$Progress.finish();
+                    this.getDatos();
+                    this.load();
                     }).catch(error=>{
                     console.log(error);	
                     swal({
@@ -219,27 +273,18 @@
                     });
                 })
             }
-			
 		},
-		ocultar(id){
-			if(id == '1')
-			{
-                $('#objetivo').show();
-                $('#nivel').show();
+		load(){
                 $('#add').show();
-                $('#curso').show();
                 $('#editar').hide();
                 this.docente.dni = null;
                 this.docente.nombres = null;
                 this.docente.apellidos = null;
                 this.docente.celular = null;
                 this.docente.escuela = null;
-			}
-			else if(id == '2')
-			{
-				$('#objetivo').hide();	
-			}
-			
+                this.docente.codigo = null;
+                this.docente.dedicacion = null;
+                this.docente.categoria = null;
 		},
 		edit(dni,nombres,apellidos,celular)
 		{
@@ -253,31 +298,7 @@
             this.docente.apellidos  = apellidos;
             this.docente.celular    = celular;
 		},
-		editDocente()
-		{
-			axios.post("updateDocente",{
-				docente:this.docente
-			}).then(data=>{
-				console.log(data);
-				swal({
-					type: 'success',
-					title: 'Docente editado correctamente',
-					showConfirmButton: false,
-					timer: 2000
-                });
-                 setTimeout(() => {
-                        location.reload();
-                    }, 1500);
-			}).catch(error=>{
-				console.log(error);	
-				swal({
-					type: 'error',
-					title: 'Error',
-					text: 'Comuniquese con el administrador del sistema',
-					showConfirmButton: true,
-				});
-			})
-        },
+		
     }
 }
 </script>

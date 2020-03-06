@@ -5,19 +5,7 @@
 				<div class="row">
 					<div class="col-md-12">
 						<div class="form-group">
-							<!-- <button  class="btn btn-outline-primary" @click="ocultar('1')">
-							Egresado <i class="fa fa-plus"></i>
-							</button> -->
                             <button data-target="#exampleModal" class="btn btn-outline-secondary" data-toggle="modal" data-placement="left" >Egresado <i class="fa fa-plus"></i></button>
-							<!-- <button  class="btn btn-outline-primary" @click="ocultar('2')">
-								<i class="fa fa-minus"></i>
-							</button> -->
-                            <!-- <router-link :to="'bachilleres'" target="_blank"  class="btn btn-warning">
-							Bachilleres	<i class="far fa-file-pdf"></i>
-							</router-link>
-                            <router-link :to="'titulados'" target="_blank" class="btn btn-success">
-							Titulados <i class="far fa-file-pdf"></i>
-							</router-link> -->
 						</div>
 					</div>
 				</div>
@@ -149,13 +137,6 @@
                                     </select>
                                 </div>
                             </div>      
-                            <!-- <div class="row text-left">
-                                <div class="col-md-2">
-                                </div>
-                                <div class="col-md-2">
-                                    <button @click="editArea()" id="editar" class="btn btn-outline-success">Editar <i class="fa fa-edit"></i></button>
-                                </div>
-                            </div> -->
                         <div class="modal-footer">
                             <button @click="addEgresado(1)" id="add" class="btn btn-outline-success" data-dismiss="modal">Agregar <i class="fa fa-save"></i></button>
                             <button @click="addEgresado(2)" id="editar" class="btn btn-outline-success" data-dismiss="modal">Editar <i class="fa fa-pencil"></i></button>

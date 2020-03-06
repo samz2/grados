@@ -95,12 +95,42 @@
                         <p>Docentes</p>
                       </router-link>
                     </li>
-                    {{-- <li class="nav-item">
-                      <router-link to="cargos" class="nav-link">
+                    <li class="nav-item">
+                      <router-link to="estados" class="nav-link">
                         <i class="fas fa-list nav-icon"></i>
-                        <p>Cargos</p>
+                        <p>Estados</p>
                       </router-link>
-                    </li> --}}
+                    </li>
+                    <li class="nav-item">
+                      <router-link to="sesion" class="nav-link">
+                        <i class="fas fa-list nav-icon"></i>
+                        <p>Sesión</p>
+                      </router-link>
+                    </li>
+                    <li class="nav-item">
+                      <router-link to="carrera" class="nav-link">
+                        <i class="fas fa-list nav-icon"></i>
+                        <p>Carrera</p>
+                      </router-link>
+                    </li>
+                    <li class="nav-item">
+                      <router-link to="comision" class="nav-link">
+                        <i class="fas fa-list nav-icon"></i>
+                        <p>Comisión</p>
+                      </router-link>
+                    </li>
+                    <li class="nav-item">
+                      <router-link to="decano" class="nav-link">
+                        <i class="fas fa-list nav-icon"></i>
+                        <p>Decano</p>
+                      </router-link>
+                    </li>
+                    <li class="nav-item">
+                      <router-link to="usuarios" class="nav-link">
+                        <i class="fas fa-list nav-icon"></i>
+                        <p>Usuarios</p>
+                      </router-link>
+                    </li>
                   </ul>
                 </li> 
                 <li class="nav-item has-treeview">
@@ -118,17 +148,6 @@
                         <p>Egresados</p>
                       </router-link>
                     </li>
-                    {{-- <li class="nav-item">
-                      <router-link to="bachilleres" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Bachilleres</p>
-                      </router-link>
-                    </li>
-                    <li class="nav-item">
-                      <router-link to="titulados" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Titulados</p>
-                      </router-link> --}}
                     </li>
                   </ul>
                 </li>
@@ -161,29 +180,6 @@
                     </li>
                   </ul>
                 </li>
-                {{-- <li class="nav-item has-treeview">
-                  <a href="#" class="nav-link">
-                    <i class="nav-icon fas fa-folder"></i>
-                    <p>
-                      Notificaciones
-                      <i class="fas fa-angle-left right"></i>
-                    </p>
-                  </a>
-                  <ul class="nav nav-treeview">
-                    <li class="nav-item">
-                      <router-link to="configuracion" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Configuración</p>
-                      </router-link>
-                    </li>
-                    <li class="nav-item">
-                      <router-link to="configuracion" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Notificar via WSP</p>
-                      </router-link>
-                    </li>
-                  </ul>
-                </li> --}}
                 <li class="nav-item has-treeview">
                   <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-folder"></i>

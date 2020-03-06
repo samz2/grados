@@ -42,10 +42,13 @@ class DocentesController extends Controller
         if(count($objDocente) == 0)
         {
             $docente->DNI           = $request->docente["dni"];
-            $docente->Nombres       = ucwords($request->docente["nombres"]);
-            $docente->Apellidos     = ucwords($request->docente["apellidos"]);
+            $docente->Nombres       = strtoupper($request->docente["nombres"]);
+            $docente->Apellidos     = strtoupper($request->docente["apellidos"]);
             $docente->Celular       = $request->docente["celular"];
             $docente->IDEscuela     = $request->docente["escuela"];
+            $docente->Dedicacion    = $request->docente["dedicacion"];
+            $docente->Categoria     = $request->docente["categoria"];
+            $docente->Codigo        = $request->docente["codigo"];
             $docente->created_at    = $hoy;
             $docente->save();
             $type   = "success";

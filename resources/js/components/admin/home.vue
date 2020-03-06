@@ -20,12 +20,12 @@
             <!-- small box -->
             <div class="small-box bg-success">
               <div class="inner">
-                <h3>53<sup style="font-size: 20px">%</sup></h3>
+                <h3>53</h3>
 
                 <p>Egresados</p>
               </div>
               <div class="icon">
-                <i class="ion ion-stats-bars"></i>
+                <i class="ion ion-university"></i>
               </div>
               <a href="#" class="small-box-footer">Mas <i class="fas fa-arrow-circle-right"></i></a>
             </div>
@@ -55,7 +55,7 @@
                 <p>Titulados</p>
               </div>
               <div class="icon">
-                <i class="ion ion-pie-graph"></i>
+                <i class="ion ion-university"></i>
               </div>
               <a href="#" class="small-box-footer">Mas <i class="fas fa-arrow-circle-right"></i></a>
             </div>
