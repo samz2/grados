@@ -97,12 +97,26 @@ class DocentesController extends Controller
     {
         $docente = Docentes::where("DNI",$request->docente["dni"])->update([
             "DNI"           => $request->docente["dni"],
-            "Nombres"       => ucwords($request->docente["nombres"]),
-            "Apellidos"     => ucwords($request->docente["apellidos"]),
+            "Nombres"       => strtoupper($request->docente["nombres"]),
+            "Apellidos"     => strtoupper($request->docente["apellidos"]),
             "Celular"       => $request->docente["celular"],
             "IDEscuela"     => $request->docente["escuela"],
+            "Dedicacion"    => $request->docente["dedicacion"],
+            "Categoria"     => $request->docente["categoria"],
+            "Codigo"        => strtoupper($request->docente["codigo"]),
         ]);
-        return "ok";
+
+        if($docente)
+        {
+            $type   = "success";
+            $title  = "Bien";
+            $text   = "Docente actualizado con éxito";
+        }else{
+            $type   = "warning";
+            $title  = "Ups";
+            $text   = "Ocurrió un roblema";
+        }
+        return compact("type","title","text");
     }
 
     /**

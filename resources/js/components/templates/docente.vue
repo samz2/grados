@@ -131,7 +131,7 @@
                             <div class="content table-responsive table-full-width">
                                 <v-client-table :data="docentes" :columns="columns" :options="options">
                                     <div slot="Acciones" slot-scope="props">
-                                    <button class="btn btn-info" data-toggle="tooltip" v-on:click="edit(props.row.DNI,props.row.Nombres,props.row.Apellidos,props.row.Celular)" data-placement="left" title="Editar"><i class="fas fa-edit" style="color: white" aria-hidden="true"></i></button>
+                                     <button data-target="#exampleModal" class="btn btn-info" data-toggle="modal" v-on:click="edit(props.row.DNI,props.row.Codigo,props.row.Nombres,props.row.Apellidos,props.row.Celular,props.row.Dedicacion,props.row.Categoria,props.row.IDEscuela)" data-placement="left" title="Editar"><i class="fas fa-edit" style="color: white" aria-hidden="true"></i></button>
                                     </div>
                                 </v-client-table>
                             </div>
@@ -165,8 +165,11 @@
                 Celular:null,
                 Escuela:null,
                 IDEscuela:null,
+                Codigo:null,
+                Dedicacion:null,
+                Categoria:null,
             }],
-            columns: ["DNI","Nombres","Apellidos","Celular","Escuela","Acciones"],
+            columns: ["DNI","Codigo","Nombres","Apellidos","Celular","Categoria","Dedicacion","Escuela","Acciones"],
             options: {
 				headings:
 				{
@@ -175,9 +178,12 @@
                     Celular:"Celular",
                     Escuela:"Escuela",
                     Nombres:"Nombres",
+                    Codigo:"Codigo",
+                    Dedicacion:"Dedicacion",
+                    Categoria:"Categoria",
 				},
-				sortable    : ["DNI","Nombres","Apellidos","Celular","Escuela"],
-				filterable  : ["DNI","Nombres","Apellidos","Celular","Escuela"]
+				sortable    : ["DNI","Codigo","Nombres","Apellidos","Celular","Categoria","Dedicacion","Escuela"],
+				filterable  : ["DNI","Codigo","Nombres","Apellidos","Celular","Categoria","Dedicacion","Escuela"]
             },
         }
 	},
@@ -248,7 +254,7 @@
                         showConfirmButton: true,
                     });
                 })
-            }else if(e == 3){
+            }else if(e == 2){
                 this.$Progress.start();
                 axios.post("updateDocente",{
                     docente:this.docente
@@ -286,17 +292,21 @@
                 this.docente.dedicacion = null;
                 this.docente.categoria = null;
 		},
-		edit(dni,nombres,apellidos,celular)
+		edit(DNI,Codigo,Nombres,Apellidos,Celular,Dedicacion,Categoria,IDEscuela)
 		{
 			$('#objetivo').show();
             $('#editar').show();
             $('#add').hide();
             $('#dni').hide();
             $('#aux').show();
-            this.docente.dni        = dni;
-            this.docente.nombres    = nombres;
-            this.docente.apellidos  = apellidos;
-            this.docente.celular    = celular;
+            this.docente.dni        = DNI;
+            this.docente.nombres    = Nombres;
+            this.docente.apellidos  = Apellidos;
+            this.docente.celular    = Celular;
+            this.docente.escuela    = IDEscuela;
+            this.docente.codigo     = Codigo;
+            this.docente.dedicacion = Dedicacion;
+            this.docente.categoria  = Categoria;
 		},
 		
     }

@@ -2815,19 +2815,25 @@ __webpack_require__.r(__webpack_exports__);
         Apellidos: null,
         Celular: null,
         Escuela: null,
-        IDEscuela: null
+        IDEscuela: null,
+        Codigo: null,
+        Dedicacion: null,
+        Categoria: null
       }],
-      columns: ["DNI", "Nombres", "Apellidos", "Celular", "Escuela", "Acciones"],
+      columns: ["DNI", "Codigo", "Nombres", "Apellidos", "Celular", "Categoria", "Dedicacion", "Escuela", "Acciones"],
       options: {
         headings: {
           DNI: "DNI",
           Apellidos: "Apellidos",
           Celular: "Celular",
           Escuela: "Escuela",
-          Nombres: "Nombres"
+          Nombres: "Nombres",
+          Codigo: "Codigo",
+          Dedicacion: "Dedicacion",
+          Categoria: "Categoria"
         },
-        sortable: ["DNI", "Nombres", "Apellidos", "Celular", "Escuela"],
-        filterable: ["DNI", "Nombres", "Apellidos", "Celular", "Escuela"]
+        sortable: ["DNI", "Codigo", "Nombres", "Apellidos", "Celular", "Categoria", "Dedicacion", "Escuela"],
+        filterable: ["DNI", "Codigo", "Nombres", "Apellidos", "Celular", "Categoria", "Dedicacion", "Escuela"]
       }
     };
   },
@@ -2895,7 +2901,7 @@ __webpack_require__.r(__webpack_exports__);
             showConfirmButton: true
           });
         });
-      } else if (e == 3) {
+      } else if (e == 2) {
         this.$Progress.start();
         axios.post("updateDocente", {
           docente: this.docente
@@ -2936,16 +2942,20 @@ __webpack_require__.r(__webpack_exports__);
       this.docente.dedicacion = null;
       this.docente.categoria = null;
     },
-    edit: function edit(dni, nombres, apellidos, celular) {
+    edit: function edit(DNI, Codigo, Nombres, Apellidos, Celular, Dedicacion, Categoria, IDEscuela) {
       $('#objetivo').show();
       $('#editar').show();
       $('#add').hide();
       $('#dni').hide();
       $('#aux').show();
-      this.docente.dni = dni;
-      this.docente.nombres = nombres;
-      this.docente.apellidos = apellidos;
-      this.docente.celular = celular;
+      this.docente.dni = DNI;
+      this.docente.nombres = Nombres;
+      this.docente.apellidos = Apellidos;
+      this.docente.celular = Celular;
+      this.docente.escuela = IDEscuela;
+      this.docente.codigo = Codigo;
+      this.docente.dedicacion = Dedicacion;
+      this.docente.categoria = Categoria;
     }
   }
 });
@@ -51033,7 +51043,8 @@ var render = function() {
                                 {
                                   staticClass: "btn btn-info",
                                   attrs: {
-                                    "data-toggle": "tooltip",
+                                    "data-target": "#exampleModal",
+                                    "data-toggle": "modal",
                                     "data-placement": "left",
                                     title: "Editar"
                                   },
@@ -51041,9 +51052,13 @@ var render = function() {
                                     click: function($event) {
                                       return _vm.edit(
                                         props.row.DNI,
+                                        props.row.Codigo,
                                         props.row.Nombres,
                                         props.row.Apellidos,
-                                        props.row.Celular
+                                        props.row.Celular,
+                                        props.row.Dedicacion,
+                                        props.row.Categoria,
+                                        props.row.IDEscuela
                                       )
                                     }
                                   }
