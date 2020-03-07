@@ -50764,7 +50764,10 @@ var render = function() {
                             }
                           ],
                           staticClass: "form-control",
-                          attrs: { maxlength: "10" },
+                          attrs: {
+                            maxlength: "10",
+                            onKeyPress: "return alfa(event)"
+                          },
                           domProps: { value: _vm.docente.codigo },
                           on: {
                             input: function($event) {

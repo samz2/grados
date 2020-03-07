@@ -272,6 +272,10 @@
   {
     return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122) || event.charCode <= 39)
   }
+  function alfa(event)
+  {
+    return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122) || (event.charCode >= 48 && event.charCode <= 57))
+  }
 </script>	
 </body>
 </html>

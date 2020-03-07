@@ -70,7 +70,7 @@
                                         <label>Código (*)</label>
                                 </div>
                                 <div class="col-md-3">
-                                    <input v-model="docente.codigo" maxlength="10" class="form-control">
+                                    <input v-model="docente.codigo" maxlength="10" class="form-control" onKeyPress="return alfa(event)">
                                 </div>
                             </div>
                             <br>
