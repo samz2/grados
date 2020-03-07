@@ -47,6 +47,10 @@ Route::post('/addTramite','TramiteController@store');
 Route::get('/getTramites','TramiteController@index');
 Route::post('/updateEstado','TramiteController@update');
 
+Route::post('/addEstado','EstadosController@store');
+Route::get('/getEstados','EstadosController@index');
+Route::post('/updateEstados','EstadosController@update');
+
 Route::get('/getEscuelas','EscuelasController@index');
 
 Route::get('{path}', 'HomeController@index');

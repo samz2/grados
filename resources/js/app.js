@@ -24,6 +24,7 @@ const routes = [
     { path: '/expeditobachiller', component: require('./components/admin/expeditob.vue').default },
     { path: '/expeditotitulo', component: require('./components/admin/expeditot.vue').default },
     { path: '/tramite', component: require('./components/admin/tramite.vue').default },
+    { path: '/estados', component: require('./components/admin/estado.vue').default },
   ];
 const options = {
   color: '#bffaf3',
@@ -63,6 +64,7 @@ Vue.component('docente', require('./components/templates/docente.vue').default);
 Vue.component('expeditob', require('./components/templates/expeditob.vue').default);
 Vue.component('expeditot', require('./components/templates/expeditot.vue').default);
 Vue.component('tramite', require('./components/templates/tramite.vue').default);
+Vue.component('estado', require('./components/templates/estados.vue').default);
 Vue.component('v-select', vSelect);
 
 /**
