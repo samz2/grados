@@ -36,7 +36,15 @@ class EscuelasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $hoy = date("Y-m-d");
+        $escuela = new Escuelas();
+        $escuela->Escuela       = strtoupper($request->carrera["carrera"]);
+        $escuela->created_at    = $hoy;
+        $escuela->save();
+        $type   = "success";
+        $title  = "Bien";
+        $text   = "Carrera creada con éxito";
+        return compact("type","title","text");
     }
 
     /**
@@ -68,9 +76,22 @@ class EscuelasController extends Controller
      * @param  \App\escuelas  $escuelas
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, escuelas $escuelas)
+    public function update(Request $request)
     {
-        //
+        $escuela = Escuelas::where("IDEscuela",$request->carrera["idcarrera"])->update([
+            "Escuela"        => strtoupper($request->carrera["carrera"]),
+        ]);
+        if($escuela)
+        {
+            $type   = "success";
+            $title  = "Bien";
+            $text   = "Carrera actualizada con éxito";
+        }else{
+            $type   = "warning";
+            $title  = "Ups";
+            $text   = "Ocurrió un roblema";
+        }
+        return compact("type","title","text");
     }
 
     /**
@@ -79,8 +100,9 @@ class EscuelasController extends Controller
      * @param  \App\escuelas  $escuelas
      * @return \Illuminate\Http\Response
      */
-    public function destroy(escuelas $escuelas)
+    public function destroy($id)
     {
-        //
+        $Escuela = Escuelas::where("IDEscuela","=",$id)->delete();
+        return "OK";
     }
 }

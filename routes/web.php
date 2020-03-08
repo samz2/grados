@@ -56,5 +56,7 @@ Route::get('/getSesiones','SesionController@index');
 Route::post('/updateSesion','SesionController@update');
 
 Route::get('/getEscuelas','EscuelasController@index');
+Route::post('/addCarrera','EscuelasController@store');
+Route::post('/updateCarrera','EscuelasController@update');
 
 Route::get('{path}', 'HomeController@index');

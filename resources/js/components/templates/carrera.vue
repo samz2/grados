@@ -21,15 +21,15 @@
                         <div class="modal-body">
                             <div class="row">
                                 <div class="col-md-4 text-left">
-                                    <label>Nombre(*)</label>
+                                    <label>Nombre Carrera(*)</label>
                                 </div>
-                                <div class="col-md-3">
-                                    <input v-model="carrera.carrera" type="text" maxlength="3" class="form-control" onKeyPress="return solonumeros(event)">
+                                <div class="col-md-8">
+                                    <input v-model="carrera.carrera" type="text" maxlength="50" class="form-control" onKeyPress="return sololetras(event)">
                                 </div>    
                             </div>
                         <div class="modal-footer">
-                            <button @click="addEscuela(1)" id="add" class="btn btn-outline-success" data-dismiss="modal">Agregar <i class="fa fa-save"></i></button>
-                            <button @click="addEscuela(2)" id="editar" class="btn btn-outline-success" data-dismiss="modal">Editar <i class="fa fa-pencil"></i></button>
+                            <button @click="addCarrera(1)" id="add" class="btn btn-outline-success" data-dismiss="modal">Agregar <i class="fa fa-save"></i></button>
+                            <button @click="addCarrera(2)" id="editar" class="btn btn-outline-success" data-dismiss="modal">Editar <i class="fa fa-pencil"></i></button>
                             <button type="button" class="btn btn-outline-secondary" @click="load()" data-dismiss="modal">Cerrar <i class="fa fa-close"></i></button>
                         </div>
                         </div>
@@ -42,13 +42,13 @@
                 <div class="col-md-12">
                     <div class="card card-secondary">
                             <div class="card-header text-center">
-                                <h4 class="title">SESIONES</h4>  
+                                <h4 class="title">CARRERAS</h4>  
                             </div>
                         <div class="card-body">
                             <div class="content table-responsive table-full-width">
-                                <v-client-table :data="sesiones" :columns="columns" :options="options">
+                                <v-client-table :data="carreras" :columns="columns" :options="options">
                                     <div slot="Acciones" slot-scope="props">
-                                     <button data-target="#exampleModal" class="btn btn-info" data-toggle="modal" v-on:click="edit(props.row.IDSesion,props.row.NumSesion,props.row.Fecha,props.row.Tipo)" data-placement="left" title="Editar"><i class="fas fa-edit" style="color: white" aria-hidden="true"></i></button>
+                                     <button data-target="#exampleModal" class="btn btn-info" data-toggle="modal" v-on:click="edit(props.row.IDEscuela,props.row.Escuela)" data-placement="left" title="Editar"><i class="fas fa-edit" style="color: white" aria-hidden="true"></i></button>
                                     </div>
                                 </v-client-table>
                             </div>
@@ -65,28 +65,21 @@
     data() {
         return {
 			carrera:{
-                idsesion:null,
+                idcarrera:null,
                 carrera:null,
-                fecha:null,
-                tipo:null,
             },
-            sesiones	:[{
-                IDSesion:null,
-                NumSesion:null,
-                Fecha:null,
-                Tipo:null,
+            carreras	:[{
+                IDEscuela:null,
+                Escuela:null,
             }],
-            columns: ["NumSesion","Tipo","Fecha","Acciones"],
+            columns: ["Escuela","Acciones"],
             options: {
 				headings:
 				{
-                    NumSesion:"Número de Sesión",
-                    Fecha:"Fecha",
-                    Tipo:"Tipo"
-                    
+                    Escuela:"Carrera",
 				},
-				sortable    : ["NumSesion","Tipo","Fecha",],
-				filterable  : ["NumSesion","Tipo","Fecha",]
+				sortable    : ["Escuela"],
+				filterable  : ["Escuela"]
             },
         }
 	},
@@ -100,19 +93,19 @@
 		getDatos()
         {
             this.$Progress.start();
-            axios.get("getSesiones")
+            axios.get("getEscuelas")
             .then(data=>
             {
-                this.sesiones = data.data.sesiones;
+                this.carreras = data.data.escuelas;
                 this.$Progress.finish();
             }
             ).catch(error=>{
                 console.log(error);
             })
         },
-        addEscuela(e)
+        addCarrera(e)
 		{
-            if(this.carrera.carrera == null || this.carrera.tipo == null || this.carrera.fecha == null)
+            if(this.carrera.carrera == null)
             {
                 swal({
 					type: 'error',
@@ -120,7 +113,7 @@
 				});
             }else if(e == 1){
                 this.$Progress.start();
-                axios.post("addEscuela",{
+                axios.post("addCarrera",{
                     carrera:this.carrera
                 }).then(data=>{
                     swal({
@@ -144,7 +137,7 @@
                 })
             }else if(e == 2){
                 this.$Progress.start();
-                axios.post("updateSesion",{
+                axios.post("updateCarrera",{
                     carrera:this.carrera
                 }).then(data=>{
                     swal({
@@ -171,20 +164,15 @@
 		load(){
                 $('#add').show();
                 $('#editar').hide();
-                this.sesion.idsesion    = null;
-                this.sesion.sesion      = null;
-                this.sesion.fecha       = null;
-                this.sesion.tipo        = null;
-                
+                this.carrera.idcarrera    = null;
+                this.carrera.carrera      = null;
 		},
-		edit(IDSesion,NumSesion,Fecha,Tipo)
+		edit(IDEscuela,Escuela)
 		{
             $('#editar').show();
             $('#add').hide();
-            this.sesion.idsesion    = IDSesion;
-            this.sesion.sesion      = NumSesion;
-            this.sesion.fecha       = Fecha;
-            this.sesion.tipo        = Tipo;
+            this.carrera.idcarrera    = IDEscuela;
+            this.carrera.carrera      = Escuela;
 		},
     }
 }
