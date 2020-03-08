@@ -14,7 +14,10 @@ class DecanoController extends Controller
      */
     public function index()
     {
-        //
+        $decanos =   Decano::join("docentes AS d","decano.CodDocente","d.DNI")
+                        ->select("decano.*",\DB::raw("concat_ws(' ',d.Apellidos,d.Nombres) as auxDecano"))
+                        ->get();    
+        return compact("decanos");
     }
 
     /**
@@ -35,7 +38,23 @@ class DecanoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $numDecano  = Decano::where("PeriodoInicio","<=",$request->decano["inicio"])->where("PeriodoFin",">=",$request->decano["inicio"])->get()->count();
+        if($numDecano == 0)
+        {
+            $decano = new Decano();
+            $decano->CodDocente     = $request->decano["decano"];
+            $decano->PeriodoInicio  = $request->decano["inicio"];
+            $decano->PeriodoFin     = $request->decano["fin"];
+            $decano->save();
+            $type   = "success";
+            $title  = "Bien";
+            $text   = "Decano agregado con éxito";
+        }else{
+            $type   = "warning";
+            $title  = "Ups...";
+            $text   = "Ya existe un decano para este periodo de tiempo";
+        }
+        return compact("type","title","text");
     }
 
     /**
@@ -67,9 +86,25 @@ class DecanoController extends Controller
      * @param  \App\decano  $decano
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, decano $decano)
+    public function update(Request $request)
     {
-        //
+        $decano = Decano::where("IDDecano",$request->decano["iddecano"])->update([
+            "CodDocente"  => $request->decano["decano"],
+            "PeriodoInicio"  => $request->decano["inicio"],
+            "PeriodoFin"  => $request->decano["fin"],
+        ]);
+
+        if($decano)
+        {
+            $type   = "success";
+            $title  = "Bien";
+            $text   = "Decano actualizado con éxito";
+        }else{
+            $type   = "warning";
+            $title  = "Ups";
+            $text   = "Ocurrió un roblema";
+        }
+        return compact("type","title","text");
     }
 
     /**

@@ -70,9 +70,10 @@ class DocentesController extends Controller
      * @param  \App\docentes  $docentes
      * @return \Illuminate\Http\Response
      */
-    public function show(docentes $docentes)
+    public function show()
     {
-        //
+        $docentes = Docentes::select("*")->where("Categoria","PRINCIPAL")->get();
+        return compact("docentes");
     }
 
     /**

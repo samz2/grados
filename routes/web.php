@@ -38,6 +38,7 @@ Route::get('/deleteEgresado/{id}','EgresadoController@destroy');
 Route::post('/addDocente','DocentesController@store');
 Route::post('/updateDocente','DocentesController@update');
 Route::get('/getDocentes','DocentesController@index');
+Route::get('/getPrincipales','DocentesController@show');
 
 Route::post('/addExpedito','ExpeditobController@store');
 Route::get('/getExpeditos','ExpeditobController@index');
@@ -62,5 +63,9 @@ Route::post('/updateCarrera','EscuelasController@update');
 Route::post('/addComision','ComisionController@store');
 Route::get('/getComisiones','ComisionController@index');
 Route::post('/updateComision','ComisionController@update');
+
+Route::post('/addDecano','DecanoController@store');
+Route::get('/getDecanos','DecanoController@index');
+Route::post('/updateDecano','DecanoController@update');
 
 Route::get('{path}', 'HomeController@index');
