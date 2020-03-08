@@ -2264,6 +2264,55 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/comisiones.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/admin/comisiones.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      tipo: null
+    };
+  },
+  created: function created() {
+    this.getAutenticacion();
+  },
+  mounted: function mounted() {},
+  methods: {
+    getAutenticacion: function getAutenticacion() {
+      var _this = this;
+
+      this.$Progress.start();
+      axios.get("autenticacion").then(function (data) {
+        _this.tipo = data.data.tipo;
+        console.log(data.data);
+
+        _this.$Progress.finish();
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/docentes.vue?vue&type=script&lang=js&":
 /*!*************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/admin/docentes.vue?vue&type=script&lang=js& ***!
@@ -2974,6 +3023,367 @@ __webpack_require__.r(__webpack_exports__);
       $('#add').hide();
       this.carrera.idcarrera = IDEscuela;
       this.carrera.carrera = Escuela;
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/templates/comision.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/templates/comision.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      comision: {
+        idcomision: null,
+        semestre: null,
+        presidente: null,
+        miembro1: null,
+        miembro2: null,
+        inicio: null,
+        fin: null,
+        estado: null
+      },
+      comisiones: [{
+        IDComision: null,
+        Semestre: null,
+        Presidente: null,
+        Miembro1: null,
+        Miembro2: null,
+        auxMiembro1: null,
+        auxMiembro2: null,
+        auxPresidente: null,
+        FechaInicio: null,
+        FechaFin: null,
+        Estado: null
+      }],
+      columns: ["Semestre", "auxPresidente", "auxMiembro1", "auxMiembro2", "FechaInicio", "FechaInicio", "FechaFin", "Estado", "Acciones"],
+      options: {
+        headings: {
+          Semestre: "Semestre",
+          auxPresidente: "Presidente",
+          auxMiembro1: "Miembro 1",
+          auxMiembro2: "Miembro 2",
+          FechaInicio: "Fecha Inicio",
+          FechaFin: "Fecha Fin"
+        },
+        sortable: ["Semestre", "Presidente", "Miembro1", "Miembro2", "FechaInicio", "FechaInicio", "FechaFin", "Estado"],
+        filterable: ["Semestre", "Presidente", "Miembro1", "Miembro2", "FechaInicio", "FechaInicio", "FechaFin", "Estado"]
+      },
+      docentes: []
+    };
+  },
+  created: function created() {
+    this.getDatos();
+    this.getDocentes();
+  },
+  mounted: function mounted() {
+    $('#editar').hide();
+  },
+  methods: {
+    getDatos: function getDatos() {
+      var _this = this;
+
+      this.$Progress.start();
+      axios.get("getComisiones").then(function (data) {
+        _this.comisiones = data.data.comisiones;
+
+        _this.$Progress.finish();
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    getDocentes: function getDocentes() {
+      var _this2 = this;
+
+      axios.get("getDocentes").then(function (data) {
+        _this2.docentes = data.data.docentes;
+
+        _this2.$Progress.finish();
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    addComision: function addComision(e) {
+      var _this3 = this;
+
+      if (this.comision.semestre == null || this.comision.presidente == null || this.comision.miembro1 == null || this.comision.miembro2 == null || this.comision.inicio == null || this.comision.fin == null || this.comision.estado == null) {
+        swal({
+          type: 'error',
+          title: 'Llenar los datos obligatorios'
+        });
+      } else if (e == 1) {
+        this.$Progress.start();
+        axios.post("addComision", {
+          comision: this.comision
+        }).then(function (data) {
+          swal({
+            type: data.data.type,
+            title: data.data.title,
+            text: data.data.text,
+            showConfirmButton: false,
+            timer: 2000
+          });
+
+          _this3.$Progress.finish();
+
+          _this3.getDatos();
+
+          _this3.load();
+        })["catch"](function (error) {
+          console.log(error);
+          swal({
+            type: 'error',
+            title: 'Error',
+            text: 'Comuniquese con un administrador',
+            showConfirmButton: true
+          });
+        });
+      } else if (e == 2) {
+        this.$Progress.start();
+        axios.post("updateComision", {
+          comision: this.comision
+        }).then(function (data) {
+          swal({
+            type: data.data.type,
+            title: data.data.title,
+            text: data.data.text,
+            showConfirmButton: false,
+            timer: 2000
+          });
+
+          _this3.$Progress.finish();
+
+          _this3.getDatos();
+
+          _this3.load();
+        })["catch"](function (error) {
+          console.log(error);
+          swal({
+            type: 'error',
+            title: 'Error',
+            text: 'Comuniquese con un administrador',
+            showConfirmButton: true
+          });
+        });
+      }
+    },
+    load: function load() {
+      $('#add').show();
+      $('#editar').hide();
+      this.comision.idcomision = null;
+      this.comision.semestre = null;
+      this.comision.presidente = null;
+      this.comision.miembro1 = null;
+      this.comision.miembro2 = null;
+      this.comision.inicio = null;
+      this.comision.fin = null;
+      this.comision.estado = null;
+    },
+    edit: function edit(IDComision, Semestre, Presidente, Miembro1, Miembro2, FechaInicio, FechaFin, Estado) {
+      $('#editar').show();
+      $('#add').hide();
+      this.comision.idcomision = IDComision;
+      this.comision.semestre = Semestre;
+      this.comision.presidente = Presidente;
+      this.comision.miembro1 = Miembro1;
+      this.comision.miembro2 = Miembro2;
+      this.comision.inicio = FechaInicio;
+      this.comision.fin = FechaFin;
+      this.comision.estado = Estado;
+    },
+    valida: function valida() {
+      if (this.comision.presidente == null || this.comision.miembro1 == null || this.comision.miembro2 == null) {
+        return;
+      }
+
+      if (this.comision.presidente == this.comision.miembro1) {
+        swal({
+          type: 'error',
+          title: 'Error',
+          text: 'Presidente debe ser diferente al Miembro 1',
+          showConfirmButton: true
+        });
+        this.comision.presidente = null;
+        this.comision.miembro1 = null;
+      }
+
+      if (this.comision.miembro1 == this.comision.miembro2) {
+        swal({
+          type: 'error',
+          title: 'Error',
+          text: 'Miembro 1 debe ser diferente al Miembro 2',
+          showConfirmButton: true
+        });
+        this.comision.miembro1 = null;
+        this.comision.miembro2 = null;
+      }
+
+      if (this.comision.presidente == this.comision.miembro2) {
+        swal({
+          type: 'error',
+          title: 'Error',
+          text: 'Presidente debe ser diferente al Miembro 2',
+          showConfirmButton: true
+        });
+        this.comision.presidente = null;
+        this.comision.miembro2 = null;
+      }
+    },
+    validafecha: function validafecha() {
+      if (this.comision.inicio == null || this.comision.fin == null) {
+        return;
+      }
+
+      if (this.comision.inicio >= this.comision.fin) {
+        swal({
+          type: 'error',
+          title: 'Error',
+          text: 'Fecha inicio debe ser menor a Fecha Fin',
+          showConfirmButton: true
+        });
+        this.comision.inicio = null;
+        this.comision.fin = null;
+      }
     }
   }
 });
@@ -51066,6 +51476,38 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/comisiones.vue?vue&type=template&id=b52c7a94&":
+/*!*******************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/admin/comisiones.vue?vue&type=template&id=b52c7a94& ***!
+  \*******************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "content" }, [
+    _vm.tipo != null && _vm.tipo == 1
+      ? _c("div", { staticClass: "container-fluid" }, [_c("comision")], 1)
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.tipo != null && _vm.tipo != 1
+      ? _c("div", { staticClass: "container-fluid" }, [_c("error")], 1)
+      : _vm._e()
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/docentes.vue?vue&type=template&id=49d1c1ec&":
 /*!*****************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/admin/docentes.vue?vue&type=template&id=49d1c1ec& ***!
@@ -51694,6 +52136,647 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "card-header text-center" }, [
       _c("h4", { staticClass: "title" }, [_vm._v("CARRERAS")])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/templates/comision.vue?vue&type=template&id=683bd844&":
+/*!*********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/templates/comision.vue?vue&type=template&id=683bd844& ***!
+  \*********************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "container-fluid" }, [
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-12" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "modal fade",
+            attrs: {
+              id: "exampleModal",
+              tabindex: "-1",
+              role: "dialog",
+              "aria-labelledby": "exampleModalLabel",
+              "aria-hidden": "true"
+            }
+          },
+          [
+            _c(
+              "div",
+              { staticClass: "modal-dialog", attrs: { role: "document" } },
+              [
+                _c("div", { staticClass: "modal-content" }, [
+                  _vm._m(1),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "modal-body" }, [
+                    _c("div", { staticClass: "row" }, [
+                      _vm._m(2),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-8" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.comision.semestre,
+                              expression: "comision.semestre"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: {
+                            type: "text",
+                            maxlength: "6",
+                            onKeyPress: "return alfa1(event)"
+                          },
+                          domProps: { value: _vm.comision.semestre },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.comision,
+                                "semestre",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        })
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("br"),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row" }, [
+                      _vm._m(3),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-8" }, [
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.comision.presidente,
+                                expression: "comision.presidente"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            on: {
+                              change: [
+                                function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.$set(
+                                    _vm.comision,
+                                    "presidente",
+                                    $event.target.multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
+                                  )
+                                },
+                                function($event) {
+                                  return _vm.valida()
+                                }
+                              ]
+                            }
+                          },
+                          _vm._l(_vm.docentes, function(d) {
+                            return _c(
+                              "option",
+                              { key: d.DNI, domProps: { value: d.DNI } },
+                              [
+                                _vm._v(
+                                  "\n                                            " +
+                                    _vm._s(d.Nombres) +
+                                    " " +
+                                    _vm._s(d.Apellidos) +
+                                    "\n                                        "
+                                )
+                              ]
+                            )
+                          }),
+                          0
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("br"),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row" }, [
+                      _vm._m(4),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-8" }, [
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.comision.miembro1,
+                                expression: "comision.miembro1"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            on: {
+                              change: [
+                                function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.$set(
+                                    _vm.comision,
+                                    "miembro1",
+                                    $event.target.multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
+                                  )
+                                },
+                                function($event) {
+                                  return _vm.valida()
+                                }
+                              ]
+                            }
+                          },
+                          _vm._l(_vm.docentes, function(d) {
+                            return _c(
+                              "option",
+                              { key: d.DNI, domProps: { value: d.DNI } },
+                              [
+                                _vm._v(
+                                  "\n                                            " +
+                                    _vm._s(d.Nombres) +
+                                    " " +
+                                    _vm._s(d.Apellidos) +
+                                    "\n                                        "
+                                )
+                              ]
+                            )
+                          }),
+                          0
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("br"),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row" }, [
+                      _vm._m(5),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-8" }, [
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.comision.miembro2,
+                                expression: "comision.miembro2"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            on: {
+                              change: [
+                                function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.$set(
+                                    _vm.comision,
+                                    "miembro2",
+                                    $event.target.multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
+                                  )
+                                },
+                                function($event) {
+                                  return _vm.valida()
+                                }
+                              ]
+                            }
+                          },
+                          _vm._l(_vm.docentes, function(d) {
+                            return _c(
+                              "option",
+                              { key: d.DNI, domProps: { value: d.DNI } },
+                              [
+                                _vm._v(
+                                  "\n                                            " +
+                                    _vm._s(d.Nombres) +
+                                    " " +
+                                    _vm._s(d.Apellidos) +
+                                    "\n                                        "
+                                )
+                              ]
+                            )
+                          }),
+                          0
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("br"),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row" }, [
+                      _vm._m(6),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-8" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.comision.inicio,
+                              expression: "comision.inicio"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: { type: "date" },
+                          domProps: { value: _vm.comision.inicio },
+                          on: {
+                            change: function($event) {
+                              return _vm.validafecha()
+                            },
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.comision,
+                                "inicio",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        })
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("br"),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row" }, [
+                      _vm._m(7),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-8" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.comision.fin,
+                              expression: "comision.fin"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: { type: "date" },
+                          domProps: { value: _vm.comision.fin },
+                          on: {
+                            change: function($event) {
+                              return _vm.validafecha()
+                            },
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(_vm.comision, "fin", $event.target.value)
+                            }
+                          }
+                        })
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("br"),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row" }, [
+                      _vm._m(8),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-8" }, [
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.comision.estado,
+                                expression: "comision.estado"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            on: {
+                              change: function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.$set(
+                                  _vm.comision,
+                                  "estado",
+                                  $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                )
+                              }
+                            }
+                          },
+                          [
+                            _c("option", { attrs: { value: "ACTIVO" } }, [
+                              _vm._v("ACTIVO")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "INACTIVO" } }, [
+                              _vm._v("INACTIVO")
+                            ])
+                          ]
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("br"),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "modal-footer" }, [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-outline-success",
+                          attrs: { id: "add", "data-dismiss": "modal" },
+                          on: {
+                            click: function($event) {
+                              return _vm.addComision(1)
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Agregar "),
+                          _c("i", { staticClass: "fa fa-save" })
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-outline-success",
+                          attrs: { id: "editar", "data-dismiss": "modal" },
+                          on: {
+                            click: function($event) {
+                              return _vm.addComision(2)
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Editar "),
+                          _c("i", { staticClass: "fa fa-pencil" })
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-outline-secondary",
+                          attrs: { type: "button", "data-dismiss": "modal" },
+                          on: {
+                            click: function($event) {
+                              return _vm.load()
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Cerrar "),
+                          _c("i", { staticClass: "fa fa-close" })
+                        ]
+                      )
+                    ])
+                  ])
+                ])
+              ]
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-12" }, [
+            _c("div", { staticClass: "card card-secondary" }, [
+              _vm._m(9),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-body" }, [
+                _c(
+                  "div",
+                  { staticClass: "content table-responsive table-full-width" },
+                  [
+                    _c("v-client-table", {
+                      attrs: {
+                        data: _vm.comisiones,
+                        columns: _vm.columns,
+                        options: _vm.options
+                      },
+                      scopedSlots: _vm._u([
+                        {
+                          key: "Acciones",
+                          fn: function(props) {
+                            return _c("div", {}, [
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-info",
+                                  attrs: {
+                                    "data-target": "#exampleModal",
+                                    "data-toggle": "modal",
+                                    "data-placement": "left",
+                                    title: "Editar"
+                                  },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.edit(
+                                        props.row.IDComision,
+                                        props.row.Semestre,
+                                        props.row.Presidente,
+                                        props.row.Miembro1,
+                                        props.row.Miembro2,
+                                        props.row.FechaInicio,
+                                        props.row.FechaFin,
+                                        props.row.Estado
+                                      )
+                                    }
+                                  }
+                                },
+                                [
+                                  _c("i", {
+                                    staticClass: "fas fa-edit",
+                                    staticStyle: { color: "white" },
+                                    attrs: { "aria-hidden": "true" }
+                                  })
+                                ]
+                              )
+                            ])
+                          }
+                        }
+                      ])
+                    })
+                  ],
+                  1
+                )
+              ])
+            ])
+          ])
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-6" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-outline-secondary",
+              attrs: {
+                "data-target": "#exampleModal",
+                "data-toggle": "modal",
+                "data-placement": "left"
+              }
+            },
+            [_vm._v("Comisión "), _c("i", { staticClass: "fa fa-plus" })]
+          )
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header text-center bg-secondary" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-titler", attrs: { id: "exampleModalLabel" } },
+        [_vm._v("Datos Comisión")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-4 text-left" }, [
+      _c("label", [_vm._v("Semestre(*)")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-4 text-left" }, [
+      _c("label", [_vm._v("Presidente(*)")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-4 text-left" }, [
+      _c("label", [_vm._v("Miembro 1(*)")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-4 text-left" }, [
+      _c("label", [_vm._v("Miembro 2(*)")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-4 text-left" }, [
+      _c("label", [_vm._v("Fecha Inicio(*)")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-4 text-left" }, [
+      _c("label", [_vm._v("Fecha Fin(*)")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-4 text-left" }, [
+      _c("label", [_vm._v("Estado(*)")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-header text-center" }, [
+      _c("h4", { staticClass: "title" }, [_vm._v("COMISIONES")])
     ])
   }
 ]
@@ -76610,6 +77693,9 @@ var routes = [{
   path: '/carreras',
   component: __webpack_require__(/*! ./components/admin/carreras.vue */ "./resources/js/components/admin/carreras.vue")["default"]
 }, {
+  path: '/comisiones',
+  component: __webpack_require__(/*! ./components/admin/comisiones.vue */ "./resources/js/components/admin/comisiones.vue")["default"]
+}, {
   path: '/sesion',
   component: __webpack_require__(/*! ./components/admin/sesiones.vue */ "./resources/js/components/admin/sesiones.vue")["default"]
 }];
@@ -76652,6 +77738,7 @@ Vue.component('expeditot', __webpack_require__(/*! ./components/templates/expedi
 Vue.component('tramite', __webpack_require__(/*! ./components/templates/tramite.vue */ "./resources/js/components/templates/tramite.vue")["default"]);
 Vue.component('estado', __webpack_require__(/*! ./components/templates/estados.vue */ "./resources/js/components/templates/estados.vue")["default"]);
 Vue.component('carrera', __webpack_require__(/*! ./components/templates/carrera.vue */ "./resources/js/components/templates/carrera.vue")["default"]);
+Vue.component('comision', __webpack_require__(/*! ./components/templates/comision.vue */ "./resources/js/components/templates/comision.vue")["default"]);
 Vue.component('sesiones', __webpack_require__(/*! ./components/templates/sesion.vue */ "./resources/js/components/templates/sesion.vue")["default"]);
 Vue.component('v-select', vue_select__WEBPACK_IMPORTED_MODULE_4___default.a);
 /**
@@ -76847,6 +77934,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_carreras_vue_vue_type_template_id_4449a5f0___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_carreras_vue_vue_type_template_id_4449a5f0___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/admin/comisiones.vue":
+/*!******************************************************!*\
+  !*** ./resources/js/components/admin/comisiones.vue ***!
+  \******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _comisiones_vue_vue_type_template_id_b52c7a94___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./comisiones.vue?vue&type=template&id=b52c7a94& */ "./resources/js/components/admin/comisiones.vue?vue&type=template&id=b52c7a94&");
+/* harmony import */ var _comisiones_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./comisiones.vue?vue&type=script&lang=js& */ "./resources/js/components/admin/comisiones.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _comisiones_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _comisiones_vue_vue_type_template_id_b52c7a94___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _comisiones_vue_vue_type_template_id_b52c7a94___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/admin/comisiones.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/admin/comisiones.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************!*\
+  !*** ./resources/js/components/admin/comisiones.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_comisiones_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./comisiones.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/comisiones.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_comisiones_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/admin/comisiones.vue?vue&type=template&id=b52c7a94&":
+/*!*************************************************************************************!*\
+  !*** ./resources/js/components/admin/comisiones.vue?vue&type=template&id=b52c7a94& ***!
+  \*************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_comisiones_vue_vue_type_template_id_b52c7a94___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./comisiones.vue?vue&type=template&id=b52c7a94& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/comisiones.vue?vue&type=template&id=b52c7a94&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_comisiones_vue_vue_type_template_id_b52c7a94___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_comisiones_vue_vue_type_template_id_b52c7a94___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -77537,6 +78693,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_carrera_vue_vue_type_template_id_1660b5e5___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_carrera_vue_vue_type_template_id_1660b5e5___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/templates/comision.vue":
+/*!********************************************************!*\
+  !*** ./resources/js/components/templates/comision.vue ***!
+  \********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _comision_vue_vue_type_template_id_683bd844___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./comision.vue?vue&type=template&id=683bd844& */ "./resources/js/components/templates/comision.vue?vue&type=template&id=683bd844&");
+/* harmony import */ var _comision_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./comision.vue?vue&type=script&lang=js& */ "./resources/js/components/templates/comision.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _comision_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _comision_vue_vue_type_template_id_683bd844___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _comision_vue_vue_type_template_id_683bd844___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/templates/comision.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/templates/comision.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/components/templates/comision.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_comision_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./comision.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/templates/comision.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_comision_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/templates/comision.vue?vue&type=template&id=683bd844&":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/components/templates/comision.vue?vue&type=template&id=683bd844& ***!
+  \***************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_comision_vue_vue_type_template_id_683bd844___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./comision.vue?vue&type=template&id=683bd844& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/templates/comision.vue?vue&type=template&id=683bd844&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_comision_vue_vue_type_template_id_683bd844___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_comision_vue_vue_type_template_id_683bd844___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

@@ -115,7 +115,7 @@ class EgresadoController extends Controller
             "IDEscuela" => $request->egresado["escuela"],
         ]);
         $title  = "OK";
-        $msj    = "Egresado registrado correctamente";
+        $msj    = "Egresado actualizado correctamente";
         $val    = "success";   
         return compact("title","msj","val");
     }

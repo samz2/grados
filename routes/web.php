@@ -59,4 +59,8 @@ Route::get('/getEscuelas','EscuelasController@index');
 Route::post('/addCarrera','EscuelasController@store');
 Route::post('/updateCarrera','EscuelasController@update');
 
+Route::post('/addComision','ComisionController@store');
+Route::get('/getComisiones','ComisionController@index');
+Route::post('/updateComision','ComisionController@update');
+
 Route::get('{path}', 'HomeController@index');

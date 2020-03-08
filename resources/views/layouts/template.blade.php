@@ -114,7 +114,7 @@
                       </router-link>
                     </li>
                     <li class="nav-item">
-                      <router-link to="comision" class="nav-link">
+                      <router-link to="comisiones" class="nav-link">
                         <i class="fas fa-list nav-icon"></i>
                         <p>Comisión</p>
                       </router-link>
@@ -275,6 +275,10 @@
   function alfa(event)
   {
     return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122) || (event.charCode >= 48 && event.charCode <= 57))
+  }
+  function alfa1(event)
+  {
+    return ((event.charCode >= 48 && event.charCode <= 57) || event.charCode == 45)
   }
 </script>	
 </body>
