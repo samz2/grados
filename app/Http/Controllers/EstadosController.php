@@ -48,7 +48,7 @@ class EstadosController extends Controller
             $title  = "Bien";
             $text   = "Estado ingresado con éxito";
         }else{
-            $type   = "success";
+            $type   = "warning";
             $title  = "Ups...";
             $text   = "Ya existe un Estado con esa posición";
         }

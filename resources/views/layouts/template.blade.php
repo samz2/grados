@@ -108,7 +108,7 @@
                       </router-link>
                     </li>
                     <li class="nav-item">
-                      <router-link to="carrera" class="nav-link">
+                      <router-link to="carreras" class="nav-link">
                         <i class="fas fa-list nav-icon"></i>
                         <p>Carrera</p>
                       </router-link>

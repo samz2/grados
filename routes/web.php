@@ -51,6 +51,10 @@ Route::post('/addEstado','EstadosController@store');
 Route::get('/getEstados','EstadosController@index');
 Route::post('/updateEstados','EstadosController@update');
 
+Route::post('/addSesion','SesionController@store');
+Route::get('/getSesiones','SesionController@index');
+Route::post('/updateSesion','SesionController@update');
+
 Route::get('/getEscuelas','EscuelasController@index');
 
 Route::get('{path}', 'HomeController@index');
