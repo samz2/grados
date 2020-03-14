@@ -28,7 +28,7 @@
             </div>
           </form>
           </div>
-          <div class="card text-white bg-primary py-5 d-md-down-none" style="width:44%">
+          <div class="card py-5 d-md-down-none" style="width:44%">
             <div class="card-body text-center">
               <div>
                 <h2>Sistema de Grados y Títulos</h2>

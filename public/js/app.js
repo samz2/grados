@@ -5254,12 +5254,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -56167,10 +56161,8 @@ var render = function() {
                 _vm._v(" "),
                 _vm._m(7),
                 _vm._v(" "),
-                _vm._m(8),
-                _vm._v(" "),
                 _c("div", { staticClass: "row" }, [
-                  _c("div", { staticClass: "col-md-2" }, [
+                  _c("div", { staticClass: "col-md-3" }, [
                     _c(
                       "button",
                       {
@@ -56188,7 +56180,7 @@ var render = function() {
                     )
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "col-md-2" }, [
+                  _c("div", { staticClass: "col-md-3" }, [
                     _c(
                       "button",
                       {
@@ -56218,30 +56210,28 @@ var render = function() {
                       attrs: { colspadding: "0", cellspacing: "0", border: "1" }
                     },
                     [
-                      _vm._m(9),
+                      _vm._m(8),
                       _vm._v(" "),
-                      _c("tbody", [
-                        _c("tr", [
-                          _c("td"),
-                          _vm._v(" "),
-                          _c("td"),
-                          _vm._v(" "),
-                          _c("td"),
-                          _vm._v(" "),
-                          _c("td", [
-                            _c("input", {
-                              staticClass: "form-control form-control-sm",
-                              attrs: {
-                                "data-dismiss": "modal",
-                                type: "checkbox"
-                              },
-                              on: {
-                                click: function($event) {
-                                  return _vm.seleccionar()
-                                }
+                      _c("tr", { staticClass: "t10" }, [
+                        _c("td"),
+                        _vm._v(" "),
+                        _c("td"),
+                        _vm._v(" "),
+                        _c("td"),
+                        _vm._v(" "),
+                        _c("td", [
+                          _c("input", {
+                            staticClass: "form-control form-control-sm",
+                            attrs: {
+                              "data-dismiss": "modal",
+                              type: "checkbox"
+                            },
+                            on: {
+                              click: function($event) {
+                                return _vm.seleccionar()
                               }
-                            })
-                          ])
+                            }
+                          })
                         ])
                       ])
                     ]
@@ -56257,7 +56247,7 @@ var render = function() {
     _c("div", { staticClass: "row", attrs: { id: "expeditos" } }, [
       _c("div", { staticClass: "col-md-12" }, [
         _c("div", { staticClass: "card card-default" }, [
-          _vm._m(10),
+          _vm._m(9),
           _vm._v(" "),
           _c("div", { staticClass: "card-body" }, [
             _c(
@@ -56455,7 +56445,7 @@ var staticRenderFns = [
           [_vm._v("Nombre: ")]
         ),
         _vm._v(" "),
-        _c("div", { staticClass: "col-md-4" }, [
+        _c("div", { staticClass: "col-md-5" }, [
           _c("input", {
             staticClass: "form-control form-control-sm",
             attrs: { type: "text", id: "nombre", readonly: "" }
@@ -56470,7 +56460,7 @@ var staticRenderFns = [
           [_vm._v("Carrera: ")]
         ),
         _vm._v(" "),
-        _c("div", { staticClass: "col-md-3" }, [
+        _c("div", { staticClass: "col-md-5" }, [
           _c("input", {
             staticClass: "form-control form-control-sm",
             attrs: { type: "text", id: "carrera", readonly: "" }
@@ -56555,18 +56545,21 @@ var staticRenderFns = [
       _c("div", { staticClass: "form-group row" }, [
         _c(
           "label",
-          { staticClass: "col-md-2 col-form-label", attrs: { for: "sesion" } },
+          {
+            staticClass: "col-md-1 col-form-label t12",
+            attrs: { for: "sesion" }
+          },
           [_vm._v("# Sesión: ")]
         ),
         _vm._v(" "),
-        _c("div", { staticClass: "col-md-1" }, [
+        _c("div", { staticClass: "col-md-2" }, [
           _c("input", {
             staticClass: "form-control form-control-sm",
             attrs: {
               type: "text",
               id: "sesion",
               onKeyPress: "return soloNumeros(event)",
-              maxlength: "3"
+              maxlength: "4"
             }
           })
         ]),
@@ -56691,14 +56684,8 @@ var staticRenderFns = [
           staticClass: "form-control form-control-sm",
           attrs: { type: "text", id: "dni" }
         })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group row" }, [
+      ]),
+      _vm._v(" "),
       _c(
         "label",
         { staticClass: "col-md-2 col-form-label", attrs: { for: "codigo" } },
@@ -56736,16 +56723,26 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("th", [_vm._v("DNI")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("CÓDIGO")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("NOMBRES")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("SELECCIONAR")])
-      ])
+    return _c("tr", [
+      _c("td", { staticClass: "text-center" }, [
+        _c("i", { staticClass: "blanco" }, [_vm._v("aaa")]),
+        _vm._v(" DNI "),
+        _c("i", { staticClass: "blanco" }, [_vm._v("aaa")])
+      ]),
+      _vm._v(" "),
+      _c("td", { staticClass: "text-center" }, [
+        _c("i", { staticClass: "blanco" }, [_vm._v("a")]),
+        _vm._v("CÓDIGO"),
+        _c("i", { staticClass: "blanco" }, [_vm._v("a")])
+      ]),
+      _vm._v(" "),
+      _c("td", { staticClass: "text-center" }, [
+        _c("i", { staticClass: "blanco" }, [_vm._v("aaaaaaaaa")]),
+        _vm._v("NOMBRES"),
+        _c("i", { staticClass: "blanco" }, [_vm._v("aaaaaaaaa")])
+      ]),
+      _vm._v(" "),
+      _c("td", { staticClass: "text-center" }, [_vm._v("SELECCIONAR")])
     ])
   },
   function() {

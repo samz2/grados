@@ -40,13 +40,13 @@
                             </div>
                             <div class="form-group row">
                                 <label for="nombre" class="col-md-2 col-form-label">Nombre: </label>
-                                <div class="col-md-4">
+                                <div class="col-md-5">
                                     <input type="text" id="nombre" readonly class="form-control form-control-sm">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="carrera" class="col-md-2 col-form-label">Carrera: </label>
-                                <div class="col-md-3">
+                                <div class="col-md-5">
                                     <input type="text" id="carrera" readonly class="form-control form-control-sm">
                                 </div>
                             </div>
@@ -71,9 +71,9 @@
                         <fieldset class="border p-2">
                             <legend class="w-auto">Sesión</legend>
                             <div class="form-group row">
-                                <label for="sesion" class="col-md-2 col-form-label"># Sesión: </label>
-                                <div class="col-md-1">
-                                    <input type="text" id="sesion" onKeyPress="return soloNumeros(event)" maxlength="3" class="form-control form-control-sm">
+                                <label for="sesion" class="col-md-1 col-form-label t12"># Sesión: </label>
+                                <div class="col-md-2">
+                                    <input type="text" id="sesion" onKeyPress="return soloNumeros(event)" maxlength="4" class="form-control form-control-sm">
                                 </div>
                                 <label for="fecha" class="col-md-1 col-form-label">Fecha: </label>
                                 <div class="col-md-3">
@@ -128,8 +128,6 @@
                                 <div class="col-md-4">
                                     <input type="text" id="dni" class="form-control form-control-sm">
                                 </div>
-                            </div>
-                            <div class="form-group row">
                                 <label for="codigo" class="col-md-2 col-form-label">Código: </label>
                                 <div class="col-md-4">
                                     <input type="text" id="codigo" class="form-control form-control-sm">
@@ -142,32 +140,28 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-2">
+                                <div class="col-md-3">
                                     <button class="btn btn-success" @click="buscar()">Buscar <i class="fa fa-search"></i></button>
                                 </div>
-                                <div class="col-md-2">
+                                <div class="col-md-3">
                                     <button class="btn btn-danger" @click="reiniciar()">Borrar <i class="fa fa-eraser"></i></button>
                                 </div>
                             </div>
                             <fieldset class="border p-2">
                                 <legend class="w-auto">Lista de egresados</legend>
                                 <table colspadding=0 cellspacing=0 border="1">
-                                    <thead>
-                                        <tr>
-                                            <th>DNI</th>
-                                            <th>CÓDIGO</th>
-                                            <th>NOMBRES</th>
-                                            <th>SELECCIONAR</th>
-                                        </tr>
-                                    </thead>   
-                                    <tbody>
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td><input data-dismiss="modal" type="checkbox" @click="seleccionar()" class="form-control form-control-sm"></td>
-                                        </tr>
-                                    </tbody>        
+                                    <tr>
+                                        <td class="text-center"><i class="blanco">aaa</i> DNI <i class="blanco">aaa</i></td>
+                                        <td class="text-center"><i class="blanco">a</i>CÓDIGO<i class="blanco">a</i></td>
+                                        <td class="text-center"><i class="blanco">aaaaaaaaa</i>NOMBRES<i class="blanco">aaaaaaaaa</i></td>
+                                        <td class="text-center">SELECCIONAR</td>
+                                    </tr>
+                                    <tr class="t10">
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td><input data-dismiss="modal" type="checkbox" @click="seleccionar()" class="form-control form-control-sm"></td>
+                                    </tr>
                                 </table>
                             </fieldset>
                         <!-- <div class="modal-footer">

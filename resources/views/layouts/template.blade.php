@@ -16,6 +16,24 @@
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
+<style>
+  .blanco
+  {
+    color: #ffffff;
+  }
+  .t10
+  {
+    font-size: 10px;
+  }
+  .t11
+  {
+    font-size: 11px;
+  }
+  .t12
+  {
+    font-size: 12px;
+  }
+</style>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper" id="app">
 
@@ -33,49 +51,38 @@
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
-      <!-- Messages Dropdown Menu -->
-      {{-- <li class="nav-item dropdown">
-        <button class="btn btn-danger"><a class="dropdown-item" href="{{ route('logout') }}"
-          onclick="event.preventDefault();
-                        document.getElementById('logout-form').submit();">
-           <i class="fas fa-power-off"></i>
-       </a>
+				<!-- Messages Dropdown Menu -->
+				<li class="nav-item dropdown">
+					<a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+						@switch(Auth::user()->tipo)
+							@case(1)
+								Administrador({{Auth::user()->username}}) <span class="caret"></span>	
+								@break
+							@case(2)
+								Decano({{Auth::user()->username}}) <span class="caret"></span>	
+								@break
+							@case(3)
+								Asistente({{Auth::user()->username}}) <span class="caret"></span>	
+								@break
+								
+							@default
+								
+						@endswitch
+						{{-- {{ Auth::user()->user }} <span class="caret"></span> --}}
+					</a>
+					<div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+						<a class="dropdown-item" href="{{ route('logout') }}"
+							onclick="event.preventDefault();
+										  document.getElementById('logout-form').submit();">
+							 {{ __('Cerrar Sesión') }}
+						 </a>
 
-       <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-           @csrf
-       </form></button>
-      </li> --}}
-      <li class="nav-item dropdown">
-        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-          @switch(Auth::user()->tipo)
-            @case(1)
-              Administrador({{Auth::user()->user}}) <span class="caret"></span>	
-              @break
-            @case(2)
-              Decano({{Auth::user()->user}}) <span class="caret"></span>	
-              @break
-            @case(3)
-              Asistente({{Auth::user()->user}}) <span class="caret"></span>	
-              @break
-            @default
-              
-          @endswitch
-          {{-- {{ Auth::user()->user }} <span class="caret"></span> --}}
-        </a>
-        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-          <a class="dropdown-item" href="{{ route('logout') }}"
-            onclick="event.preventDefault();
-                    document.getElementById('logout-form').submit();">
-             {{ __('Cerrar Sesión') }}
-           </a>
-
-           <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-             @csrf
-           </form>
-        </div>
-      </li>
-      
-    </ul>
+						 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+							 @csrf
+						 </form>
+					</div>
+				</li>
+			</ul>
   </nav>
   <!-- /.navbar -->
 
@@ -280,7 +287,7 @@
   $.widget.bridge('uibutton', $.ui.button)
 </script> --}}
 <!-- Bootstrap 4 -->
-<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+{{-- <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script> --}}
 <!-- ChartJS -->
 <script src="dist/js/adminlte.js"></script>
 <script src="{{ asset('js/app.js') }}" defer></script>
