@@ -34,7 +34,7 @@
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
       <!-- Messages Dropdown Menu -->
-      <li class="nav-item dropdown">
+      {{-- <li class="nav-item dropdown">
         <button class="btn btn-danger"><a class="dropdown-item" href="{{ route('logout') }}"
           onclick="event.preventDefault();
                         document.getElementById('logout-form').submit();">
@@ -44,6 +44,35 @@
        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
            @csrf
        </form></button>
+      </li> --}}
+      <li class="nav-item dropdown">
+        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+          @switch(Auth::user()->tipo)
+            @case(1)
+              Administrador({{Auth::user()->user}}) <span class="caret"></span>	
+              @break
+            @case(2)
+              Decano({{Auth::user()->user}}) <span class="caret"></span>	
+              @break
+            @case(3)
+              Asistente({{Auth::user()->user}}) <span class="caret"></span>	
+              @break
+            @default
+              
+          @endswitch
+          {{-- {{ Auth::user()->user }} <span class="caret"></span> --}}
+        </a>
+        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+          <a class="dropdown-item" href="{{ route('logout') }}"
+            onclick="event.preventDefault();
+                    document.getElementById('logout-form').submit();">
+             {{ __('Cerrar Sesión') }}
+           </a>
+
+           <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+             @csrf
+           </form>
+        </div>
       </li>
       
     </ul>

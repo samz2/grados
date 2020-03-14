@@ -11,10 +11,11 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-
+    <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link href="css/plantilla.css" rel="stylesheet">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -22,9 +23,9 @@
 <style>
     body
     {
-        background-image: url("img/fondo.jpg");
-        background-repeat: no-repeat;
-        background-size: 100% 220%;
+        /* background-image: url("img/fondo.jpg"); */
+        /* background-repeat: no-repeat; */
+        /* background-size: 100% 220%; */
     }
     .header-fondo
     {
@@ -38,7 +39,7 @@
 </style>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light card-fondo shadow-sm">
+        {{-- <nav class="navbar navbar-expand-md navbar-light card-fondo shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     SISTEMA DE GRADOS Y TITULOS
@@ -64,7 +65,7 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
-                            @endif --}}
+                            @endif
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -87,11 +88,13 @@
                     </ul>
                 </div>
             </div>
-        </nav>
+        </nav> --}}
 
         <main class="py-4">
             @yield('content')
         </main>
     </div>
+  <script src="js/app.js"></script>
+
 </body>
 </html>

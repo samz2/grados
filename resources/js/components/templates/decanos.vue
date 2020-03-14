@@ -13,7 +13,7 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                         <div class="modal-header text-center bg-secondary">
-                            <h5 class="modal-titler" id="exampleModalLabel">Datos Comisión</h5>
+                            <h5 class="modal-titler" id="exampleModalLabel">Datos Decano</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                             </button>

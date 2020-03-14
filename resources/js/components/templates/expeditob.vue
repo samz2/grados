@@ -6,55 +6,184 @@
 				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
-							<button  class="btn btn-outline-primary" @click="ocultar('1')">
-							Expedito <i class="fa fa-plus"></i>
+							<button  class="btn btn-outline-primary" id="mas" @click="ocultar('1')">
+							Agregar <i class="fa fa-plus"></i>
 							</button>
-							<button  class="btn btn-outline-primary" @click="ocultar('2')">
+							<button  class="btn btn-outline-primary" id="menos" @click="ocultar('2')">
 								<i class="fa fa-minus"></i>
 							</button>
 						</div>
 					</div>
 				</div>
 	            <div class="card card-default"  id="objetivo">
-	                <div class="card-header text-center" style="background-color: #2FA3C6; color: white;">
-	                    <h4 class="title">Expeditos</h4>  
+	                <div class="card-header text-center bg-secondary">
+	                    <h4 class="title">Expedito</h4>  
 	                </div>
 					<div class="card-body">
+                        <fieldset class="border p-2">
+                            <legend class="w-auto">Datos Egresado 
+                                <button  data-target="#exampleModal" class="btn btn-outline-secondary" data-toggle="modal" data-placement="left">
+								<i class="fa fa-plus"></i>
+							    </button>
+                            </legend>
+                            <div class="form-group row">
+                                <label for="dni" class="col-md-2 col-form-label">DNI: </label>
+                                <div class="col-md-2">
+                                    <input type="text" id="dni" readonly class="form-control form-control-sm">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="codigo" class="col-md-2 col-form-label">Código: </label>
+                                <div class="col-md-2">
+                                    <input type="text" id="codigo" readonly class="form-control form-control-sm">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="nombre" class="col-md-2 col-form-label">Nombre: </label>
+                                <div class="col-md-4">
+                                    <input type="text" id="nombre" readonly class="form-control form-control-sm">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="carrera" class="col-md-2 col-form-label">Carrera: </label>
+                                <div class="col-md-3">
+                                    <input type="text" id="carrera" readonly class="form-control form-control-sm">
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset class="border p-2">
+                            <legend class="w-auto">Datos del Libro de Actas</legend>
+                            <div class="form-group row">
+                                <label for="tomo" class="col-md-1 col-form-label">Tomo: </label>
+                                <div class="col-md-2">
+                                    <input type="text" id="tomo" onKeyPress="return soloNumeros(event)" maxlength="3" class="form-control form-control-sm">
+                                </div>
+                                <label for="folio" class="col-md-1 col-form-label">Fólio: </label>
+                                <div class="col-md-2">
+                                    <input type="text" id="folio" onKeyPress="return soloNumeros(event)" maxlength="3" class="form-control form-control-sm">
+                                </div>
+                                <label for="asiento" class="col-md-2 col-form-label">Asiento: </label>
+                                <div class="col-md-2">
+                                    <input type="text" id="asiento" onKeyPress="return soloNumeros(event)" maxlength="3" class="form-control form-control-sm">
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset class="border p-2">
+                            <legend class="w-auto">Sesión</legend>
+                            <div class="form-group row">
+                                <label for="sesion" class="col-md-2 col-form-label"># Sesión: </label>
+                                <div class="col-md-1">
+                                    <input type="text" id="sesion" onKeyPress="return soloNumeros(event)" maxlength="3" class="form-control form-control-sm">
+                                </div>
+                                <label for="fecha" class="col-md-1 col-form-label">Fecha: </label>
+                                <div class="col-md-3">
+                                    <input type="date" id="fecha" class="form-control form-control-sm">
+                                </div>
+                                <label for="Tipo" class="col-md-1 col-form-label">Tipo: </label>
+                                <div class="col-md-3">
+                                    <input type="text" id="sesion" readonly maxlength="3" class="form-control form-control-sm">
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset class="border p-2">
+                            <legend class="w-auto">Datos del trámite</legend>
+                            <div class="form-group row">
+                                <label for="ingreso" class="col-md-4 col-form-label">Fecha de Ingreso de la solicitud: </label>
+                                <div class="col-md-3">
+                                    <input type="date" id="ingreso" onKeyPress="return soloNumeros(event)" maxlength="3" class="form-control form-control-sm">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="comienzo" class="col-md-4 col-form-label">Fecha que empienza el trámite </label>
+                                <div class="col-md-3">
+                                    <input type="date" id="comienzo" onKeyPress="return soloNumeros(event)" maxlength="3" class="form-control form-control-sm">
+                                </div>
+                            </div>
+                        </fieldset>
+                        <br>
                         <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label>Alumno (*)</label>
-                                    <v-select v-model="alumnoz" :options="alumnos" :value="alumnos.code"> </v-select>
-                                   
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label>Fecha Recepción(*)</label>
-                                    <input v-model="expedito.recepcion" type="date" class="form-control">
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label>Fecha Sesión(*)</label>
-                                    <input v-model="expedito.sesion" type="date" class="form-control">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row text-left">
                             <div class="col-md-2">
-                                <button @click="addExpedito()" id="add" class="btn btn-outline-success">Agregar <i class="fa fa-save"></i></button>
+                                <button class="btn btn-success" @click="addExpedito()">Guardar <i class="fa fa-save"></i></button>
+                            </div>
+                            <div class="col-md-2">
+                                <button class="btn btn-danger" @click="cancelar()">Cancelar <i class="fa fa-stop"></i></button>
                             </div>
                         </div>
-                        <div class="clearfix"></div>
 	                </div>
 				</div>
 			</div>
 	    	</div>
-            <div class="row">
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                        <div class="modal-header text-center bg-secondary">
+                            <h5 class="modal-titler" id="exampleModalLabel">Buscar Egresado</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group row">
+                                <label for="dni" class="col-md-2 col-form-label">DNI: </label>
+                                <div class="col-md-4">
+                                    <input type="text" id="dni" class="form-control form-control-sm">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="codigo" class="col-md-2 col-form-label">Código: </label>
+                                <div class="col-md-4">
+                                    <input type="text" id="codigo" class="form-control form-control-sm">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="nombre" class="col-md-2 col-form-label">Apellido: </label>
+                                <div class="col-md-8">
+                                    <input type="text" id="nombre" class="form-control form-control-sm">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <button class="btn btn-success" @click="buscar()">Buscar <i class="fa fa-search"></i></button>
+                                </div>
+                                <div class="col-md-2">
+                                    <button class="btn btn-danger" @click="reiniciar()">Borrar <i class="fa fa-eraser"></i></button>
+                                </div>
+                            </div>
+                            <fieldset class="border p-2">
+                                <legend class="w-auto">Lista de egresados</legend>
+                                <table colspadding=0 cellspacing=0 border="1">
+                                    <thead>
+                                        <tr>
+                                            <th>DNI</th>
+                                            <th>CÓDIGO</th>
+                                            <th>NOMBRES</th>
+                                            <th>SELECCIONAR</th>
+                                        </tr>
+                                    </thead>   
+                                    <tbody>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td><input data-dismiss="modal" type="checkbox" @click="seleccionar()" class="form-control form-control-sm"></td>
+                                        </tr>
+                                    </tbody>        
+                                </table>
+                            </fieldset>
+                        <!-- <div class="modal-footer">
+                            <button @click="addDecano(1)" id="add" class="btn btn-outline-success" data-dismiss="modal">Agregar <i class="fa fa-save"></i></button>
+                            <button @click="addDecano(2)" id="editar" class="btn btn-outline-success" data-dismiss="modal">Editar <i class="fa fa-pencil"></i></button>
+                            <button type="button" class="btn btn-outline-secondary" @click="load()" data-dismiss="modal">Cerrar <i class="fa fa-close"></i></button>
+                        </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>    
+                <!-- final modal -->
+            <div class="row" id="expeditos">
                 <div class="col-md-12">
                     <div class="card card-default">
-                            <div class="card-header text-center" style="background-color: #2FA3C6; color: white;">
+                            <div class="card-header text-center bg-secondary">
                                 <h4 class="title">EXPEDITOS</h4>  
                             </div>
                         <div class="card-body">
@@ -111,14 +240,11 @@
 	},
 	created(){
         this.getExpeditos();
-        this.getAlumnos();
+        // this.getAlumnos();
 	},
 	mounted(){
         $('#objetivo').hide();
-        $('#editar').hide();
-        $('#grado').hide();
-        $("#alumnos").hide();
-        $("#aux1").hide();
+        $('#menos').hide();
 	},
     methods: {
         getAlumnos()
@@ -195,14 +321,16 @@
 			if(id == '1')
 			{
                 $('#objetivo').show();
-                $('#nivel').show();
-                $('#add').show();
-                $('#curso').show();
-                $('#editar').hide();
+                $('#expeditos').hide();
+                $('#menos').show();
+                $('#mas').hide();
 			}
 			else if(id == '2')
 			{
-				$('#objetivo').hide();	
+				$('#objetivo').hide();
+                $('#expeditos').show();	
+                $('#menos').hide();
+                $('#mas').show();
 			}
 			
         },
