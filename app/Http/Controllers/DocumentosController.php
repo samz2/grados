@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\documentos;
+use App\expeditob;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade as PDF;
 
@@ -42,11 +43,16 @@ class DocumentosController extends Controller
     }
     public function oficio($id)
     {
-        $datos = Documentos::join("egresado AS e","documentos.Codigo","e.Codigo")
-        ->join("escuela AS es","e.IDEscuela","es.IDEscuela")
-        ->select("e.*","documentos.*","es.*")
-        ->where("IDDocumento",$id)->get();
-        $dato = $datos[0];
+        $expeditosb =   Expeditob::join("egresado AS e","expedito.CodigoAlumno","e.Codigo")
+                        ->join("sesion AS s","expedito.NumSesion","s.NumSesion")
+                        ->join("escuela AS esc","e.IDEscuela","esc.IDEscuela")
+                        ->select("expedito.*","s.*",\DB::raw("concat(e.Paterno,' ',e.Materno,', ',e.Nombre) as Alumno"),"esc.Escuela")
+                        ->where("expedito.IDExpedito",$id)->get();
+        // $datos = Documentos::join("egresado AS e","documentos.Codigo","e.Codigo")
+        // ->join("escuela AS es","e.IDEscuela","es.IDEscuela")
+        // ->select("e.*","documentos.*","es.*")
+        // ->where("IDDocumento",$id)->get();
+        $dato = $expeditosb[0];
         $anio = substr($dato->Fecha,0,4);
         $mes  = $this->mes(substr($dato->Fecha,5,2)) ;
         $dia  = substr($dato->Fecha,8,2);

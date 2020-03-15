@@ -76,7 +76,7 @@
         <h3 class="center">FACULTAD DE INGENIERÍA DE SISTEMAS E INGENIERÍA CIVIL</h3>
         <h4 class="center">COMISIÓN DE GRADOS y TÍTULOS - FIS e IC</h4>
         <h5 class="derecho">Pucallpa, {{$dia}} {{"de"}} {{$mes}} del {{$anio}}</h5>
-        <h5 class="izquierdo subrayado">OFICIO  No {{$dato->Numero}}/{{$anio}}– UNU-FIS e IC-CG y T</h5>
+        <h5 class="izquierdo subrayado">OFICIO  No {{$dato->IDExpedito}}/{{$anio}}– UNU-FIS e IC-CG y T</h5>
         Señor {{"Ing. Mg."}}
         <br>
         {{"ROMEL PINEDO RIOS"}}
@@ -97,7 +97,7 @@
             <tr class="izquierdo">
                 <td width="80" class="arriba"><b>REFERENCIA</b></td>
                 <td width="40" class="arriba"><b>:</b></td>
-                <td><b>ACTA DE SESIÓN ORDINARIA N° {{$dato->Sesion}} Comisión de Grados y Títulos de la FIS e IC</b></td>
+                <td><b>ACTA DE {{$dato->Tipo}} N° {{$dato->NumSesion}} Comisión de Grados y Títulos de la FIS e IC</b></td>
             </tr>
             <tr>
                 <td colspan="3">&nbsp;</td>
@@ -108,7 +108,7 @@
             </tr>
         </table>
         <p class="justificado"><b class="vacio justificado">aaaaaaaaaaaaaaaaaaaaa</b>Mediante el presente remito adjunto el expediente del Ex alumno: 
-            <b>{{$dato->Paterno}} {{$dato->Materno}}{{","}} {{$dato->Nombre}}</b>; de la <b>Carrera Profesional de {{$dato->Escuela}}</b> en condición de EXPEDITO, 
+            <b>{{$dato->Alumno}}</b>; de la <b>Carrera Profesional de {{$dato->Escuela}}</b> en condición de EXPEDITO, 
             para que se le dé el trámite correspondiente a fin de otorgarle el <b> Académico de  
             Bachiller en {{$dato->Escuela}}  </b>, 
             cuyo registro en el libro de Grados de la Facultad es el siguiente: </p>
@@ -122,7 +122,7 @@
             </tr>
             <tr>
                 <td width=30><b>01</b></td>
-                <td width=150><b>{{$dato->Paterno}} {{$dato->Materno}}{{","}} {{$dato->Nombre}}</b></td>
+                <td width=150><b>{{$dato->Alumno}}</b></td>
                 <td width=60><b>{{$dato->Tomo}}</b></td>
                 <td width=60><b>{{$dato->Folio}}</b></td>
                 <td width=90><b>{{$dato->Asiento}}</b></td>

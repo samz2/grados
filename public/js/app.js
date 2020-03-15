@@ -5251,6 +5251,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -5328,6 +5329,24 @@ __webpack_require__.r(__webpack_exports__);
         console.log(error);
       });
     },
+    cancelar: function cancelar() {
+      this.expedito.codigo = null;
+      this.expedito.dni = null;
+      this.expedito.alumno = null;
+      this.expedito.carrera = null;
+      this.expedito.tomo = null;
+      this.expedito.folio = null;
+      this.expedito.asiento = null;
+      this.expedito.sesion = null;
+      this.expedito.sfecha = null;
+      this.expedito.stipo = null;
+      this.expedito.ingreso = null;
+      this.expedito.comienzo = null;
+      $('#objetivo').hide();
+      $('#expeditos').show();
+      $('#menos').hide();
+      $('#mas').show();
+    },
     borrar: function borrar() {
       this.alumno.codigo = null;
       this.alumno.dni = null;
@@ -5384,7 +5403,7 @@ __webpack_require__.r(__webpack_exports__);
     addExpedito: function addExpedito() {
       var _this5 = this;
 
-      if (this.expedito.codigo == null || this.expedito.dni == null || this.expedito.alumno == null || this.expedito.carrera == null || this.expedito.tomo == null || this.expedito.folio == null || this.expedito.asiento == null || this.expedito.sesion == null || this.expedito.sfecha == null || this.expedito.stipo == null || this.expedito.ingreso == null || this.expedito.comienzo == null) {
+      if (this.expedito.codigo == null || this.expedito.dni == null || this.expedito.alumno == null || this.expedito.carrera == null || this.expedito.tomo == null || this.expedito.folio == null || this.expedito.asiento == null || this.expedito.sesion == null || this.expedito.sfecha == null || this.expedito.stipo == null || this.expedito.ingreso == null) {
         swal({
           type: 'error',
           title: 'Llenar los datos obligatorios'
@@ -5396,17 +5415,21 @@ __webpack_require__.r(__webpack_exports__);
         }).then(function (data) {
           swal({
             // position: 'top-end',
-            type: 'success',
-            title: 'Datos ingresados correctamente',
+            type: data.data.type,
+            title: data.data.title,
+            text: data.data.text,
             showConfirmButton: false,
             timer: 2000
           });
 
-          _this5.$Progress.finish();
+          _this5.$Progress.finish(); // setTimeout(() => {
+          //     location.reload();
+          // }, 1500);
 
-          setTimeout(function () {
-            location.reload();
-          }, 1500);
+
+          _this5.cancelar();
+
+          _this5.getExpeditos();
         })["catch"](function (error) {
           console.log(error);
           swal({
@@ -56103,7 +56126,7 @@ var render = function() {
               _c(
                 "button",
                 {
-                  staticClass: "btn btn-outline-primary",
+                  staticClass: "btn btn-outline-secondary",
                   attrs: { id: "mas" },
                   on: {
                     click: function($event) {
@@ -56120,11 +56143,11 @@ var render = function() {
               _c(
                 "button",
                 {
-                  staticClass: "btn btn-outline-primary",
+                  staticClass: "btn btn-outline-secondary",
                   attrs: { id: "menos" },
                   on: {
                     click: function($event) {
-                      return _vm.ocultar("2")
+                      return _vm.cancelar()
                     }
                   }
                 },
@@ -56952,107 +56975,90 @@ var render = function() {
                     {
                       key: "Acciones",
                       fn: function(props) {
-                        return _c("div", {}, [
-                          props.row.Estado == "PENDIENTE"
-                            ? _c(
-                                "button",
-                                {
-                                  staticClass: "btn btn-danger",
-                                  attrs: {
-                                    "data-toggle": "tooltip",
-                                    "data-placement": "left"
-                                  },
-                                  on: {
-                                    click: function($event) {
-                                      return _vm.estado(props.row.IDExpedito, 1)
+                        return _c(
+                          "div",
+                          {},
+                          [
+                            props.row.Estado == "PENDIENTE"
+                              ? _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn btn-danger",
+                                    attrs: {
+                                      "data-toggle": "tooltip",
+                                      "data-placement": "left"
+                                    },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.estado(
+                                          props.row.IDExpedito,
+                                          1
+                                        )
+                                      }
                                     }
-                                  }
-                                },
-                                [_vm._v("Pendiente")]
-                              )
-                            : _vm._e(),
-                          _vm._v(" "),
-                          props.row.Estado == "EN PROCESO"
-                            ? _c(
-                                "button",
-                                {
-                                  staticClass: "btn btn-warning",
-                                  attrs: {
-                                    "data-toggle": "tooltip",
-                                    "data-placement": "left"
                                   },
-                                  on: {
-                                    click: function($event) {
-                                      return _vm.estado(props.row.IDExpedito, 2)
+                                  [_vm._v("Pendiente")]
+                                )
+                              : _vm._e(),
+                            _vm._v(" "),
+                            props.row.Estado == "EN PROCESO"
+                              ? _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn btn-warning",
+                                    attrs: {
+                                      "data-toggle": "tooltip",
+                                      "data-placement": "left"
+                                    },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.estado(
+                                          props.row.IDExpedito,
+                                          2
+                                        )
+                                      }
                                     }
-                                  }
-                                },
-                                [_vm._v("En Proceso")]
-                              )
-                            : _vm._e(),
-                          _vm._v(" "),
-                          props.row.Estado == "FINALIZADO"
-                            ? _c(
-                                "button",
-                                {
-                                  staticClass: "btn btn-success",
-                                  attrs: {
-                                    "data-toggle": "tooltip",
-                                    "data-placement": "left"
-                                  }
-                                },
-                                [_vm._v("Finalizado")]
-                              )
-                            : _vm._e(),
-                          _vm._v(" "),
-                          _c(
-                            "button",
-                            {
-                              staticClass: "btn btn-info",
-                              attrs: {
-                                "data-toggle": "tooltip",
-                                "data-placement": "left",
-                                title: "Registrar"
-                              },
-                              on: {
-                                click: function($event) {
-                                  return _vm.reg(props.row.IDExpedito)
+                                  },
+                                  [_vm._v("En Proceso")]
+                                )
+                              : _vm._e(),
+                            _vm._v(" "),
+                            props.row.Estado == "FINALIZADO"
+                              ? _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn btn-success",
+                                    attrs: {
+                                      "data-toggle": "tooltip",
+                                      "data-placement": "left"
+                                    }
+                                  },
+                                  [_vm._v("Finalizado")]
+                                )
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _c(
+                              "router-link",
+                              {
+                                staticClass: "btn btn-success",
+                                attrs: {
+                                  target: "_blank",
+                                  to: "/oficio/" + props.row.IDExpedito,
+                                  "data-toggle": "tooltip",
+                                  "data-placement": "left",
+                                  title: "Eliminar"
                                 }
-                              }
-                            },
-                            [
-                              _c("i", {
-                                staticClass: "fas fa-edit",
-                                staticStyle: { color: "white" },
-                                attrs: { "aria-hidden": "true" }
-                              })
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "button",
-                            {
-                              staticClass: "btn btn-success",
-                              attrs: {
-                                "data-toggle": "tooltip",
-                                "data-placement": "left",
-                                title: "Acta"
                               },
-                              on: {
-                                click: function($event) {
-                                  return _vm.edit(props.row.IDExpedito)
-                                }
-                              }
-                            },
-                            [
-                              _c("i", {
-                                staticClass: "far fa-file-pdf",
-                                staticStyle: { color: "white" },
-                                attrs: { "aria-hidden": "true" }
-                              })
-                            ]
-                          )
-                        ])
+                              [
+                                _c("i", {
+                                  staticClass: "far fa-file-pdf",
+                                  attrs: { "aria-hidden": "true" }
+                                })
+                              ]
+                            )
+                          ],
+                          1
+                        )
                       }
                     }
                   ])

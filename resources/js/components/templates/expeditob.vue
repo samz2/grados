@@ -6,10 +6,10 @@
 				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
-							<button  class="btn btn-outline-primary" id="mas" @click="ocultar('1')">
+							<button  class="btn btn-outline-secondary" id="mas" @click="ocultar('1')">
 							Agregar <i class="fa fa-plus"></i>
 							</button>
-							<button  class="btn btn-outline-primary" id="menos" @click="ocultar('2')">
+							<button  class="btn btn-outline-secondary" id="menos" @click="cancelar()">
 								<i class="fa fa-minus"></i>
 							</button>
 						</div>
@@ -184,8 +184,9 @@
                                         <button v-if="props.row.Estado == 'PENDIENTE'" v-on:click="estado(props.row.IDExpedito,1)" class="btn btn-danger" data-toggle="tooltip" data-placement="left" >Pendiente</button>
                                         <button v-if="props.row.Estado == 'EN PROCESO'" v-on:click="estado(props.row.IDExpedito,2)"  class="btn btn-warning" data-toggle="tooltip" data-placement="left" >En Proceso</button>
                                         <button v-if="props.row.Estado == 'FINALIZADO'"  class="btn btn-success" data-toggle="tooltip" data-placement="left" >Finalizado</button>
-                                        <button class="btn btn-info" data-toggle="tooltip" v-on:click="reg(props.row.IDExpedito)" data-placement="left" title="Registrar"><i class="fas fa-edit" style="color: white" aria-hidden="true"></i></button>
-                                        <button class="btn btn-success" data-toggle="tooltip" v-on:click="edit(props.row.IDExpedito)" data-placement="left" title="Acta"><i class="far fa-file-pdf" style="color: white" aria-hidden="true"></i></button>
+                                        <!-- <button class="btn btn-info" data-toggle="tooltip" v-on:click="reg(props.row.IDExpedito)" data-placement="left" title="Registrar"><i class="fas fa-edit" style="color: white" aria-hidden="true"></i></button> -->
+                                        <router-link class="btn btn-success" target="_blank" :to="'/oficio/'+props.row.IDExpedito" data-toggle="tooltip"  data-placement="left" title="Eliminar"><i class="far fa-file-pdf" aria-hidden="true"></i></router-link>
+                                        <!-- <button class="btn btn-success" data-toggle="tooltip" v-on:click="edit(props.row.IDExpedito)" data-placement="left" title="Acta"><i class="far fa-file-pdf" style="color: white" aria-hidden="true"></i></button> -->
                                     </div>
                                 </v-client-table>
                             </div>
@@ -276,6 +277,25 @@
                 console.log(error);
             })
         },
+        cancelar()
+        {
+            this.expedito.codigo      = null;
+            this.expedito.dni         = null;
+            this.expedito.alumno      = null;
+            this.expedito.carrera     = null;
+            this.expedito.tomo        = null;
+            this.expedito.folio       = null;
+            this.expedito.asiento     = null;
+            this.expedito.sesion      = null;
+            this.expedito.sfecha      = null;
+            this.expedito.stipo       = null;
+            this.expedito.ingreso     = null;
+            this.expedito.comienzo    = null;
+            $('#objetivo').hide();
+            $('#expeditos').show();	
+            $('#menos').hide();
+            $('#mas').show();
+        },
         borrar()
         {
             this.alumno.codigo      = null;
@@ -342,7 +362,7 @@
                 this.expedito.alumno==null || this.expedito.carrera==null ||
                 this.expedito.tomo==null || this.expedito.folio==null || this.expedito.asiento==null ||
                 this.expedito.sesion==null || this.expedito.sfecha==null || this.expedito.stipo==null ||
-                this.expedito.ingreso==null || this.expedito.comienzo==null)
+                this.expedito.ingreso==null)
             {
                 swal({
 					type: 'error',
@@ -355,15 +375,18 @@
                 }).then(data=>{
                     swal({
                         // position: 'top-end',
-                        type: 'success',
-                        title: 'Datos ingresados correctamente',
+                        type: data.data.type,
+                        title: data.data.title,
+                        text: data.data.text,
                         showConfirmButton: false,
                         timer: 2000
                     });
                     this.$Progress.finish();
-                    setTimeout(() => {
-                        location.reload();
-                    }, 1500);
+                    // setTimeout(() => {
+                    //     location.reload();
+                    // }, 1500);
+                    this.cancelar();
+                    this.getExpeditos();
                     }).catch(error=>{
                     console.log(error);	
                     swal({

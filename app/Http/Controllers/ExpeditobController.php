@@ -17,7 +17,8 @@ class ExpeditobController extends Controller
         $expeditosb =   Expeditob::join("egresado AS e","expedito.CodigoAlumno","e.Codigo")
                         ->join("sesion AS s","expedito.NumSesion","s.NumSesion")
                         ->join("estados AS es","expedito.Estado","es.Posicion")
-                        ->select("expedito.*",\DB::raw("concat_ws('-',expedito.Tomo,expedito.Folio,expedito.Asiento) AS Acta"),"s.*","es.Estado",\DB::raw("concat_ws(' ',e.Nombre,e.Paterno,e.Materno) as Alumno"))->get();
+                        ->join("escuela AS esc","e.IDEscuela","esc.IDEscuela")
+                        ->select("expedito.*",\DB::raw("concat_ws('-',expedito.Tomo,expedito.Folio,expedito.Asiento) AS Acta"),"esc.Escuela","s.*","es.Estado",\DB::raw("concat_ws(' ',e.Nombre,e.Paterno,e.Materno) as Alumno"))->get();
         
         // $expeditost = \DB::select("SELECT ex.FechaSesion,ex.FechaRecepcion,ex.IDExpedito,
         // concat_ws(' ',e.Nombre,e.Paterno,e.Materno) as Alumno,ex.Estado 
@@ -48,19 +49,31 @@ class ExpeditobController extends Controller
     {
         $hoy = date("Y-m-d");
         $expedito = new Expeditob();
+        $numEgresado = Egresado::select("*")->where("CodigoAlumno",$request->expedito["codigo"])->get()->count();
+        if($numEgresado == 0)
+        {
+            $expedito->Tipo             = $request->expedito["tipo"];
+            $expedito->CodigoAlumno     = $request->expedito["codigo"];
+            $expedito->Tomo             = $request->expedito["tomo"];
+            $expedito->Folio            = $request->expedito["folio"];
+            $expedito->Asiento          = $request->expedito["asiento"];
+            $expedito->NumSesion        = $request->expedito["sesion"];
+            $expedito->FechaIngreso     = $request->expedito["ingreso"];
+            $expedito->FechaComienzo    = $request->expedito["comienzo"];
+            $expedito->Estado           = 1;
+            $expedito->created_at       = $hoy;
+            $expedito->save();
+            $type = "success";
+            $title = "OK";
+            $text = "Expedito creado satisfactoriamente";
+        }else
+        {
+            $type = "warning";
+            $title = "Advertencia";
+            $text = "Egresado ya tiene un expedito";
+        }
         
-        $expedito->Tipo             = $request->expedito["tipo"];
-        $expedito->CodigoAlumno     = $request->expedito["codigo"];
-        $expedito->Tomo             = $request->expedito["tomo"];
-        $expedito->Folio            = $request->expedito["folio"];
-        $expedito->Asiento          = $request->expedito["asiento"];
-        $expedito->NumSesion        = $request->expedito["sesion"];
-        $expedito->FechaIngreso     = $request->expedito["ingreso"];
-        $expedito->FechaComienzo    = $request->expedito["comienzo"];
-        $expedito->Estado           = 1;
-        $expedito->created_at       = $hoy;
-        $expedito->save();
-        return "ok";
+        return compact("type","title","text");
     }
 
     /**
@@ -94,16 +107,18 @@ class ExpeditobController extends Controller
      */
     public function update($IDExpedito,$tipo)
     {
+        $hoy = date("Y-m-d");
         if($tipo == 1)
         {
             $expedito   = Expeditob::where("IDExpedito",$IDExpedito)->update(
                 [
-                    "Estado"    => "EN PROCESO",
+                    "Estado"    => 2,
+                    "FechaComienzo"    => $hoy,
                 ]);
         }else {
             $expedito   = Expeditob::where("IDExpedito",$IDExpedito)->update(
                 [
-                    "Estado"    => "FINALIZADO",
+                    "Estado"    => 3,
                 ]);
         }
         if($expedito)
