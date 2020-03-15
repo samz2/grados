@@ -125,7 +125,7 @@
                     </p>
                   </a>
                   <ul class="nav nav-treeview">
-                    <li class="nav-item">
+                    <li>
                       <router-link to="docentes" class="nav-link">
                         <i class="fas fa-list nav-icon"></i>
                         <p>Docentes</p>

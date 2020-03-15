@@ -5281,9 +5281,7 @@ __webpack_require__.r(__webpack_exports__);
         IDExpedito: null,
         Tipo: null,
         CodigoAlumno: null,
-        Tomo: null,
-        Folio: null,
-        Asiento: null,
+        Acta: null,
         NumSesion: null,
         FechaIngreso: null,
         FechaComienzo: null,
@@ -5291,18 +5289,19 @@ __webpack_require__.r(__webpack_exports__);
         Fecha: null,
         Alumno: null
       }],
-      columns: ["Alumno", "Tomo", "Folio", "Asiento", "NumSesion", "Fecha", "FechaIngreso", "FechaComienzo", "Acciones"],
+      columns: ["Alumno", "Acta", "NumSesion", "Fecha", "FechaIngreso", "FechaComienzo", "Acciones"],
       options: {
         headings: {
           CodigoAlumno: "Código",
           NumSesion: "Sesión",
-          FechaIngreso: "Fecha Ingreso trámite",
-          FechaComienzo: "Fecha Comienzo trámite",
+          FechaIngreso: "Ingreso trámite",
+          FechaComienzo: "Comienzo trámite",
           Fecha: "Fecha Sesión",
-          Alumno: "Egresado"
+          Alumno: "Egresado",
+          Acta: "   T-F-A   "
         },
-        sortable: ["Alumno", "Tomo", "Folio", "Asiento", "NumSesion", "Fecha", "FechaIngreso", "FechaComienzo"],
-        filterable: ["Alumno", "Tomo", "Folio", "Asiento", "NumSesion", "Fecha", "FechaIngreso", "FechaComienzo"]
+        sortable: ["Alumno", "Acta", "NumSesion", "Fecha", "FechaIngreso", "FechaComienzo"],
+        filterable: ["Alumno", "Acta", "NumSesion", "Fecha", "FechaIngreso", "FechaComienzo"]
       }
     };
   },
@@ -56941,7 +56940,7 @@ var render = function() {
           _c("div", { staticClass: "card-body" }, [
             _c(
               "div",
-              { staticClass: "content table-responsive table-full-width" },
+              { staticClass: "content table-responsive table-full-width t12" },
               [
                 _c("v-client-table", {
                   attrs: {

@@ -178,7 +178,7 @@
                                 <h4 class="title">EXPEDITOS</h4>  
                             </div>
                         <div class="card-body">
-                            <div class="content table-responsive table-full-width">
+                            <div class="content table-responsive table-full-width t12">
                                 <v-client-table :data="expeditos" :columns="columns" :options="options">
                                     <div slot="Acciones" slot-scope="props">
                                         <button v-if="props.row.Estado == 'PENDIENTE'" v-on:click="estado(props.row.IDExpedito,1)" class="btn btn-danger" data-toggle="tooltip" data-placement="left" >Pendiente</button>
@@ -227,9 +227,7 @@
 				IDExpedito: null,
                 Tipo: null,
                 CodigoAlumno: null,
-                Tomo: null,
-                Folio: null,
-                Asiento: null,
+                Acta: null,
                 NumSesion: null,
                 FechaIngreso: null,
                 FechaComienzo: null,
@@ -237,19 +235,20 @@
                 Fecha: null,
                 Alumno: null,
             }],
-            columns: ["Alumno","Tomo","Folio","Asiento","NumSesion","Fecha","FechaIngreso","FechaComienzo","Acciones"],
+            columns: ["Alumno","Acta","NumSesion","Fecha","FechaIngreso","FechaComienzo","Acciones"],
             options: {
 				headings:
 				{
                     CodigoAlumno: "Código",
                     NumSesion: "Sesión",
-                    FechaIngreso: "Fecha Ingreso trámite",
-                    FechaComienzo: "Fecha Comienzo trámite",
+                    FechaIngreso: "Ingreso trámite",
+                    FechaComienzo: "Comienzo trámite",
                     Fecha: "Fecha Sesión",
                     Alumno: "Egresado",
+                    Acta: "   T-F-A   "
 				},
-				sortable    : ["Alumno","Tomo","Folio","Asiento","NumSesion","Fecha","FechaIngreso","FechaComienzo",],
-				filterable  : ["Alumno","Tomo","Folio","Asiento","NumSesion","Fecha","FechaIngreso","FechaComienzo",]
+				sortable    : ["Alumno","Acta","NumSesion","Fecha","FechaIngreso","FechaComienzo",],
+				filterable  : ["Alumno","Acta","NumSesion","Fecha","FechaIngreso","FechaComienzo",]
             },
         }
 	},
