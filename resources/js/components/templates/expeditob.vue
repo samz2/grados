@@ -29,25 +29,25 @@
                             <div class="form-group row">
                                 <label for="dni" class="col-md-2 col-form-label">DNI: </label>
                                 <div class="col-md-2">
-                                    <input type="text" id="dni" readonly class="form-control form-control-sm">
+                                    <input type="text" v-model="expedito.dni" id="dni" readonly class="form-control form-control-sm">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="codigo" class="col-md-2 col-form-label">Código: </label>
                                 <div class="col-md-2">
-                                    <input type="text" id="codigo" readonly class="form-control form-control-sm">
+                                    <input type="text" v-model="expedito.codigo" id="codigo" readonly class="form-control form-control-sm">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="nombre" class="col-md-2 col-form-label">Nombre: </label>
                                 <div class="col-md-5">
-                                    <input type="text" id="nombre" readonly class="form-control form-control-sm">
+                                    <input type="text" v-model="expedito.alumno" id="nombre" readonly class="form-control form-control-sm">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="carrera" class="col-md-2 col-form-label">Carrera: </label>
                                 <div class="col-md-5">
-                                    <input type="text" id="carrera" readonly class="form-control form-control-sm">
+                                    <input type="text" v-model="expedito.carrera" id="carrera" readonly class="form-control form-control-sm">
                                 </div>
                             </div>
                         </fieldset>
@@ -56,15 +56,15 @@
                             <div class="form-group row">
                                 <label for="tomo" class="col-md-1 col-form-label">Tomo: </label>
                                 <div class="col-md-2">
-                                    <input type="text" id="tomo" onKeyPress="return soloNumeros(event)" maxlength="3" class="form-control form-control-sm">
+                                    <input type="text" id="tomo" v-model="expedito.tomo" onKeyPress="return soloNumeros(event)" maxlength="3" class="form-control form-control-sm">
                                 </div>
-                                <label for="folio" class="col-md-1 col-form-label">Fólio: </label>
+                                <label for="folio" class="col-md-1 col-form-label">Folio: </label>
                                 <div class="col-md-2">
-                                    <input type="text" id="folio" onKeyPress="return soloNumeros(event)" maxlength="3" class="form-control form-control-sm">
+                                    <input type="text" id="folio" v-model="expedito.folio" onKeyPress="return soloNumeros(event)" maxlength="3" class="form-control form-control-sm">
                                 </div>
-                                <label for="asiento" class="col-md-2 col-form-label">Asiento: </label>
+                                <label for="asiento" class="col-md-1 t12 col-form-label">Asiento: </label>
                                 <div class="col-md-2">
-                                    <input type="text" id="asiento" onKeyPress="return soloNumeros(event)" maxlength="3" class="form-control form-control-sm">
+                                    <input type="text" id="asiento" v-model="expedito.asiento" onKeyPress="return soloNumeros(event)" maxlength="3" class="form-control form-control-sm">
                                 </div>
                             </div>
                         </fieldset>
@@ -73,15 +73,17 @@
                             <div class="form-group row">
                                 <label for="sesion" class="col-md-1 col-form-label t12"># Sesión: </label>
                                 <div class="col-md-2">
-                                    <input type="text" id="sesion" onKeyPress="return soloNumeros(event)" maxlength="4" class="form-control form-control-sm">
+                                    <select id="sesion" v-model="expedito.sesion" @change="getSession(expedito.sesion)" class="form-control form-control-sm">
+                                        <option v-for="s in sesiones" :key="s.NumSesion" :value="s.NumSesion">{{s.NumSesion}}</option>    
+                                    </select>
                                 </div>
                                 <label for="fecha" class="col-md-1 col-form-label">Fecha: </label>
                                 <div class="col-md-3">
-                                    <input type="date" id="fecha" class="form-control form-control-sm">
+                                    <input type="date" id="fecha" v-model="expedito.sfecha" readonly class="form-control form-control-sm">
                                 </div>
                                 <label for="Tipo" class="col-md-1 col-form-label">Tipo: </label>
                                 <div class="col-md-3">
-                                    <input type="text" id="sesion" readonly maxlength="3" class="form-control form-control-sm">
+                                    <input type="text" id="tipo" v-model="expedito.stipo" readonly maxlength="3" class="form-control form-control-sm">
                                 </div>
                             </div>
                         </fieldset>
@@ -90,13 +92,13 @@
                             <div class="form-group row">
                                 <label for="ingreso" class="col-md-4 col-form-label">Fecha de Ingreso de la solicitud: </label>
                                 <div class="col-md-3">
-                                    <input type="date" id="ingreso" onKeyPress="return soloNumeros(event)" maxlength="3" class="form-control form-control-sm">
+                                    <input type="date" id="ingreso" v-model="expedito.ingreso" onKeyPress="return soloNumeros(event)" maxlength="3" class="form-control form-control-sm">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="comienzo" class="col-md-4 col-form-label">Fecha que empienza el trámite </label>
+                                <label for="comienzo" class="col-md-4 col-form-label">Fecha que empieza el trámite </label>
                                 <div class="col-md-3">
-                                    <input type="date" id="comienzo" onKeyPress="return soloNumeros(event)" maxlength="3" class="form-control form-control-sm">
+                                    <input type="date" id="comienzo" v-model="expedito.comienzo" onKeyPress="return soloNumeros(event)" maxlength="3" class="form-control form-control-sm">
                                 </div>
                             </div>
                         </fieldset>
@@ -118,33 +120,33 @@
                         <div class="modal-content">
                         <div class="modal-header text-center bg-secondary">
                             <h5 class="modal-titler" id="exampleModalLabel">Buscar Egresado</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <button type="button" class="close" data-dismiss="modal" @click="borrar()" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
                             <div class="form-group row">
-                                <label for="dni" class="col-md-2 col-form-label">DNI: </label>
+                                <label for="dni1" class="col-md-2 col-form-label">DNI: </label>
                                 <div class="col-md-4">
-                                    <input type="text" id="dni" class="form-control form-control-sm">
+                                    <input type="text" v-model="alumno.dni" id="dni1" class="form-control form-control-sm">
                                 </div>
-                                <label for="codigo" class="col-md-2 col-form-label">Código: </label>
+                                <label for="codigo1" class="col-md-2 col-form-label">Código: </label>
                                 <div class="col-md-4">
-                                    <input type="text" id="codigo" class="form-control form-control-sm">
+                                    <input type="text" v-model="alumno.codigo" id="codigo1" class="form-control form-control-sm">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="nombre" class="col-md-2 col-form-label">Apellido: </label>
-                                <div class="col-md-8">
-                                    <input type="text" id="nombre" class="form-control form-control-sm">
+                                <label for="nombre1" class="col-md-2 col-form-label">Apellido: </label>
+                                <div class="col-md-10">
+                                    <input type="text" id="nombre1"  v-model="alumno.apellido" class="form-control form-control-sm">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-3">
-                                    <button class="btn btn-success" @click="buscar()">Buscar <i class="fa fa-search"></i></button>
+                                    <button class="btn btn-success" @click="buscar(alumno.dni,alumno.codigo,alumno.apellido)">Buscar <i class="fa fa-search"></i></button>
                                 </div>
                                 <div class="col-md-3">
-                                    <button class="btn btn-danger" @click="reiniciar()">Borrar <i class="fa fa-eraser"></i></button>
+                                    <button class="btn btn-danger" @click="borrar()">Borrar <i class="fa fa-eraser"></i></button>
                                 </div>
                             </div>
                             <fieldset class="border p-2">
@@ -156,19 +158,14 @@
                                         <td class="text-center"><i class="blanco">aaaaaaaaa</i>NOMBRES<i class="blanco">aaaaaaaaa</i></td>
                                         <td class="text-center">SELECCIONAR</td>
                                     </tr>
-                                    <tr class="t10">
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td><input data-dismiss="modal" type="checkbox" @click="seleccionar()" class="form-control form-control-sm"></td>
+                                    <tr class="t10" v-for="a in alumnos" :key="a.Codigo">
+                                        <td>{{a.DNI}}</td>
+                                        <td>{{a.Codigo}}</td>
+                                        <td>{{a.Nombres}}</td>
+                                        <td><input data-dismiss="modal" type="checkbox" @click="seleccionar(a.DNI,a.Codigo,a.Nombres,a.Carrera)" class="form-control form-control-sm"></td>
                                     </tr>
                                 </table>
                             </fieldset>
-                        <!-- <div class="modal-footer">
-                            <button @click="addDecano(1)" id="add" class="btn btn-outline-success" data-dismiss="modal">Agregar <i class="fa fa-save"></i></button>
-                            <button @click="addDecano(2)" id="editar" class="btn btn-outline-success" data-dismiss="modal">Editar <i class="fa fa-pencil"></i></button>
-                            <button type="button" class="btn btn-outline-secondary" @click="load()" data-dismiss="modal">Cerrar <i class="fa fa-close"></i></button>
-                        </div> -->
                         </div>
                     </div>
                 </div>
@@ -205,50 +202,116 @@
         return {
             alumnoz:null,
 			expedito:{
-                aux:null,
+                codigo:null,
+                dni:null,
                 alumno:null,
-                recepcion:null,
+                carrera:null,
+                tomo:null,
+                folio:null,
+                asiento:null,
                 sesion:null,
-                tipo:1
-			},
+                sfecha:null,
+                stipo:null,
+                ingreso:null,
+                comienzo:null,
+                tipo:"BACHILLER"
+            },
+            alumno:{
+                codigo:null,
+                dni:null,
+                apellido:null,
+            },
             alumnos:[],
+            sesiones:[],
             expeditos	:[{
-				IDExpedito:null,
-                Alumno:null,
-                FechaRecepcion:null,
-                FechaSesion:null,
-                Estado:null
+				IDExpedito: null,
+                Tipo: null,
+                CodigoAlumno: null,
+                Tomo: null,
+                Folio: null,
+                Asiento: null,
+                NumSesion: null,
+                FechaIngreso: null,
+                FechaComienzo: null,
+                Estado: null,
+                Fecha: null,
+                Alumno: null,
             }],
-            columns: ["Alumno","FechaRecepcion","FechaSesion","Acciones"],
+            columns: ["Alumno","Tomo","Folio","Asiento","NumSesion","Fecha","FechaIngreso","FechaComienzo","Acciones"],
             options: {
 				headings:
 				{
-                    Alumno:"Alumno",
-                    FechaRecepcion:"Fecha Recepción",
-                    FechaSesion:"Fecha Sesión",
+                    CodigoAlumno: "Código",
+                    NumSesion: "Sesión",
+                    FechaIngreso: "Fecha Ingreso trámite",
+                    FechaComienzo: "Fecha Comienzo trámite",
+                    Fecha: "Fecha Sesión",
+                    Alumno: "Egresado",
 				},
-				sortable    : ["Alumno","FechaRecepcion","FechaSesion",],
-				filterable  : ["Alumno","FechaRecepcion","FechaSesion",]
+				sortable    : ["Alumno","Tomo","Folio","Asiento","NumSesion","Fecha","FechaIngreso","FechaComienzo",],
+				filterable  : ["Alumno","Tomo","Folio","Asiento","NumSesion","Fecha","FechaIngreso","FechaComienzo",]
             },
         }
 	},
 	created(){
         this.getExpeditos();
-        // this.getAlumnos();
+        this.getSesiones();
 	},
 	mounted(){
         $('#objetivo').hide();
         $('#menos').hide();
 	},
     methods: {
-        getAlumnos()
+        buscar(d,c,a)
         {
-            axios.get("getAlumnos")
+            if(d == '') d = null;
+            if(c == '') c = null;
+            if(a == '') a = null;
+            axios.get("getAlumnos/"+d+"/"+c+"/"+a)
             .then(data=>
             {
-                this.alumnos = data.data.egresados;
-                console.log(this.alumnos);
-                $("#alumnos").show();
+                this.alumnos = data.data.alumnos;
+                this.$Progress.finish();
+            }
+            ).catch(error=>{
+                console.log(error);
+            })
+        },
+        borrar()
+        {
+            this.alumno.codigo      = null;
+            this.alumno.dni         = null;
+            this.alumno.apellido    = null;
+        },
+        seleccionar(d,c,n,ca)
+        {
+            this.expedito.codigo     = c;
+            this.expedito.dni        = d;
+            this.expedito.alumno     = n;
+            this.expedito.carrera    = ca;
+
+        },
+        getSesiones()
+        {
+            this.$Progress.start();
+            axios.get("getSessions")
+            .then(data=>
+            {
+                this.sesiones    = data.data.sesiones;
+                this.$Progress.finish();
+            }
+            ).catch(error=>{
+                console.log(error);
+            })
+        },
+        getSession(e)
+        {
+            this.$Progress.start();
+            axios.get("getSession/"+e)
+            .then(data=>
+            {
+                this.expedito.sfecha    = data.data.fecha;
+                this.expedito.stipo     = data.data.tipo;
                 this.$Progress.finish();
             }
             ).catch(error=>{
@@ -275,9 +338,12 @@
 		},
 		addExpedito()
 		{
-            console.log(this.expedito);
-            this.expedito.alumno = this.alumnoz.code;
-            if(this.expedito.alumno == null || this.expedito.recepcion == null || this.expedito.sesion == null)
+           
+            if( this.expedito.codigo==null || this.expedito.dni==null ||
+                this.expedito.alumno==null || this.expedito.carrera==null ||
+                this.expedito.tomo==null || this.expedito.folio==null || this.expedito.asiento==null ||
+                this.expedito.sesion==null || this.expedito.sfecha==null || this.expedito.stipo==null ||
+                this.expedito.ingreso==null || this.expedito.comienzo==null)
             {
                 swal({
 					type: 'error',

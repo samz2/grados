@@ -14,17 +14,18 @@ class ExpeditobController extends Controller
      */
     public function index()
     {
-        $expeditosb = \DB::select("SELECT ex.FechaSesion,ex.FechaRecepcion,ex.IDExpedito,
-        concat_ws(' ',e.Nombre,e.Paterno,e.Materno) as Alumno,ex.Estado 
-        FROM egresado e 
-        JOIN expedito ex ON e.Codigo = ex.CodigoAlumno  WHERE ex.Tipo='BACHILLER'");
+        $expeditosb =   Expeditob::join("egresado AS e","expedito.CodigoAlumno","e.Codigo")
+                        ->join("sesion AS s","expedito.NumSesion","s.NumSesion")
+                        ->join("estados AS es","expedito.Estado","es.Posicion")
+                        ->select("expedito.*","s.*","es.Estado",\DB::raw("concat_ws(' ',e.Nombre,e.Paterno,e.Materno) as Alumno"))->get();
         
-        $expeditost = \DB::select("SELECT ex.FechaSesion,ex.FechaRecepcion,ex.IDExpedito,
-        concat_ws(' ',e.Nombre,e.Paterno,e.Materno) as Alumno,ex.Estado 
-        FROM egresado e 
-        JOIN expedito ex ON e.Codigo = ex.CodigoAlumno  WHERE ex.Tipo='TITULO'");
+        // $expeditost = \DB::select("SELECT ex.FechaSesion,ex.FechaRecepcion,ex.IDExpedito,
+        // concat_ws(' ',e.Nombre,e.Paterno,e.Materno) as Alumno,ex.Estado 
+        // FROM egresado e 
+        // JOIN expedito ex ON e.Codigo = ex.CodigoAlumno  WHERE ex.Tipo='TITULO'");
         
-        return compact("expeditosb","expeditost");
+        // return compact("expeditosb","expeditost");
+        return compact("expeditosb");
     }
 
     /**
@@ -48,17 +49,16 @@ class ExpeditobController extends Controller
         $hoy = date("Y-m-d");
         $expedito = new Expeditob();
         
-        $expedito->CodigoAlumno     = $request->expedito["alumno"];
-        $expedito->FechaSesion      = $request->expedito["sesion"];
-        $expedito->FechaRecepcion   = $request->expedito["recepcion"];
+        $expedito->Tipo             = $request->expedito["tipo"];
+        $expedito->CodigoAlumno     = $request->expedito["codigo"];
+        $expedito->Tomo             = $request->expedito["tomo"];
+        $expedito->Folio            = $request->expedito["folio"];
+        $expedito->Asiento          = $request->expedito["asiento"];
+        $expedito->NumSesion        = $request->expedito["sesion"];
+        $expedito->FechaIngreso     = $request->expedito["ingreso"];
+        $expedito->FechaComienzo    = $request->expedito["comienzo"];
+        $expedito->Estado           = 1;
         $expedito->created_at       = $hoy;
-        $expedito->Estado           = "PENDIENTE";
-        if($request->expedito["tipo"] == 1)
-        {
-            $expedito->Tipo         = "BACHILLER";
-        }else{
-            $expedito->Tipo         = "TITULO";
-        }
         $expedito->save();
         return "ok";
     }

@@ -30,7 +30,7 @@ Route::get('/getDocumentos','DocumentosController@index');
 
 Route::post('/addEgresado','EgresadoController@store');
 Route::get('/getEgresados','EgresadoController@index');
-Route::get('/getAlumnos/{id}','EgresadoController@show');
+Route::get('/getAlumnos/{d}/{c}/{a}','EgresadoController@show');
 Route::get('/getAlumnos','EgresadoController@alumnos');
 Route::post('/updateEgresado','EgresadoController@update');
 Route::get('/deleteEgresado/{id}','EgresadoController@destroy');
@@ -54,7 +54,10 @@ Route::post('/updateEstados','EstadosController@update');
 
 Route::post('/addSesion','SesionController@store');
 Route::get('/getSesiones','SesionController@index');
+Route::get('/getSessions','SesionController@sessions');
+Route::get('/getSession/{num}','SesionController@show');
 Route::post('/updateSesion','SesionController@update');
+
 
 Route::get('/getEscuelas','EscuelasController@index');
 Route::post('/addCarrera','EscuelasController@store');

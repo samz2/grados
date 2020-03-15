@@ -17,6 +17,11 @@ class SesionController extends Controller
         $sesiones = Sesion::all();
         return compact("sesiones");
     }
+    public function sessions()
+    {
+        $sesiones = Sesion::select("NumSesion")->orderBy("NumSesion","DESC")->get();
+        return compact("sesiones");
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -53,9 +58,20 @@ class SesionController extends Controller
      * @param  \App\sesion  $sesion
      * @return \Illuminate\Http\Response
      */
-    public function show(sesion $sesion)
+    public function show($num)
     {
-        //
+        $objSesion  = Sesion::select("Fecha","Tipo")->where("NumSesion",$num)->get();
+        $fecha  = "";
+        $tipo   = "";
+        if(count($objSesion) > 0)
+        {
+            $val = true;
+            $fecha = $objSesion[0]->Fecha;
+            $tipo = $objSesion[0]->Tipo;
+        }
+        else $val = false;
+        
+        return compact("val","fecha","tipo");
     }
 
     /**

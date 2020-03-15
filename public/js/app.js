@@ -5251,57 +5251,116 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       alumnoz: null,
       expedito: {
-        aux: null,
+        codigo: null,
+        dni: null,
         alumno: null,
-        recepcion: null,
+        carrera: null,
+        tomo: null,
+        folio: null,
+        asiento: null,
         sesion: null,
-        tipo: 1
+        sfecha: null,
+        stipo: null,
+        ingreso: null,
+        comienzo: null,
+        tipo: "BACHILLER"
+      },
+      alumno: {
+        codigo: null,
+        dni: null,
+        apellido: null
       },
       alumnos: [],
+      sesiones: [],
       expeditos: [{
         IDExpedito: null,
-        Alumno: null,
-        FechaRecepcion: null,
-        FechaSesion: null,
-        Estado: null
+        Tipo: null,
+        CodigoAlumno: null,
+        Tomo: null,
+        Folio: null,
+        Asiento: null,
+        NumSesion: null,
+        FechaIngreso: null,
+        FechaComienzo: null,
+        Estado: null,
+        Fecha: null,
+        Alumno: null
       }],
-      columns: ["Alumno", "FechaRecepcion", "FechaSesion", "Acciones"],
+      columns: ["Alumno", "Tomo", "Folio", "Asiento", "NumSesion", "Fecha", "FechaIngreso", "FechaComienzo", "Acciones"],
       options: {
         headings: {
-          Alumno: "Alumno",
-          FechaRecepcion: "Fecha Recepción",
-          FechaSesion: "Fecha Sesión"
+          CodigoAlumno: "Código",
+          NumSesion: "Sesión",
+          FechaIngreso: "Fecha Ingreso trámite",
+          FechaComienzo: "Fecha Comienzo trámite",
+          Fecha: "Fecha Sesión",
+          Alumno: "Egresado"
         },
-        sortable: ["Alumno", "FechaRecepcion", "FechaSesion"],
-        filterable: ["Alumno", "FechaRecepcion", "FechaSesion"]
+        sortable: ["Alumno", "Tomo", "Folio", "Asiento", "NumSesion", "Fecha", "FechaIngreso", "FechaComienzo"],
+        filterable: ["Alumno", "Tomo", "Folio", "Asiento", "NumSesion", "Fecha", "FechaIngreso", "FechaComienzo"]
       }
     };
   },
   created: function created() {
-    this.getExpeditos(); // this.getAlumnos();
+    this.getExpeditos();
+    this.getSesiones();
   },
   mounted: function mounted() {
     $('#objetivo').hide();
     $('#menos').hide();
   },
   methods: {
-    getAlumnos: function getAlumnos() {
+    buscar: function buscar(d, c, a) {
       var _this = this;
 
-      axios.get("getAlumnos").then(function (data) {
-        _this.alumnos = data.data.egresados;
-        console.log(_this.alumnos);
-        $("#alumnos").show();
+      if (d == '') d = null;
+      if (c == '') c = null;
+      if (a == '') a = null;
+      axios.get("getAlumnos/" + d + "/" + c + "/" + a).then(function (data) {
+        _this.alumnos = data.data.alumnos;
 
         _this.$Progress.finish();
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    borrar: function borrar() {
+      this.alumno.codigo = null;
+      this.alumno.dni = null;
+      this.alumno.apellido = null;
+    },
+    seleccionar: function seleccionar(d, c, n, ca) {
+      this.expedito.codigo = c;
+      this.expedito.dni = d;
+      this.expedito.alumno = n;
+      this.expedito.carrera = ca;
+    },
+    getSesiones: function getSesiones() {
+      var _this2 = this;
+
+      this.$Progress.start();
+      axios.get("getSessions").then(function (data) {
+        _this2.sesiones = data.data.sesiones;
+
+        _this2.$Progress.finish();
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    getSession: function getSession(e) {
+      var _this3 = this;
+
+      this.$Progress.start();
+      axios.get("getSession/" + e).then(function (data) {
+        _this3.expedito.sfecha = data.data.fecha;
+        _this3.expedito.stipo = data.data.tipo;
+
+        _this3.$Progress.finish();
       })["catch"](function (error) {
         console.log(error);
       });
@@ -5310,13 +5369,13 @@ __webpack_require__.r(__webpack_exports__);
       console.log(e);
     },
     getExpeditos: function getExpeditos() {
-      var _this2 = this;
+      var _this4 = this;
 
       this.$Progress.start();
       axios.get("getExpeditos").then(function (data) {
-        _this2.expeditos = data.data.expeditosb;
+        _this4.expeditos = data.data.expeditosb;
 
-        _this2.$Progress.finish();
+        _this4.$Progress.finish();
 
         console.log(data.data);
       })["catch"](function (error) {
@@ -5324,12 +5383,9 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     addExpedito: function addExpedito() {
-      var _this3 = this;
+      var _this5 = this;
 
-      console.log(this.expedito);
-      this.expedito.alumno = this.alumnoz.code;
-
-      if (this.expedito.alumno == null || this.expedito.recepcion == null || this.expedito.sesion == null) {
+      if (this.expedito.codigo == null || this.expedito.dni == null || this.expedito.alumno == null || this.expedito.carrera == null || this.expedito.tomo == null || this.expedito.folio == null || this.expedito.asiento == null || this.expedito.sesion == null || this.expedito.sfecha == null || this.expedito.stipo == null || this.expedito.ingreso == null || this.expedito.comienzo == null) {
         swal({
           type: 'error',
           title: 'Llenar los datos obligatorios'
@@ -5347,7 +5403,7 @@ __webpack_require__.r(__webpack_exports__);
             timer: 2000
           });
 
-          _this3.$Progress.finish();
+          _this5.$Progress.finish();
 
           setTimeout(function () {
             location.reload();
@@ -5377,7 +5433,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     estado: function estado(id, tipo) {
-      var _this4 = this;
+      var _this6 = this;
 
       this.$Progress.start();
 
@@ -5397,7 +5453,7 @@ __webpack_require__.r(__webpack_exports__);
               if (data.data == "OK") {
                 swal('Actualizado!', 'El Expedito cambio a En Proceso.', 'success');
 
-                _this4.$Progress.finish();
+                _this6.$Progress.finish();
 
                 setTimeout(function () {
                   location.reload();
@@ -5406,7 +5462,7 @@ __webpack_require__.r(__webpack_exports__);
             })["catch"](function (error) {
               console.log('Ocurrio un error ' + error);
 
-              _this4.$Progress.fail();
+              _this6.$Progress.fail();
             });
           }
         });
@@ -5426,7 +5482,7 @@ __webpack_require__.r(__webpack_exports__);
               if (data.data == "OK") {
                 swal('Actualizado!', 'El Expedito cambio a Finalizado.', 'success');
 
-                _this4.$Progress.finish();
+                _this6.$Progress.finish();
 
                 setTimeout(function () {
                   location.reload();
@@ -5435,7 +5491,7 @@ __webpack_require__.r(__webpack_exports__);
             })["catch"](function (error) {
               console.log('Ocurrio un error ' + error);
 
-              _this4.$Progress.fail();
+              _this6.$Progress.fail();
             });
           }
         });
@@ -56086,13 +56142,500 @@ var render = function() {
             _vm._m(0),
             _vm._v(" "),
             _c("div", { staticClass: "card-body" }, [
-              _vm._m(1),
+              _c("fieldset", { staticClass: "border p-2" }, [
+                _vm._m(1),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group row" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-md-2 col-form-label",
+                      attrs: { for: "dni" }
+                    },
+                    [_vm._v("DNI: ")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-2" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.expedito.dni,
+                          expression: "expedito.dni"
+                        }
+                      ],
+                      staticClass: "form-control form-control-sm",
+                      attrs: { type: "text", id: "dni", readonly: "" },
+                      domProps: { value: _vm.expedito.dni },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.expedito, "dni", $event.target.value)
+                        }
+                      }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group row" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-md-2 col-form-label",
+                      attrs: { for: "codigo" }
+                    },
+                    [_vm._v("Código: ")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-2" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.expedito.codigo,
+                          expression: "expedito.codigo"
+                        }
+                      ],
+                      staticClass: "form-control form-control-sm",
+                      attrs: { type: "text", id: "codigo", readonly: "" },
+                      domProps: { value: _vm.expedito.codigo },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.expedito, "codigo", $event.target.value)
+                        }
+                      }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group row" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-md-2 col-form-label",
+                      attrs: { for: "nombre" }
+                    },
+                    [_vm._v("Nombre: ")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-5" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.expedito.alumno,
+                          expression: "expedito.alumno"
+                        }
+                      ],
+                      staticClass: "form-control form-control-sm",
+                      attrs: { type: "text", id: "nombre", readonly: "" },
+                      domProps: { value: _vm.expedito.alumno },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.expedito, "alumno", $event.target.value)
+                        }
+                      }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group row" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-md-2 col-form-label",
+                      attrs: { for: "carrera" }
+                    },
+                    [_vm._v("Carrera: ")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-5" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.expedito.carrera,
+                          expression: "expedito.carrera"
+                        }
+                      ],
+                      staticClass: "form-control form-control-sm",
+                      attrs: { type: "text", id: "carrera", readonly: "" },
+                      domProps: { value: _vm.expedito.carrera },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.expedito, "carrera", $event.target.value)
+                        }
+                      }
+                    })
+                  ])
+                ])
+              ]),
               _vm._v(" "),
-              _vm._m(2),
+              _c("fieldset", { staticClass: "border p-2" }, [
+                _c("legend", { staticClass: "w-auto" }, [
+                  _vm._v("Datos del Libro de Actas")
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group row" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-md-1 col-form-label",
+                      attrs: { for: "tomo" }
+                    },
+                    [_vm._v("Tomo: ")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-2" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.expedito.tomo,
+                          expression: "expedito.tomo"
+                        }
+                      ],
+                      staticClass: "form-control form-control-sm",
+                      attrs: {
+                        type: "text",
+                        id: "tomo",
+                        onKeyPress: "return soloNumeros(event)",
+                        maxlength: "3"
+                      },
+                      domProps: { value: _vm.expedito.tomo },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.expedito, "tomo", $event.target.value)
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-md-1 col-form-label",
+                      attrs: { for: "folio" }
+                    },
+                    [_vm._v("Folio: ")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-2" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.expedito.folio,
+                          expression: "expedito.folio"
+                        }
+                      ],
+                      staticClass: "form-control form-control-sm",
+                      attrs: {
+                        type: "text",
+                        id: "folio",
+                        onKeyPress: "return soloNumeros(event)",
+                        maxlength: "3"
+                      },
+                      domProps: { value: _vm.expedito.folio },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.expedito, "folio", $event.target.value)
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-md-1 t12 col-form-label",
+                      attrs: { for: "asiento" }
+                    },
+                    [_vm._v("Asiento: ")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-2" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.expedito.asiento,
+                          expression: "expedito.asiento"
+                        }
+                      ],
+                      staticClass: "form-control form-control-sm",
+                      attrs: {
+                        type: "text",
+                        id: "asiento",
+                        onKeyPress: "return soloNumeros(event)",
+                        maxlength: "3"
+                      },
+                      domProps: { value: _vm.expedito.asiento },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.expedito, "asiento", $event.target.value)
+                        }
+                      }
+                    })
+                  ])
+                ])
+              ]),
               _vm._v(" "),
-              _vm._m(3),
+              _c("fieldset", { staticClass: "border p-2" }, [
+                _c("legend", { staticClass: "w-auto" }, [_vm._v("Sesión")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group row" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-md-1 col-form-label t12",
+                      attrs: { for: "sesion" }
+                    },
+                    [_vm._v("# Sesión: ")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-2" }, [
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.expedito.sesion,
+                            expression: "expedito.sesion"
+                          }
+                        ],
+                        staticClass: "form-control form-control-sm",
+                        attrs: { id: "sesion" },
+                        on: {
+                          change: [
+                            function($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function(o) {
+                                  return o.selected
+                                })
+                                .map(function(o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.$set(
+                                _vm.expedito,
+                                "sesion",
+                                $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              )
+                            },
+                            function($event) {
+                              return _vm.getSession(_vm.expedito.sesion)
+                            }
+                          ]
+                        }
+                      },
+                      _vm._l(_vm.sesiones, function(s) {
+                        return _c(
+                          "option",
+                          {
+                            key: s.NumSesion,
+                            domProps: { value: s.NumSesion }
+                          },
+                          [_vm._v(_vm._s(s.NumSesion))]
+                        )
+                      }),
+                      0
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-md-1 col-form-label",
+                      attrs: { for: "fecha" }
+                    },
+                    [_vm._v("Fecha: ")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-3" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.expedito.sfecha,
+                          expression: "expedito.sfecha"
+                        }
+                      ],
+                      staticClass: "form-control form-control-sm",
+                      attrs: { type: "date", id: "fecha", readonly: "" },
+                      domProps: { value: _vm.expedito.sfecha },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.expedito, "sfecha", $event.target.value)
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-md-1 col-form-label",
+                      attrs: { for: "Tipo" }
+                    },
+                    [_vm._v("Tipo: ")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-3" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.expedito.stipo,
+                          expression: "expedito.stipo"
+                        }
+                      ],
+                      staticClass: "form-control form-control-sm",
+                      attrs: {
+                        type: "text",
+                        id: "tipo",
+                        readonly: "",
+                        maxlength: "3"
+                      },
+                      domProps: { value: _vm.expedito.stipo },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.expedito, "stipo", $event.target.value)
+                        }
+                      }
+                    })
+                  ])
+                ])
+              ]),
               _vm._v(" "),
-              _vm._m(4),
+              _c("fieldset", { staticClass: "border p-2" }, [
+                _c("legend", { staticClass: "w-auto" }, [
+                  _vm._v("Datos del trámite")
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group row" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-md-4 col-form-label",
+                      attrs: { for: "ingreso" }
+                    },
+                    [_vm._v("Fecha de Ingreso de la solicitud: ")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-3" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.expedito.ingreso,
+                          expression: "expedito.ingreso"
+                        }
+                      ],
+                      staticClass: "form-control form-control-sm",
+                      attrs: {
+                        type: "date",
+                        id: "ingreso",
+                        onKeyPress: "return soloNumeros(event)",
+                        maxlength: "3"
+                      },
+                      domProps: { value: _vm.expedito.ingreso },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.expedito, "ingreso", $event.target.value)
+                        }
+                      }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group row" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-md-4 col-form-label",
+                      attrs: { for: "comienzo" }
+                    },
+                    [_vm._v("Fecha que empieza el trámite ")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-3" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.expedito.comienzo,
+                          expression: "expedito.comienzo"
+                        }
+                      ],
+                      staticClass: "form-control form-control-sm",
+                      attrs: {
+                        type: "date",
+                        id: "comienzo",
+                        onKeyPress: "return soloNumeros(event)",
+                        maxlength: "3"
+                      },
+                      domProps: { value: _vm.expedito.comienzo },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.expedito,
+                            "comienzo",
+                            $event.target.value
+                          )
+                        }
+                      }
+                    })
+                  ])
+                ])
+              ]),
               _vm._v(" "),
               _c("br"),
               _vm._v(" "),
@@ -56154,12 +56697,146 @@ var render = function() {
           { staticClass: "modal-dialog", attrs: { role: "document" } },
           [
             _c("div", { staticClass: "modal-content" }, [
-              _vm._m(5),
+              _c(
+                "div",
+                { staticClass: "modal-header text-center bg-secondary" },
+                [
+                  _c(
+                    "h5",
+                    {
+                      staticClass: "modal-titler",
+                      attrs: { id: "exampleModalLabel" }
+                    },
+                    [_vm._v("Buscar Egresado")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "close",
+                      attrs: {
+                        type: "button",
+                        "data-dismiss": "modal",
+                        "aria-label": "Close"
+                      },
+                      on: {
+                        click: function($event) {
+                          return _vm.borrar()
+                        }
+                      }
+                    },
+                    [
+                      _c("span", { attrs: { "aria-hidden": "true" } }, [
+                        _vm._v("×")
+                      ])
+                    ]
+                  )
+                ]
+              ),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
-                _vm._m(6),
+                _c("div", { staticClass: "form-group row" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-md-2 col-form-label",
+                      attrs: { for: "dni1" }
+                    },
+                    [_vm._v("DNI: ")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-4" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.alumno.dni,
+                          expression: "alumno.dni"
+                        }
+                      ],
+                      staticClass: "form-control form-control-sm",
+                      attrs: { type: "text", id: "dni1" },
+                      domProps: { value: _vm.alumno.dni },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.alumno, "dni", $event.target.value)
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-md-2 col-form-label",
+                      attrs: { for: "codigo1" }
+                    },
+                    [_vm._v("Código: ")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-4" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.alumno.codigo,
+                          expression: "alumno.codigo"
+                        }
+                      ],
+                      staticClass: "form-control form-control-sm",
+                      attrs: { type: "text", id: "codigo1" },
+                      domProps: { value: _vm.alumno.codigo },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.alumno, "codigo", $event.target.value)
+                        }
+                      }
+                    })
+                  ])
+                ]),
                 _vm._v(" "),
-                _vm._m(7),
+                _c("div", { staticClass: "form-group row" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-md-2 col-form-label",
+                      attrs: { for: "nombre1" }
+                    },
+                    [_vm._v("Apellido: ")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-10" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.alumno.apellido,
+                          expression: "alumno.apellido"
+                        }
+                      ],
+                      staticClass: "form-control form-control-sm",
+                      attrs: { type: "text", id: "nombre1" },
+                      domProps: { value: _vm.alumno.apellido },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.alumno, "apellido", $event.target.value)
+                        }
+                      }
+                    })
+                  ])
+                ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "row" }, [
                   _c("div", { staticClass: "col-md-3" }, [
@@ -56169,7 +56846,11 @@ var render = function() {
                         staticClass: "btn btn-success",
                         on: {
                           click: function($event) {
-                            return _vm.buscar()
+                            return _vm.buscar(
+                              _vm.alumno.dni,
+                              _vm.alumno.codigo,
+                              _vm.alumno.apellido
+                            )
                           }
                         }
                       },
@@ -56187,7 +56868,7 @@ var render = function() {
                         staticClass: "btn btn-danger",
                         on: {
                           click: function($event) {
-                            return _vm.reiniciar()
+                            return _vm.borrar()
                           }
                         }
                       },
@@ -56210,31 +56891,39 @@ var render = function() {
                       attrs: { colspadding: "0", cellspacing: "0", border: "1" }
                     },
                     [
-                      _vm._m(8),
+                      _vm._m(2),
                       _vm._v(" "),
-                      _c("tr", { staticClass: "t10" }, [
-                        _c("td"),
-                        _vm._v(" "),
-                        _c("td"),
-                        _vm._v(" "),
-                        _c("td"),
-                        _vm._v(" "),
-                        _c("td", [
-                          _c("input", {
-                            staticClass: "form-control form-control-sm",
-                            attrs: {
-                              "data-dismiss": "modal",
-                              type: "checkbox"
-                            },
-                            on: {
-                              click: function($event) {
-                                return _vm.seleccionar()
+                      _vm._l(_vm.alumnos, function(a) {
+                        return _c("tr", { key: a.Codigo, staticClass: "t10" }, [
+                          _c("td", [_vm._v(_vm._s(a.DNI))]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v(_vm._s(a.Codigo))]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v(_vm._s(a.Nombres))]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _c("input", {
+                              staticClass: "form-control form-control-sm",
+                              attrs: {
+                                "data-dismiss": "modal",
+                                type: "checkbox"
+                              },
+                              on: {
+                                click: function($event) {
+                                  return _vm.seleccionar(
+                                    a.DNI,
+                                    a.Codigo,
+                                    a.Nombres,
+                                    a.Carrera
+                                  )
+                                }
                               }
-                            }
-                          })
+                            })
+                          ])
                         ])
-                      ])
-                    ]
+                      })
+                    ],
+                    2
                   )
                 ])
               ])
@@ -56247,7 +56936,7 @@ var render = function() {
     _c("div", { staticClass: "row", attrs: { id: "expeditos" } }, [
       _c("div", { staticClass: "col-md-12" }, [
         _c("div", { staticClass: "card card-default" }, [
-          _vm._m(9),
+          _vm._m(3),
           _vm._v(" "),
           _c("div", { staticClass: "card-body" }, [
             _c(
@@ -56391,332 +57080,20 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("fieldset", { staticClass: "border p-2" }, [
-      _c("legend", { staticClass: "w-auto" }, [
-        _vm._v("Datos Egresado \n                                "),
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-outline-secondary",
-            attrs: {
-              "data-target": "#exampleModal",
-              "data-toggle": "modal",
-              "data-placement": "left"
-            }
-          },
-          [_c("i", { staticClass: "fa fa-plus" })]
-        )
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group row" }, [
-        _c(
-          "label",
-          { staticClass: "col-md-2 col-form-label", attrs: { for: "dni" } },
-          [_vm._v("DNI: ")]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-2" }, [
-          _c("input", {
-            staticClass: "form-control form-control-sm",
-            attrs: { type: "text", id: "dni", readonly: "" }
-          })
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group row" }, [
-        _c(
-          "label",
-          { staticClass: "col-md-2 col-form-label", attrs: { for: "codigo" } },
-          [_vm._v("Código: ")]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-2" }, [
-          _c("input", {
-            staticClass: "form-control form-control-sm",
-            attrs: { type: "text", id: "codigo", readonly: "" }
-          })
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group row" }, [
-        _c(
-          "label",
-          { staticClass: "col-md-2 col-form-label", attrs: { for: "nombre" } },
-          [_vm._v("Nombre: ")]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-5" }, [
-          _c("input", {
-            staticClass: "form-control form-control-sm",
-            attrs: { type: "text", id: "nombre", readonly: "" }
-          })
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group row" }, [
-        _c(
-          "label",
-          { staticClass: "col-md-2 col-form-label", attrs: { for: "carrera" } },
-          [_vm._v("Carrera: ")]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-5" }, [
-          _c("input", {
-            staticClass: "form-control form-control-sm",
-            attrs: { type: "text", id: "carrera", readonly: "" }
-          })
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("fieldset", { staticClass: "border p-2" }, [
-      _c("legend", { staticClass: "w-auto" }, [
-        _vm._v("Datos del Libro de Actas")
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group row" }, [
-        _c(
-          "label",
-          { staticClass: "col-md-1 col-form-label", attrs: { for: "tomo" } },
-          [_vm._v("Tomo: ")]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-2" }, [
-          _c("input", {
-            staticClass: "form-control form-control-sm",
-            attrs: {
-              type: "text",
-              id: "tomo",
-              onKeyPress: "return soloNumeros(event)",
-              maxlength: "3"
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c(
-          "label",
-          { staticClass: "col-md-1 col-form-label", attrs: { for: "folio" } },
-          [_vm._v("Fólio: ")]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-2" }, [
-          _c("input", {
-            staticClass: "form-control form-control-sm",
-            attrs: {
-              type: "text",
-              id: "folio",
-              onKeyPress: "return soloNumeros(event)",
-              maxlength: "3"
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c(
-          "label",
-          { staticClass: "col-md-2 col-form-label", attrs: { for: "asiento" } },
-          [_vm._v("Asiento: ")]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-2" }, [
-          _c("input", {
-            staticClass: "form-control form-control-sm",
-            attrs: {
-              type: "text",
-              id: "asiento",
-              onKeyPress: "return soloNumeros(event)",
-              maxlength: "3"
-            }
-          })
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("fieldset", { staticClass: "border p-2" }, [
-      _c("legend", { staticClass: "w-auto" }, [_vm._v("Sesión")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group row" }, [
-        _c(
-          "label",
-          {
-            staticClass: "col-md-1 col-form-label t12",
-            attrs: { for: "sesion" }
-          },
-          [_vm._v("# Sesión: ")]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-2" }, [
-          _c("input", {
-            staticClass: "form-control form-control-sm",
-            attrs: {
-              type: "text",
-              id: "sesion",
-              onKeyPress: "return soloNumeros(event)",
-              maxlength: "4"
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c(
-          "label",
-          { staticClass: "col-md-1 col-form-label", attrs: { for: "fecha" } },
-          [_vm._v("Fecha: ")]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-3" }, [
-          _c("input", {
-            staticClass: "form-control form-control-sm",
-            attrs: { type: "date", id: "fecha" }
-          })
-        ]),
-        _vm._v(" "),
-        _c(
-          "label",
-          { staticClass: "col-md-1 col-form-label", attrs: { for: "Tipo" } },
-          [_vm._v("Tipo: ")]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-3" }, [
-          _c("input", {
-            staticClass: "form-control form-control-sm",
-            attrs: { type: "text", id: "sesion", readonly: "", maxlength: "3" }
-          })
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("fieldset", { staticClass: "border p-2" }, [
-      _c("legend", { staticClass: "w-auto" }, [_vm._v("Datos del trámite")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group row" }, [
-        _c(
-          "label",
-          { staticClass: "col-md-4 col-form-label", attrs: { for: "ingreso" } },
-          [_vm._v("Fecha de Ingreso de la solicitud: ")]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-3" }, [
-          _c("input", {
-            staticClass: "form-control form-control-sm",
-            attrs: {
-              type: "date",
-              id: "ingreso",
-              onKeyPress: "return soloNumeros(event)",
-              maxlength: "3"
-            }
-          })
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group row" }, [
-        _c(
-          "label",
-          {
-            staticClass: "col-md-4 col-form-label",
-            attrs: { for: "comienzo" }
-          },
-          [_vm._v("Fecha que empienza el trámite ")]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-3" }, [
-          _c("input", {
-            staticClass: "form-control form-control-sm",
-            attrs: {
-              type: "date",
-              id: "comienzo",
-              onKeyPress: "return soloNumeros(event)",
-              maxlength: "3"
-            }
-          })
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header text-center bg-secondary" }, [
-      _c(
-        "h5",
-        { staticClass: "modal-titler", attrs: { id: "exampleModalLabel" } },
-        [_vm._v("Buscar Egresado")]
-      ),
-      _vm._v(" "),
+    return _c("legend", { staticClass: "w-auto" }, [
+      _vm._v("Datos Egresado \n                                "),
       _c(
         "button",
         {
-          staticClass: "close",
+          staticClass: "btn btn-outline-secondary",
           attrs: {
-            type: "button",
-            "data-dismiss": "modal",
-            "aria-label": "Close"
+            "data-target": "#exampleModal",
+            "data-toggle": "modal",
+            "data-placement": "left"
           }
         },
-        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+        [_c("i", { staticClass: "fa fa-plus" })]
       )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group row" }, [
-      _c(
-        "label",
-        { staticClass: "col-md-2 col-form-label", attrs: { for: "dni" } },
-        [_vm._v("DNI: ")]
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-md-4" }, [
-        _c("input", {
-          staticClass: "form-control form-control-sm",
-          attrs: { type: "text", id: "dni" }
-        })
-      ]),
-      _vm._v(" "),
-      _c(
-        "label",
-        { staticClass: "col-md-2 col-form-label", attrs: { for: "codigo" } },
-        [_vm._v("Código: ")]
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-md-4" }, [
-        _c("input", {
-          staticClass: "form-control form-control-sm",
-          attrs: { type: "text", id: "codigo" }
-        })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group row" }, [
-      _c(
-        "label",
-        { staticClass: "col-md-2 col-form-label", attrs: { for: "nombre" } },
-        [_vm._v("Apellido: ")]
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-md-8" }, [
-        _c("input", {
-          staticClass: "form-control form-control-sm",
-          attrs: { type: "text", id: "nombre" }
-        })
-      ])
     ])
   },
   function() {
@@ -57245,14 +57622,14 @@ var render = function() {
                           [
                             _c(
                               "option",
-                              { attrs: { value: "SESION ORINARIA" } },
-                              [_vm._v("SESION ORINARIA")]
+                              { attrs: { value: "SESION ORDINARIA" } },
+                              [_vm._v("SESION ORDINARIA")]
                             ),
                             _vm._v(" "),
                             _c(
                               "option",
-                              { attrs: { value: "SESION EXTRAORINARIA" } },
-                              [_vm._v("SESION EXTRAORINARIA")]
+                              { attrs: { value: "SESION EXTRAORDINARIA" } },
+                              [_vm._v("SESION EXTRAORDINARIA")]
                             )
                           ]
                         )

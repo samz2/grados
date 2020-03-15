@@ -43,8 +43,8 @@
                                 </div>
                                 <div class="col-md-8">
                                     <select v-model="sesion.tipo" class="form-control">
-                                        <option value="SESION ORINARIA">SESION ORINARIA</option>
-                                        <option value="SESION EXTRAORINARIA">SESION EXTRAORINARIA</option>
+                                        <option value="SESION ORDINARIA">SESION ORDINARIA</option>
+                                        <option value="SESION EXTRAORDINARIA">SESION EXTRAORDINARIA</option>
                                     </select>
                                 </div>
                             </div>

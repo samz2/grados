@@ -74,10 +74,14 @@ class EgresadoController extends Controller
      * @param  \App\egresado  $egresado
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($d,$c,$a)
     {
-        $alumnos = \DB::select("SELECT IDEgresado,Codigo, concat_ws(' ',Nombre,Paterno,Materno) AS Nombres FROM egresado WHERE (Paterno LIKE '$id%') 
-        OR (Materno LIKE '$id%') OR (Nombre LIKE '$id%')");
+        $alumnos = \DB::select("SELECT eg.Codigo,eg.DNI,concat_ws(' ',eg.Nombre,eg.Paterno,eg.Materno) AS Nombres,
+        e.Escuela AS Carrera 
+        FROM egresado eg
+        JOIN escuela e ON eg.IDEscuela = e.IDEscuela
+        WHERE (eg.Paterno LIKE '$a%') 
+        OR (eg.DNI = '$d') OR (eg.Codigo LIKE '%$c%')");
         return compact("alumnos");
     }
 
