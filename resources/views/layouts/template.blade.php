@@ -162,6 +162,12 @@
                       </router-link>
                     </li>
                     <li class="nav-item">
+                      <router-link to="modalidad" class="nav-link">
+                        <i class="fas fa-list nav-icon"></i>
+                        <p>Modalidad</p>
+                      </router-link>
+                    </li>
+                    <li class="nav-item">
                       <router-link to="usuarios" class="nav-link">
                         <i class="fas fa-list nav-icon"></i>
                         <p>Usuarios</p>
@@ -306,11 +312,11 @@
   }
   function sololetras(event)
   {
-    return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122) || event.charCode <= 39)
+    return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode == 239 || event.charCode == 164 || event.charCode == 165) || (event.charCode >= 97 && event.charCode <= 122) || event.charCode <= 39)
   }
   function alfa(event)
   {
-    return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122) || (event.charCode >= 48 && event.charCode <= 57))
+    return (event.charCode >= 164 || (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122) || (event.charCode >= 44 && event.charCode <= 57))
   }
   function alfa1(event)
   {

@@ -185,7 +185,7 @@
                                         <button v-if="props.row.Estado == 'EN PROCESO'" v-on:click="estado(props.row.IDExpedito,2)"  class="btn btn-warning" data-toggle="tooltip" data-placement="left" >En Proceso</button>
                                         <button v-if="props.row.Estado == 'FINALIZADO'"  class="btn btn-success" data-toggle="tooltip" data-placement="left" >Finalizado</button>
                                         <!-- <button class="btn btn-info" data-toggle="tooltip" v-on:click="reg(props.row.IDExpedito)" data-placement="left" title="Registrar"><i class="fas fa-edit" style="color: white" aria-hidden="true"></i></button> -->
-                                        <router-link class="btn btn-success" target="_blank" :to="'/oficio/'+props.row.IDExpedito" data-toggle="tooltip"  data-placement="left" title="Eliminar"><i class="far fa-file-pdf" aria-hidden="true"></i></router-link>
+                                        <router-link v-if="props.row.Estado == 'FINALIZADO'" class="btn btn-success" target="_blank" :to="'/oficio/'+props.row.IDExpedito" data-toggle="tooltip"  data-placement="left" title="Ver Acta"><i class="far fa-file-pdf" aria-hidden="true"></i></router-link>
                                         <!-- <button class="btn btn-success" data-toggle="tooltip" v-on:click="edit(props.row.IDExpedito)" data-placement="left" title="Acta"><i class="far fa-file-pdf" style="color: white" aria-hidden="true"></i></button> -->
                                     </div>
                                 </v-client-table>

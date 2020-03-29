@@ -71,4 +71,8 @@ Route::post('/addDecano','DecanoController@store');
 Route::get('/getDecanos','DecanoController@index');
 Route::post('/updateDecano','DecanoController@update');
 
+Route::post('/addModalidad','ModalidadController@store');
+Route::get('/getModalidades','ModalidadController@index');
+Route::post('/updateModalidad','ModalidadController@update');
+
 Route::get('{path}', 'HomeController@index');

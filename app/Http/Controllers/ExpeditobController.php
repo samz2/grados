@@ -18,15 +18,22 @@ class ExpeditobController extends Controller
                         ->join("sesion AS s","expedito.NumSesion","s.NumSesion")
                         ->join("estados AS es","expedito.Estado","es.Posicion")
                         ->join("escuela AS esc","e.IDEscuela","esc.IDEscuela")
-                        ->select("expedito.*",\DB::raw("concat_ws('-',expedito.Tomo,expedito.Folio,expedito.Asiento) AS Acta"),"esc.Escuela","s.*","es.Estado",\DB::raw("concat_ws(' ',e.Nombre,e.Paterno,e.Materno) as Alumno"))->get();
+                        ->select("expedito.*",\DB::raw("concat_ws('-',expedito.Tomo,expedito.Folio,expedito.Asiento) AS Acta"),"esc.Escuela","s.*","es.Estado",\DB::raw("concat_ws(' ',e.Nombre,e.Paterno,e.Materno) as Alumno"))
+                        ->where("expedito.Tipo","BACHILLER")->get();
         
+        $expeditost =   Expeditob::join("egresado AS e","expedito.CodigoAlumno","e.Codigo")
+        ->join("sesion AS s","expedito.NumSesion","s.NumSesion")
+        ->join("estados AS es","expedito.Estado","es.Posicion")
+        ->join("escuela AS esc","e.IDEscuela","esc.IDEscuela")
+        ->select("expedito.*",\DB::raw("concat_ws('-',expedito.Tomo,expedito.Folio,expedito.Asiento) AS Acta"),"esc.Escuela","s.*","es.Estado",\DB::raw("concat_ws(' ',e.Nombre,e.Paterno,e.Materno) as Alumno"))
+        ->where("expedito.Tipo","TITULO")->get();
         // $expeditost = \DB::select("SELECT ex.FechaSesion,ex.FechaRecepcion,ex.IDExpedito,
         // concat_ws(' ',e.Nombre,e.Paterno,e.Materno) as Alumno,ex.Estado 
         // FROM egresado e 
         // JOIN expedito ex ON e.Codigo = ex.CodigoAlumno  WHERE ex.Tipo='TITULO'");
         
         // return compact("expeditosb","expeditost");
-        return compact("expeditosb");
+        return compact("expeditosb","expeditost");
     }
 
     /**

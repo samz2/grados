@@ -5,7 +5,7 @@
 				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
-							<button data-target="#exampleModal" class="btn btn-outline-secondary" data-toggle="modal" data-placement="left" >Comisión <i class="fa fa-plus"></i></button>
+							<button data-target="#exampleModal" class="btn btn-outline-secondary" data-toggle="modal" data-placement="left" >Decano <i class="fa fa-plus"></i></button>
 						</div>
 					</div>
 				</div>

@@ -6,65 +6,270 @@
 				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
-							<button  class="btn btn-outline-primary" @click="ocultar('1')">
-							Expedito <i class="fa fa-plus"></i>
+							<button  class="btn btn-outline-secondary" id="mas" @click="ocultar('1')">
+							Agregar <i class="fa fa-plus"></i>
 							</button>
-							<button  class="btn btn-outline-primary" @click="ocultar('2')">
+							<button  class="btn btn-outline-secondary" id="menos" @click="cancelar()">
 								<i class="fa fa-minus"></i>
 							</button>
 						</div>
 					</div>
 				</div>
 	            <div class="card card-default"  id="objetivo">
-	                <div class="card-header text-center" style="background-color: #2FA3C6; color: white;">
-	                    <h4 class="title">Expeditos</h4>  
+	                <div class="card-header text-center bg-secondary">
+	                    <h4 class="title">Expedito</h4>  
 	                </div>
 					<div class="card-body">
+                        <fieldset class="border p-2">
+                            <legend class="w-auto">Datos Egresado 
+                                <button  data-target="#exampleModal" class="btn btn-outline-secondary" data-toggle="modal" data-placement="left">
+								<i class="fa fa-plus"></i>
+							    </button>
+                            </legend>
+                            <div class="form-group row">
+                                <label for="dni" class="col-md-2 col-form-label">DNI: </label>
+                                <div class="col-md-2">
+                                    <input type="text" v-model="expedito.dni" id="dni" readonly class="form-control form-control-sm">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="codigo" class="col-md-2 col-form-label">Código: </label>
+                                <div class="col-md-2">
+                                    <input type="text" v-model="expedito.codigo" id="codigo" readonly class="form-control form-control-sm">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="nombre" class="col-md-2 col-form-label">Nombre: </label>
+                                <div class="col-md-5">
+                                    <input type="text" v-model="expedito.alumno" id="nombre" readonly class="form-control form-control-sm">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="carrera" class="col-md-2 col-form-label">Carrera: </label>
+                                <div class="col-md-5">
+                                    <input type="text" v-model="expedito.carrera" id="carrera" readonly class="form-control form-control-sm">
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset class="border p-2">
+                            <legend class="w-auto">Datos del Libro de Actas</legend>
+                            <div class="form-group row">
+                                <label for="tomo" class="col-md-1 col-form-label">Tomo: </label>
+                                <div class="col-md-2">
+                                    <input type="text" id="tomo" v-model="expedito.tomo" onKeyPress="return soloNumeros(event)" maxlength="3" class="form-control form-control-sm">
+                                </div>
+                                <label for="folio" class="col-md-1 col-form-label">Folio: </label>
+                                <div class="col-md-2">
+                                    <input type="text" id="folio" v-model="expedito.folio" onKeyPress="return soloNumeros(event)" maxlength="3" class="form-control form-control-sm">
+                                </div>
+                                <label for="asiento" class="col-md-1 t12 col-form-label">Asiento: </label>
+                                <div class="col-md-2">
+                                    <input type="text" id="asiento" v-model="expedito.asiento" onKeyPress="return soloNumeros(event)" maxlength="3" class="form-control form-control-sm">
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset class="border p-2">
+                            <legend class="w-auto">Sesión</legend>
+                            <div class="form-group row">
+                                <label for="sesion" class="col-md-1 col-form-label t12"># Sesión: </label>
+                                <div class="col-md-2">
+                                    <select id="sesion" v-model="expedito.sesion" @change="getSession(expedito.sesion)" class="form-control form-control-sm">
+                                        <option v-for="s in sesiones" :key="s.NumSesion" :value="s.NumSesion">{{s.NumSesion}}</option>    
+                                    </select>
+                                </div>
+                                <label for="fecha" class="col-md-1 col-form-label">Fecha: </label>
+                                <div class="col-md-3">
+                                    <input type="date" id="fecha" v-model="expedito.sfecha" readonly class="form-control form-control-sm">
+                                </div>
+                                <label for="Tipo" class="col-md-1 col-form-label">Tipo: </label>
+                                <div class="col-md-3">
+                                    <input type="text" id="tipo" v-model="expedito.stipo" readonly maxlength="3" class="form-control form-control-sm">
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset class="border p-2">
+                            <legend class="w-auto">Datos del trámite</legend>
+                            <div class="form-group row">
+                                <label for="ingreso" class="col-md-4 col-form-label">Fecha de Ingreso de la solicitud: </label>
+                                <div class="col-md-3">
+                                    <input type="date" id="ingreso" v-model="expedito.ingreso" onKeyPress="return soloNumeros(event)" maxlength="3" class="form-control form-control-sm">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="comienzo" class="col-md-4 col-form-label">Fecha que empieza el trámite </label>
+                                <div class="col-md-3">
+                                    <input type="date" id="comienzo" v-model="expedito.comienzo" class="form-control form-control-sm">
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset class="border p-2">
+                            <legend class="w-auto">Datos titulación</legend>
+                            <div class="form-group row">
+                                <label class="col-md-4 col-form-label">Modalidad</label>
+                                <div class="col-md-4">
+                                    <select v-model="expedito.modalidad" class="form-control form-control-sm">
+                                        <option v-for="m in modalidades" :key="m.IDModalidad" :value="m.IDModalidad">
+                                            {{m.Modalidad}}
+                                        </option>                                            
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-4 col-form-label">Nombre de la tesis: </label>
+                                <div class="col-md-8">
+                                    <input type="text" v-model="expedito.tesis" onKeyPress="return alfa(event)" maxlength="200" class="form-control form-control-sm">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-4 col-form-label">Asesor: </label>
+                                <div class="col-md-8">
+                                    <select v-model="expedito.asesor" class="form-control form-control-sm">
+                                        <option v-for="d in docentes" :key="d.DNI" :value="d.DNI">
+                                            {{d.Nombres}} {{d.Apellidos}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-4 col-form-label">Calificación: </label>
+                                <div class="col-md-8">
+                                    <select v-model="expedito.calificacion" class="form-control form-control-sm">
+                                        <option value="SOBRESALIENTE">SOBRESALIENTE</option>
+                                        <option value="UNANIMIDAD">UNANIMIDAD</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-4 col-form-label">Fecha sustentación: </label>
+                                <div class="col-md-3">
+                                    <input type="date" v-model="expedito.sustentacion" class="form-control form-control-sm">
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset class="border p-2">
+                            <legend class="w-auto">Documentos</legend>
+                            <div class="form-group row">
+                                <label class="col-md-2 col-form-label">Tesis PDF</label>
+                                <div class="col-md-4">
+                                    <input type="file" name="pdf" class="form-control form-control-sm">
+                                </div>
+                                <div class="col-md-1">
+                                    <input type="checkbox" name="check" class="form-control form-control-sm">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-2 col-form-label">Autorización de publicación</label>
+                                <div class="col-md-4">
+                                    <input type="file" name="pdf" class="form-control form-control-sm">
+                                </div>
+                                <div class="col-md-1">
+                                    <input type="checkbox" name="check" class="form-control form-control-sm">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-2 col-form-label">Constancia antiplagio</label>
+                                <div class="col-md-4">
+                                    <input type="file" name="pdf" class="form-control form-control-sm">
+                                </div>
+                                <div class="col-md-1">
+                                    <input type="checkbox" name="check" class="form-control form-control-sm">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-2 col-form-label">Constancia URL</label>
+                                <div class="col-md-4">
+                                    <input type="file" name="pdf" class="form-control form-control-sm">
+                                </div>
+                                <div class="col-md-1">
+                                    <input type="checkbox" name="check" class="form-control form-control-sm">
+                                </div>
+                            </div>
+                        </fieldset>
+                        <br>
                         <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label>Alumno (*)</label>
-                                    <v-select v-model="expedito.alumno" :options="alumnos"> </v-select>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label>Fecha Recepción(*)</label>
-                                    <input v-model="expedito.recepcion" type="date" class="form-control">
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label>Fecha Sesión(*)</label>
-                                    <input v-model="expedito.sesion" type="date" class="form-control">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row text-left">
                             <div class="col-md-2">
-                                <button @click="addExpedito()" id="add" class="btn btn-outline-success">Agregar <i class="fa fa-save"></i></button>
+                                <button class="btn btn-success" @click="addExpedito()">Guardar <i class="fa fa-save"></i></button>
+                            </div>
+                            <div class="col-md-2">
+                                <button class="btn btn-danger" @click="cancelar()">Cancelar <i class="fa fa-stop"></i></button>
                             </div>
                         </div>
-                        <div class="clearfix"></div>
 	                </div>
 				</div>
 			</div>
 	    	</div>
-            <div class="row">
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                        <div class="modal-header text-center bg-secondary">
+                            <h5 class="modal-titler" id="exampleModalLabel">Buscar Egresado</h5>
+                            <button type="button" class="close" data-dismiss="modal" @click="borrar()" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group row">
+                                <label for="dni1" class="col-md-2 col-form-label">DNI: </label>
+                                <div class="col-md-4">
+                                    <input type="text" v-model="alumno.dni" id="dni1" onkeypress="return solonumeros(event)" class="form-control form-control-sm">
+                                </div>
+                                <label for="codigo1" class="col-md-2 col-form-label">Código: </label>
+                                <div class="col-md-4">
+                                    <input type="text" v-model="alumno.codigo" id="codigo1" onkeypress="return solonumeros(event)" class="form-control form-control-sm">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="nombre1" class="col-md-2 col-form-label">Apellido: </label>
+                                <div class="col-md-10">
+                                    <input type="text" id="nombre1"  v-model="alumno.apellido" onkeypress="return sololetras(event)" class="form-control form-control-sm">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <button class="btn btn-success" @click="buscar(alumno.dni,alumno.codigo,alumno.apellido)">Buscar <i class="fa fa-search"></i></button>
+                                </div>
+                                <div class="col-md-3">
+                                    <button class="btn btn-danger" @click="borrar()">Borrar <i class="fa fa-eraser"></i></button>
+                                </div>
+                            </div>
+                            <fieldset class="border p-2">
+                                <legend class="w-auto">Lista de egresados</legend>
+                                <table colspadding=0 cellspacing=0 border="1">
+                                    <tr>
+                                        <td class="text-center"><i class="blanco">aaa</i> DNI <i class="blanco">aaa</i></td>
+                                        <td class="text-center"><i class="blanco">a</i>CÓDIGO<i class="blanco">a</i></td>
+                                        <td class="text-center"><i class="blanco">aaaaaaaaa</i>NOMBRES<i class="blanco">aaaaaaaaa</i></td>
+                                        <td class="text-center">SELECCIONAR</td>
+                                    </tr>
+                                    <tr class="t10" v-for="a in alumnos" :key="a.Codigo">
+                                        <td>{{a.DNI}}</td>
+                                        <td>{{a.Codigo}}</td>
+                                        <td>{{a.Nombres}}</td>
+                                        <td><input data-dismiss="modal" type="checkbox" @click="seleccionar(a.DNI,a.Codigo,a.Nombres,a.Carrera)" class="form-control form-control-sm"></td>
+                                    </tr>
+                                </table>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+            </div>    
+                <!-- final modal -->
+            <div class="row" id="expeditos">
                 <div class="col-md-12">
                     <div class="card card-default">
-                            <div class="card-header text-center" style="background-color: #2FA3C6; color: white;">
+                            <div class="card-header text-center bg-secondary">
                                 <h4 class="title">EXPEDITOS</h4>  
                             </div>
                         <div class="card-body">
-                            <div class="content table-responsive table-full-width">
+                            <div class="content table-responsive table-full-width t12">
                                 <v-client-table :data="expeditos" :columns="columns" :options="options">
                                     <div slot="Acciones" slot-scope="props">
                                         <button v-if="props.row.Estado == 'PENDIENTE'" v-on:click="estado(props.row.IDExpedito,1)" class="btn btn-danger" data-toggle="tooltip" data-placement="left" >Pendiente</button>
                                         <button v-if="props.row.Estado == 'EN PROCESO'" v-on:click="estado(props.row.IDExpedito,2)"  class="btn btn-warning" data-toggle="tooltip" data-placement="left" >En Proceso</button>
-                                        <button v-if="props.row.Estado == 'FINALIZADO'" class="btn btn-success" data-toggle="tooltip" data-placement="left" >Finalizado</button>
-                                        <button class="btn btn-info" data-toggle="tooltip" v-on:click="reg(props.row.IDExpedito)" data-placement="left" title="Registrar"><i class="fas fa-edit" style="color: white" aria-hidden="true"></i></button>
-                                        <button class="btn btn-success" data-toggle="tooltip" v-on:click="edit(props.row.IDExpedito)" data-placement="left" title="Acta"><i class="far fa-file-pdf" style="color: white" aria-hidden="true"></i></button>
+                                        <button v-if="props.row.Estado == 'FINALIZADO'"  class="btn btn-success" data-toggle="tooltip" data-placement="left" >Finalizado</button>
+                                        <!-- <button class="btn btn-info" data-toggle="tooltip" v-on:click="reg(props.row.IDExpedito)" data-placement="left" title="Registrar"><i class="fas fa-edit" style="color: white" aria-hidden="true"></i></button> -->
+                                        <router-link v-if="props.row.Estado == 'FINALIZADO'" class="btn btn-success" target="_blank" :to="'/oficio/'+props.row.IDExpedito" data-toggle="tooltip"  data-placement="left" title="Ver Acta"><i class="far fa-file-pdf" aria-hidden="true"></i></router-link>
+                                        <!-- <button class="btn btn-success" data-toggle="tooltip" v-on:click="edit(props.row.IDExpedito)" data-placement="left" title="Acta"><i class="far fa-file-pdf" style="color: white" aria-hidden="true"></i></button> -->
                                     </div>
                                 </v-client-table>
                             </div>
@@ -79,68 +284,175 @@
   
     data() {
         return {
-            
+            alumnoz:null,
 			expedito:{
-                aux:null,
+                codigo:null,
+                dni:null,
                 alumno:null,
-                recepcion:null,
+                carrera:null,
+                tomo:null,
+                folio:null,
+                asiento:null,
                 sesion:null,
-                tipo:2
-			},
-            alumnos:[{label:null,code:null}],
+                sfecha:null,
+                stipo:null,
+                ingreso:null,
+                comienzo:null,
+                tipo:"TITULO"
+            },
+            alumno:{
+                codigo:null,
+                dni:null,
+                apellido:null,
+            },
+            alumnos:[],
+            sesiones:[],
+            docentes:[],
+            modalidades:[],
             expeditos	:[{
-				IDExpedito:null,
-                Alumno:null,
-                FechaRecepcion:null,
-                FechaSesion:null,
-                Estado:null
+				IDExpedito: null,
+                Tipo: null,
+                CodigoAlumno: null,
+                Acta: null,
+                NumSesion: null,
+                FechaIngreso: null,
+                FechaComienzo: null,
+                Estado: null,
+                Fecha: null,
+                Alumno: null,
             }],
-            columns: ["Alumno","FechaRecepcion","FechaSesion","Acciones"],
+            columns: ["Alumno","Acta","NumSesion","Fecha","FechaIngreso","FechaComienzo","Acciones"],
             options: {
 				headings:
 				{
-                    Alumno:"Alumno",
-                    FechaRecepcion:"Fecha Recepción",
-                    FechaSesion:"Fecha Sesión",
+                    CodigoAlumno: "Código",
+                    NumSesion: "Sesión",
+                    FechaIngreso: "Ingreso trámite",
+                    FechaComienzo: "Comienzo trámite",
+                    Fecha: "Fecha Sesión",
+                    Alumno: "Egresado",
+                    Acta: "   T-F-A   "
 				},
-				sortable    : ["Alumno","FechaRecepcion","FechaSesion",],
-				filterable  : ["Alumno","FechaRecepcion","FechaSesion",]
+				sortable    : ["Alumno","Acta","NumSesion","Fecha","FechaIngreso","FechaComienzo",],
+				filterable  : ["Alumno","Acta","NumSesion","Fecha","FechaIngreso","FechaComienzo",]
             },
         }
 	},
 	created(){
         this.getExpeditos();
-        this.getAlumnos();
+        this.getSesiones();
+        this.getModalidades();
+        this.getDocentes();
 	},
 	mounted(){
         $('#objetivo').hide();
-        $('#editar').hide();
-        $('#grado').hide();
-        $("#alumnos").hide();
-        $("#aux1").hide();
+        $('#menos').hide();
 	},
     methods: {
-        getAlumnos()
+        getDocentes()
         {
-            axios.get("getAlumnos")
+            this.$Progress.start();
+            axios.get("getDocentes")
             .then(data=>
             {
-                this.alumnos = data.data.egresados;
-                console.log(this.alumnos);
-                $("#alumnos").show();
+                this.docentes = data.data.docentes;
                 this.$Progress.finish();
             }
             ).catch(error=>{
                 console.log(error);
             })
         },
-        validar()
+        getModalidades()
         {
-            $("#alumnos").hide();
-            var combo1 = document.getElementById("seleccionado");
-            this.expedito.aux = combo1.options[combo1.selectedIndex].text;
-            $("#aux").hide();
-            $("#aux1").show();
+            this.$Progress.start();
+            axios.get("getModalidades")
+            .then(data=>
+            {
+                this.modalidades = data.data.modalidades;
+                this.$Progress.finish();
+            }
+            ).catch(error=>{
+                console.log(error);
+            })
+        },
+        buscar(d,c,a)
+        {
+            if(d == '') d = null;
+            if(c == '') c = null;
+            if(a == '') a = null;
+            axios.get("getAlumnos/"+d+"/"+c+"/"+a)
+            .then(data=>
+            {
+                this.alumnos = data.data.alumnos;
+                this.$Progress.finish();
+            }
+            ).catch(error=>{
+                console.log(error);
+            })
+        },
+        cancelar()
+        {
+            this.expedito.codigo      = null;
+            this.expedito.dni         = null;
+            this.expedito.alumno      = null;
+            this.expedito.carrera     = null;
+            this.expedito.tomo        = null;
+            this.expedito.folio       = null;
+            this.expedito.asiento     = null;
+            this.expedito.sesion      = null;
+            this.expedito.sfecha      = null;
+            this.expedito.stipo       = null;
+            this.expedito.ingreso     = null;
+            this.expedito.comienzo    = null;
+            $('#objetivo').hide();
+            $('#expeditos').show();	
+            $('#menos').hide();
+            $('#mas').show();
+        },
+        borrar()
+        {
+            this.alumno.codigo      = null;
+            this.alumno.dni         = null;
+            this.alumno.apellido    = null;
+        },
+        seleccionar(d,c,n,ca)
+        {
+            this.expedito.codigo     = c;
+            this.expedito.dni        = d;
+            this.expedito.alumno     = n;
+            this.expedito.carrera    = ca;
+
+        },
+        getSesiones()
+        {
+            this.$Progress.start();
+            axios.get("getSessions")
+            .then(data=>
+            {
+                this.sesiones    = data.data.sesiones;
+                this.$Progress.finish();
+            }
+            ).catch(error=>{
+                console.log(error);
+            })
+        },
+        getSession(e)
+        {
+            this.$Progress.start();
+            axios.get("getSession/"+e)
+            .then(data=>
+            {
+                this.expedito.sfecha    = data.data.fecha;
+                this.expedito.stipo     = data.data.tipo;
+                this.$Progress.finish();
+            }
+            ).catch(error=>{
+                console.log(error);
+            })
+        },
+        validar(e)
+        {
+           console.log(e);
         },
         getExpeditos()
         {
@@ -158,7 +470,12 @@
 		},
 		addExpedito()
 		{
-            if(this.expedito.alumno == null || this.expedito.recepcion == null || this.expedito.sesion == null)
+           
+            if( this.expedito.codigo==null || this.expedito.dni==null ||
+                this.expedito.alumno==null || this.expedito.carrera==null ||
+                this.expedito.tomo==null || this.expedito.folio==null || this.expedito.asiento==null ||
+                this.expedito.sesion==null || this.expedito.sfecha==null || this.expedito.stipo==null ||
+                this.expedito.ingreso==null)
             {
                 swal({
 					type: 'error',
@@ -171,15 +488,18 @@
                 }).then(data=>{
                     swal({
                         // position: 'top-end',
-                        type: 'success',
-                        title: 'Datos ingresados correctamente',
+                        type: data.data.type,
+                        title: data.data.title,
+                        text: data.data.text,
                         showConfirmButton: false,
                         timer: 2000
                     });
                     this.$Progress.finish();
-                    setTimeout(() => {
-                        location.reload();
-                    }, 1500);
+                    // setTimeout(() => {
+                    //     location.reload();
+                    // }, 1500);
+                    this.cancelar();
+                    this.getExpeditos();
                     }).catch(error=>{
                     console.log(error);	
                     swal({
@@ -196,14 +516,16 @@
 			if(id == '1')
 			{
                 $('#objetivo').show();
-                $('#nivel').show();
-                $('#add').show();
-                $('#curso').show();
-                $('#editar').hide();
+                $('#expeditos').hide();
+                $('#menos').show();
+                $('#mas').hide();
 			}
 			else if(id == '2')
 			{
-				$('#objetivo').hide();	
+				$('#objetivo').hide();
+                $('#expeditos').show();	
+                $('#menos').hide();
+                $('#mas').show();
 			}
 			
         },
