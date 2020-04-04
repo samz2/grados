@@ -461,6 +461,7 @@ class ComposerStaticInit22427e75c100aaea966a2edfbf2eb07c
         'App\\Http\\Controllers\\EstadosController' => __DIR__ . '/../..' . '/app/Http/Controllers/EstadosController.php',
         'App\\Http\\Controllers\\ExpeditobController' => __DIR__ . '/../..' . '/app/Http/Controllers/ExpeditobController.php',
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
+        'App\\Http\\Controllers\\ModalidadController' => __DIR__ . '/../..' . '/app/Http/Controllers/ModalidadController.php',
         'App\\Http\\Controllers\\SesionController' => __DIR__ . '/../..' . '/app/Http/Controllers/SesionController.php',
         'App\\Http\\Controllers\\TramiteController' => __DIR__ . '/../..' . '/app/Http/Controllers/TramiteController.php',
         'App\\Http\\Controllers\\UsersController' => __DIR__ . '/../..' . '/app/Http/Controllers/UsersController.php',

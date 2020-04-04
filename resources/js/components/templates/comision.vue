@@ -5,14 +5,14 @@
 				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
-							<button data-target="#exampleModal" class="btn btn-outline-secondary" data-toggle="modal" data-placement="left" >Comisión <i class="fa fa-plus"></i></button>
+							<button data-target="#exampleModal" class="btn btn-success" data-toggle="modal" data-placement="left" >Agregar Comisión <i class="fa fa-plus"></i></button>
 						</div>
 					</div>
 				</div>
 	            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
-                        <div class="modal-header text-center bg-secondary">
+                        <div class="modal-header text-center" style="background-color: #007bff55 !important; color:black; font-weight: bold;">
                             <h5 class="modal-titler" id="exampleModalLabel">Datos Comisión</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
@@ -98,9 +98,9 @@
                             </div>
                             <br>
                         <div class="modal-footer">
-                            <button @click="addComision(1)" id="add" class="btn btn-outline-success" data-dismiss="modal">Agregar <i class="fa fa-save"></i></button>
-                            <button @click="addComision(2)" id="editar" class="btn btn-outline-success" data-dismiss="modal">Editar <i class="fa fa-pencil"></i></button>
-                            <button type="button" class="btn btn-outline-secondary" @click="load()" data-dismiss="modal">Cerrar <i class="fa fa-close"></i></button>
+                            <button @click="addComision(1)" id="add" class="btn btn-success" data-dismiss="modal">Agregar <i class="fa fa-save"></i></button>
+                            <button @click="addComision(2)" id="editar" class="btn btn-success" data-dismiss="modal">Editar <i class="far fa-edit"></i></button>
+                            <button type="button" class="btn btn-danger" @click="load()" data-dismiss="modal">Cancelar <i class="fas fa-times"></i></button>
                         </div>
                         </div>
                     </div>

@@ -21,6 +21,7 @@
   {
     color: #ffffff;
   }
+ 
   .t10
   {
     font-size: 10px;
@@ -90,9 +91,8 @@
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <router-link to="/home" class="brand-link">
-      {{-- <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-           style="opacity: .8"> --}}
-      <span class="brand-text font-weight-light">Grados & Titulos</span>
+        <!--<img src="" alt="GyT" class="brand-image img-circle elevation-3"> -->
+      <span class="brand-text font-weight-light">Grados y Títulos</span>
     </router-link>
 
     <!-- Sidebar -->
@@ -110,7 +110,7 @@
       </div>
 
       <!-- Sidebar Menu -->
-      <nav class="mt-2">
+      <nav class="mt-2"> 
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
@@ -119,7 +119,7 @@
                 <li class="nav-item has-treeview">
                   <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-folder"></i>
-                    <p>
+                    <p >
                       Configuración
                       <i class="fas fa-angle-left right"></i>
                     </p>
@@ -127,49 +127,49 @@
                   <ul class="nav nav-treeview">
                     <li>
                       <router-link to="docentes" class="nav-link">
-                        <i class="fas fa-list nav-icon"></i>
+                        <i class="far fa-circle nav-icon"></i>
                         <p>Docentes</p>
                       </router-link>
                     </li>
                     <li class="nav-item">
                       <router-link to="estados" class="nav-link">
-                        <i class="fas fa-list nav-icon"></i>
+                        <i class="far fa-circle nav-icon"></i>
                         <p>Estados</p>
                       </router-link>
                     </li>
                     <li class="nav-item">
                       <router-link to="sesion" class="nav-link">
-                        <i class="fas fa-list nav-icon"></i>
+                        <i class="far fa-circle nav-icon"></i>
                         <p>Sesión</p>
                       </router-link>
                     </li>
                     <li class="nav-item">
                       <router-link to="carreras" class="nav-link">
-                        <i class="fas fa-list nav-icon"></i>
+                        <i class="far fa-circle nav-icon"></i>
                         <p>Carrera</p>
                       </router-link>
                     </li>
                     <li class="nav-item">
                       <router-link to="comisiones" class="nav-link">
-                        <i class="fas fa-list nav-icon"></i>
+                        <i class="far fa-circle nav-icon"></i>
                         <p>Comisión</p>
                       </router-link>
                     </li>
                     <li class="nav-item">
                       <router-link to="decano" class="nav-link">
-                        <i class="fas fa-list nav-icon"></i>
+                        <i class="far fa-circle nav-icon"></i>
                         <p>Decano</p>
                       </router-link>
                     </li>
                     <li class="nav-item">
                       <router-link to="modalidad" class="nav-link">
-                        <i class="fas fa-list nav-icon"></i>
+                        <i class="far fa-circle nav-icon"></i>
                         <p>Modalidad</p>
                       </router-link>
                     </li>
                     <li class="nav-item">
                       <router-link to="usuarios" class="nav-link">
-                        <i class="fas fa-list nav-icon"></i>
+                        <i class="far fa-circle nav-icon"></i>
                         <p>Usuarios</p>
                       </router-link>
                     </li>
@@ -202,15 +202,15 @@
                     </p>
                   </a>
                   <ul class="nav nav-treeview">
-                    <li class="nav-item">
+                    <!--<li class="nav-item">
                       <router-link to="tramite" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Trámite Titulación</p>
                       </router-link>
-                    </li>
+                    </li>-->
                     <li class="nav-item">
                       <router-link to="expeditobachiller" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
+                        <i class="far fa-circle fa-1x nav-icon"></i>
                         <p>Expedito Bachiller</p>
                       </router-link>
                     </li>
@@ -222,7 +222,7 @@
                     </li>
                   </ul>
                 </li>
-                <li class="nav-item has-treeview">
+               <!-- <li class="nav-item has-treeview">
                   <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-folder"></i>
                     <p>
@@ -233,13 +233,13 @@
                   <ul class="nav nav-treeview">
                     <li class="nav-item">
                       <router-link to="documentos" class="nav-link">
-                        <i class="fas fa-list nav-icon"></i>
+                        <i class="fas fa-circle nav-icon"></i>
                         <p>Lista</p>
                       </router-link>
                     </li>
                     
                   </ul>
-                </li> 
+                </li> -->
                   @break
               @case(2)
                   

@@ -5,14 +5,14 @@
 				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
-							<button data-target="#exampleModal" class="btn btn-outline-secondary" data-toggle="modal" data-placement="left" >Sesión <i class="fa fa-plus"></i></button>
+							<button data-target="#exampleModal" class="btn btn-success" data-toggle="modal" data-placement="left" >Agregar Sesión <i class="fa fa-plus"></i></button>
 						</div>
 					</div>
 				</div>
 	            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
-                        <div class="modal-header text-center bg-secondary">
+                        <div class="modal-header text-center bg-secondary" style="background-color: #007bff55 !important; color:black; font-weight: bold;">
                             <h5 class="modal-titler" id="exampleModalLabel">Datos Sesión</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
@@ -20,28 +20,25 @@
                         </div>
                         <div class="modal-body">
                             <div class="row">
-                                <div class="col-md-4 text-left">
-                                        <label>Número de Sesión(*)</label>
+                                <div class="col-md-2 text-left">
+                                        <label>Nro. Sesión*</label>
                                 </div>
                                 <div class="col-md-3">
                                     <input v-model="sesion.sesion" type="text" maxlength="3" class="form-control" onKeyPress="return solonumeros(event)">
-                                </div>    
-                            </div>
-                            <br>
-                            <div class="row">
-                                <div class="col-md-4 text-left">
-                                    <label>Fecha(*)</label>
+                                </div> 
+                                <div class="col-md-2 text-left">
+                                    <label>Fecha*</label>
                                 </div>
                                 <div class="col-md-5">
                                     <input v-model="sesion.fecha" type="date" class="form-control">
-                                </div>
-                            </div>
+                                </div>   
+                            </div>                           
                             <br>
                             <div class="row">
-                                <div class="col-md-4 text-left">
-                                    <label>Tipo(*)</label>
+                                <div class="col-md-2 text-left">
+                                    <label>Tipo*</label>
                                 </div>
-                                <div class="col-md-8">
+                                <div class="col-md-10">
                                     <select v-model="sesion.tipo" class="form-control">
                                         <option value="SESION ORDINARIA">SESION ORDINARIA</option>
                                         <option value="SESION EXTRAORDINARIA">SESION EXTRAORDINARIA</option>
@@ -49,9 +46,9 @@
                                 </div>
                             </div>
                         <div class="modal-footer">
-                            <button @click="addSesion(1)" id="add" class="btn btn-outline-success" data-dismiss="modal">Agregar <i class="fa fa-save"></i></button>
-                            <button @click="addSesion(2)" id="editar" class="btn btn-outline-success" data-dismiss="modal">Editar <i class="fa fa-pencil"></i></button>
-                            <button type="button" class="btn btn-outline-secondary" @click="load()" data-dismiss="modal">Cerrar <i class="fa fa-close"></i></button>
+                            <button @click="addSesion(1)" id="add" class="btn btn-success" data-dismiss="modal">Agregar <i class="fa fa-save"></i></button>
+                            <button @click="addSesion(2)" id="editar" class="btn btn-success" data-dismiss="modal">Editar <i class="far fa-edit"></i></button>
+                            <button type="button" class="btn btn-danger" @click="load()" data-dismiss="modal">Cancelar <i class="fas fa-times"></i></button>
                         </div>
                         </div>
                     </div>
@@ -69,7 +66,7 @@
                             <div class="content table-responsive table-full-width">
                                 <v-client-table :data="sesiones" :columns="columns" :options="options">
                                     <div slot="Acciones" slot-scope="props">
-                                     <button data-target="#exampleModal" class="btn btn-info" data-toggle="modal" v-on:click="edit(props.row.IDSesion,props.row.NumSesion,props.row.Fecha,props.row.Tipo)" data-placement="left" title="Editar"><i class="fas fa-edit" style="color: white" aria-hidden="true"></i></button>
+                                     <button data-target="#exampleModal" class="btn btn-info" data-toggle="modal" v-on:click="edit(props.row.IDSesion,props.row.NumSesion,props.row.Fecha,props.row.Tipo)" data-placement="left" style="color: white" title="Editar">Editar <i class="fas fa-edit" style="color: white" aria-hidden="true"></i></button>
                                     </div>
                                 </v-client-table>
                             </div>

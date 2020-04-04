@@ -5,7 +5,7 @@
 				<div class="row">
 					<div class="col-md-12">
 						<div class="form-group">
-                            <button data-target="#exampleModal" class="btn btn-outline-secondary" data-toggle="modal" data-placement="left" >Egresado <i class="fa fa-plus"></i></button>
+                            <button data-target="#exampleModal" class="btn btn-success" data-toggle="modal" data-placement="left" >Agregar Egresado <i class="fa fa-plus"></i></button>
 						</div>
 					</div>
 				</div>
@@ -13,7 +13,7 @@
                 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
-                        <div class="modal-header text-center bg-secondary">
+                        <div class="modal-header text-center" style="background-color: #007bff55 !important; color:black; font-weight: bold;">
                             <h5 class="modal-titler" id="exampleModalLabel">Datos Egresado</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
@@ -21,104 +21,96 @@
                         </div>
                         <div class="modal-body">
                             <div class="row">
-                                <div class="col-md-12">Datos Personales</div>
+                                <div class="col-md-12 text-center">Datos Personales</div>
                                 
                             </div>
                             <hr>
                             <div class="row">
-                                <div class="col-md-4 text-left">
-                                        <label>DNI(*)</label>
+                                <div class="col-md-3 text-left">
+                                        <label>DNI*</label>
                                 </div>
                                 <div class="col-md-3">
                                     <input v-model="egresado.dni" maxlength="8" onKeyPress="return soloNumeros(event)" class="form-control">
-                                </div>    
-                            </div>
-                            <br>
-                            <div class="row">
-                                <div class="col-md-4 text-left">
-                                        <label>Código (*)</label>
+                                </div>  
+                                <div class="col-md-2 text-left">
+                                        <label>Código*</label>
                                         
                                 </div>
                                 <div class="col-md-4">
                                     <input v-model="egresado.codigo" maxlength="10" onKeyPress="return soloNumeros(event)" class="form-control">
-                                </div>
+                                </div>  
                             </div>
                             <br>
                             <div class="row">
-                                <div class="col-md-4 text-left">
-                                    <label>Nombre(*)</label>
+                                <div class="col-md-3 text-left">
+                                    <label>Nombres*</label>
                                 </div>
-                                <div class="col-md-5">
+                                <div class="col-md-9">
                                     <input v-model="egresado.nombre" maxlength="50" class="form-control" onKeyPress="return sololetras(event)">
                                 </div>
                             </div>
                             <br>
                             <div class="row">
-                                <div class="col-md-4 text-left">
-                                    <label>Apellido Paterno(*)</label>
+                                <div class="col-md-3 text-left">
+                                    <label>Apellido Pat.*</label>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-9">
                                     <input v-model="egresado.paterno" maxlength="50" onKeyPress="return sololetras(event)" class="form-control">
                                 </div>
                             </div>
                             <br>
                             <div class="row">
-                                <div class="col-md-4 text-left">
-                                    <label>Apellido Materno(*)</label>
+                                <div class="col-md-3 text-left">
+                                    <label>Apellido Mat.*</label>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-9">
                                     <input v-model="egresado.materno" maxlength="50" onKeyPress="return sololetras(event)" class="form-control">
                                 </div>
                             </div>   
                             <br> 
                             <div class="row">
-                                <div class="col-md-4 text-left">
-                                    <label>Celular(*)</label>
+                                <div class="col-md-3 text-left">
+                                    <label>Celular*</label>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <input v-model="egresado.celular" maxlength="9" onKeyPress="return soloNumeros(event)" class="form-control">
                                 </div>
-                            </div>
-                            <br>
-                            <div class="row">
-                                <div class="col-md-4 text-left">
-                                    <label>Correo</label>
+                                <div class="col-md-2 text-left">
+                                    <label>Género*</label>
                                 </div>
-                                <div class="col-md-5">
-                                    <input v-model="egresado.correo" type="email" maxlength="30" class="form-control">
-                                </div>
-                            </div>
-                            <br>
-                            <div class="row">
-                                <div class="col-md-4 text-left">
-                                    <label>Género(*)</label>
-                                </div>
-                                <div class="col-md-5">
+                                <div class="col-md-4">
                                     <select class="form-control" v-model="egresado.genero">
                                         <option value="M">Masculino</option>
                                         <option value="F">Femenino</option>
                                     </select>
                                 </div>
-                            </div>
+                            </div>                            
                             <br>
                             <div class="row">
-                                <div class="col-md-12">Datos Académicos</div>
+                                <div class="col-md-3 text-left">
+                                    <label>Correo*</label>
+                                </div>
+                                <div class="col-md-9">
+                                    <input v-model="egresado.correo" type="email" maxlength="30" class="form-control">
+                                </div>
+                            </div>
+                            <br>
+                            
+                            <div class="row">
+                                <div class="col-md-12 text-center">Datos Académicos</div>
                             </div>
                             <hr>
                             <div class="row">
-                                <div class="col-md-4 text-left">
-                                    <label>Año Ingreso(*)</label>
+                                <div class="col-md-3 text-left">
+                                    <label>Año Ingreso*</label>
                                 </div>
                                 <div class="col-md-3">
                                     <select class="form-control" v-model="egresado.ingreso" @change="validaFecha()">
                                         <option v-for="a in anios" :key="a" :value="a">{{a}}</option>
                                     </select>
                                 </div>
-                            </div>
-                            <br> 
-                            <div class="row">
-                                <div class="col-md-4 text-left">
-                                    <label>Año Egreso(*)</label>
+                                <div class="col-md-3 text-left">
+                                    <label>Año Egreso*</label>
                                 </div>
                                 <div class="col-md-3">
                                     <select class="form-control" v-model="egresado.egreso" @change="validaFecha()">
@@ -126,21 +118,21 @@
                                     </select>
                                 </div>
                             </div>
-                            <br>
+                            <br>                             
                             <div class="row">
-                                <div class="col-md-4 text-left">
-                                    <label>Escuela(*)</label>
+                                <div class="col-md-3 text-left">
+                                    <label>Escuela*</label>
                                 </div>
-                                <div class="col-md-7">
+                                <div class="col-md-9">
                                     <select v-model="egresado.escuela" class="form-control">
                                         <option v-for="e in escuelas" :key="e.IDEscuela" :value="e.IDEscuela">{{e.Escuela}}</option>
                                     </select>
                                 </div>
                             </div>      
                         <div class="modal-footer">
-                            <button @click="addEgresado(1)" id="add" class="btn btn-outline-success" data-dismiss="modal">Agregar <i class="fa fa-save"></i></button>
-                            <button @click="addEgresado(2)" id="editar" class="btn btn-outline-success" data-dismiss="modal">Editar <i class="fa fa-pencil"></i></button>
-                            <button type="button" class="btn btn-outline-secondary" @click="load()" data-dismiss="modal">Cerrar <i class="fa fa-close"></i></button>
+                            <button @click="addEgresado(1)" id="add" class="btn btn-success" data-dismiss="modal">Agregar <i class="fa fa-save"></i></button>
+                            <button @click="addEgresado(2)" id="editar" class="btn btn-success" data-dismiss="modal">Editar <i class="far fa-edit"></i></button>
+                            <button type="button" class="btn btn-danger" @click="load()" data-dismiss="modal">Cancelar <i class="fas fa-times"></i></button>
                         </div>
                         </div>
                     </div>
@@ -152,7 +144,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card card-default">
-                        <div class="card-header text-center bg-secondary">
+                        <div class="card-header text-center" style="background-color: #007bff55 !important; color:black; font-weight: bold;">
                             <h4 class="title">EGRESADOS</h4>  
                         </div>
                     <div class="card-body" style="font-size: 11px">
@@ -204,7 +196,7 @@
                 Correo:null,
                 Escuela:null,
             }],
-            columns: ["Escuela","Codigo","DNI","Nombre","Paterno","Celular","Correo","Genero","Ingreso","Egreso","Acciones"],
+            columns: ["Escuela","DNI","Nombre","Paterno","Celular","Correo","Ingreso","Egreso","Acciones"],
             options: {
 				headings:
 				{
@@ -218,8 +210,8 @@
                     Correo:"Correo",
                     Escuela:"Escuela",
 				},
-				sortable    : ["Escuela","Codigo","DNI","Nombre","Paterno","Celular","Correo","Ingreso","Egreso"],
-				filterable  : ["Escuela","Codigo","DNI","Nombre","Paterno","Celular","Correo","Ingreso","Egreso"]
+				sortable    : ["Escuela","DNI","Nombre","Paterno","Celular","Correo","Ingreso","Egreso"],
+				filterable  : ["Escuela","DNI","Nombre","Paterno","Celular","Correo","Ingreso","Egreso"]
             },
             escuelas:[],
         }

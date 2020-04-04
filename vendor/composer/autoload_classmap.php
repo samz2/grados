@@ -25,6 +25,7 @@ return array(
     'App\\Http\\Controllers\\EstadosController' => $baseDir . '/app/Http/Controllers/EstadosController.php',
     'App\\Http\\Controllers\\ExpeditobController' => $baseDir . '/app/Http/Controllers/ExpeditobController.php',
     'App\\Http\\Controllers\\HomeController' => $baseDir . '/app/Http/Controllers/HomeController.php',
+    'App\\Http\\Controllers\\ModalidadController' => $baseDir . '/app/Http/Controllers/ModalidadController.php',
     'App\\Http\\Controllers\\SesionController' => $baseDir . '/app/Http/Controllers/SesionController.php',
     'App\\Http\\Controllers\\TramiteController' => $baseDir . '/app/Http/Controllers/TramiteController.php',
     'App\\Http\\Controllers\\UsersController' => $baseDir . '/app/Http/Controllers/UsersController.php',

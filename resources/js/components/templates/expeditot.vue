@@ -6,47 +6,55 @@
 				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
-							<button  class="btn btn-outline-secondary" id="mas" @click="ocultar('1')">
-							Agregar <i class="fa fa-plus"></i>
-							</button>
-							<button  class="btn btn-outline-secondary" id="menos" @click="cancelar()">
-								<i class="fa fa-minus"></i>
+							<button  class="btn btn-success" id="mas" @click="ocultar('1')">
+							Agregar Expedito Título <i class="fa fa-plus"></i>
 							</button>
 						</div>
 					</div>
 				</div>
 	            <div class="card card-default"  id="objetivo">
-	                <div class="card-header text-center bg-secondary">
-	                    <h4 class="title">Expedito</h4>  
+	                <div class="card-header text-center" style="background-color: #007bff55 !important; color:black; font-weight: bold;">
+	                    <h4 class="title">Expeditos Títulación</h4>  
 	                </div>
+                    <div class="col-md-4"><label><mark style="background-color: #dc354526; color: #520606f7">- (*) Llenar datos obligatoriamente.</mark></label></div>
+                    
+                    <div class="col-md-4"><label><mark style="background-color: #dc354526; color: #520606f7">- Primero realizar la búsqueda del bachiller.</mark></label></div>
+                    
 					<div class="card-body">
                         <fieldset class="border p-2">
-                            <legend class="w-auto">Datos Egresado 
-                                <button  data-target="#exampleModal" class="btn btn-outline-secondary" data-toggle="modal" data-placement="left">
-								<i class="fa fa-plus"></i>
+                            <legend class="w-auto">Datos Bachiller 
+                                <button  data-target="#exampleModal" class="btn btn-primary" data-toggle="modal" data-placement="left">
+								Buscar Bachiller <i class="fas fa-search"></i>
 							    </button>
                             </legend>
-                            <div class="form-group row">
-                                <label for="dni" class="col-md-2 col-form-label">DNI: </label>
+                            <div class="form-group row">  
+                                
+                                <div class="col-md-2">
+                                <label>Nro. DNI:</label>   
+                                </div>                             
                                 <div class="col-md-2">
                                     <input type="text" v-model="expedito.dni" id="dni" readonly class="form-control form-control-sm">
                                 </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="codigo" class="col-md-2 col-form-label">Código: </label>
+                                 <div class="col-md-2 text-left">
+                                        <label>Nro. Código:</label>
+                                 </div>
                                 <div class="col-md-2">
                                     <input type="text" v-model="expedito.codigo" id="codigo" readonly class="form-control form-control-sm">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="nombre" class="col-md-2 col-form-label">Nombre: </label>
-                                <div class="col-md-5">
+                                
+                                <div class="col-md-2 text-left">
+                                        <label>Nombre Completo:</label>
+                                </div>
+                                <div class="col-md-6">
                                     <input type="text" v-model="expedito.alumno" id="nombre" readonly class="form-control form-control-sm">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="carrera" class="col-md-2 col-form-label">Carrera: </label>
-                                <div class="col-md-5">
+                                
+                                <label for="carrera" class="col-md-2 col-form-label">Carrera Profesional: </label>
+                                <div class="col-md-6">
                                     <input type="text" v-model="expedito.carrera" id="carrera" readonly class="form-control form-control-sm">
                                 </div>
                             </div>
@@ -54,43 +62,183 @@
                         <fieldset class="border p-2">
                             <legend class="w-auto">Datos del Libro de Actas</legend>
                             <div class="form-group row">
-                                <label for="tomo" class="col-md-1 col-form-label">Tomo: </label>
+                                
+                                <label for="tomo" class="col-md-2 col-form-label">Número Tomo(*)</label>
                                 <div class="col-md-2">
                                     <input type="text" id="tomo" v-model="expedito.tomo" onKeyPress="return soloNumeros(event)" maxlength="3" class="form-control form-control-sm">
                                 </div>
-                                <label for="folio" class="col-md-1 col-form-label">Folio: </label>
+                                <label for="folio" class="col-md-2 col-form-label">Número Folio(*)</label>
                                 <div class="col-md-2">
                                     <input type="text" id="folio" v-model="expedito.folio" onKeyPress="return soloNumeros(event)" maxlength="3" class="form-control form-control-sm">
                                 </div>
-                                <label for="asiento" class="col-md-1 t12 col-form-label">Asiento: </label>
+                                <label for="asiento" class="col-md-2 col-form-label">Número Asiento(*)</label>
                                 <div class="col-md-2">
                                     <input type="text" id="asiento" v-model="expedito.asiento" onKeyPress="return soloNumeros(event)" maxlength="3" class="form-control form-control-sm">
                                 </div>
                             </div>
                         </fieldset>
                         <fieldset class="border p-2">
+                            <legend class="w-auto">Datos titulación</legend>
+                            <div class="form-group row">
+                                <div class="col-md-2 text-left">
+                                <label>Modalidad(*)</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <select v-model="expedito.modalidad" class="form-control form-control-sm">
+                                        <option v-for="m in modalidades" :key="m.IDModalidad" :value="m.IDModalidad">
+                                            {{m.Modalidad}}
+                                        </option>                                            
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-2 text-left">
+                                <label>Nombre Tesis(*)</label>
+                                </div>
+                                <div class="col-md-9">
+                                    <input type="text" v-model="expedito.tesis" onKeyPress="return alfa(event)" maxlength="200" class="form-control form-control-sm">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-2 text-left">
+                                <label>Asesor(*)</label>
+                                </div>
+                                <div class="col-md-9">
+                                    <select v-model="expedito.asesor" class="form-control form-control-sm">
+                                        <option v-for="d in docentes" :key="d.DNI" :value="d.DNI">
+                                            {{d.Nombres}} {{d.Apellidos}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-2 text-left">
+                                <label>Calificación(*)</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <select v-model="expedito.calificacion" class="form-control form-control-sm">
+                                        <option value="SOBRESALIENTE">SOBRESALIENTE</option>
+                                        <option value="UNANIMIDAD">UNANIMIDAD</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3 text-left">
+                                <label>Fecha sustentación(*)</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="date" v-model="expedito.sustentacion" class="form-control form-control-sm">
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset class="border p-2">
                             <legend class="w-auto">Sesión</legend>
                             <div class="form-group row">
-                                <label for="sesion" class="col-md-1 col-form-label t12"># Sesión: </label>
+                                
+                                <label for="sesion" class="col-md-2 col-form-label">Nro. Sesión(*)</label>
                                 <div class="col-md-2">
                                     <select id="sesion" v-model="expedito.sesion" @change="getSession(expedito.sesion)" class="form-control form-control-sm">
                                         <option v-for="s in sesiones" :key="s.NumSesion" :value="s.NumSesion">{{s.NumSesion}}</option>    
                                     </select>
                                 </div>
-                                <label for="fecha" class="col-md-1 col-form-label">Fecha: </label>
+                                <label for="fecha" class="col-md-1 col-form-label">Fecha</label>
                                 <div class="col-md-3">
                                     <input type="date" id="fecha" v-model="expedito.sfecha" readonly class="form-control form-control-sm">
                                 </div>
-                                <label for="Tipo" class="col-md-1 col-form-label">Tipo: </label>
+                                <label for="Tipo" class="col-md-1 col-form-label">Tipo</label>
                                 <div class="col-md-3">
                                     <input type="text" id="tipo" v-model="expedito.stipo" readonly maxlength="3" class="form-control form-control-sm">
                                 </div>
                             </div>
                         </fieldset>
+                        
+                        <fieldset class="border p-2">
+                            <legend class="w-auto">Documentos Titulación</legend>
+                             <div class="form-group row">
+                                
+                                <div class="col-md-4">
+                                    <label><input type="checkbox" name="check" >   Tesis PDF</label>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label><input type="checkbox" name="check" >   Autorización de publicación</label>
+                                </div>
+                                
+                            </div> 
+
+                            <div class="form-group row">
+                                
+                                <div class="col-md-4">
+                                    <label><input type="checkbox" name="check" >   Constancia antiplagio</label>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label><input type="checkbox" name="check" >   Constancia URL</label>
+                                </div>
+                                
+                            </div>
+                            <div class="form-group row">
+
+                                <div class="col-md-6">
+                                    <label><mark style="background-color: #dc354526; color: #520606f7">Nota: Obligatorio tener marcado los 4 documentos para continuar.</mark></label>
+                                </div>
+                                
+                                
+                            </div>
+                        </fieldset>
+                        <fieldset class="border p-2">
+                            <legend class="w-auto">Archivos</legend>
+                            <div class="form-group row">
+                                <div class="col-md-2">
+                                    <label>Const. Matrícula(*)</label>
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="file" name="pdf" class="form-control form-control-sm">
+                                </div>
+                                <div class="col-md-2">
+                                <label>Const. Egresado(*)</label>
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="file" name="pdf" class="form-control form-control-sm">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-2">
+                                <label>Arch. Tesis PDF(*)</label>
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="file" name="pdf" class="form-control form-control-sm">
+                                </div>
+                                <div class="col-md-2">
+                                <label>Arch. Tesis Word(*)</label>
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="file" name="pdf" class="form-control form-control-sm">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-2">
+                                <label>Foto(*)</label>
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="file" name="pdf" class="form-control form-control-sm">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-7">
+                                    <label><mark style="background-color: #dc354526; color: #520606f7">* Constancias en formato PDF (Tam. max. 1mb c/u)</mark></label>
+                                </div>
+                                <div class="col-md-7">
+                                    <label><mark style="background-color: #dc354526; color: #520606f7">* Archivo Tesis en formato PDF (Editable) y Word (Tam. max. 3mb c/u)</mark></label>
+                                </div>
+                                <div class="col-md-7">
+                                    <label><mark style="background-color: #dc354526; color: #520606f7">* Foto en formato JPG (Tam. max. 1mb)</mark></label>
+                                </div>
+                            </div>
+                            
+                        </fieldset>
                         <fieldset class="border p-2">
                             <legend class="w-auto">Datos del trámite</legend>
                             <div class="form-group row">
-                                <label for="ingreso" class="col-md-4 col-form-label">Fecha de Ingreso de la solicitud: </label>
+                                <label for="ingreso" class="col-md-4 col-form-label">Fecha de Ingreso de la solicitud(*)</label>
                                 <div class="col-md-3">
                                     <input type="date" id="ingreso" v-model="expedito.ingreso" onKeyPress="return soloNumeros(event)" maxlength="3" class="form-control form-control-sm">
                                 </div>
@@ -102,96 +250,13 @@
                                 </div>
                             </div>
                         </fieldset>
-                        <fieldset class="border p-2">
-                            <legend class="w-auto">Datos titulación</legend>
-                            <div class="form-group row">
-                                <label class="col-md-4 col-form-label">Modalidad</label>
-                                <div class="col-md-4">
-                                    <select v-model="expedito.modalidad" class="form-control form-control-sm">
-                                        <option v-for="m in modalidades" :key="m.IDModalidad" :value="m.IDModalidad">
-                                            {{m.Modalidad}}
-                                        </option>                                            
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-4 col-form-label">Nombre de la tesis: </label>
-                                <div class="col-md-8">
-                                    <input type="text" v-model="expedito.tesis" onKeyPress="return alfa(event)" maxlength="200" class="form-control form-control-sm">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-4 col-form-label">Asesor: </label>
-                                <div class="col-md-8">
-                                    <select v-model="expedito.asesor" class="form-control form-control-sm">
-                                        <option v-for="d in docentes" :key="d.DNI" :value="d.DNI">
-                                            {{d.Nombres}} {{d.Apellidos}}
-                                        </option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-4 col-form-label">Calificación: </label>
-                                <div class="col-md-8">
-                                    <select v-model="expedito.calificacion" class="form-control form-control-sm">
-                                        <option value="SOBRESALIENTE">SOBRESALIENTE</option>
-                                        <option value="UNANIMIDAD">UNANIMIDAD</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-4 col-form-label">Fecha sustentación: </label>
-                                <div class="col-md-3">
-                                    <input type="date" v-model="expedito.sustentacion" class="form-control form-control-sm">
-                                </div>
-                            </div>
-                        </fieldset>
-                        <fieldset class="border p-2">
-                            <legend class="w-auto">Documentos</legend>
-                            <div class="form-group row">
-                                <label class="col-md-2 col-form-label">Tesis PDF</label>
-                                <div class="col-md-4">
-                                    <input type="file" name="pdf" class="form-control form-control-sm">
-                                </div>
-                                <div class="col-md-1">
-                                    <input type="checkbox" name="check" class="form-control form-control-sm">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-2 col-form-label">Autorización de publicación</label>
-                                <div class="col-md-4">
-                                    <input type="file" name="pdf" class="form-control form-control-sm">
-                                </div>
-                                <div class="col-md-1">
-                                    <input type="checkbox" name="check" class="form-control form-control-sm">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-2 col-form-label">Constancia antiplagio</label>
-                                <div class="col-md-4">
-                                    <input type="file" name="pdf" class="form-control form-control-sm">
-                                </div>
-                                <div class="col-md-1">
-                                    <input type="checkbox" name="check" class="form-control form-control-sm">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-2 col-form-label">Constancia URL</label>
-                                <div class="col-md-4">
-                                    <input type="file" name="pdf" class="form-control form-control-sm">
-                                </div>
-                                <div class="col-md-1">
-                                    <input type="checkbox" name="check" class="form-control form-control-sm">
-                                </div>
-                            </div>
-                        </fieldset>
                         <br>
                         <div class="row">
                             <div class="col-md-2">
                                 <button class="btn btn-success" @click="addExpedito()">Guardar <i class="fa fa-save"></i></button>
                             </div>
                             <div class="col-md-2">
-                                <button class="btn btn-danger" @click="cancelar()">Cancelar <i class="fa fa-stop"></i></button>
+                                <button class="btn btn-danger" @click="cancelar()">Cancelar <i class="fas fa-times"></i></button>
                             </div>
                         </div>
 	                </div>
@@ -201,8 +266,8 @@
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
-                        <div class="modal-header text-center bg-secondary">
-                            <h5 class="modal-titler" id="exampleModalLabel">Buscar Egresado</h5>
+                        <div class="modal-header text-center" style="background-color: #007bff55 !important; color:black; font-weight: bold;">
+                            <h5 class="modal-titler" id="exampleModalLabel">Buscar Bachiller</h5>
                             <button type="button" class="close" data-dismiss="modal" @click="borrar()" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                             </button>
@@ -211,28 +276,31 @@
                             <div class="form-group row">
                                 <label for="dni1" class="col-md-2 col-form-label">DNI: </label>
                                 <div class="col-md-4">
-                                    <input type="text" v-model="alumno.dni" id="dni1" onkeypress="return solonumeros(event)" class="form-control form-control-sm">
+                                    <input type="text" v-model="alumno.dni" id="dni1" class="form-control form-control-sm">
                                 </div>
                                 <label for="codigo1" class="col-md-2 col-form-label">Código: </label>
                                 <div class="col-md-4">
-                                    <input type="text" v-model="alumno.codigo" id="codigo1" onkeypress="return solonumeros(event)" class="form-control form-control-sm">
+                                    <input type="text" v-model="alumno.codigo" id="codigo1" class="form-control form-control-sm">
                                 </div>
                             </div>
-                            <div class="form-group row">
+                            <!--<div class="form-group row">
                                 <label for="nombre1" class="col-md-2 col-form-label">Apellido: </label>
                                 <div class="col-md-10">
-                                    <input type="text" id="nombre1"  v-model="alumno.apellido" onkeypress="return sololetras(event)" class="form-control form-control-sm">
+                                    <input type="text" id="nombre1"  v-model="alumno.apellido" class="form-control form-control-sm">
+                                </div>
+                            </div>-->
+                            <div class="form-group row">
+                                <label for="nombre1" class="col-md-2 col-form-label">Input Creado: </label>
+                                <div class="col-md-10">
+                                    <table colspadding=0 cellspacing=0 border="1">
+                                    <tr class="t10" v-for="a in alumnos" :key="a.Codigo">
+                                        <td><input type="text" class="form-control form-control-sm">{{a.Nombres}}</td>
+                                        <td><input data-dismiss="modal" type="checkbox" @click="seleccionar(a.DNI,a.Codigo,a.Nombres,a.Carrera)" class="form-control form-control-sm"></td>
+                                    </tr>
+                                    </table>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <button class="btn btn-success" @click="buscar(alumno.dni,alumno.codigo,alumno.apellido)">Buscar <i class="fa fa-search"></i></button>
-                                </div>
-                                <div class="col-md-3">
-                                    <button class="btn btn-danger" @click="borrar()">Borrar <i class="fa fa-eraser"></i></button>
-                                </div>
-                            </div>
-                            <fieldset class="border p-2">
+                            <!--<fieldset class="border p-2">
                                 <legend class="w-auto">Lista de egresados</legend>
                                 <table colspadding=0 cellspacing=0 border="1">
                                     <tr>
@@ -248,7 +316,19 @@
                                         <td><input data-dismiss="modal" type="checkbox" @click="seleccionar(a.DNI,a.Codigo,a.Nombres,a.Carrera)" class="form-control form-control-sm"></td>
                                     </tr>
                                 </table>
-                            </fieldset>
+                            </fieldset>-->
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <button class="btn btn-primary" @click="buscar(alumno.dni,alumno.codigo,alumno.apellido)">Buscar <i class="fa fa-search"></i></button>
+                                </div>
+                                <div class="col-md-4">
+                                    <button class="btn btn-warning" @click="borrar()">Limpiar <i class="fas fa-broom"></i></button>
+                                </div>
+                                <div class="col-md-4">
+                                    <button class="btn btn-success" data-dismiss="modal" type="checkbox" @click="seleccionar(a.DNI,a.Codigo,a.Nombres,a.Carrera)">Seleccionar <i class="fas fa-check"></i></button>
+                                </div>
+                            </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -256,9 +336,9 @@
                 <!-- final modal -->
             <div class="row" id="expeditos">
                 <div class="col-md-12">
-                    <div class="card card-default">
-                            <div class="card-header text-center bg-secondary">
-                                <h4 class="title">EXPEDITOS</h4>  
+                    <div class="card card-default" >
+                            <div class="card-header text-center" style="background-color: #007bff55 !important; color:black; font-weight: bold;">
+                                <h4 class="title">EXPEDITOS TITULACIÓN</h4>  
                             </div>
                         <div class="card-body">
                             <div class="content table-responsive table-full-width t12">
