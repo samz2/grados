@@ -5323,34 +5323,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -5421,7 +5393,14 @@ __webpack_require__.r(__webpack_exports__);
       if (c == '') c = null;
       if (a == '') a = null;
       axios.get("getAlumnos/" + d + "/" + c + "/" + a).then(function (data) {
-        _this.alumnos = data.data.alumnos;
+        if (data.data.alumnos[0] == null) {
+          swal({
+            type: 'error',
+            title: 'no se encontraron registros'
+          });
+        } else {
+          _this.alumnos = data.data.alumnos[0];
+        }
 
         _this.$Progress.finish();
       })["catch"](function (error) {
@@ -5450,6 +5429,7 @@ __webpack_require__.r(__webpack_exports__);
       this.alumno.codigo = null;
       this.alumno.dni = null;
       this.alumno.apellido = null;
+      this.alumnos = [];
     },
     seleccionar: function seleccionar(d, c, n, ca) {
       this.expedito.codigo = c;
@@ -57274,7 +57254,12 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-control form-control-sm",
-                      attrs: { type: "date", id: "fecha", readonly: "" },
+                      attrs: {
+                        type: "date",
+                        id: "fecha",
+                        "data-date-format": "DD MMMM YYYY",
+                        readonly: ""
+                      },
                       domProps: { value: _vm.expedito.sfecha },
                       on: {
                         input: function($event) {
@@ -57357,6 +57342,7 @@ var render = function() {
                       staticClass: "form-control form-control-sm",
                       attrs: {
                         type: "date",
+                        "data-date-format": "DD MMMM YYYY",
                         id: "ingreso",
                         onKeyPress: "return soloNumeros(event)",
                         maxlength: "3"
@@ -57397,6 +57383,7 @@ var render = function() {
                       staticClass: "form-control form-control-sm",
                       attrs: {
                         type: "date",
+                        "data-date-format": "DD MMMM YYYY",
                         id: "comienzo",
                         onKeyPress: "return soloNumeros(event)",
                         maxlength: "3"
@@ -57545,7 +57532,11 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-control form-control-sm",
-                      attrs: { type: "text", id: "dni1" },
+                      attrs: {
+                        type: "text",
+                        id: "dni1",
+                        onKeyPress: "return solonumeros(event)"
+                      },
                       domProps: { value: _vm.alumno.dni },
                       on: {
                         input: function($event) {
@@ -57578,7 +57569,11 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-control form-control-sm",
-                      attrs: { type: "text", id: "codigo1" },
+                      attrs: {
+                        type: "text",
+                        onKeyPress: "return solonumeros(event)",
+                        id: "codigo1"
+                      },
                       domProps: { value: _vm.alumno.codigo },
                       on: {
                         input: function($event) {
@@ -57599,52 +57594,31 @@ var render = function() {
                       staticClass: "col-md-2 col-form-label",
                       attrs: { for: "nombre1" }
                     },
-                    [_vm._v("Input Creado: ")]
+                    [_vm._v("Egresado: ")]
                   ),
                   _vm._v(" "),
                   _c("div", { staticClass: "col-md-10" }, [
-                    _c(
-                      "table",
-                      {
-                        attrs: {
-                          colspadding: "0",
-                          cellspacing: "0",
-                          border: "1"
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.alumnos.Nombres,
+                          expression: "alumnos.Nombres"
                         }
-                      },
-                      _vm._l(_vm.alumnos, function(a) {
-                        return _c("tr", { key: a.Codigo, staticClass: "t10" }, [
-                          _c("td", [
-                            _c("input", {
-                              staticClass: "form-control form-control-sm",
-                              attrs: { type: "text" }
-                            }),
-                            _vm._v(_vm._s(a.Nombres))
-                          ]),
-                          _vm._v(" "),
-                          _c("td", [
-                            _c("input", {
-                              staticClass: "form-control form-control-sm",
-                              attrs: {
-                                "data-dismiss": "modal",
-                                type: "checkbox"
-                              },
-                              on: {
-                                click: function($event) {
-                                  return _vm.seleccionar(
-                                    a.DNI,
-                                    a.Codigo,
-                                    a.Nombres,
-                                    a.Carrera
-                                  )
-                                }
-                              }
-                            })
-                          ])
-                        ])
-                      }),
-                      0
-                    )
+                      ],
+                      staticClass: "form-control form-control-sm",
+                      attrs: { type: "text", readonly: "" },
+                      domProps: { value: _vm.alumnos.Nombres },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.alumnos, "Nombres", $event.target.value)
+                        }
+                      }
+                    })
                   ])
                 ]),
                 _vm._v(" "),
@@ -57698,10 +57672,10 @@ var render = function() {
                         on: {
                           click: function($event) {
                             return _vm.seleccionar(
-                              _vm.a.DNI,
-                              _vm.a.Codigo,
-                              _vm.a.Nombres,
-                              _vm.a.Carrera
+                              _vm.alumnos.DNI,
+                              _vm.alumnos.Codigo,
+                              _vm.alumnos.Nombres,
+                              _vm.alumnos.Carrera
                             )
                           }
                         }
@@ -83679,8 +83653,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\Sistemas\SISTEMA GRADOS\grados\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\Sistemas\SISTEMA GRADOS\grados\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\grados\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\grados\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

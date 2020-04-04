@@ -92,7 +92,7 @@
                                 </div>
                                 <label for="fecha" class="col-md-1 col-form-label">Fecha</label>
                                 <div class="col-md-3">
-                                    <input type="date" id="fecha" v-model="expedito.sfecha" readonly class="form-control form-control-sm">
+                                    <input type="date" id="fecha" data-date-format="DD MMMM YYYY" v-model="expedito.sfecha" readonly class="form-control form-control-sm">
                                 </div>
                                 <label for="Tipo" class="col-md-1 col-form-label">Tipo</label>
                                 <div class="col-md-3">
@@ -140,13 +140,13 @@
                                 
                                 <label for="ingreso" class="col-md-4 col-form-label">Fecha de Ingreso de la solicitud(*)</label>
                                 <div class="col-md-3">
-                                    <input type="date" id="ingreso" v-model="expedito.ingreso" onKeyPress="return soloNumeros(event)" maxlength="3" class="form-control form-control-sm">
+                                    <input type="date"  data-date-format="DD MMMM YYYY" id="ingreso" v-model="expedito.ingreso" onKeyPress="return soloNumeros(event)" maxlength="3" class="form-control form-control-sm">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="comienzo" class="col-md-4 col-form-label">Fecha que empieza el trámite</label>
                                 <div class="col-md-3">
-                                    <input type="date" id="comienzo" v-model="expedito.comienzo" onKeyPress="return soloNumeros(event)" maxlength="3" class="form-control form-control-sm">
+                                    <input type="date"  data-date-format="DD MMMM YYYY" id="comienzo" v-model="expedito.comienzo" onKeyPress="return soloNumeros(event)" maxlength="3" class="form-control form-control-sm">
                                 </div>
                             </div>
                         </fieldset>
@@ -176,47 +176,19 @@
                             <div class="form-group row">
                                 <label for="dni1" class="col-md-2 col-form-label">DNI: </label>
                                 <div class="col-md-4">
-                                    <input type="text" v-model="alumno.dni" id="dni1" class="form-control form-control-sm">
+                                    <input type="text" v-model="alumno.dni" id="dni1" onKeyPress="return solonumeros(event)" class="form-control form-control-sm">
                                 </div>
                                 <label for="codigo1" class="col-md-2 col-form-label">Código: </label>
                                 <div class="col-md-4">
-                                    <input type="text" v-model="alumno.codigo" id="codigo1" class="form-control form-control-sm">
+                                    <input type="text" v-model="alumno.codigo" onKeyPress="return solonumeros(event)" id="codigo1" class="form-control form-control-sm">
                                 </div>
                             </div>
-                            <!--<div class="form-group row">
-                                <label for="nombre1" class="col-md-2 col-form-label">Apellido: </label>
-                                <div class="col-md-10">
-                                    <input type="text" id="nombre1"  v-model="alumno.apellido" class="form-control form-control-sm">
-                                </div>
-                            </div>-->
                             <div class="form-group row">
-                                <label for="nombre1" class="col-md-2 col-form-label">Input Creado: </label>
+                                <label for="nombre1" class="col-md-2 col-form-label">Egresado: </label>
                                 <div class="col-md-10">
-                                    <table colspadding=0 cellspacing=0 border="1">
-                                    <tr class="t10" v-for="a in alumnos" :key="a.Codigo">
-                                        <td><input type="text" class="form-control form-control-sm">{{a.Nombres}}</td>
-                                        <td><input data-dismiss="modal" type="checkbox" @click="seleccionar(a.DNI,a.Codigo,a.Nombres,a.Carrera)" class="form-control form-control-sm"></td>
-                                    </tr>
-                                    </table>
+                                    <input type="text" v-model="alumnos.Nombres" readonly class="form-control form-control-sm">
                                 </div>
                             </div>
-                            <!--<fieldset class="border p-2">
-                                <legend class="w-auto">Lista de egresados</legend>
-                                <table colspadding=0 cellspacing=0 border="1">
-                                    <tr>
-                                        <td class="text-center"><i class="blanco">aaa</i> DNI <i class="blanco">aaa</i></td>
-                                        <td class="text-center"><i class="blanco">a</i>CÓDIGO<i class="blanco">a</i></td>
-                                        <td class="text-center"><i class="blanco">aaaaaaaaa</i>NOMBRES<i class="blanco">aaaaaaaaa</i></td>
-                                        <td class="text-center">SELECCIONAR</td>
-                                    </tr>
-                                    <tr class="t10" v-for="a in alumnos" :key="a.Codigo">
-                                        <td>{{a.DNI}}</td>
-                                        <td>{{a.Codigo}}</td>
-                                        <td>{{a.Nombres}}</td>
-                                        <td><input data-dismiss="modal" type="checkbox" @click="seleccionar(a.DNI,a.Codigo,a.Nombres,a.Carrera)" class="form-control form-control-sm"></td>
-                                    </tr>
-                                </table>
-                            </fieldset>-->
                             <div class="row">
                                 <div class="col-md-4">
                                     <button class="btn btn-primary" @click="buscar(alumno.dni,alumno.codigo,alumno.apellido)">Buscar <i class="fa fa-search"></i></button>
@@ -225,7 +197,7 @@
                                     <button class="btn btn-warning" @click="borrar()">Limpiar <i class="fas fa-broom"></i></button>
                                 </div>
                                 <div class="col-md-4">
-                                    <button class="btn btn-success" data-dismiss="modal" type="checkbox" @click="seleccionar(a.DNI,a.Codigo,a.Nombres,a.Carrera)">Seleccionar <i class="fas fa-check"></i></button>
+                                    <button class="btn btn-success" data-dismiss="modal" type="checkbox" @click="seleccionar(alumnos.DNI,alumnos.Codigo,alumnos.Nombres,alumnos.Carrera)">Seleccionar <i class="fas fa-check"></i></button>
                                 </div>
                             </div>
                             
@@ -333,7 +305,16 @@
             axios.get("getAlumnos/"+d+"/"+c+"/"+a)
             .then(data=>
             {
-                this.alumnos = data.data.alumnos;
+                if(data.data.alumnos[0] == null)
+                {
+                    swal({
+                        type: 'error',
+                        title: 'no se encontraron registros',
+                    });
+                }else{
+                    this.alumnos = data.data.alumnos[0];
+                }
+                
                 this.$Progress.finish();
             }
             ).catch(error=>{
@@ -364,6 +345,7 @@
             this.alumno.codigo      = null;
             this.alumno.dni         = null;
             this.alumno.apellido    = null;
+            this.alumnos = [];
         },
         seleccionar(d,c,n,ca)
         {
