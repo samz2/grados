@@ -92,7 +92,7 @@
                                 </div>
                                 <label for="fecha" class="col-md-1 col-form-label">Fecha</label>
                                 <div class="col-md-3">
-                                    <input type="date" id="fecha" data-date-format="DD MMMM YYYY" v-model="expedito.sfecha" readonly class="form-control form-control-sm">
+                                    <input type="date" id="fecha" dateformat="d M y" v-model="expedito.sfecha" readonly class="form-control form-control-sm">
                                 </div>
                                 <label for="Tipo" class="col-md-1 col-form-label">Tipo</label>
                                 <div class="col-md-3">
@@ -140,13 +140,13 @@
                                 
                                 <label for="ingreso" class="col-md-4 col-form-label">Fecha de Ingreso de la solicitud(*)</label>
                                 <div class="col-md-3">
-                                    <input type="date"  data-date-format="DD MMMM YYYY" id="ingreso" v-model="expedito.ingreso" onKeyPress="return soloNumeros(event)" maxlength="3" class="form-control form-control-sm">
+                                    <input type="date"  dateformat="d M y" id="ingreso" v-model="expedito.ingreso" onKeyPress="return soloNumeros(event)" maxlength="3" class="form-control form-control-sm">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="comienzo" class="col-md-4 col-form-label">Fecha que empieza el trámite</label>
                                 <div class="col-md-3">
-                                    <input type="date"  data-date-format="DD MMMM YYYY" id="comienzo" v-model="expedito.comienzo" onKeyPress="return soloNumeros(event)" maxlength="3" class="form-control form-control-sm">
+                                    <input type="date"  dateformat="d M y" id="comienzo" v-model="expedito.comienzo" onKeyPress="return soloNumeros(event)" maxlength="3" class="form-control form-control-sm">
                                 </div>
                             </div>
                         </fieldset>

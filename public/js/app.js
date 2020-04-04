@@ -57257,7 +57257,7 @@ var render = function() {
                       attrs: {
                         type: "date",
                         id: "fecha",
-                        "data-date-format": "DD MMMM YYYY",
+                        dateformat: "d M y",
                         readonly: ""
                       },
                       domProps: { value: _vm.expedito.sfecha },
@@ -57342,7 +57342,7 @@ var render = function() {
                       staticClass: "form-control form-control-sm",
                       attrs: {
                         type: "date",
-                        "data-date-format": "DD MMMM YYYY",
+                        dateformat: "d M y",
                         id: "ingreso",
                         onKeyPress: "return soloNumeros(event)",
                         maxlength: "3"
@@ -57383,7 +57383,7 @@ var render = function() {
                       staticClass: "form-control form-control-sm",
                       attrs: {
                         type: "date",
-                        "data-date-format": "DD MMMM YYYY",
+                        dateformat: "d M y",
                         id: "comienzo",
                         onKeyPress: "return soloNumeros(event)",
                         maxlength: "3"
