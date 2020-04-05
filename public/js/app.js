@@ -5424,6 +5424,9 @@ __webpack_require__.r(__webpack_exports__);
       this.expedito.stipo = null;
       this.expedito.ingreso = null;
       this.expedito.comienzo = null;
+      $("#matricula").val('');
+      $("#egresado").val('');
+      $("#foto").val('');
       $('#objetivo').hide();
       $('#expeditos').show();
       $('#menos').hide();
@@ -5473,7 +5476,7 @@ __webpack_require__.r(__webpack_exports__);
       var type = e.target.files[0].type;
 
       if (size > 1024000) {
-        this.archivos.matricula = null;
+        e.target.value = '';
         swal({
           type: 'error',
           title: 'Error',
@@ -5492,6 +5495,7 @@ __webpack_require__.r(__webpack_exports__);
           console.log(_this4.archivos.matricula);
         };
       } else {
+        e.target.value = '';
         this.archivos.matricula = null;
         swal({
           type: 'error',
@@ -5509,6 +5513,7 @@ __webpack_require__.r(__webpack_exports__);
       var type = e.target.files[0].type;
 
       if (size > 1024000) {
+        e.target.value = '';
         swal({
           type: 'error',
           title: 'Error',
@@ -5528,6 +5533,7 @@ __webpack_require__.r(__webpack_exports__);
 
         console.log(this.archivos.matricula);
       } else {
+        e.target.value = '';
         swal({
           type: 'error',
           title: 'Error',
@@ -5544,6 +5550,7 @@ __webpack_require__.r(__webpack_exports__);
       var type = e.target.files[0].type;
 
       if (size > 1024000) {
+        e.target.value = '';
         swal({
           type: 'error',
           title: 'Error',
@@ -5563,6 +5570,7 @@ __webpack_require__.r(__webpack_exports__);
           console.log(_this6.archivos.foto);
         };
       } else {
+        e.target.value = '';
         swal({
           type: 'error',
           title: 'Error',
@@ -57438,7 +57446,7 @@ var render = function() {
                   _c("div", { staticClass: "col-md-4" }, [
                     _c("input", {
                       staticClass: "form-control form-control-sm",
-                      attrs: { type: "file" },
+                      attrs: { type: "file", id: "matricula" },
                       on: { change: _vm.validarMatricula }
                     })
                   ]),
@@ -57448,7 +57456,7 @@ var render = function() {
                   _c("div", { staticClass: "col-md-4" }, [
                     _c("input", {
                       staticClass: "form-control form-control-sm",
-                      attrs: { type: "file", name: "egresado" },
+                      attrs: { type: "file", id: "egresado", name: "egresado" },
                       on: { change: _vm.validarEgresado }
                     })
                   ])
@@ -57460,7 +57468,7 @@ var render = function() {
                   _c("div", { staticClass: "col-md-4" }, [
                     _c("input", {
                       staticClass: "form-control form-control-sm",
-                      attrs: { type: "file" },
+                      attrs: { type: "file", id: "foto" },
                       on: { change: _vm.validarFoto }
                     })
                   ])

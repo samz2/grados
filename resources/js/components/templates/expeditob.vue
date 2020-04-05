@@ -106,13 +106,13 @@
                                     <label>Const. Matrícula(*)</label>
                                 </div>
                                 <div class="col-md-4">
-                                    <input type="file" @change="validarMatricula" class="form-control form-control-sm">
+                                    <input type="file" id="matricula" @change="validarMatricula" class="form-control form-control-sm">
                                 </div>
                                 <div class="col-md-2">
                                 <label>Const. Egresado(*)</label>
                                 </div>
                                 <div class="col-md-4">
-                                    <input type="file"  @change="validarEgresado" name="egresado" class="form-control form-control-sm">
+                                    <input type="file" id="egresado"  @change="validarEgresado" name="egresado" class="form-control form-control-sm">
                                 </div>
                             </div>                            
                             <div class="form-group row">
@@ -120,7 +120,7 @@
                                 <label>Foto(*)</label>
                                 </div>
                                 <div class="col-md-4">
-                                    <input type="file" @change="validarFoto" class="form-control form-control-sm">
+                                    <input type="file" id="foto" @change="validarFoto" class="form-control form-control-sm">
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -340,6 +340,9 @@
             this.expedito.stipo       = null;
             this.expedito.ingreso     = null;
             this.expedito.comienzo    = null;
+            $("#matricula").val('');
+            $("#egresado").val('');
+            $("#foto").val('');
             $('#objetivo').hide();
             $('#expeditos').show();	
             $('#menos').hide();
@@ -350,6 +353,7 @@
             this.alumno.codigo      = null;
             this.alumno.dni         = null;
             this.alumno.apellido    = null;
+            
             this.alumnos = [];
         },
         seleccionar(d,c,n,ca)
@@ -393,7 +397,7 @@
             var type = e.target.files[0].type;
             if(size > 1024000)
             {
-               this.archivos.matricula = null;
+               e.target.value = '';
                swal({
                         type: 'error',
                         title: 'Error',
@@ -413,8 +417,9 @@
                 }
             }else
             {
+                e.target.value = '';
                 this.archivos.matricula = null;
-               swal({
+                swal({
                         type: 'error',
                         title: 'Error',
                         text: 'El archivo debe ser PDF, por favor intente subiendo otro archivo',
@@ -430,7 +435,8 @@
             var type = e.target.files[0].type;
             if(size > 1024000)
             {
-               swal({
+                e.target.value = '';
+                swal({
                         type: 'error',
                         title: 'Error',
                         text: 'El tamaño del archivo debe ser menor a 1mb',
@@ -449,7 +455,8 @@
                 console.log(this.archivos.matricula) 
             }else
             {
-               swal({
+                e.target.value = '';
+                swal({
                         type: 'error',
                         title: 'Error',
                         text: 'El archivo debe ser PDF, por favor intente subiendo otro archivo',
@@ -465,7 +472,8 @@
             var type = e.target.files[0].type;
             if(size > 1024000)
             {
-               swal({
+                e.target.value = '';
+                swal({
                         type: 'error',
                         title: 'Error',
                         text: 'El tamaño del archivo debe ser menor a 1mb',
@@ -486,7 +494,8 @@
                 
             }else
             {
-               swal({
+                e.target.value = '';
+                swal({
                         type: 'error',
                         title: 'Error',
                         text: 'El archivo debe ser una imagen, por favor intente subiendo otro archivo',
