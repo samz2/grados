@@ -56,7 +56,7 @@ class ExpeditobController extends Controller
     {
         $hoy = date("Y-m-d");
         $expedito = new Expeditob();
-        $numEgresado = Egresado::select("*")->where("CodigoAlumno",$request->expedito["codigo"])->get()->count();
+        $numEgresado = Expeditob::where("CodigoAlumno",$request->expedito["codigo"])->get()->count();
         if($numEgresado == 0)
         {
             $expedito->Tipo             = $request->expedito["tipo"];
@@ -69,6 +69,21 @@ class ExpeditobController extends Controller
             $expedito->FechaComienzo    = $request->expedito["comienzo"];
             $expedito->Estado           = 1;
             $expedito->created_at       = $hoy;
+            $objMatricula  = explode(",",$request->archivos["matricula"]);
+            $objEgresado   = explode(",",$request->archivos["egresado"]);
+            $objFoto       = explode(",",$request->archivos["foto"]);
+            $matricula  = base64_decode($objMatricula[1]);
+            $egresado   = base64_decode($objEgresado[1]);
+            $foto       = base64_decode($objFoto[1]);
+            $matriculaNombre    = "CM_".$request->expedito["codigo"].".pdf";
+            $egresadoNombre     = "CE_".$request->expedito["codigo"].".pdf";
+            $fotoNombre         = $request->expedito["codigo"].".jpg";
+            $rutaMatricula  = public_path()."/".$matriculaNombre;
+            $rutaEgresado   = public_path()."/".$egresadoNombre;
+            $rutaFoto       = public_path()."/".$fotoNombre;
+            file_put_contents($rutaMatricula,$matricula);
+            file_put_contents($rutaEgresado,$egresado);
+            file_put_contents($rutaFoto,$foto);
             $expedito->save();
             $type = "success";
             $title = "OK";

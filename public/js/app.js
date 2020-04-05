@@ -5322,11 +5322,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       alumnoz: null,
+      archivos: {
+        matricula: null,
+        egresado: null,
+        foto: null
+      },
       expedito: {
         codigo: null,
         dni: null,
@@ -5462,17 +5466,120 @@ __webpack_require__.r(__webpack_exports__);
         console.log(error);
       });
     },
-    validar: function validar(e) {
-      console.log(e);
+    validarMatricula: function validarMatricula(e) {
+      var _this4 = this;
+
+      var size = e.target.files[0].size;
+      var type = e.target.files[0].type;
+
+      if (size > 1024000) {
+        this.archivos.matricula = null;
+        swal({
+          type: 'error',
+          title: 'Error',
+          text: 'El tamaño del archivo debe ser menor a 1mb',
+          showConfirmButton: true
+        });
+        return;
+      }
+
+      if (type.includes("pdf")) {
+        var file = new FileReader();
+        file.readAsDataURL(e.target.files[0]);
+
+        file.onload = function (e) {
+          _this4.archivos.matricula = e.target.result;
+          console.log(_this4.archivos.matricula);
+        };
+      } else {
+        this.archivos.matricula = null;
+        swal({
+          type: 'error',
+          title: 'Error',
+          text: 'El archivo debe ser PDF, por favor intente subiendo otro archivo',
+          showConfirmButton: true
+        });
+        return;
+      }
+    },
+    validarEgresado: function validarEgresado(e) {
+      var _this5 = this;
+
+      var size = e.target.files[0].size;
+      var type = e.target.files[0].type;
+
+      if (size > 1024000) {
+        swal({
+          type: 'error',
+          title: 'Error',
+          text: 'El tamaño del archivo debe ser menor a 1mb',
+          showConfirmButton: true
+        });
+        return;
+      }
+
+      if (type.includes("pdf")) {
+        var file = new FileReader();
+        file.readAsDataURL(e.target.files[0]);
+
+        file.onload = function (e) {
+          _this5.archivos.egresado = e.target.result;
+        };
+
+        console.log(this.archivos.matricula);
+      } else {
+        swal({
+          type: 'error',
+          title: 'Error',
+          text: 'El archivo debe ser PDF, por favor intente subiendo otro archivo',
+          showConfirmButton: true
+        });
+        return;
+      }
+    },
+    validarFoto: function validarFoto(e) {
+      var _this6 = this;
+
+      var size = e.target.files[0].size;
+      var type = e.target.files[0].type;
+
+      if (size > 1024000) {
+        swal({
+          type: 'error',
+          title: 'Error',
+          text: 'El tamaño del archivo debe ser menor a 1mb',
+          showConfirmButton: true
+        });
+        return;
+      }
+
+      if (type.includes("image")) {
+        var file = new FileReader();
+        console.log(e.target.files[0]);
+        file.readAsDataURL(e.target.files[0]);
+
+        file.onload = function (e) {
+          _this6.archivos.foto = e.target.result;
+          console.log(_this6.archivos.foto);
+        };
+      } else {
+        swal({
+          type: 'error',
+          title: 'Error',
+          text: 'El archivo debe ser una imagen, por favor intente subiendo otro archivo',
+          showConfirmButton: true
+        });
+        return;
+      }
     },
     getExpeditos: function getExpeditos() {
-      var _this4 = this;
+      var _this7 = this;
 
       this.$Progress.start();
       axios.get("getExpeditos").then(function (data) {
-        _this4.expeditos = data.data.expeditosb;
+        _this7.expeditos = data.data.expeditosb;
 
-        _this4.$Progress.finish();
+        _this7.$Progress.finish();
 
         console.log(data.data);
       })["catch"](function (error) {
@@ -5480,17 +5587,27 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     addExpedito: function addExpedito() {
-      var _this5 = this;
+      var _this8 = this;
 
       if (this.expedito.codigo == null || this.expedito.dni == null || this.expedito.alumno == null || this.expedito.carrera == null || this.expedito.tomo == null || this.expedito.folio == null || this.expedito.asiento == null || this.expedito.sesion == null || this.expedito.sfecha == null || this.expedito.stipo == null || this.expedito.ingreso == null) {
         swal({
           type: 'error',
           title: 'Llenar los datos obligatorios'
         });
+        return;
+      }
+
+      if (this.archivos.foto == null || this.archivos.egresado == null || this.archivos.matricula == null) {
+        swal({
+          type: 'error',
+          title: 'Subir archivos, con los formatos requeridos'
+        });
+        return;
       } else {
         this.$Progress.start();
         axios.post("addExpedito", {
-          expedito: this.expedito
+          expedito: this.expedito,
+          archivos: this.archivos
         }).then(function (data) {
           swal({
             // position: 'top-end',
@@ -5501,14 +5618,14 @@ __webpack_require__.r(__webpack_exports__);
             timer: 2000
           });
 
-          _this5.$Progress.finish(); // setTimeout(() => {
+          _this8.$Progress.finish(); // setTimeout(() => {
           //     location.reload();
           // }, 1500);
 
 
-          _this5.cancelar();
+          _this8.cancelar();
 
-          _this5.getExpeditos();
+          _this8.getExpeditos();
         })["catch"](function (error) {
           console.log(error);
           swal({
@@ -5534,7 +5651,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     estado: function estado(id, tipo) {
-      var _this6 = this;
+      var _this9 = this;
 
       this.$Progress.start();
 
@@ -5554,7 +5671,7 @@ __webpack_require__.r(__webpack_exports__);
               if (data.data == "OK") {
                 swal('Actualizado!', 'El Expedito cambio a En Proceso.', 'success');
 
-                _this6.$Progress.finish();
+                _this9.$Progress.finish();
 
                 setTimeout(function () {
                   location.reload();
@@ -5563,7 +5680,7 @@ __webpack_require__.r(__webpack_exports__);
             })["catch"](function (error) {
               console.log('Ocurrio un error ' + error);
 
-              _this6.$Progress.fail();
+              _this9.$Progress.fail();
             });
           }
         });
@@ -5583,7 +5700,7 @@ __webpack_require__.r(__webpack_exports__);
               if (data.data == "OK") {
                 swal('Actualizado!', 'El Expedito cambio a Finalizado.', 'success');
 
-                _this6.$Progress.finish();
+                _this9.$Progress.finish();
 
                 setTimeout(function () {
                   location.reload();
@@ -5592,7 +5709,7 @@ __webpack_require__.r(__webpack_exports__);
             })["catch"](function (error) {
               console.log('Ocurrio un error ' + error);
 
-              _this6.$Progress.fail();
+              _this9.$Progress.fail();
             });
           }
         });
@@ -57257,7 +57374,7 @@ var render = function() {
                       attrs: {
                         type: "date",
                         id: "fecha",
-                        dateformat: "d M y",
+                        max: "2030-12-31",
                         readonly: ""
                       },
                       domProps: { value: _vm.expedito.sfecha },
@@ -57312,7 +57429,45 @@ var render = function() {
                 ])
               ]),
               _vm._v(" "),
-              _vm._m(7),
+              _c("fieldset", { staticClass: "border p-2" }, [
+                _c("legend", { staticClass: "w-auto" }, [_vm._v("Archivos")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group row" }, [
+                  _vm._m(7),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-4" }, [
+                    _c("input", {
+                      staticClass: "form-control form-control-sm",
+                      attrs: { type: "file" },
+                      on: { change: _vm.validarMatricula }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(8),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-4" }, [
+                    _c("input", {
+                      staticClass: "form-control form-control-sm",
+                      attrs: { type: "file", name: "egresado" },
+                      on: { change: _vm.validarEgresado }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group row" }, [
+                  _vm._m(9),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-4" }, [
+                    _c("input", {
+                      staticClass: "form-control form-control-sm",
+                      attrs: { type: "file" },
+                      on: { change: _vm.validarFoto }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _vm._m(10)
+              ]),
               _vm._v(" "),
               _c("fieldset", { staticClass: "border p-2" }, [
                 _c("legend", { staticClass: "w-auto" }, [
@@ -57342,7 +57497,7 @@ var render = function() {
                       staticClass: "form-control form-control-sm",
                       attrs: {
                         type: "date",
-                        dateformat: "d M y",
+                        max: "2030-12-31",
                         id: "ingreso",
                         onKeyPress: "return soloNumeros(event)",
                         maxlength: "3"
@@ -57383,7 +57538,7 @@ var render = function() {
                       staticClass: "form-control form-control-sm",
                       attrs: {
                         type: "date",
-                        dateformat: "d M y",
+                        max: "2030-12-31",
                         id: "comienzo",
                         onKeyPress: "return soloNumeros(event)",
                         maxlength: "3"
@@ -57697,7 +57852,7 @@ var render = function() {
     _c("div", { staticClass: "row", attrs: { id: "expeditos" } }, [
       _c("div", { staticClass: "col-md-12" }, [
         _c("div", { staticClass: "card card-default" }, [
-          _vm._m(8),
+          _vm._m(11),
           _vm._v(" "),
           _c("div", { staticClass: "card-body" }, [
             _c(
@@ -57915,75 +58070,58 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("fieldset", { staticClass: "border p-2" }, [
-      _c("legend", { staticClass: "w-auto" }, [_vm._v("Archivos")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group row" }, [
-        _c("div", { staticClass: "col-md-2" }, [
-          _c("label", [_vm._v("Const. Matrícula(*)")])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-4" }, [
-          _c("input", {
-            staticClass: "form-control form-control-sm",
-            attrs: { type: "file", name: "pdf" }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-2" }, [
-          _c("label", [_vm._v("Const. Egresado(*)")])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-4" }, [
-          _c("input", {
-            staticClass: "form-control form-control-sm",
-            attrs: { type: "file", name: "pdf" }
-          })
+    return _c("div", { staticClass: "col-md-2" }, [
+      _c("label", [_vm._v("Const. Matrícula(*)")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-2" }, [
+      _c("label", [_vm._v("Const. Egresado(*)")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-2" }, [
+      _c("label", [_vm._v("Foto(*)")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group row" }, [
+      _c("div", { staticClass: "col-md-7" }, [
+        _c("label", [
+          _c(
+            "mark",
+            {
+              staticStyle: {
+                "background-color": "#dc354526",
+                color: "#520606f7"
+              }
+            },
+            [_vm._v("* Constancias en formato PDF (Tam. max. 1mb c/u)")]
+          )
         ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "form-group row" }, [
-        _c("div", { staticClass: "col-md-2" }, [
-          _c("label", [_vm._v("Foto(*)")])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-4" }, [
-          _c("input", {
-            staticClass: "form-control form-control-sm",
-            attrs: { type: "file", name: "pdf" }
-          })
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group row" }, [
-        _c("div", { staticClass: "col-md-7" }, [
-          _c("label", [
-            _c(
-              "mark",
-              {
-                staticStyle: {
-                  "background-color": "#dc354526",
-                  color: "#520606f7"
-                }
-              },
-              [_vm._v("* Constancias en formato PDF (Tam. max. 1mb c/u)")]
-            )
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-7" }, [
-          _c("label", [
-            _c(
-              "mark",
-              {
-                staticStyle: {
-                  "background-color": "#dc354526",
-                  color: "#520606f7"
-                }
-              },
-              [_vm._v("* Foto en formato JPG (Tam. max. 1mb)")]
-            )
-          ])
+      _c("div", { staticClass: "col-md-7" }, [
+        _c("label", [
+          _c(
+            "mark",
+            {
+              staticStyle: {
+                "background-color": "#dc354526",
+                color: "#520606f7"
+              }
+            },
+            [_vm._v("* Foto en formato JPG (Tam. max. 1mb)")]
+          )
         ])
       ])
     ])

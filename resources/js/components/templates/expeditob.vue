@@ -16,7 +16,6 @@
 	                <div class="card-header text-center" style="background-color: #007bff55 !important; color:black; font-weight: bold;">
 	                    <h4 class="title">Expedito Bachiller</h4>  
 	                </div>
-                    
                     <div class="col-md-4"><label><mark style="background-color: #dc354526; color: #520606f7">- (*) Llenar datos obligatoriamente.</mark></label></div>
                     
                     <div class="col-md-4"><label><mark style="background-color: #dc354526; color: #520606f7">- Primero realizar la búsqueda del egresado.</mark></label></div>
@@ -92,7 +91,7 @@
                                 </div>
                                 <label for="fecha" class="col-md-1 col-form-label">Fecha</label>
                                 <div class="col-md-3">
-                                    <input type="date" id="fecha" dateformat="d M y" v-model="expedito.sfecha" readonly class="form-control form-control-sm">
+                                    <input type="date" id="fecha" max="2030-12-31" v-model="expedito.sfecha" readonly class="form-control form-control-sm">
                                 </div>
                                 <label for="Tipo" class="col-md-1 col-form-label">Tipo</label>
                                 <div class="col-md-3">
@@ -107,13 +106,13 @@
                                     <label>Const. Matrícula(*)</label>
                                 </div>
                                 <div class="col-md-4">
-                                    <input type="file" name="pdf" class="form-control form-control-sm">
+                                    <input type="file" @change="validarMatricula" class="form-control form-control-sm">
                                 </div>
                                 <div class="col-md-2">
                                 <label>Const. Egresado(*)</label>
                                 </div>
                                 <div class="col-md-4">
-                                    <input type="file" name="pdf" class="form-control form-control-sm">
+                                    <input type="file"  @change="validarEgresado" name="egresado" class="form-control form-control-sm">
                                 </div>
                             </div>                            
                             <div class="form-group row">
@@ -121,7 +120,7 @@
                                 <label>Foto(*)</label>
                                 </div>
                                 <div class="col-md-4">
-                                    <input type="file" name="pdf" class="form-control form-control-sm">
+                                    <input type="file" @change="validarFoto" class="form-control form-control-sm">
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -140,13 +139,13 @@
                                 
                                 <label for="ingreso" class="col-md-4 col-form-label">Fecha de Ingreso de la solicitud(*)</label>
                                 <div class="col-md-3">
-                                    <input type="date"  dateformat="d M y" id="ingreso" v-model="expedito.ingreso" onKeyPress="return soloNumeros(event)" maxlength="3" class="form-control form-control-sm">
+                                    <input type="date" max="2030-12-31" id="ingreso" v-model="expedito.ingreso" onKeyPress="return soloNumeros(event)" maxlength="3" class="form-control form-control-sm">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="comienzo" class="col-md-4 col-form-label">Fecha que empieza el trámite</label>
                                 <div class="col-md-3">
-                                    <input type="date"  dateformat="d M y" id="comienzo" v-model="expedito.comienzo" onKeyPress="return soloNumeros(event)" maxlength="3" class="form-control form-control-sm">
+                                    <input type="date" max="2030-12-31" id="comienzo" v-model="expedito.comienzo" onKeyPress="return soloNumeros(event)" maxlength="3" class="form-control form-control-sm">
                                 </div>
                             </div>
                         </fieldset>
@@ -237,6 +236,12 @@
     data() {
         return {
             alumnoz:null,
+            archivos:
+            {
+                matricula:null,
+                egresado:null,
+                foto:null,
+            },
 			expedito:{
                 codigo:null,
                 dni:null,
@@ -382,9 +387,114 @@
                 console.log(error);
             })
         },
-        validar(e)
+        validarMatricula(e)
         {
-           console.log(e);
+            var size = e.target.files[0].size;
+            var type = e.target.files[0].type;
+            if(size > 1024000)
+            {
+               this.archivos.matricula = null;
+               swal({
+                        type: 'error',
+                        title: 'Error',
+                        text: 'El tamaño del archivo debe ser menor a 1mb',
+                        showConfirmButton: true,
+                    });
+                return;    
+            }
+            if(type.includes("pdf"))
+            {
+                var file = new FileReader();
+                file.readAsDataURL(e.target.files[0]);
+                file.onload = (e) =>
+                {
+                    this.archivos.matricula = e.target.result;
+                    console.log(this.archivos.matricula) 
+                }
+            }else
+            {
+                this.archivos.matricula = null;
+               swal({
+                        type: 'error',
+                        title: 'Error',
+                        text: 'El archivo debe ser PDF, por favor intente subiendo otro archivo',
+                        showConfirmButton: true,
+                    });
+                return;     
+            }
+            
+        },
+        validarEgresado(e)
+        {
+            var size = e.target.files[0].size;
+            var type = e.target.files[0].type;
+            if(size > 1024000)
+            {
+               swal({
+                        type: 'error',
+                        title: 'Error',
+                        text: 'El tamaño del archivo debe ser menor a 1mb',
+                        showConfirmButton: true,
+                    });
+                return;    
+            }
+            if(type.includes("pdf"))
+            {
+                var file = new FileReader();
+                file.readAsDataURL(e.target.files[0]);
+                file.onload = (e) =>
+                {
+                    this.archivos.egresado = e.target.result;
+                }
+                console.log(this.archivos.matricula) 
+            }else
+            {
+               swal({
+                        type: 'error',
+                        title: 'Error',
+                        text: 'El archivo debe ser PDF, por favor intente subiendo otro archivo',
+                        showConfirmButton: true,
+                    });
+                return;     
+            }
+            
+        },
+         validarFoto(e)
+        {
+            var size = e.target.files[0].size;
+            var type = e.target.files[0].type;
+            if(size > 1024000)
+            {
+               swal({
+                        type: 'error',
+                        title: 'Error',
+                        text: 'El tamaño del archivo debe ser menor a 1mb',
+                        showConfirmButton: true,
+                    });
+                return;    
+            }
+            if(type.includes("image"))
+            {
+                var file = new FileReader();
+                console.log(e.target.files[0]);
+                file.readAsDataURL(e.target.files[0]);
+                file.onload = (e) =>
+                {
+                    this.archivos.foto = e.target.result;
+                    console.log(this.archivos.foto);
+                }
+                
+            }else
+            {
+               swal({
+                        type: 'error',
+                        title: 'Error',
+                        text: 'El archivo debe ser una imagen, por favor intente subiendo otro archivo',
+                        showConfirmButton: true,
+                    });
+                return;     
+            }
+            
         },
         getExpeditos()
         {
@@ -412,11 +522,24 @@
                 swal({
 					type: 'error',
 					title: 'Llenar los datos obligatorios',
-				});
-            }else{
+                });
+                return;
+            }
+            if(this.archivos.foto == null 
+            || this.archivos.egresado == null 
+            || this.archivos.matricula == null)
+            {
+                swal({
+					type: 'error',
+					title: 'Subir archivos, con los formatos requeridos',
+                });
+                return;
+            }
+            else{
                 this.$Progress.start();
                 axios.post("addExpedito",{
-                    expedito:this.expedito
+                    expedito:this.expedito,
+                    archivos:this.archivos
                 }).then(data=>{
                     swal({
                         // position: 'top-end',
