@@ -75,9 +75,9 @@ class ExpeditobController extends Controller
             $matricula  = base64_decode($objMatricula[1]);
             $egresado   = base64_decode($objEgresado[1]);
             $foto       = base64_decode($objFoto[1]);
-            $matriculaNombre    = "CM_".$request->expedito["codigo"].".pdf";
-            $egresadoNombre     = "CE_".$request->expedito["codigo"].".pdf";
-            $fotoNombre         = $request->expedito["codigo"].".jpg";
+            $matriculaNombre    = "CM035".$request->expedito["dni"]."_B.pdf";
+            $egresadoNombre     = "CE035".$request->expedito["dni"]."_B.pdf";
+            $fotoNombre         = "F035".$request->expedito["dni"]."_B.jpg";
             $rutaMatricula  = public_path()."/".$matriculaNombre;
             $rutaEgresado   = public_path()."/".$egresadoNombre;
             $rutaFoto       = public_path()."/".$fotoNombre;
