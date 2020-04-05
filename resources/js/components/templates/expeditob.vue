@@ -270,26 +270,26 @@
                 CodigoAlumno: null,
                 Acta: null,
                 NumSesion: null,
-                FechaIngreso: null,
-                FechaComienzo: null,
+                FechaIngresoAux: null,
+                FechaComienzoAux: null,
                 Estado: null,
-                Fecha: null,
+                FechaAux: null,
                 Alumno: null,
             }],
-            columns: ["Alumno","Acta","NumSesion","Fecha","FechaIngreso","FechaComienzo","Acciones"],
+            columns: ["Alumno","Acta","NumSesion","FechaAux","FechaIngresoAux","FechaComienzoAux","Acciones"],
             options: {
 				headings:
 				{
                     CodigoAlumno: "Código",
                     NumSesion: "Sesión",
-                    FechaIngreso: "Ingreso trámite",
-                    FechaComienzo: "Comienzo trámite",
-                    Fecha: "Fecha Sesión",
+                    FechaIngresoAux: "Ingreso trámite",
+                    FechaComienzoAux: "Comienzo trámite",
+                    FechaAux: "Fecha Sesión",
                     Alumno: "Egresado",
                     Acta: "   T-F-A   "
 				},
-				sortable    : ["Alumno","Acta","NumSesion","Fecha","FechaIngreso","FechaComienzo",],
-				filterable  : ["Alumno","Acta","NumSesion","Fecha","FechaIngreso","FechaComienzo",]
+				sortable    : ["Alumno","Acta","NumSesion","FechaAux","FechaIngresoAux","FechaComienzoAux",],
+				filterable  : ["Alumno","Acta","NumSesion","FechaAux","FechaIngresoAux","FechaComienzoAux",]
             },
         }
 	},
