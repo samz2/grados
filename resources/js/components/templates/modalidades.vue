@@ -24,12 +24,12 @@
                                     <label>Modalidad(*)</label>
                                 </div>
                                 <div class="col-md-9">
-                                    <input type="text" class="form-control form-control-sm" v-model="modalidad.modalidad" onkeypress="return sololetras(event)" maxlength="30">
+                                    <input type="text" class="form-control form-control-sm" v-model="modalidad.modalidad" onkeypress="return soloLetras(event)" maxlength="30">
                                 </div>    
                             </div>
                             <br>
                         <div class="modal-footer">
-                            <button @click="addModalidad(1)" id="add" class="btn btn-success" data-dismiss="modal">Agregar <i class="fa fa-save"></i></button>
+                            <button @click="addModalidad(1)" id="add" class="btn btn-success" data-dismiss="modal">Guardar <i class="fa fa-save"></i></button>
                             <button @click="addModalidad(2)" id="editar" class="btn btn-success" data-dismiss="modal">Editar <i class="far fa-edit"></i></button>
                             <button type="button" class="btn btn-danger" @click="load()" data-dismiss="modal">Cancelar <i class="fas fa-times"></i></button>
                         </div>

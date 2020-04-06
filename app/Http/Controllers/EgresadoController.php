@@ -15,7 +15,7 @@ class EgresadoController extends Controller
     public function index()
     {
         $egresados  =   Egresado::join("escuela","egresado.IDEscuela","escuela.IDEscuela")
-                        ->select("egresado.*","escuela.Escuela")->get();
+                        ->select("egresado.*","escuela.Escuela",\DB::raw("concat_ws(' ',egresado.Nombre,egresado.Paterno,egresado.Materno) as NombreAux"))->get();
         return compact("egresados");
     }
 
@@ -45,9 +45,9 @@ class EgresadoController extends Controller
         {
             $egresado = new Egresado();
             $egresado->Codigo       = $request->egresado["codigo"];
-            $egresado->Nombre       = strtoupper($request->egresado["nombre"]);
-            $egresado->Paterno      = strtoupper($request->egresado["paterno"]);
-            $egresado->Materno      = strtoupper($request->egresado["materno"]);
+            $egresado->Nombre       = mb_strtoupper($request->egresado["nombre"]);
+            $egresado->Paterno      = mb_strtoupper($request->egresado["paterno"]);
+            $egresado->Materno      = mb_strtoupper($request->egresado["materno"]);
             $egresado->Celular      = $request->egresado["celular"];
             $egresado->Genero       = $request->egresado["genero"];
             $egresado->Ingreso      = $request->egresado["ingreso"];
@@ -107,9 +107,9 @@ class EgresadoController extends Controller
     {
         $egresado = Egresado::where("IDEgresado",$request->egresado["IDEgresado"])->update([
             "Codigo"    => $request->egresado["codigo"],
-            "Nombre"    => strtoupper($request->egresado["nombre"]),
-            "Paterno"   => strtoupper($request->egresado["paterno"]),
-            "Materno"   => strtoupper($request->egresado["materno"]),
+            "Nombre"    => mb_strtoupper($request->egresado["nombre"]),
+            "Paterno"   => mb_strtoupper($request->egresado["paterno"]),
+            "Materno"   => mb_strtoupper($request->egresado["materno"]),
             "Celular"   => $request->egresado["celular"],
             "Genero"    => $request->egresado["genero"],
             "Ingreso"   => $request->egresado["ingreso"],

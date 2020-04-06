@@ -46,7 +46,7 @@
                                     <label>Nombres*</label>
                                 </div>
                                 <div class="col-md-9">
-                                    <input v-model="egresado.nombre" maxlength="50" class="form-control" onKeyPress="return sololetras(event)">
+                                    <input v-model="egresado.nombre" maxlength="41" class="form-control" onKeyPress="return soloLetras(event)">
                                 </div>
                             </div>
                             <br>
@@ -55,7 +55,7 @@
                                     <label>Apellido Pat.*</label>
                                 </div>
                                 <div class="col-md-9">
-                                    <input v-model="egresado.paterno" maxlength="50" onKeyPress="return sololetras(event)" class="form-control">
+                                    <input v-model="egresado.paterno" maxlength="41" onKeyPress="return soloLetras(event)" class="form-control">
                                 </div>
                             </div>
                             <br>
@@ -64,7 +64,7 @@
                                     <label>Apellido Mat.*</label>
                                 </div>
                                 <div class="col-md-9">
-                                    <input v-model="egresado.materno" maxlength="50" onKeyPress="return sololetras(event)" class="form-control">
+                                    <input v-model="egresado.materno" maxlength="41" onKeyPress="return soloLetras(event)" class="form-control">
                                 </div>
                             </div>   
                             <br> 
@@ -91,7 +91,7 @@
                                     <label>Correo*</label>
                                 </div>
                                 <div class="col-md-9">
-                                    <input v-model="egresado.correo" type="email" maxlength="30" class="form-control">
+                                    <input v-model="egresado.correo" type="email" onKeyPress="return soloEmail(event)" maxlength="30" class="form-control">
                                 </div>
                             </div>
                             <br>
@@ -130,7 +130,7 @@
                                 </div>
                             </div>      
                         <div class="modal-footer">
-                            <button @click="addEgresado(1)" id="add" class="btn btn-success" data-dismiss="modal">Agregar <i class="fa fa-save"></i></button>
+                            <button @click="addEgresado(1)" id="add" class="btn btn-success" data-dismiss="modal">Guardar <i class="fa fa-save"></i></button>
                             <button @click="addEgresado(2)" id="editar" class="btn btn-success" data-dismiss="modal">Editar <i class="far fa-edit"></i></button>
                             <button type="button" class="btn btn-danger" @click="load()" data-dismiss="modal">Cancelar <i class="fas fa-times"></i></button>
                         </div>
@@ -151,8 +151,8 @@
                         <div class="content table-responsive table-full-width">
                             <v-client-table :data="egresados" :columns="columns" :options="options">
                                 <div slot="Acciones" slot-scope="props">
-                                <button class="btn btn-danger" data-toggle="tooltip" v-on:click="deleteEgresado(props.row.IDEgresado)" data-placement="left" title="Eliminar"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                                <button data-target="#exampleModal" class="btn btn-info" data-toggle="modal" v-on:click="edit(props.row.IDEgresado,props.row.Codigo,props.row.DNI,props.row.Paterno,props.row.Materno,props.row.Celular,props.row.Ingreso,props.row.Egreso,props.row.Nombre,props.row.Genero,props.row.Correo,props.row.IDEscuela)" data-placement="left" title="Editar"><i class="fas fa-edit" style="color: white" aria-hidden="true"></i></button>
+                                <button class="btn btn-danger" data-toggle="tooltip" style="padding: 2px 8px;" v-on:click="deleteEgresado(props.row.IDEgresado)" data-placement="left" title="Eliminar"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                <button data-target="#exampleModal" class="btn btn-info" data-toggle="modal" style="padding: 2px 8px;" v-on:click="edit(props.row.IDEgresado,props.row.Codigo,props.row.DNI,props.row.Paterno,props.row.Materno,props.row.Celular,props.row.Ingreso,props.row.Egreso,props.row.Nombre,props.row.Genero,props.row.Correo,props.row.IDEscuela)" data-placement="left" title="Editar"><i class="fas fa-edit" style="color: white" aria-hidden="true"></i></button>
                                 </div>
                             </v-client-table>
                         </div>
@@ -186,32 +186,32 @@
 				IDEscuela:null,
                 Codigo:null,
                 DNI:null,
-                Paterno:null,
+                //Paterno:null,
                 Materno:null,
                 Celular:null,
                 Ingreso:null,
                 Egreso:null,
                 Genero:null,
-                Nombre:null,
+                NombreAux:null,
                 Correo:null,
                 Escuela:null,
             }],
-            columns: ["Escuela","DNI","Nombre","Paterno","Celular","Correo","Ingreso","Egreso","Acciones"],
+            columns: ["Escuela","DNI","NombreAux","Celular","Correo","Ingreso","Egreso","Acciones"],
             options: {
 				headings:
 				{
                     Codigo:"Código",
                     DNI:"DNI",
-                    Paterno:"Apellidos",
+                    //Paterno:"Apellidos",
                     Celular:"Celular",
                     Ingreso:"Ingreso",
                     Egreso:"Egreso",
-                    Nombre:"Nombre",
+                    NombreAux:"Nombres y Apellidos",
                     Correo:"Correo",
                     Escuela:"Escuela",
 				},
-				sortable    : ["Escuela","DNI","Nombre","Paterno","Celular","Correo","Ingreso","Egreso"],
-				filterable  : ["Escuela","DNI","Nombre","Paterno","Celular","Correo","Ingreso","Egreso"]
+				sortable    : ["Escuela","DNI","NombreAux","Celular","Correo","Ingreso","Egreso"],
+				filterable  : ["Escuela","DNI","NombreAux","Celular","Correo","Ingreso","Egreso"]
             },
             escuelas:[],
         }

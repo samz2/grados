@@ -32,8 +32,8 @@
                                 <div class="col-md-4 text-left">
                                     <label>Estado(*)</label>
                                 </div>
-                                <div class="col-md-5">
-                                    <input v-model="estado.estado" maxlength="20" class="form-control" onKeyPress="return sololetras(event)">
+                                <div class="col-md-8">
+                                    <input v-model="estado.estado" maxlength="35" class="form-control" onKeyPress="return soloLetras(event)">
                                 </div>
                             </div>
                         <div class="modal-footer">

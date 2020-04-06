@@ -30,7 +30,7 @@
                                     <label>Fecha*</label>
                                 </div>
                                 <div class="col-md-5">
-                                    <input v-model="sesion.fecha" type="date" class="form-control">
+                                    <input v-model="sesion.fecha" type="date" max="2030-12-31" class="form-control">
                                 </div>   
                             </div>                           
                             <br>
@@ -46,7 +46,7 @@
                                 </div>
                             </div>
                         <div class="modal-footer">
-                            <button @click="addSesion(1)" id="add" class="btn btn-success" data-dismiss="modal">Agregar <i class="fa fa-save"></i></button>
+                            <button @click="addSesion(1)" id="add" class="btn btn-success" data-dismiss="modal">Guardar <i class="fa fa-save"></i></button>
                             <button @click="addSesion(2)" id="editar" class="btn btn-success" data-dismiss="modal">Editar <i class="far fa-edit"></i></button>
                             <button type="button" class="btn btn-danger" @click="load()" data-dismiss="modal">Cancelar <i class="fas fa-times"></i></button>
                         </div>
@@ -91,20 +91,20 @@
             sesiones	:[{
                 IDSesion:null,
                 NumSesion:null,
-                Fecha:null,
+                FechaAux:null,
                 Tipo:null,
             }],
-            columns: ["NumSesion","Tipo","Fecha","Acciones"],
+            columns: ["NumSesion","Tipo","FechaAux","Acciones"],
             options: {
 				headings:
 				{
                     NumSesion:"Número de Sesión",
-                    Fecha:"Fecha",
+                    FechaAux:"Fecha",
                     Tipo:"Tipo"
                     
 				},
-				sortable    : ["NumSesion","Tipo","Fecha",],
-				filterable  : ["NumSesion","Tipo","Fecha",]
+				sortable    : ["NumSesion","Tipo","FechaAux",],
+				filterable  : ["NumSesion","Tipo","FechaAux",]
             },
         }
 	},

@@ -15,7 +15,7 @@ class DecanoController extends Controller
     public function index()
     {
         $decanos =   Decano::join("docentes AS d","decano.CodDocente","d.DNI")
-                        ->select("decano.*",\DB::raw("concat_ws(' ',d.Apellidos,d.Nombres) as auxDecano"))
+                        ->select("decano.*",\DB::raw("concat_ws(' ',d.Apellidos,d.Nombres) as auxDecano"),\DB::raw("date_format(PeriodoInicio,'%d-%m-%Y') AS FechaInicioAux"),\DB::raw("date_format(PeriodoFin,'%d-%m-%Y') AS FechaFinAux"))
                         ->get();    
         return compact("decanos");
     }

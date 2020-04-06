@@ -50,7 +50,7 @@
                                 </div>    
                             </div>
                         <div class="modal-footer">
-                            <button @click="addDecano(1)" id="add" class="btn btn-success" data-dismiss="modal">Agregar <i class="fa fa-save"></i></button>
+                            <button @click="addDecano(1)" id="add" class="btn btn-success" data-dismiss="modal">Guardar <i class="fa fa-save"></i></button>
                             <button @click="addDecano(2)" id="editar" class="btn btn-success" data-dismiss="modal">Editar <i class="far fa-edit"></i></button>
                             <button type="button" class="btn btn-danger" @click="load()" data-dismiss="modal">Cancelar <i class="fas fa-times"></i></button>
                         </div>
@@ -96,19 +96,19 @@
                 IDDecano:null,
                 auxDecano:null,
                 CodDocente:null,
-                PeriodoInicio:null,
-                PeriodoFin:null,
+                FechaInicioAux:null,
+                FechaFinAux:null,
             }],
-            columns: ["auxDecano","PeriodoInicio","PeriodoFin","Acciones"],
+            columns: ["auxDecano","FechaInicioAux","FechaFinAux","Acciones"],
             options: {
 				headings:
 				{
                     auxDecano:"Decano",
-                    PeriodoInicio:"Fecha de Inicio",
-                    PeriodoFin:"Fecha de Fin",
+                    FechaInicioAux:"Fecha de Inicio",
+                    FechaFinAux:"Fecha de Fin",
 				},
-				sortable    : ["auxDecano","PeriodoInicio","PeriodoFin"],
-				filterable  : ["auxDecano","PeriodoInicio","PeriodoFin"]
+				sortable    : ["auxDecano","FechaInicioAux","FechaFinAux"],
+				filterable  : ["auxDecano","FechaInicioAux","FechaFinAux"]
             },
             docentes:[]
         }

@@ -46,9 +46,9 @@ class DocumentosController extends Controller
         $expeditosb =   Expeditob::join("egresado AS e","expedito.CodigoAlumno","e.Codigo")
                         ->join("sesion AS s","expedito.NumSesion","s.NumSesion")
                         ->join("escuela AS esc","e.IDEscuela","esc.IDEscuela")
-                        ->select("expedito.*","s.*",\DB::raw("concat(e.Paterno,' ',e.Materno,', ',e.Nombre) as Alumno"),"esc.Escuela")
+                        ->select("expedito.*","s.*",\DB::raw("concat(e.Paterno,' ',e.Materno) as Apellido"),\DB::raw("concat(upper(left(e.Nombre, 1)), lower(substring(e.Nombre, 2))) as Nombre"),"esc.Escuela")
                         ->where("expedito.IDExpedito",$id)->get();
-        // $datos = Documentos::join("egresado AS e","documentos.Codigo","e.Codigo")
+        // $datos = Documentos::join("egresado AS e","documentos.Codigo","e.Codigo")                      CONCAT(UPPER(LEFT(, 1)), LOWER(SUBSTRING(, 2))) ----- \DB::raw("ucwords(e.Nombre,' ') as Nombre")
         // ->join("escuela AS es","e.IDEscuela","es.IDEscuela")
         // ->select("e.*","documentos.*","es.*")
         // ->where("IDDocumento",$id)->get();

@@ -38,7 +38,7 @@ class ModalidadController extends Controller
     {
         $modalidad = new Modalidad();
         try {
-            $modalidad->Modalidad = ucwords($request->modalidad["modalidad"]);
+            $modalidad->Modalidad = mb_strtoupper($request->modalidad["modalidad"]);
             $modalidad->save();
             $type   = "success";
             $title  = "Bien";
@@ -85,7 +85,7 @@ class ModalidadController extends Controller
     public function update(Request $request)
     {
         $modalidad = Modalidad::where("IDModalidad",$request->modalidad["idmodalidad"])->update([
-            "Modalidad"  => ucwords($request->modalidad["modalidad"])
+            "Modalidad"  => mb_strtoupper($request->modalidad["modalidad"])
         ]);
 
         if($modalidad)

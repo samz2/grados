@@ -24,7 +24,7 @@
                                     <label>Semestre(*)</label>
                                 </div>
                                 <div class="col-md-8">
-                                    <input v-model="comision.semestre" type="text" maxlength="6" class="form-control" onKeyPress="return alfa1(event)">
+                                    <input v-model="comision.semestre" style="text-transform:uppercase" type="text" maxlength="7" class="form-control" onKeyPress="return soloSemestre(event)">
                                 </div>    
                             </div>
                             <br>
@@ -98,7 +98,7 @@
                             </div>
                             <br>
                         <div class="modal-footer">
-                            <button @click="addComision(1)" id="add" class="btn btn-success" data-dismiss="modal">Agregar <i class="fa fa-save"></i></button>
+                            <button @click="addComision(1)" id="add" class="btn btn-success" data-dismiss="modal">Guardar <i class="fa fa-save"></i></button>
                             <button @click="addComision(2)" id="editar" class="btn btn-success" data-dismiss="modal">Editar <i class="far fa-edit"></i></button>
                             <button type="button" class="btn btn-danger" @click="load()" data-dismiss="modal">Cancelar <i class="fas fa-times"></i></button>
                         </div>
@@ -115,7 +115,7 @@
                                 <h4 class="title">COMISIONES</h4>  
                             </div>
                         <div class="card-body">
-                            <div class="content table-responsive table-full-width">
+                            <div class="content table-responsive table-full-width t12">
                                 <v-client-table :data="comisiones" :columns="columns" :options="options">
                                     <div slot="Acciones" slot-scope="props">
                                      <button data-target="#exampleModal" class="btn btn-info" data-toggle="modal" v-on:click="edit(props.row.IDComision,props.row.Semestre,props.row.Presidente,props.row.Miembro1,props.row.Miembro2,props.row.FechaInicio,props.row.FechaFin,props.row.Estado)" data-placement="left" title="Editar"><i class="fas fa-edit" style="color: white" aria-hidden="true"></i></button>
@@ -153,11 +153,11 @@
                 auxMiembro1:null,
                 auxMiembro2:null,
                 auxPresidente:null,
-                FechaInicio:null,
-                FechaFin:null,
+                FechaInicioAux:null,
+                FechaFinAux:null,
                 Estado:null,
             }],
-            columns: ["Semestre","auxPresidente","auxMiembro1","auxMiembro2","FechaInicio","FechaInicio","FechaFin","Estado","Acciones"],
+            columns: ["Semestre","auxPresidente","auxMiembro1","auxMiembro2","FechaInicioAux","FechaFinAux","Estado","Acciones"],
             options: {
 				headings:
 				{
@@ -165,11 +165,11 @@
                     auxPresidente:"Presidente",
                     auxMiembro1:"Miembro 1",
                     auxMiembro2:"Miembro 2",
-                    FechaInicio:"Fecha Inicio",
-                    FechaFin:"Fecha Fin",
+                    FechaInicioAux:"Inicio",
+                    FechaFinAux:"Fin",
 				},
-				sortable    : ["Semestre","Presidente","Miembro1","Miembro2","FechaInicio","FechaInicio","FechaFin","Estado"],
-				filterable  : ["Semestre","Presidente","Miembro1","Miembro2","FechaInicio","FechaInicio","FechaFin","Estado"]
+				sortable    : ["Semestre","Presidente","Miembro1","Miembro2","FechaInicioAux","FechaFinAux","Estado"],
+				filterable  : ["Semestre","Presidente","Miembro1","Miembro2","FechaInicioAux","FechaFinAux","Estado"]
             },
             docentes:[]
         }

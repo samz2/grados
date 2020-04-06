@@ -14,7 +14,7 @@ class DocentesController extends Controller
      */
     public function index()
     {
-        $docentes = Docentes::join("escuela AS e","docentes.IDEscuela","=","e.IDEscuela")->select("docentes.*","e.Escuela")->get();
+        $docentes = Docentes::join("escuela AS e","docentes.IDEscuela","=","e.IDEscuela")->select("docentes.*","e.Escuela",\DB::raw("concat_ws(' ',docentes.Nombres,docentes.Apellidos) as NombreAux"))->get();
         return compact("docentes");
     }
 
@@ -42,8 +42,8 @@ class DocentesController extends Controller
         if(count($objDocente) == 0)
         {
             $docente->DNI           = $request->docente["dni"];
-            $docente->Nombres       = strtoupper($request->docente["nombres"]);
-            $docente->Apellidos     = strtoupper($request->docente["apellidos"]);
+            $docente->Nombres       = mb_strtoupper($request->docente["nombres"]);
+            $docente->Apellidos     = mb_strtoupper($request->docente["apellidos"]);
             $docente->Celular       = $request->docente["celular"];
             $docente->IDEscuela     = $request->docente["escuela"];
             $docente->Dedicacion    = $request->docente["dedicacion"];
@@ -98,13 +98,13 @@ class DocentesController extends Controller
     {
         $docente = Docentes::where("DNI",$request->docente["dni"])->update([
             "DNI"           => $request->docente["dni"],
-            "Nombres"       => strtoupper($request->docente["nombres"]),
-            "Apellidos"     => strtoupper($request->docente["apellidos"]),
+            "Nombres"       => mb_strtoupper($request->docente["nombres"]),
+            "Apellidos"     => mb_strtoupper($request->docente["apellidos"]),
             "Celular"       => $request->docente["celular"],
             "IDEscuela"     => $request->docente["escuela"],
             "Dedicacion"    => $request->docente["dedicacion"],
             "Categoria"     => $request->docente["categoria"],
-            "Codigo"        => strtoupper($request->docente["codigo"]),
+            "Codigo"        => mb_strtoupper($request->docente["codigo"]),
         ]);
 
         if($docente)

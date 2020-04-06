@@ -17,7 +17,7 @@ class ComisionController extends Controller
         $comisiones =   Comision::join("docentes AS d","comision.Presidente","d.DNI")
                         ->join("docentes AS do","comision.Miembro1","do.DNI")
                         ->join("docentes AS doc","comision.Miembro2","doc.DNI")
-                        ->select("comision.*",\DB::raw("concat_ws(' ',d.Apellidos,d.Nombres) as auxPresidente"),\DB::raw("concat_ws(' ',do.Apellidos,do.Nombres) as auxMiembro1"),\DB::raw("concat_ws(' ',doc.Apellidos,doc.Nombres) as auxMiembro2"))
+                        ->select("comision.*",\DB::raw("concat_ws(' ',d.Apellidos,d.Nombres) as auxPresidente"),\DB::raw("concat_ws(' ',do.Apellidos,do.Nombres) as auxMiembro1"),\DB::raw("concat_ws(' ',doc.Apellidos,doc.Nombres) as auxMiembro2"),\DB::raw("date_format(FechaInicio,'%d-%m-%Y') AS FechaInicioAux"),\DB::raw("date_format(FechaFin,'%d-%m-%Y') AS FechaFinAux"))
                         ->get();    
         return compact("comisiones");
     }
@@ -41,7 +41,7 @@ class ComisionController extends Controller
     public function store(Request $request)
     {
         $comision = new Comision();
-        $comision->Semestre     = $request->comision["semestre"];
+        $comision->Semestre     = mb_strtoupper($request->comision["semestre"]);
         $comision->Presidente   = $request->comision["presidente"];
         $comision->Miembro1     = $request->comision["miembro1"];
         $comision->Miembro2     = $request->comision["miembro2"];
@@ -87,7 +87,7 @@ class ComisionController extends Controller
     public function update(Request $request)
     {
         $comision = Comision::where("IDComision",$request->comision["idcomision"])->update([
-            "Semestre"      => $request->comision["semestre"],
+            "Semestre"      => mb_strtoupper($request->comision["semestre"]),
             "Presidente"    => $request->comision["presidente"],
             "Miembro1"      => $request->comision["miembro1"],
             "Miembro2"      => $request->comision["miembro2"],

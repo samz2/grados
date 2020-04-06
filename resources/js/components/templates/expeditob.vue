@@ -151,11 +151,15 @@
                         </fieldset>
                         <br>
                         <div class="row">
-                            <div class="col-md-2">
-                                <button class="btn btn-success" @click="addExpedito()">Guardar <i class="fa fa-save"></i></button>
+                            <div class="col-md-4" style="text-align: center;">
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-2" style="text-align: center;">
+                                <button class="btn btn-success"  @click="addExpedito()">Guardar <i class="fa fa-save"></i></button>
+                            </div>
+                            <div class="col-md-2" style="text-align: center;">
                                 <button class="btn btn-danger" @click="cancelar()">Cancelar <i class="fas fa-times"></i></button>
+                            </div>
+                            <div class="col-md-4" style="text-align: center;">
                             </div>
                         </div>
 	                </div>
@@ -172,7 +176,11 @@
                             </button>
                         </div>
                         <div class="modal-body">
+                            
+                    
+                    
                             <div class="form-group row">
+                                <div class="col-md-12"><label><mark style="background-color: #dc354526; color: #520606f7">Ingresar DNI o Código.</mark></label></div>
                                 <label for="dni1" class="col-md-2 col-form-label">DNI: </label>
                                 <div class="col-md-4">
                                     <input type="text" v-model="alumno.dni" id="dni1" onKeyPress="return solonumeros(event)" class="form-control form-control-sm">
@@ -188,14 +196,14 @@
                                     <input type="text" v-model="alumnos.Nombres" readonly class="form-control form-control-sm">
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-4">
+                            <div class="form-group row">
+                                <div class="col-md-4" style="text-align: center;">
                                     <button class="btn btn-primary" @click="buscar(alumno.dni,alumno.codigo,alumno.apellido)">Buscar <i class="fa fa-search"></i></button>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-4" style="text-align: center;">
                                     <button class="btn btn-warning" @click="borrar()">Limpiar <i class="fas fa-broom"></i></button>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-4" style="text-align: center;">
                                     <button class="btn btn-success" data-dismiss="modal" type="checkbox" @click="seleccionar(alumnos.DNI,alumnos.Codigo,alumnos.Nombres,alumnos.Carrera)">Seleccionar <i class="fas fa-check"></i></button>
                                 </div>
                             </div>

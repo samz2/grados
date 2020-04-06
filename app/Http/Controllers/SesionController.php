@@ -14,8 +14,10 @@ class SesionController extends Controller
      */
     public function index()
     {
-        $sesiones = Sesion::all();
+        $sesiones = Sesion::select("sesion.*",\DB::raw("date_format(Fecha,'%d-%m-%Y') AS FechaAux"))->get();
         return compact("sesiones");
+        /**$sesiones = Sesion::all();
+        return compact("sesiones");**/
     }
     public function sessions()
     {

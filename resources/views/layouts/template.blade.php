@@ -34,6 +34,18 @@
   {
     font-size: 12px;
   }
+  .t13
+  {
+    font-size: 13px;
+  }
+  .t14
+  {
+    font-size: 14px;
+  }
+  .t15
+  {
+    font-size: 15px;
+  }
 </style>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper" id="app">
@@ -88,7 +100,7 @@
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+  <aside class="main-sidebar sidebar-dark-primary elevation-4" >
     <!-- Brand Logo -->
     <router-link to="/home" class="brand-link">
         <!--<img src="" alt="GyT" class="brand-image img-circle elevation-3"> -->
@@ -125,7 +137,7 @@
                     </p>
                   </a>
                   <ul class="nav nav-treeview">
-                    <li>
+                    <li class="nav-item">
                       <router-link to="docentes" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Docentes</p>
@@ -167,12 +179,12 @@
                         <p>Modalidad</p>
                       </router-link>
                     </li>
-                    <li class="nav-item">
+                    <!--<li class="nav-item">
                       <router-link to="usuarios" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Usuarios</p>
                       </router-link>
-                    </li>
+                    </li>-->
                   </ul>
                 </li> 
                 <li class="nav-item has-treeview">
@@ -217,7 +229,7 @@
                     <li class="nav-item">
                       <router-link to="expeditotitulo" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
-                        <p>Expedito Titulo</p>
+                        <p>Expedito Título</p>
                       </router-link>
                     </li>
                   </ul>
@@ -269,7 +281,7 @@
       $Anio = date("Y");
   @endphp
   <footer class="main-footer">
-    <strong>Copyright &copy; {{$Anio}} <a href="#">Oficina de Grados & Titulos</a>.</strong>
+    <strong>Copyright &copy; {{$Anio}} <a href="#">Oficina de Grados y Títulos</a>.</strong>
     Todos los derechos reservados.
     <div class="float-right d-none d-sm-inline-block">
       <b>Version</b> 1.0
@@ -310,10 +322,87 @@
   {
     return event.charCode >= 48 && event.charCode <= 57
   }
-  function sololetras(event)
-  {
-    return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode == 239 || event.charCode == 164 || event.charCode == 165) || (event.charCode >= 97 && event.charCode <= 122) || event.charCode <= 39)
-  }
+  //function sololetras(event)
+  //{
+    //return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode == 239 || event.charCode == 164 || event.charCode == 165) || (event.charCode >= 97 && event.charCode <= 122) || event.charCode <= 39)
+  //}
+  function soloLetras(e){
+       key = e.keyCode || e.which;
+       tecla = String.fromCharCode(key).toLowerCase();
+       letras = " áéíóúabcdefghijklmnñopqrstuvwxyz'";
+       especiales = "8-37-38-46-164";
+
+       tecla_especial = false
+       for(var i in especiales){
+            if(key == especiales[i]){
+                tecla_especial = true;
+                break;
+            }
+        }
+
+        if(letras.indexOf(tecla)==-1 && !tecla_especial){
+            return false;
+        }
+    }
+
+    function soloEmail(e){
+       key = e.keyCode || e.which;
+       tecla = String.fromCharCode(key).toLowerCase();
+       letras = " áéíóúabcdefghijklmnñopqrstuvwxyz-_.@0123456789";
+       especiales = "8-37-38-46-164";
+
+       tecla_especial = false
+       for(var i in especiales){
+            if(key == especiales[i]){
+                tecla_especial = true;
+                break;
+            }
+        }
+
+        if(letras.indexOf(tecla)==-1 && !tecla_especial){
+            return false;
+        }
+    }
+
+    function soloCodigoDocente(e){
+       key = e.keyCode || e.which;
+       tecla = String.fromCharCode(key).toLowerCase();
+       letras = " áéíóúabcdefghijklmnñopqrstuvwxyz-_0123456789";
+       especiales = "8-37-38-46-164";
+
+       tecla_especial = false
+       for(var i in especiales){
+            if(key == especiales[i]){
+                tecla_especial = true;
+                break;
+            }
+        }
+
+        if(letras.indexOf(tecla)==-1 && !tecla_especial){
+            return false;
+        }
+    }
+
+    function soloSemestre(e){
+       key = e.keyCode || e.which;
+       tecla = String.fromCharCode(key).toLowerCase();
+       letras = " i-0123456789";
+       especiales = "8-37-38-46-164";
+
+       tecla_especial = false
+       for(var i in especiales){
+            if(key == especiales[i]){
+                tecla_especial = true;
+                break;
+            }
+        }
+
+        if(letras.indexOf(tecla)==-1 && !tecla_especial){
+            return false;
+        }
+    }
+  
+
   function alfa(event)
   {
     return (event.charCode >= 164 || (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122) || (event.charCode >= 44 && event.charCode <= 57))

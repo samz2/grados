@@ -3290,22 +3290,22 @@ __webpack_require__.r(__webpack_exports__);
         auxMiembro1: null,
         auxMiembro2: null,
         auxPresidente: null,
-        FechaInicio: null,
-        FechaFin: null,
+        FechaInicioAux: null,
+        FechaFinAux: null,
         Estado: null
       }],
-      columns: ["Semestre", "auxPresidente", "auxMiembro1", "auxMiembro2", "FechaInicio", "FechaInicio", "FechaFin", "Estado", "Acciones"],
+      columns: ["Semestre", "auxPresidente", "auxMiembro1", "auxMiembro2", "FechaInicioAux", "FechaFinAux", "Estado", "Acciones"],
       options: {
         headings: {
           Semestre: "Semestre",
           auxPresidente: "Presidente",
           auxMiembro1: "Miembro 1",
           auxMiembro2: "Miembro 2",
-          FechaInicio: "Fecha Inicio",
-          FechaFin: "Fecha Fin"
+          FechaInicioAux: "Inicio",
+          FechaFinAux: "Fin"
         },
-        sortable: ["Semestre", "Presidente", "Miembro1", "Miembro2", "FechaInicio", "FechaInicio", "FechaFin", "Estado"],
-        filterable: ["Semestre", "Presidente", "Miembro1", "Miembro2", "FechaInicio", "FechaInicio", "FechaFin", "Estado"]
+        sortable: ["Semestre", "Presidente", "Miembro1", "Miembro2", "FechaInicioAux", "FechaFinAux", "Estado"],
+        filterable: ["Semestre", "Presidente", "Miembro1", "Miembro2", "FechaInicioAux", "FechaFinAux", "Estado"]
       },
       docentes: []
     };
@@ -3594,18 +3594,18 @@ __webpack_require__.r(__webpack_exports__);
         IDDecano: null,
         auxDecano: null,
         CodDocente: null,
-        PeriodoInicio: null,
-        PeriodoFin: null
+        FechaInicioAux: null,
+        FechaFinAux: null
       }],
-      columns: ["auxDecano", "PeriodoInicio", "PeriodoFin", "Acciones"],
+      columns: ["auxDecano", "FechaInicioAux", "FechaFinAux", "Acciones"],
       options: {
         headings: {
           auxDecano: "Decano",
-          PeriodoInicio: "Fecha de Inicio",
-          PeriodoFin: "Fecha de Fin"
+          FechaInicioAux: "Fecha de Inicio",
+          FechaFinAux: "Fecha de Fin"
         },
-        sortable: ["auxDecano", "PeriodoInicio", "PeriodoFin"],
-        filterable: ["auxDecano", "PeriodoInicio", "PeriodoFin"]
+        sortable: ["auxDecano", "FechaInicioAux", "FechaFinAux"],
+        filterable: ["auxDecano", "FechaInicioAux", "FechaFinAux"]
       },
       docentes: []
     };
@@ -3907,8 +3907,8 @@ __webpack_require__.r(__webpack_exports__);
       escuelas: [],
       docentes: [{
         DNI: null,
-        Nombres: null,
-        Apellidos: null,
+        NombreAux: null,
+        //Apellidos:null,
         Celular: null,
         Escuela: null,
         IDEscuela: null,
@@ -3916,20 +3916,21 @@ __webpack_require__.r(__webpack_exports__);
         Dedicacion: null,
         Categoria: null
       }],
-      columns: ["DNI", "Codigo", "Nombres", "Apellidos", "Celular", "Categoria", "Dedicacion", "Escuela", "Acciones"],
+      //columns: ["DNI","Codigo","Nombres","Apellidos","Celular","Categoria","Dedicacion","Escuela","Acciones"],
+      columns: ["DNI", "Codigo", "NombreAux", "Celular", "Categoria", "Dedicacion", "Escuela", "Acciones"],
       options: {
         headings: {
           DNI: "DNI",
-          Apellidos: "Apellidos",
+          //Apellidos:"Apellidos",
           Celular: "Celular",
           Escuela: "Escuela",
-          Nombres: "Nombres",
-          Codigo: "Codigo",
-          Dedicacion: "Dedicacion",
-          Categoria: "Categoria"
+          NombreAux: "Nombres y Apellidos",
+          Codigo: "Código",
+          Dedicacion: "Dedicación",
+          Categoria: "Categoría"
         },
-        sortable: ["DNI", "Codigo", "Nombres", "Apellidos", "Celular", "Categoria", "Dedicacion", "Escuela"],
-        filterable: ["DNI", "Codigo", "Nombres", "Apellidos", "Celular", "Categoria", "Dedicacion", "Escuela"]
+        sortable: ["DNI", "Codigo", "NombresAux", "Celular", "Categoria", "Dedicacion", "Escuela"],
+        filterable: ["DNI", "Codigo", "NombresAux", "Celular", "Categoria", "Dedicacion", "Escuela"]
       }
     };
   },
@@ -4606,31 +4607,31 @@ __webpack_require__.r(__webpack_exports__);
         IDEscuela: null,
         Codigo: null,
         DNI: null,
-        Paterno: null,
+        //Paterno:null,
         Materno: null,
         Celular: null,
         Ingreso: null,
         Egreso: null,
         Genero: null,
-        Nombre: null,
+        NombreAux: null,
         Correo: null,
         Escuela: null
       }],
-      columns: ["Escuela", "DNI", "Nombre", "Paterno", "Celular", "Correo", "Ingreso", "Egreso", "Acciones"],
+      columns: ["Escuela", "DNI", "NombreAux", "Celular", "Correo", "Ingreso", "Egreso", "Acciones"],
       options: {
         headings: {
           Codigo: "Código",
           DNI: "DNI",
-          Paterno: "Apellidos",
+          //Paterno:"Apellidos",
           Celular: "Celular",
           Ingreso: "Ingreso",
           Egreso: "Egreso",
-          Nombre: "Nombre",
+          NombreAux: "Nombres y Apellidos",
           Correo: "Correo",
           Escuela: "Escuela"
         },
-        sortable: ["Escuela", "DNI", "Nombre", "Paterno", "Celular", "Correo", "Ingreso", "Egreso"],
-        filterable: ["Escuela", "DNI", "Nombre", "Paterno", "Celular", "Correo", "Ingreso", "Egreso"]
+        sortable: ["Escuela", "DNI", "NombreAux", "Celular", "Correo", "Ingreso", "Egreso"],
+        filterable: ["Escuela", "DNI", "NombreAux", "Celular", "Correo", "Ingreso", "Egreso"]
       },
       escuelas: []
     };
@@ -5090,6 +5091,14 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -6694,18 +6703,18 @@ __webpack_require__.r(__webpack_exports__);
       sesiones: [{
         IDSesion: null,
         NumSesion: null,
-        Fecha: null,
+        FechaAux: null,
         Tipo: null
       }],
-      columns: ["NumSesion", "Tipo", "Fecha", "Acciones"],
+      columns: ["NumSesion", "Tipo", "FechaAux", "Acciones"],
       options: {
         headings: {
           NumSesion: "Número de Sesión",
-          Fecha: "Fecha",
+          FechaAux: "Fecha",
           Tipo: "Tipo"
         },
-        sortable: ["NumSesion", "Tipo", "Fecha"],
-        filterable: ["NumSesion", "Tipo", "Fecha"]
+        sortable: ["NumSesion", "Tipo", "FechaAux"],
+        filterable: ["NumSesion", "Tipo", "FechaAux"]
       }
     };
   },
@@ -53281,7 +53290,7 @@ var render = function() {
                           attrs: {
                             type: "text",
                             maxlength: "50",
-                            onKeyPress: "return sololetras(event)"
+                            onKeyPress: "return soloLetras(event)"
                           },
                           domProps: { value: _vm.carrera.carrera },
                           on: {
@@ -53313,7 +53322,7 @@ var render = function() {
                           }
                         },
                         [
-                          _vm._v("Agregar "),
+                          _vm._v("Guardar "),
                           _c("i", { staticClass: "fa fa-save" })
                         ]
                       ),
@@ -53563,10 +53572,11 @@ var render = function() {
                             }
                           ],
                           staticClass: "form-control",
+                          staticStyle: { "text-transform": "uppercase" },
                           attrs: {
                             type: "text",
-                            maxlength: "6",
-                            onKeyPress: "return alfa1(event)"
+                            maxlength: "7",
+                            onKeyPress: "return soloSemestre(event)"
                           },
                           domProps: { value: _vm.comision.semestre },
                           on: {
@@ -53913,7 +53923,7 @@ var render = function() {
                           }
                         },
                         [
-                          _vm._v("Agregar "),
+                          _vm._v("Guardar "),
                           _c("i", { staticClass: "fa fa-save" })
                         ]
                       ),
@@ -53967,7 +53977,9 @@ var render = function() {
               _c("div", { staticClass: "card-body" }, [
                 _c(
                   "div",
-                  { staticClass: "content table-responsive table-full-width" },
+                  {
+                    staticClass: "content table-responsive table-full-width t12"
+                  },
                   [
                     _c("v-client-table", {
                       attrs: {
@@ -54343,7 +54355,7 @@ var render = function() {
                           }
                         },
                         [
-                          _vm._v("Agregar "),
+                          _vm._v("Guardar "),
                           _c("i", { staticClass: "fa fa-save" })
                         ]
                       ),
@@ -54617,7 +54629,8 @@ var render = function() {
                           staticClass: "form-control",
                           attrs: {
                             maxlength: "40",
-                            onKeyPress: "return sololetras(event)"
+                            onKeyPress: "return soloLetras(event)",
+                            required: ""
                           },
                           domProps: { value: _vm.docente.nombres },
                           on: {
@@ -54654,7 +54667,7 @@ var render = function() {
                           staticClass: "form-control",
                           attrs: {
                             maxlength: "40",
-                            onKeyPress: "return sololetras(event)"
+                            onKeyPress: "return soloLetras(event)"
                           },
                           domProps: { value: _vm.docente.apellidos },
                           on: {
@@ -54761,7 +54774,7 @@ var render = function() {
                           staticClass: "form-control",
                           attrs: {
                             maxlength: "10",
-                            onKeyPress: "return alfa(event)"
+                            onKeyPress: "return soloCodigoDocente(event)"
                           },
                           domProps: { value: _vm.docente.codigo },
                           on: {
@@ -55193,7 +55206,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-md-2 text-left" }, [
-      _c("label", [_vm._v("Categoria*")])
+      _c("label", [_vm._v("Categoría*")])
     ])
   },
   function() {
@@ -55898,8 +55911,8 @@ var render = function() {
                           ],
                           staticClass: "form-control",
                           attrs: {
-                            maxlength: "50",
-                            onKeyPress: "return sololetras(event)"
+                            maxlength: "41",
+                            onKeyPress: "return soloLetras(event)"
                           },
                           domProps: { value: _vm.egresado.nombre },
                           on: {
@@ -55935,8 +55948,8 @@ var render = function() {
                           ],
                           staticClass: "form-control",
                           attrs: {
-                            maxlength: "50",
-                            onKeyPress: "return sololetras(event)"
+                            maxlength: "41",
+                            onKeyPress: "return soloLetras(event)"
                           },
                           domProps: { value: _vm.egresado.paterno },
                           on: {
@@ -55972,8 +55985,8 @@ var render = function() {
                           ],
                           staticClass: "form-control",
                           attrs: {
-                            maxlength: "50",
-                            onKeyPress: "return sololetras(event)"
+                            maxlength: "41",
+                            onKeyPress: "return soloLetras(event)"
                           },
                           domProps: { value: _vm.egresado.materno },
                           on: {
@@ -56092,7 +56105,11 @@ var render = function() {
                             }
                           ],
                           staticClass: "form-control",
-                          attrs: { type: "email", maxlength: "30" },
+                          attrs: {
+                            type: "email",
+                            onKeyPress: "return soloEmail(event)",
+                            maxlength: "30"
+                          },
                           domProps: { value: _vm.egresado.correo },
                           on: {
                             input: function($event) {
@@ -56288,7 +56305,7 @@ var render = function() {
                           }
                         },
                         [
-                          _vm._v("Agregar "),
+                          _vm._v("Guardar "),
                           _c("i", { staticClass: "fa fa-save" })
                         ]
                       ),
@@ -56364,6 +56381,7 @@ var render = function() {
                               "button",
                               {
                                 staticClass: "btn btn-danger",
+                                staticStyle: { padding: "2px 8px" },
                                 attrs: {
                                   "data-toggle": "tooltip",
                                   "data-placement": "left",
@@ -56389,6 +56407,7 @@ var render = function() {
                               "button",
                               {
                                 staticClass: "btn btn-info",
+                                staticStyle: { padding: "2px 8px" },
                                 attrs: {
                                   "data-target": "#exampleModal",
                                   "data-toggle": "modal",
@@ -56749,7 +56768,7 @@ var render = function() {
                     _c("div", { staticClass: "row" }, [
                       _vm._m(3),
                       _vm._v(" "),
-                      _c("div", { staticClass: "col-md-5" }, [
+                      _c("div", { staticClass: "col-md-8" }, [
                         _c("input", {
                           directives: [
                             {
@@ -56761,8 +56780,8 @@ var render = function() {
                           ],
                           staticClass: "form-control",
                           attrs: {
-                            maxlength: "20",
-                            onKeyPress: "return sololetras(event)"
+                            maxlength: "35",
+                            onKeyPress: "return soloLetras(event)"
                           },
                           domProps: { value: _vm.estado.estado },
                           on: {
@@ -57572,38 +57591,65 @@ var render = function() {
               _c("br"),
               _vm._v(" "),
               _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col-md-2" }, [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-success",
-                      on: {
-                        click: function($event) {
-                          return _vm.addExpedito()
-                        }
-                      }
-                    },
-                    [_vm._v("Guardar "), _c("i", { staticClass: "fa fa-save" })]
-                  )
-                ]),
+                _c("div", {
+                  staticClass: "col-md-4",
+                  staticStyle: { "text-align": "center" }
+                }),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-md-2" }, [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-danger",
-                      on: {
-                        click: function($event) {
-                          return _vm.cancelar()
+                _c(
+                  "div",
+                  {
+                    staticClass: "col-md-2",
+                    staticStyle: { "text-align": "center" }
+                  },
+                  [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-success",
+                        on: {
+                          click: function($event) {
+                            return _vm.addExpedito()
+                          }
                         }
-                      }
-                    },
-                    [
-                      _vm._v("Cancelar "),
-                      _c("i", { staticClass: "fas fa-times" })
-                    ]
-                  )
-                ])
+                      },
+                      [
+                        _vm._v("Guardar "),
+                        _c("i", { staticClass: "fa fa-save" })
+                      ]
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "col-md-2",
+                    staticStyle: { "text-align": "center" }
+                  },
+                  [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-danger",
+                        on: {
+                          click: function($event) {
+                            return _vm.cancelar()
+                          }
+                        }
+                      },
+                      [
+                        _vm._v("Cancelar "),
+                        _c("i", { staticClass: "fas fa-times" })
+                      ]
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c("div", {
+                  staticClass: "col-md-4",
+                  staticStyle: { "text-align": "center" }
+                })
               ])
             ])
           ]
@@ -57675,6 +57721,8 @@ var render = function() {
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
                 _c("div", { staticClass: "form-group row" }, [
+                  _vm._m(11),
+                  _vm._v(" "),
                   _c(
                     "label",
                     {
@@ -57785,70 +57833,91 @@ var render = function() {
                   ])
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "row" }, [
-                  _c("div", { staticClass: "col-md-4" }, [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-primary",
-                        on: {
-                          click: function($event) {
-                            return _vm.buscar(
-                              _vm.alumno.dni,
-                              _vm.alumno.codigo,
-                              _vm.alumno.apellido
-                            )
+                _c("div", { staticClass: "form-group row" }, [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "col-md-4",
+                      staticStyle: { "text-align": "center" }
+                    },
+                    [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-primary",
+                          on: {
+                            click: function($event) {
+                              return _vm.buscar(
+                                _vm.alumno.dni,
+                                _vm.alumno.codigo,
+                                _vm.alumno.apellido
+                              )
+                            }
                           }
-                        }
-                      },
-                      [
-                        _vm._v("Buscar "),
-                        _c("i", { staticClass: "fa fa-search" })
-                      ]
-                    )
-                  ]),
+                        },
+                        [
+                          _vm._v("Buscar "),
+                          _c("i", { staticClass: "fa fa-search" })
+                        ]
+                      )
+                    ]
+                  ),
                   _vm._v(" "),
-                  _c("div", { staticClass: "col-md-4" }, [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-warning",
-                        on: {
-                          click: function($event) {
-                            return _vm.borrar()
+                  _c(
+                    "div",
+                    {
+                      staticClass: "col-md-4",
+                      staticStyle: { "text-align": "center" }
+                    },
+                    [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-warning",
+                          on: {
+                            click: function($event) {
+                              return _vm.borrar()
+                            }
                           }
-                        }
-                      },
-                      [
-                        _vm._v("Limpiar "),
-                        _c("i", { staticClass: "fas fa-broom" })
-                      ]
-                    )
-                  ]),
+                        },
+                        [
+                          _vm._v("Limpiar "),
+                          _c("i", { staticClass: "fas fa-broom" })
+                        ]
+                      )
+                    ]
+                  ),
                   _vm._v(" "),
-                  _c("div", { staticClass: "col-md-4" }, [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-success",
-                        attrs: { "data-dismiss": "modal", type: "checkbox" },
-                        on: {
-                          click: function($event) {
-                            return _vm.seleccionar(
-                              _vm.alumnos.DNI,
-                              _vm.alumnos.Codigo,
-                              _vm.alumnos.Nombres,
-                              _vm.alumnos.Carrera
-                            )
+                  _c(
+                    "div",
+                    {
+                      staticClass: "col-md-4",
+                      staticStyle: { "text-align": "center" }
+                    },
+                    [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-success",
+                          attrs: { "data-dismiss": "modal", type: "checkbox" },
+                          on: {
+                            click: function($event) {
+                              return _vm.seleccionar(
+                                _vm.alumnos.DNI,
+                                _vm.alumnos.Codigo,
+                                _vm.alumnos.Nombres,
+                                _vm.alumnos.Carrera
+                              )
+                            }
                           }
-                        }
-                      },
-                      [
-                        _vm._v("Seleccionar "),
-                        _c("i", { staticClass: "fas fa-check" })
-                      ]
-                    )
-                  ])
+                        },
+                        [
+                          _vm._v("Seleccionar "),
+                          _c("i", { staticClass: "fas fa-check" })
+                        ]
+                      )
+                    ]
+                  )
                 ])
               ])
             ])
@@ -57860,7 +57929,7 @@ var render = function() {
     _c("div", { staticClass: "row", attrs: { id: "expeditos" } }, [
       _c("div", { staticClass: "col-md-12" }, [
         _c("div", { staticClass: "card card-default" }, [
-          _vm._m(11),
+          _vm._m(12),
           _vm._v(" "),
           _c("div", { staticClass: "card-body" }, [
             _c(
@@ -58131,6 +58200,22 @@ var staticRenderFns = [
             [_vm._v("* Foto en formato JPG (Tam. max. 1mb)")]
           )
         ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-12" }, [
+      _c("label", [
+        _c(
+          "mark",
+          {
+            staticStyle: { "background-color": "#dc354526", color: "#520606f7" }
+          },
+          [_vm._v("Ingresar DNI o Código.")]
+        )
       ])
     ])
   },
@@ -59732,7 +59817,7 @@ var render = function() {
                           staticClass: "form-control form-control-sm",
                           attrs: {
                             type: "text",
-                            onkeypress: "return sololetras(event)",
+                            onkeypress: "return soloLetras(event)",
                             maxlength: "30"
                           },
                           domProps: { value: _vm.modalidad.modalidad },
@@ -59767,7 +59852,7 @@ var render = function() {
                           }
                         },
                         [
-                          _vm._v("Agregar "),
+                          _vm._v("Guardar "),
                           _c("i", { staticClass: "fa fa-save" })
                         ]
                       ),
@@ -60054,7 +60139,7 @@ var render = function() {
                             }
                           ],
                           staticClass: "form-control",
-                          attrs: { type: "date" },
+                          attrs: { type: "date", max: "2030-12-31" },
                           domProps: { value: _vm.sesion.fecha },
                           on: {
                             input: function($event) {
@@ -60136,7 +60221,7 @@ var render = function() {
                           }
                         },
                         [
-                          _vm._v("Agregar "),
+                          _vm._v("Guardar "),
                           _c("i", { staticClass: "fa fa-save" })
                         ]
                       ),
@@ -83799,8 +83884,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\grados\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\grados\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\Sistemas\SISTEMA GRADOS\grados\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\Sistemas\SISTEMA GRADOS\grados\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

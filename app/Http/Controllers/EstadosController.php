@@ -42,7 +42,7 @@ class EstadosController extends Controller
         {
             $estado = new Estados();
             $estado->Posicion   = $request->estado["posicion"];
-            $estado->Estado     = strtoupper($request->estado["estado"]);
+            $estado->Estado     = mb_strtoupper($request->estado["estado"]);
             $estado->save();
             $type   = "success";
             $title  = "Bien";
@@ -92,7 +92,7 @@ class EstadosController extends Controller
         {
             $estado     = Estados::where("IDEstado",$request->estado["idestado"])->update([
                             "Posicion"  => $request->estado["posicion"],
-                            "Estado"    => strtoupper($request->estado["estado"]),
+                            "Estado"    => mb_strtoupper($request->estado["estado"]),
             ]);
             $type   = "success";
             $title  = "Bien";

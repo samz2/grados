@@ -44,7 +44,7 @@ class TramiteController extends Controller
         $tramite->CodigoAlumno      = $request->tramite["alumno"];
         $tramite->DNIDocente        = $request->tramite["docente"];
         $tramite->FechaRecepcion    = $request->tramite["fechar"];
-        $tramite->Tema              = strtoupper($request->tramite["tema"]);
+        $tramite->Tema              = mb_strtoupper($request->tramite["tema"]);
         $tramite->Tipo              = $request->tramite["tipo"];
         $tramite->Estado            = "RECIBIDO";
         $tramite->save();

@@ -29,7 +29,7 @@
                                     <label>Nombres*</label>
                                 </div>
                                 <div class="col-md-10">
-                                    <input v-model="docente.nombres" maxlength="40" class="form-control" onKeyPress="return sololetras(event)">
+                                    <input v-model="docente.nombres" maxlength="40" class="form-control" onKeyPress="return soloLetras(event)" required>
                                 </div>
                             </div>
                             <br>
@@ -38,7 +38,7 @@
                                     <label>Apellidos*</label>
                                 </div>
                                 <div class="col-md-10">
-                                    <input v-model="docente.apellidos" maxlength="40" onKeyPress="return sololetras(event)" class="form-control">
+                                    <input v-model="docente.apellidos" maxlength="40" onKeyPress="return soloLetras(event)" class="form-control">
                                 </div>
                             </div>
                             <br>
@@ -67,10 +67,10 @@
                                         <label>Código*</label>
                                 </div>
                                 <div class="col-md-4">
-                                    <input v-model="docente.codigo" maxlength="10" class="form-control" onKeyPress="return alfa(event)">
+                                    <input v-model="docente.codigo" maxlength="10" class="form-control" onKeyPress="return soloCodigoDocente(event)">
                                 </div>
                                 <div class="col-md-2 text-left">
-                                    <label>Categoria*</label>
+                                    <label>Categoría*</label>
                                 </div>
                                 <div class="col-md-4">
                                     <select class="form-control" v-model="docente.categoria">
@@ -155,8 +155,8 @@
             escuelas:[],
             docentes	:[{
                 DNI:null,
-                Nombres:null,
-                Apellidos:null,
+                NombreAux:null,
+                //Apellidos:null,
                 Celular:null,
                 Escuela:null,
                 IDEscuela:null,
@@ -164,21 +164,22 @@
                 Dedicacion:null,
                 Categoria:null,
             }],
-            columns: ["DNI","Codigo","Nombres","Apellidos","Celular","Categoria","Dedicacion","Escuela","Acciones"],
+            //columns: ["DNI","Codigo","Nombres","Apellidos","Celular","Categoria","Dedicacion","Escuela","Acciones"],
+            columns: ["DNI","Codigo","NombreAux","Celular","Categoria","Dedicacion","Escuela","Acciones"],
             options: {
 				headings:
 				{
                     DNI:"DNI",
-                    Apellidos:"Apellidos",
+                    //Apellidos:"Apellidos",
                     Celular:"Celular",
                     Escuela:"Escuela",
-                    Nombres:"Nombres",
-                    Codigo:"Codigo",
-                    Dedicacion:"Dedicacion",
-                    Categoria:"Categoria",
+                    NombreAux:"Nombres y Apellidos",
+                    Codigo:"Código",
+                    Dedicacion:"Dedicación",
+                    Categoria:"Categoría",
 				},
-				sortable    : ["DNI","Codigo","Nombres","Apellidos","Celular","Categoria","Dedicacion","Escuela"],
-				filterable  : ["DNI","Codigo","Nombres","Apellidos","Celular","Categoria","Dedicacion","Escuela"]
+				sortable    : ["DNI","Codigo","NombresAux","Celular","Categoria","Dedicacion","Escuela"],
+				filterable  : ["DNI","Codigo","NombresAux","Celular","Categoria","Dedicacion","Escuela"]
             },
         }
 	},
@@ -224,7 +225,7 @@
                 swal({
 					type: 'error',
 					title: 'Llenar los datos obligatorios',
-				});
+                });
             }else if(e == 1){
                 this.$Progress.start();
                 axios.post("addDocente",{

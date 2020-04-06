@@ -24,11 +24,11 @@
                                     <label>Nombre Carrera(*)</label>
                                 </div>
                                 <div class="col-md-8">
-                                    <input v-model="carrera.carrera" type="text" maxlength="50" class="form-control" onKeyPress="return sololetras(event)">
+                                    <input v-model="carrera.carrera" type="text" maxlength="50" class="form-control" onKeyPress="return soloLetras(event)">
                                 </div>    
                             </div>
                         <div class="modal-footer">
-                            <button @click="addCarrera(1)" id="add" class="btn btn-success" data-dismiss="modal">Agregar <i class="fa fa-save"></i></button>
+                            <button @click="addCarrera(1)" id="add" class="btn btn-success" data-dismiss="modal">Guardar <i class="fa fa-save"></i></button>
                             <button @click="addCarrera(2)" id="editar" class="btn btn-success" data-dismiss="modal">Editar <i class="far fa-edit"></i></button>
                             <button type="button" class="btn btn-danger" @click="load()" data-dismiss="modal">Cancelar <i class="fas fa-times"></i></button>
                         </div>

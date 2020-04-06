@@ -38,7 +38,8 @@ class EscuelasController extends Controller
     {
         $hoy = date("Y-m-d");
         $escuela = new Escuelas();
-        $escuela->Escuela       = strtoupper($request->carrera["carrera"]);
+        $escuela->Escuela       = mb_strtoupper($request->carrera["carrera"]);
+        //$escuela->Escuela       = $request->carrera["carrera"];
         $escuela->created_at    = $hoy;
         $escuela->save();
         $type   = "success";
@@ -79,7 +80,8 @@ class EscuelasController extends Controller
     public function update(Request $request)
     {
         $escuela = Escuelas::where("IDEscuela",$request->carrera["idcarrera"])->update([
-            "Escuela"        => strtoupper($request->carrera["carrera"]),
+            "Escuela"        => mb_strtoupper($request->carrera["carrera"]),
+            //"Escuela"        => $request->carrera["carrera"],
         ]);
         if($escuela)
         {
