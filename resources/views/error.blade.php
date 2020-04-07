@@ -7,6 +7,6 @@
     <title>Document</title>
 </head>
 <body>
-    Página salvaje de error
+    Página de error
 </body>
 </html>

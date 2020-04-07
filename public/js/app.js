@@ -65077,8 +65077,20 @@ module.exports = function () {
     skin: false,
     columnsDisplay: {},
     columnsDropdown: false,
-    texts: {
-      count: "Showing {from} to {to} of {count} records|{count} records|One record",
+    texts: {      
+      count: "Mostrando {from} al {to} de {count} registros|{count} registros|Un registro",
+      first: 'Primero',
+      last: 'Ultimo',
+      /*filter: "Buscar:                                    ",*/
+      filterPlaceholder: "Buscador..",
+      limit: "Registros:",
+      page: "Pagina:",
+      noResults: "No hay registros",
+      filterBy: "Filtrar por {column}",
+      loading: 'Cargando...',
+      defaultOption: 'Seleccionar {column}',
+      columns: 'Columnas'
+      /*count: "Showing {from} to {to} of {count} records|{count} records|One record",
       first: 'First',
       last: 'Last',
       filter: "Filter:",
@@ -65089,7 +65101,7 @@ module.exports = function () {
       filterBy: "Filter by {column}",
       loading: 'Loading...',
       defaultOption: 'Select {column}',
-      columns: 'Columns'
+      columns: 'Columns'*/
     },
     sortIcon: {
       is: 'glyphicon-sort',
