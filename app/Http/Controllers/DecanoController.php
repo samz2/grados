@@ -47,11 +47,11 @@ class DecanoController extends Controller
             $decano->PeriodoFin     = $request->decano["fin"];
             $decano->save();
             $type   = "success";
-            $title  = "Bien";
-            $text   = "Decano agregado con éxito";
+            //$title  = "Bien";
+            $text   = "Decano creado con éxito";
         }else{
             $type   = "warning";
-            $title  = "Ups...";
+            //$title  = "Ups...";
             $text   = "Ya existe un decano para este periodo de tiempo";
         }
         return compact("type","title","text");
@@ -97,12 +97,12 @@ class DecanoController extends Controller
         if($decano)
         {
             $type   = "success";
-            $title  = "Bien";
-            $text   = "Decano actualizado con éxito";
+            //$title  = "Bien";
+            $text   = "Decano editado con éxito";
         }else{
             $type   = "warning";
-            $title  = "Ups";
-            $text   = "Ocurrió un roblema";
+            //$title  = "Ups";
+            $text   = "Ocurrió un problema";
         }
         return compact("type","title","text");
     }

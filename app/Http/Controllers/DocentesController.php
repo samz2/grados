@@ -52,13 +52,13 @@ class DocentesController extends Controller
             $docente->created_at    = $hoy;
             $docente->save();
             $type   = "success";
-            $title  = "Bien";
-            $text   = "Docente agregado con éxito";
+            //$title  = "Bien";
+            $text   = "Docente creado con éxito";
         }else
         {
             $type   = "error";
-            $title  = "Error";
-            $text   = "Docente ya existe";
+            //$title  = "Error";
+            $text   = "Docente actualmente ya existe";
         }
         return compact("type","title","text");
         
@@ -110,13 +110,14 @@ class DocentesController extends Controller
         if($docente)
         {
             $type   = "success";
-            $title  = "Bien";
-            $text   = "Docente actualizado con éxito";
+            //$title  = "Bien";
+            $text   = "El docente editado con éxito";
         }else{
             $type   = "warning";
-            $title  = "Ups";
-            $text   = "Ocurrió un roblema";
+            //$title  = "Ups";
+            $text   = "Ocurrió un problema";
         }
+        //return compact("type","title","text");
         return compact("type","title","text");
     }
 

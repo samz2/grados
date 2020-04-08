@@ -86,13 +86,13 @@ class ExpeditobController extends Controller
             file_put_contents($rutaFoto,$foto);
             $expedito->save();
             $type = "success";
-            $title = "OK";
-            $text = "Expedito creado satisfactoriamente";
+            //$title = "OK";
+            $text = "Expedito creado con éxito";
         }else
         {
             $type = "warning";
-            $title = "Advertencia";
-            $text = "Egresado ya tiene un expedito";
+            //$title = "Advertencia";
+            $text = "Egresado ya cuenta con un expedito";
         }
         
         return compact("type","title","text");

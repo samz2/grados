@@ -57,12 +57,12 @@ class EgresadoController extends Controller
             $egresado->IDEscuela    = $request->egresado["escuela"];
             $egresado->created_at   = $hoy;
             $egresado->save();
-            $title  = "OK";
-            $msj    = "Egresado registrado correctamente";
+            //$title  = "OK";
+            $msj    = "Egresado creado con éxito";
             $val    = "success";    
         }else {
-            $title  = "Error";
-            $msj    = "Egresado ya Existe";
+            //$title  = "Error";
+            $msj    = "Egresado actualmente ya existe";
             $val    = "warning";
         }
         return compact("title","msj","val");
@@ -118,8 +118,8 @@ class EgresadoController extends Controller
             "Correo"    => strtolower($request->egresado["correo"]),
             "IDEscuela" => $request->egresado["escuela"],
         ]);
-        $title  = "OK";
-        $msj    = "Egresado actualizado correctamente";
+        //$title  = "OK";
+        $msj    = "Egresado editado con éxito";
         $val    = "success";   
         return compact("title","msj","val");
     }

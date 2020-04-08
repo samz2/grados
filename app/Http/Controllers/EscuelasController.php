@@ -43,7 +43,7 @@ class EscuelasController extends Controller
         $escuela->created_at    = $hoy;
         $escuela->save();
         $type   = "success";
-        $title  = "Bien";
+        //$title  = "Bien";
         $text   = "Carrera creada con éxito";
         return compact("type","title","text");
     }
@@ -86,12 +86,12 @@ class EscuelasController extends Controller
         if($escuela)
         {
             $type   = "success";
-            $title  = "Bien";
-            $text   = "Carrera actualizada con éxito";
+            //$title  = "Bien";
+            $text   = "Carrera editada con éxito";
         }else{
             $type   = "warning";
-            $title  = "Ups";
-            $text   = "Ocurrió un roblema";
+            //$title  = "Ups";
+            $text   = "Ocurrió un problema";
         }
         return compact("type","title","text");
     }

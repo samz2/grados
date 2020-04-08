@@ -30,7 +30,7 @@
                                     <label>Fecha*</label>
                                 </div>
                                 <div class="col-md-5">
-                                    <input v-model="sesion.fecha" type="date" max="2030-12-31" class="form-control">
+                                    <input v-model="sesion.fecha" type="date" max="2030-12-31" class="form-control" @change="validaFecha()">
                                 </div>   
                             </div>                           
                             <br>
@@ -46,7 +46,7 @@
                                 </div>
                             </div>
                         <div class="modal-footer">
-                            <button @click="addSesion(1)" id="add" class="btn btn-success" data-dismiss="modal">Guardar <i class="fa fa-save"></i></button>
+                            <button @click="addSesion(1)" id="add" class="btn btn-success">Guardar <i class="fa fa-save"></i></button>
                             <button @click="addSesion(2)" id="editar" class="btn btn-success" data-dismiss="modal">Editar <i class="far fa-edit"></i></button>
                             <button type="button" class="btn btn-danger" @click="load()" data-dismiss="modal">Cancelar <i class="fas fa-times"></i></button>
                         </div>
@@ -133,9 +133,11 @@
             if(this.sesion.sesion == null || this.sesion.tipo == null || this.sesion.fecha == null)
             {
                 swal({
-					type: 'error',
-					title: 'Llenar los datos obligatorios',
-				});
+                    type: 'warning',
+                    title: 'Llenar los campos obligatorios',
+                    //allowOutsideClick: false,
+                    timer: 3000
+                });
             }else if(e == 1){
                 this.$Progress.start();
                 axios.post("addSesion",{
@@ -151,11 +153,12 @@
                     this.$Progress.finish();
                     this.getDatos();
                     this.load();
+                    $("#exampleModal").modal('hide');
                     }).catch(error=>{
                     console.log(error);	
                     swal({
                         type: 'error',
-                        title: 'Error',
+                        title: 'Ocurrió un problema',
                         text: 'Comuniquese con un administrador',
                         showConfirmButton: true,
                     });
@@ -179,7 +182,7 @@
                     console.log(error);	
                     swal({
                         type: 'error',
-                        title: 'Error',
+                        title: 'Ocurrió un problema',
                         text: 'Comuniquese con un administrador',
                         showConfirmButton: true,
                     });
@@ -194,7 +197,24 @@
                 this.sesion.fecha       = null;
                 this.sesion.tipo        = null;
                 
-		},
+        },
+        validaFecha()
+        {
+            if(this.sesion.fecha != null)
+            {
+                var inicio = this.sesion.fecha;
+                var final  = '2022-01-01';
+                if(final<=inicio)
+                {
+                    swal({
+                        type: 'warning',
+                        title: 'Ingresar una fecha correcta',
+                       
+                    });
+                    this.sesion.fecha = null;
+                }
+            }
+        },
 		edit(IDSesion,NumSesion,Fecha,Tipo)
 		{
             $('#editar').show();

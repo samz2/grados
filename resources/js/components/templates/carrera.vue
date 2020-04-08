@@ -28,7 +28,7 @@
                                 </div>    
                             </div>
                         <div class="modal-footer">
-                            <button @click="addCarrera(1)" id="add" class="btn btn-success" data-dismiss="modal">Guardar <i class="fa fa-save"></i></button>
+                            <button @click="addCarrera(1)" id="add" class="btn btn-success">Guardar <i class="fa fa-save"></i></button>
                             <button @click="addCarrera(2)" id="editar" class="btn btn-success" data-dismiss="modal">Editar <i class="far fa-edit"></i></button>
                             <button type="button" class="btn btn-danger" @click="load()" data-dismiss="modal">Cancelar <i class="fas fa-times"></i></button>
                         </div>
@@ -108,9 +108,11 @@
             if(this.carrera.carrera == null)
             {
                 swal({
-					type: 'error',
-					title: 'Llenar los datos obligatorios',
-				});
+                    type: 'warning',
+                    title: 'Llenar los campos obligatorios',
+                    //allowOutsideClick: false,
+                    timer: 3000
+                });
             }else if(e == 1){
                 this.$Progress.start();
                 axios.post("addCarrera",{
@@ -126,11 +128,12 @@
                     this.$Progress.finish();
                     this.getDatos();
                     this.load();
+                    $("#exampleModal").modal('hide');
                     }).catch(error=>{
                     console.log(error);	
                     swal({
                         type: 'error',
-                        title: 'Error',
+                        title: 'Ocurrió un problema',
                         text: 'Comuniquese con un administrador',
                         showConfirmButton: true,
                     });
@@ -154,7 +157,7 @@
                     console.log(error);	
                     swal({
                         type: 'error',
-                        title: 'Error',
+                        title: 'Ocurrió un problema',
                         text: 'Comuniquese con un administrador',
                         showConfirmButton: true,
                     });

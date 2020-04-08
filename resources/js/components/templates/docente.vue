@@ -106,7 +106,7 @@
                                 </div>
                             </div>      
                         <div class="modal-footer">
-                            <button @click="addDocente(1)" id="add" class="btn btn-success" data-dismiss="modal">Guardar <i class="fa fa-save"></i></button>
+                            <button @click="addDocente(1)" id="add" class="btn btn-success">Guardar <i class="fa fa-save"></i></button>
                             <button @click="addDocente(2)" id="editar" class="btn btn-success" data-dismiss="modal">Editar <i class="far fa-edit"></i></button>
                             <button type="button" class="btn btn-danger" @click="load()" data-dismiss="modal">Cancelar <i class="fas fa-times"></i></button>
                         </div>
@@ -178,8 +178,8 @@
                     Dedicacion:"Dedicación",
                     Categoria:"Categoría",
 				},
-				sortable    : ["DNI","Codigo","NombresAux","Celular","Categoria","Dedicacion","Escuela"],
-				filterable  : ["DNI","Codigo","NombresAux","Celular","Categoria","Dedicacion","Escuela"]
+				sortable    : ["DNI","Codigo","NombreAux","Celular","Categoria","Dedicacion","Escuela"],
+				filterable  : ["DNI","Codigo","NombreAux","Celular","Categoria","Dedicacion","Escuela"]
             },
         }
 	},
@@ -221,11 +221,14 @@
             if(this.docente.nombres == null || this.docente.apellidos == null || this.docente.celular == null 
             || this.docente.escuela == null || this.docente.codigo == null || this.docente.dedicacion == null
             || this.docente.categoria == null || this.docente.dni == null)
-            {
+            {                
                 swal({
-					type: 'error',
-					title: 'Llenar los datos obligatorios',
+                    type: 'warning',
+                    title: 'Llenar los campos obligatorios',
+                    //allowOutsideClick: false,
+                    timer: 3000
                 });
+                
             }else if(e == 1){
                 this.$Progress.start();
                 axios.post("addDocente",{
@@ -241,11 +244,12 @@
                     this.$Progress.finish();
                     this.getDatos();
                     this.load();
+                    $("#exampleModal").modal('hide');
                     }).catch(error=>{
                     console.log(error);	
                     swal({
                         type: 'error',
-                        title: 'Error',
+                        title: 'Ocurrió un problema',
                         text: 'Comuniquese con un administrador',
                         showConfirmButton: true,
                     });
@@ -269,8 +273,8 @@
                     console.log(error);	
                     swal({
                         type: 'error',
-                        title: 'Error',
-                        text: 'Comuniquese con un administrador',
+                        title: 'Ocurrió un problema',
+                        text: 'Comuníquese con un administrador',
                         showConfirmButton: true,
                     });
                 })

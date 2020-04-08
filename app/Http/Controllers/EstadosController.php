@@ -45,11 +45,11 @@ class EstadosController extends Controller
             $estado->Estado     = mb_strtoupper($request->estado["estado"]);
             $estado->save();
             $type   = "success";
-            $title  = "Bien";
-            $text   = "Estado ingresado con éxito";
+            //$title  = "Bien";
+            $text   = "Estado creado con éxito";
         }else{
             $type   = "warning";
-            $title  = "Ups...";
+            //$title  = "Ups...";
             $text   = "Ya existe un Estado con esa posición";
         }
         return compact("type","title","text");
@@ -95,11 +95,11 @@ class EstadosController extends Controller
                             "Estado"    => mb_strtoupper($request->estado["estado"]),
             ]);
             $type   = "success";
-            $title  = "Bien";
-            $text   = "Estado actualizado con éxito";
+            //$title  = "Bien";
+            $text   = "Estado editado con éxito";
         }else{
             $type   = "warning";
-            $title  = "Ups...";
+            //$title  = "Ups...";
             $text   = "Ya existe un Estado con esa posición";
         }
         return compact("type","title","text");

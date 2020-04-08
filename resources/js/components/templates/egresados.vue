@@ -130,8 +130,8 @@
                                 </div>
                             </div>      
                         <div class="modal-footer">
-                            <button @click="addEgresado(1)" id="add" class="btn btn-success" data-dismiss="modal">Guardar <i class="fa fa-save"></i></button>
-                            <button @click="addEgresado(2)" id="editar" class="btn btn-success" data-dismiss="modal">Editar <i class="far fa-edit"></i></button>
+                            <button @click="addEgresado(1)" id="add" class="btn btn-success">Guardar <i class="fa fa-save"></i></button>
+                            <button @click="addEgresado(2)" id="editar" class="btn btn-success">Editar <i class="far fa-edit"></i></button>
                             <button type="button" class="btn btn-danger" @click="load()" data-dismiss="modal">Cancelar <i class="fas fa-times"></i></button>
                         </div>
                         </div>
@@ -248,10 +248,12 @@
                 {
                     swal({
                         // position: 'top-en]d',
-                        type: 'error',
-                        title: 'Año de Egreso debe ser mayor a año de Ingreso',
+                        type: 'warning',
+                        title: 'Año de egreso debe ser mayor al año de Ingreso',
                        
                     });
+                    this.egresado.ingreso       = null;
+                    this.egresado.egreso        = null;
                 }
             }
         },
@@ -271,17 +273,16 @@
 		},
         
         addEgresado(e)
-		{
-            if(e == 1)
-            {
-                if(this.egresado.nombre == null || this.egresado.paterno == null || this.egresado.materno == null 
+		{   
+            if(this.egresado.nombre == null || this.egresado.paterno == null || this.egresado.materno == null 
                 || this.egresado.genero == null || this.egresado.ingreso == null || this.egresado.egreso == null)
                 {
                     swal({
-                        type: 'error',
-                        title: 'Llenar los datos obligatorios',
-                    });
-                }else{
+                    type: 'warning',
+                    title: 'Llenar los campos obligatorios',
+                    timer: 3000
+                });
+            }else if(e == 1){                
                     this.$Progress.start();
                     axios.post("addEgresado",{
                         egresado:this.egresado
@@ -297,30 +298,23 @@
                         this.$Progress.finish();
                         this.getDatos();
                         this.load();
+                        $("#exampleModal").modal('hide');
                         // setTimeout(() => {
                         //     location.reload();
                         // }, 1500);
                         }).catch(error=>{
                         console.log(error);	
                         swal({
-                            type: 'error',
-                            title: 'Error',
-                            text: 'Comuniquese con un administrador',
-                            showConfirmButton: true,
-                        });
+                        type: 'error',
+                        title: 'Ocurrió un problema',
+                        text: 'Comuniquese con un administrador',
+                        showConfirmButton: true,
+                    });
                     })
-                }
+                
             }
             else if(e == 2)
             {
-                if(this.egresado.nombre == null || this.egresado.paterno == null || this.egresado.materno == null 
-                || this.egresado.genero == null || this.egresado.ingreso == null || this.egresado.egreso == null)
-                {
-                    swal({
-                        type: 'error',
-                        title: 'Llenar los datos obligatorios',
-                    });
-                }else{
                     this.$Progress.start();
                     axios.post("updateEgresado",{
                         egresado:this.egresado
@@ -336,18 +330,17 @@
                         this.$Progress.finish();
                         this.getDatos();
                         this.load();
+                        $("#exampleModal").modal('hide');
                         }).catch(error=>{
                         console.log(error);	
                         swal({
-                            type: 'error',
-                            title: 'Error',
-                            text: 'Comuniquese con un administrador',
-                            showConfirmButton: true,
-                        });
+                        type: 'error',
+                        title: 'Ocurrió un problema',
+                        text: 'Comuniquese con un administrador',
+                        showConfirmButton: true,
+                    });
                     })
-                }
-            }
-			
+                }            
 		},
 		ocultar(id){
 			if(id == '1')
@@ -369,28 +362,28 @@
 			this.$Progress.start();
             swal({
                 title: '¿Deseas eliminar este Egresado?',
-                text: "No será posible revertir esta acción!",
+                text: "No será posible revertir esta acción",
                 type: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Si',
-                cancelButtonText: 'cancelar',
+                confirmButtonText: 'Sí',
+                cancelButtonText: 'Cancelar',
             }).then((result) => {
                 if (result.value) {
                     axios.get(`/deleteEgresado/${id}`)
                         .then(data => {
                         if(data.data=="OK"){
                             swal(
-                            'Eliminado!',
-                            'el egresado ha sido eliminada.',
+                            'Egresado eliminado con éxito',
+                            '',
                             'success'
 							);
                         this.$Progress.finish();
                         this.getDatos();
                         }
                         }).catch(error => {
-                            console.log('Ocurrio un error ' + error);
+                            console.log('Ocurrió un problema ' + error);
                             this.$Progress.fail();
                         });
                      }

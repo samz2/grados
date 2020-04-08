@@ -50,8 +50,8 @@ class ComisionController extends Controller
         $comision->FechaFin     = $request->comision["fin"];
         $comision->save();
         $type   = "success";
-        $title  = "Bien";
-        $text   = "Comisión agregada con éxito";
+        //$title  = "Bien";
+        $text   = "Comisión creada con éxito";
         return compact("type","title","text");
     }
 
@@ -98,12 +98,12 @@ class ComisionController extends Controller
         if($comision)
         {
             $type   = "success";
-            $title  = "Bien";
-            $text   = "Comisión actualizada con éxito";
+            //$title  = "Bien";
+            $text   = "Comisión editada con éxito";
         }else{
             $type   = "warning";
-            $title  = "Ups";
-            $text   = "Ocurrió un roblema";
+            //$title  = "Ups";
+            $text   = "Ocurrió un problema";
         }
         return compact("type","title","text");
     }

@@ -98,8 +98,8 @@
                             </div>
                             <br>
                         <div class="modal-footer">
-                            <button @click="addComision(1)" id="add" class="btn btn-success" data-dismiss="modal">Guardar <i class="fa fa-save"></i></button>
-                            <button @click="addComision(2)" id="editar" class="btn btn-success" data-dismiss="modal">Editar <i class="far fa-edit"></i></button>
+                            <button @click="addComision(1)" id="add" class="btn btn-success">Guardar <i class="fa fa-save"></i></button>
+                            <button @click="addComision(2)" id="editar" class="btn btn-success">Editar <i class="far fa-edit"></i></button>
                             <button type="button" class="btn btn-danger" @click="load()" data-dismiss="modal">Cancelar <i class="fas fa-times"></i></button>
                         </div>
                         </div>
@@ -213,10 +213,23 @@
                 this.comision.miembro2 == null || this.comision.inicio == null || this.comision.fin == null || this.comision.estado == null)
             {
                 swal({
-					type: 'error',
-					title: 'Llenar los datos obligatorios',
-				});
+                    type: 'warning',
+                    title: 'Llenar los campos obligatorios',
+                    //allowOutsideClick: false,
+                    timer: 3000
+                });
             }else if(e == 1){
+                if(this.comision.inicio >= this.comision.fin){
+
+                    swal({
+                        type: 'warning',
+                        title: 'La fecha de inicio no puede ser mayor a la fecha de fin',
+                       
+                    });
+                    this.comision.inicio = null;
+                    this.comision.fin = null;
+
+                }else{
                 this.$Progress.start();
                 axios.post("addComision",{
                     comision:this.comision
@@ -231,16 +244,29 @@
                     this.$Progress.finish();
                     this.getDatos();
                     this.load();
+                    $("#exampleModal").modal('hide');
                     }).catch(error=>{
                     console.log(error);	
                     swal({
                         type: 'error',
-                        title: 'Error',
+                        title: 'Ocurrió un problema',
                         text: 'Comuniquese con un administrador',
                         showConfirmButton: true,
                     });
                 })
+                }
             }else if(e == 2){
+                if(this.comision.inicio >= this.comision.fin){
+
+                    swal({
+                        type: 'warning',
+                        title: 'La fecha de inicio no puede ser mayor a la fecha de fin',
+                       
+                    });
+                    this.comision.inicio = null;
+                    this.comision.fin = null;
+
+                }else{
                 this.$Progress.start();
                 axios.post("updateComision",{
                     comision:this.comision
@@ -255,15 +281,17 @@
                     this.$Progress.finish();
                     this.getDatos();
                     this.load();
+                    $("#exampleModal").modal('hide');
                     }).catch(error=>{
                     console.log(error);	
                     swal({
                         type: 'error',
-                        title: 'Error',
+                        title: 'Ocurrió un problema',
                         text: 'Comuniquese con un administrador',
                         showConfirmButton: true,
                     });
                 })
+            }
             }
 		},
 		load(){
@@ -277,7 +305,7 @@
                 this.comision.inicio        = null;
                 this.comision.fin           = null;
                 this.comision.estado        = null;
-		},
+        },
 		edit(IDComision,Semestre,Presidente,Miembro1,Miembro2,FechaInicio,FechaFin,Estado)
 		{
             $('#editar').show();
@@ -302,7 +330,7 @@
             {
                 swal({
                         type: 'error',
-                        title: 'Error',
+                        //title: 'Error',
                         text: 'Presidente debe ser diferente al Miembro 1',
                         showConfirmButton: true,
                     });
@@ -313,7 +341,7 @@
             {
                 swal({
                         type: 'error',
-                        title: 'Error',
+                        //title: 'Error',
                         text: 'Miembro 1 debe ser diferente al Miembro 2',
                         showConfirmButton: true,
                     });
@@ -324,7 +352,7 @@
             {
                 swal({
                         type: 'error',
-                        title: 'Error',
+                        //title: 'Error',
                         text: 'Presidente debe ser diferente al Miembro 2',
                         showConfirmButton: true,
                     });
@@ -334,7 +362,7 @@
         },
         validafecha()
         {
-            if(this.comision.inicio == null || this.comision.fin == null)
+            /*if(this.comision.inicio == null || this.comision.fin == null)
             {
                 return;
             }
@@ -342,13 +370,42 @@
             {
                 swal({
                         type: 'error',
-                        title: 'Error',
+                        //title: 'Error',
                         text: 'Fecha inicio debe ser menor a Fecha Fin',
                         showConfirmButton: true,
                     });
                 this.comision.inicio = null;
                 this.comision.fin = null;
+            }*/
+            if(this.comision.inicio !=null)
+            {
+                var inicio = this.comision.inicio;
+                var final  = '2022-01-01';
+                if(final<=inicio)
+                {
+                    swal({
+                        type: 'warning',
+                        title: 'Ingresar una fecha correcta',
+                       
+                    });
+                    this.comision.inicio = null;
+                }
             }
+             if(this.comision.fin !=null)
+            {
+                var inicio = this.comision.fin;
+                var final  = '2026-01-01';
+                if(final<=inicio)
+                {
+                    swal({
+                        type: 'warning',
+                        title: 'Ingresar una fecha correcta',
+                       
+                    });
+                    this.comision.fin = null;
+                }
+            }
+            
         },
     }
 }

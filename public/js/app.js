@@ -3051,8 +3051,10 @@ __webpack_require__.r(__webpack_exports__);
 
       if (this.carrera.carrera == null) {
         swal({
-          type: 'error',
-          title: 'Llenar los datos obligatorios'
+          type: 'warning',
+          title: 'Llenar los campos obligatorios',
+          //allowOutsideClick: false,
+          timer: 3000
         });
       } else if (e == 1) {
         this.$Progress.start();
@@ -3072,11 +3074,13 @@ __webpack_require__.r(__webpack_exports__);
           _this2.getDatos();
 
           _this2.load();
+
+          $("#exampleModal").modal('hide');
         })["catch"](function (error) {
           console.log(error);
           swal({
             type: 'error',
-            title: 'Error',
+            title: 'Ocurrió un problema',
             text: 'Comuniquese con un administrador',
             showConfirmButton: true
           });
@@ -3103,7 +3107,7 @@ __webpack_require__.r(__webpack_exports__);
           console.log(error);
           swal({
             type: 'error',
-            title: 'Error',
+            title: 'Ocurrió un problema',
             text: 'Comuniquese con un administrador',
             showConfirmButton: true
           });
@@ -3346,63 +3350,87 @@ __webpack_require__.r(__webpack_exports__);
 
       if (this.comision.semestre == null || this.comision.presidente == null || this.comision.miembro1 == null || this.comision.miembro2 == null || this.comision.inicio == null || this.comision.fin == null || this.comision.estado == null) {
         swal({
-          type: 'error',
-          title: 'Llenar los datos obligatorios'
+          type: 'warning',
+          title: 'Llenar los campos obligatorios',
+          //allowOutsideClick: false,
+          timer: 3000
         });
       } else if (e == 1) {
-        this.$Progress.start();
-        axios.post("addComision", {
-          comision: this.comision
-        }).then(function (data) {
+        if (this.comision.inicio >= this.comision.fin) {
           swal({
-            type: data.data.type,
-            title: data.data.title,
-            text: data.data.text,
-            showConfirmButton: false,
-            timer: 2000
+            type: 'warning',
+            title: 'La fecha de inicio no puede ser mayor a la fecha de fin'
           });
+          this.comision.inicio = null;
+          this.comision.fin = null;
+        } else {
+          this.$Progress.start();
+          axios.post("addComision", {
+            comision: this.comision
+          }).then(function (data) {
+            swal({
+              type: data.data.type,
+              title: data.data.title,
+              text: data.data.text,
+              showConfirmButton: false,
+              timer: 2000
+            });
 
-          _this3.$Progress.finish();
+            _this3.$Progress.finish();
 
-          _this3.getDatos();
+            _this3.getDatos();
 
-          _this3.load();
-        })["catch"](function (error) {
-          console.log(error);
-          swal({
-            type: 'error',
-            title: 'Error',
-            text: 'Comuniquese con un administrador',
-            showConfirmButton: true
+            _this3.load();
+
+            $("#exampleModal").modal('hide');
+          })["catch"](function (error) {
+            console.log(error);
+            swal({
+              type: 'error',
+              title: 'Ocurrió un problema',
+              text: 'Comuniquese con un administrador',
+              showConfirmButton: true
+            });
           });
-        });
+        }
       } else if (e == 2) {
-        this.$Progress.start();
-        axios.post("updateComision", {
-          comision: this.comision
-        }).then(function (data) {
+        if (this.comision.inicio >= this.comision.fin) {
           swal({
-            type: data.data.type,
-            title: data.data.title,
-            text: data.data.text,
-            showConfirmButton: false,
-            timer: 2000
+            type: 'warning',
+            title: 'La fecha de inicio no puede ser mayor a la fecha de fin'
           });
+          this.comision.inicio = null;
+          this.comision.fin = null;
+        } else {
+          this.$Progress.start();
+          axios.post("updateComision", {
+            comision: this.comision
+          }).then(function (data) {
+            swal({
+              type: data.data.type,
+              title: data.data.title,
+              text: data.data.text,
+              showConfirmButton: false,
+              timer: 2000
+            });
 
-          _this3.$Progress.finish();
+            _this3.$Progress.finish();
 
-          _this3.getDatos();
+            _this3.getDatos();
 
-          _this3.load();
-        })["catch"](function (error) {
-          console.log(error);
-          swal({
-            type: 'error',
-            title: 'Error',
-            text: 'Comuniquese con un administrador',
-            showConfirmButton: true
+            _this3.load();
+
+            $("#exampleModal").modal('hide');
+          })["catch"](function (error) {
+            console.log(error);
+            swal({
+              type: 'error',
+              title: 'Ocurrió un problema',
+              text: 'Comuniquese con un administrador',
+              showConfirmButton: true
+            });
           });
-        });
+        }
       }
     },
     load: function load() {
@@ -3437,7 +3465,7 @@ __webpack_require__.r(__webpack_exports__);
       if (this.comision.presidente == this.comision.miembro1) {
         swal({
           type: 'error',
-          title: 'Error',
+          //title: 'Error',
           text: 'Presidente debe ser diferente al Miembro 1',
           showConfirmButton: true
         });
@@ -3448,7 +3476,7 @@ __webpack_require__.r(__webpack_exports__);
       if (this.comision.miembro1 == this.comision.miembro2) {
         swal({
           type: 'error',
-          title: 'Error',
+          //title: 'Error',
           text: 'Miembro 1 debe ser diferente al Miembro 2',
           showConfirmButton: true
         });
@@ -3459,7 +3487,7 @@ __webpack_require__.r(__webpack_exports__);
       if (this.comision.presidente == this.comision.miembro2) {
         swal({
           type: 'error',
-          title: 'Error',
+          //title: 'Error',
           text: 'Presidente debe ser diferente al Miembro 2',
           showConfirmButton: true
         });
@@ -3468,19 +3496,45 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     validafecha: function validafecha() {
-      if (this.comision.inicio == null || this.comision.fin == null) {
-        return;
+      /*if(this.comision.inicio == null || this.comision.fin == null)
+      {
+          return;
+      }
+      if(this.comision.inicio >= this.comision.fin)
+      {
+          swal({
+                  type: 'error',
+                  //title: 'Error',
+                  text: 'Fecha inicio debe ser menor a Fecha Fin',
+                  showConfirmButton: true,
+              });
+          this.comision.inicio = null;
+          this.comision.fin = null;
+      }*/
+      if (this.comision.inicio != null) {
+        var inicio = this.comision.inicio;
+        var _final = '2022-01-01';
+
+        if (_final <= inicio) {
+          swal({
+            type: 'warning',
+            title: 'Ingresar una fecha correcta'
+          });
+          this.comision.inicio = null;
+        }
       }
 
-      if (this.comision.inicio >= this.comision.fin) {
-        swal({
-          type: 'error',
-          title: 'Error',
-          text: 'Fecha inicio debe ser menor a Fecha Fin',
-          showConfirmButton: true
-        });
-        this.comision.inicio = null;
-        this.comision.fin = null;
+      if (this.comision.fin != null) {
+        var inicio = this.comision.fin;
+        var _final = '2026-01-01';
+
+        if (_final <= inicio) {
+          swal({
+            type: 'warning',
+            title: 'Ingresar una fecha correcta'
+          });
+          this.comision.fin = null;
+        }
       }
     }
   }
@@ -3646,63 +3700,87 @@ __webpack_require__.r(__webpack_exports__);
 
       if (this.decano.decano == null || this.decano.inicio == null || this.decano.fin == null) {
         swal({
-          type: 'error',
-          title: 'Llenar los datos obligatorios'
+          type: 'warning',
+          title: 'Llenar los campos obligatorios',
+          //allowOutsideClick: false,
+          timer: 3000
         });
       } else if (e == 1) {
-        this.$Progress.start();
-        axios.post("addDecano", {
-          decano: this.decano
-        }).then(function (data) {
+        if (this.decano.inicio >= this.decano.fin) {
           swal({
-            type: data.data.type,
-            title: data.data.title,
-            text: data.data.text,
-            showConfirmButton: false,
-            timer: 2000
+            type: 'warning',
+            title: 'La fecha de inicio no puede ser mayor a la fecha de fin'
           });
+          this.decano.inicio = null;
+          this.decano.fin = null;
+        } else {
+          this.$Progress.start();
+          axios.post("addDecano", {
+            decano: this.decano
+          }).then(function (data) {
+            swal({
+              type: data.data.type,
+              title: data.data.title,
+              text: data.data.text,
+              showConfirmButton: false,
+              timer: 2000
+            });
 
-          _this3.$Progress.finish();
+            _this3.$Progress.finish();
 
-          _this3.getDatos();
+            _this3.getDatos();
 
-          _this3.load();
-        })["catch"](function (error) {
-          console.log(error);
-          swal({
-            type: 'error',
-            title: 'Error',
-            text: 'Comuniquese con un administrador',
-            showConfirmButton: true
+            _this3.load();
+
+            $("#exampleModal").modal('hide');
+          })["catch"](function (error) {
+            console.log(error);
+            swal({
+              type: 'error',
+              title: 'Ocurrió un problema',
+              text: 'Comuniquese con un administrador',
+              showConfirmButton: true
+            });
           });
-        });
+        }
       } else if (e == 2) {
-        this.$Progress.start();
-        axios.post("updateDecano", {
-          decano: this.decano
-        }).then(function (data) {
+        if (this.decano.inicio >= this.decano.fin) {
           swal({
-            type: data.data.type,
-            title: data.data.title,
-            text: data.data.text,
-            showConfirmButton: false,
-            timer: 2000
+            type: 'warning',
+            title: 'La fecha de inicio no puede ser mayor a la fecha de fin'
           });
+          this.decano.inicio = null;
+          this.decano.fin = null;
+        } else {
+          this.$Progress.start();
+          axios.post("updateDecano", {
+            decano: this.decano
+          }).then(function (data) {
+            swal({
+              type: data.data.type,
+              title: data.data.title,
+              text: data.data.text,
+              showConfirmButton: false,
+              timer: 2000
+            });
 
-          _this3.$Progress.finish();
+            _this3.$Progress.finish();
 
-          _this3.getDatos();
+            _this3.getDatos();
 
-          _this3.load();
-        })["catch"](function (error) {
-          console.log(error);
-          swal({
-            type: 'error',
-            title: 'Error',
-            text: 'Comuniquese con un administrador',
-            showConfirmButton: true
+            _this3.load();
+
+            $("#exampleModal").modal('hide');
+          })["catch"](function (error) {
+            console.log(error);
+            swal({
+              type: 'error',
+              title: 'Ocurrió un problema',
+              text: 'Comuniquese con un administrador',
+              showConfirmButton: true
+            });
           });
-        });
+        }
       }
     },
     load: function load() {
@@ -3722,19 +3800,45 @@ __webpack_require__.r(__webpack_exports__);
       this.decano.fin = PeriodoFin;
     },
     validafecha: function validafecha() {
-      if (this.decano.inicio == null || this.decano.fin == null) {
-        return;
+      /*if(this.decano.inicio == null || this.decano.fin == null)
+      {
+          return;
+      }
+      if(this.decano.inicio >= this.decano.fin)
+      {
+          swal({
+                  type: 'error',
+                  title: 'Error',
+                  text: 'Fecha inicio debe ser menor a Fecha Fin',
+                  showConfirmButton: true,
+              });
+          this.decano.inicio = null;
+          this.decano.fin = null;
+      }*/
+      if (this.decano.inicio != null) {
+        var inicio = this.decano.inicio;
+        var _final = '2022-01-01';
+
+        if (_final <= inicio) {
+          swal({
+            type: 'warning',
+            title: 'Ingresar una fecha correcta'
+          });
+          this.decano.inicio = null;
+        }
       }
 
-      if (this.decano.inicio >= this.decano.fin) {
-        swal({
-          type: 'error',
-          title: 'Error',
-          text: 'Fecha inicio debe ser menor a Fecha Fin',
-          showConfirmButton: true
-        });
-        this.decano.inicio = null;
-        this.decano.fin = null;
+      if (this.decano.fin != null) {
+        var inicio = this.decano.fin;
+        var _final = '2026-01-01';
+
+        if (_final <= inicio) {
+          swal({
+            type: 'warning',
+            title: 'Ingresar una fecha correcta'
+          });
+          this.decano.fin = null;
+        }
       }
     }
   }
@@ -3929,8 +4033,8 @@ __webpack_require__.r(__webpack_exports__);
           Dedicacion: "Dedicación",
           Categoria: "Categoría"
         },
-        sortable: ["DNI", "Codigo", "NombresAux", "Celular", "Categoria", "Dedicacion", "Escuela"],
-        filterable: ["DNI", "Codigo", "NombresAux", "Celular", "Categoria", "Dedicacion", "Escuela"]
+        sortable: ["DNI", "Codigo", "NombreAux", "Celular", "Categoria", "Dedicacion", "Escuela"],
+        filterable: ["DNI", "Codigo", "NombreAux", "Celular", "Categoria", "Dedicacion", "Escuela"]
       }
     };
   },
@@ -3968,8 +4072,10 @@ __webpack_require__.r(__webpack_exports__);
 
       if (this.docente.nombres == null || this.docente.apellidos == null || this.docente.celular == null || this.docente.escuela == null || this.docente.codigo == null || this.docente.dedicacion == null || this.docente.categoria == null || this.docente.dni == null) {
         swal({
-          type: 'error',
-          title: 'Llenar los datos obligatorios'
+          type: 'warning',
+          title: 'Llenar los campos obligatorios',
+          //allowOutsideClick: false,
+          timer: 3000
         });
       } else if (e == 1) {
         this.$Progress.start();
@@ -3989,11 +4095,13 @@ __webpack_require__.r(__webpack_exports__);
           _this3.getDatos();
 
           _this3.load();
+
+          $("#exampleModal").modal('hide');
         })["catch"](function (error) {
           console.log(error);
           swal({
             type: 'error',
-            title: 'Error',
+            title: 'Ocurrió un problema',
             text: 'Comuniquese con un administrador',
             showConfirmButton: true
           });
@@ -4020,8 +4128,8 @@ __webpack_require__.r(__webpack_exports__);
           console.log(error);
           swal({
             type: 'error',
-            title: 'Error',
-            text: 'Comuniquese con un administrador',
+            title: 'Ocurrió un problema',
+            text: 'Comuníquese con un administrador',
             showConfirmButton: true
           });
         });
@@ -4665,9 +4773,11 @@ __webpack_require__.r(__webpack_exports__);
         if (_final <= inicio) {
           swal({
             // position: 'top-en]d',
-            type: 'error',
-            title: 'Año de Egreso debe ser mayor a año de Ingreso'
+            type: 'warning',
+            title: 'Año de egreso debe ser mayor al año de Ingreso'
           });
+          this.egresado.ingreso = null;
+          this.egresado.egreso = null;
         }
       }
     },
@@ -4688,79 +4798,74 @@ __webpack_require__.r(__webpack_exports__);
     addEgresado: function addEgresado(e) {
       var _this3 = this;
 
-      if (e == 1) {
-        if (this.egresado.nombre == null || this.egresado.paterno == null || this.egresado.materno == null || this.egresado.genero == null || this.egresado.ingreso == null || this.egresado.egreso == null) {
+      if (this.egresado.nombre == null || this.egresado.paterno == null || this.egresado.materno == null || this.egresado.genero == null || this.egresado.ingreso == null || this.egresado.egreso == null) {
+        swal({
+          type: 'warning',
+          title: 'Llenar los campos obligatorios',
+          timer: 3000
+        });
+      } else if (e == 1) {
+        this.$Progress.start();
+        axios.post("addEgresado", {
+          egresado: this.egresado
+        }).then(function (data) {
+          swal({
+            // position: 'top-end',
+            type: data.data.val,
+            title: data.data.title,
+            text: data.data.msj,
+            showConfirmButton: false,
+            timer: 2000
+          });
+
+          _this3.$Progress.finish();
+
+          _this3.getDatos();
+
+          _this3.load();
+
+          $("#exampleModal").modal('hide'); // setTimeout(() => {
+          //     location.reload();
+          // }, 1500);
+        })["catch"](function (error) {
+          console.log(error);
           swal({
             type: 'error',
-            title: 'Llenar los datos obligatorios'
+            title: 'Ocurrió un problema',
+            text: 'Comuniquese con un administrador',
+            showConfirmButton: true
           });
-        } else {
-          this.$Progress.start();
-          axios.post("addEgresado", {
-            egresado: this.egresado
-          }).then(function (data) {
-            swal({
-              // position: 'top-end',
-              type: data.data.val,
-              title: data.data.title,
-              text: data.data.msj,
-              showConfirmButton: false,
-              timer: 2000
-            });
-
-            _this3.$Progress.finish();
-
-            _this3.getDatos();
-
-            _this3.load(); // setTimeout(() => {
-            //     location.reload();
-            // }, 1500);
-
-          })["catch"](function (error) {
-            console.log(error);
-            swal({
-              type: 'error',
-              title: 'Error',
-              text: 'Comuniquese con un administrador',
-              showConfirmButton: true
-            });
-          });
-        }
+        });
       } else if (e == 2) {
-        if (this.egresado.nombre == null || this.egresado.paterno == null || this.egresado.materno == null || this.egresado.genero == null || this.egresado.ingreso == null || this.egresado.egreso == null) {
+        this.$Progress.start();
+        axios.post("updateEgresado", {
+          egresado: this.egresado
+        }).then(function (data) {
+          swal({
+            // position: 'top-end',
+            type: data.data.val,
+            title: data.data.title,
+            text: data.data.msj,
+            showConfirmButton: false,
+            timer: 2000
+          });
+
+          _this3.$Progress.finish();
+
+          _this3.getDatos();
+
+          _this3.load();
+
+          $("#exampleModal").modal('hide');
+        })["catch"](function (error) {
+          console.log(error);
           swal({
             type: 'error',
-            title: 'Llenar los datos obligatorios'
+            title: 'Ocurrió un problema',
+            text: 'Comuniquese con un administrador',
+            showConfirmButton: true
           });
-        } else {
-          this.$Progress.start();
-          axios.post("updateEgresado", {
-            egresado: this.egresado
-          }).then(function (data) {
-            swal({
-              // position: 'top-end',
-              type: data.data.val,
-              title: data.data.title,
-              text: data.data.msj,
-              showConfirmButton: false,
-              timer: 2000
-            });
-
-            _this3.$Progress.finish();
-
-            _this3.getDatos();
-
-            _this3.load();
-          })["catch"](function (error) {
-            console.log(error);
-            swal({
-              type: 'error',
-              title: 'Error',
-              text: 'Comuniquese con un administrador',
-              showConfirmButton: true
-            });
-          });
-        }
+        });
       }
     },
     ocultar: function ocultar(id) {
@@ -4780,25 +4885,25 @@ __webpack_require__.r(__webpack_exports__);
       this.$Progress.start();
       swal({
         title: '¿Deseas eliminar este Egresado?',
-        text: "No será posible revertir esta acción!",
+        text: "No será posible revertir esta acción",
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Si',
-        cancelButtonText: 'cancelar'
+        confirmButtonText: 'Sí',
+        cancelButtonText: 'Cancelar'
       }).then(function (result) {
         if (result.value) {
           axios.get("/deleteEgresado/".concat(id)).then(function (data) {
             if (data.data == "OK") {
-              swal('Eliminado!', 'el egresado ha sido eliminada.', 'success');
+              swal('Egresado eliminado con éxito', '', 'success');
 
               _this4.$Progress.finish();
 
               _this4.getDatos();
             }
           })["catch"](function (error) {
-            console.log('Ocurrio un error ' + error);
+            console.log('Ocurrió un problema ' + error);
 
             _this4.$Progress.fail();
           });
@@ -5004,8 +5109,10 @@ __webpack_require__.r(__webpack_exports__);
 
       if (this.estado.posicion == null || this.estado.estado == null) {
         swal({
-          type: 'error',
-          title: 'Llenar los datos obligatorios'
+          type: 'warning',
+          title: 'Llenar los campos obligatorios',
+          //allowOutsideClick: false,
+          timer: 3000
         });
       } else if (e == 1) {
         this.$Progress.start();
@@ -5025,11 +5132,13 @@ __webpack_require__.r(__webpack_exports__);
           _this2.getDatos();
 
           _this2.load();
+
+          $("#exampleModal").modal('hide');
         })["catch"](function (error) {
           console.log(error);
           swal({
             type: 'error',
-            title: 'Error',
+            title: 'Ocurrió un problema',
             text: 'Comuniquese con un administrador',
             showConfirmButton: true
           });
@@ -5056,7 +5165,7 @@ __webpack_require__.r(__webpack_exports__);
           console.log(error);
           swal({
             type: 'error',
-            title: 'Error',
+            title: 'Ocurrió un problema',
             text: 'Comuniquese con un administrador',
             showConfirmButton: true
           });
@@ -5091,9 +5200,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
 //
 //
 //
@@ -5409,7 +5515,7 @@ __webpack_require__.r(__webpack_exports__);
         if (data.data.alumnos[0] == null) {
           swal({
             type: 'error',
-            title: 'no se encontraron registros'
+            title: 'No se encontraron registros'
           });
         } else {
           _this.alumnos = data.data.alumnos[0];
@@ -5484,12 +5590,12 @@ __webpack_require__.r(__webpack_exports__);
       var size = e.target.files[0].size;
       var type = e.target.files[0].type;
 
-      if (size > 1024000) {
+      if (size > 1024001) {
         e.target.value = '';
         swal({
           type: 'error',
-          title: 'Error',
-          text: 'El tamaño del archivo debe ser menor a 1mb',
+          //title: 'Error',
+          text: 'El tamaño del archivo debe ser menor o igual a 1mb',
           showConfirmButton: true
         });
         return;
@@ -5508,7 +5614,7 @@ __webpack_require__.r(__webpack_exports__);
         this.archivos.matricula = null;
         swal({
           type: 'error',
-          title: 'Error',
+          //title: 'Error',
           text: 'El archivo debe ser PDF, por favor intente subiendo otro archivo',
           showConfirmButton: true
         });
@@ -5521,12 +5627,12 @@ __webpack_require__.r(__webpack_exports__);
       var size = e.target.files[0].size;
       var type = e.target.files[0].type;
 
-      if (size > 1024000) {
+      if (size > 1024001) {
         e.target.value = '';
         swal({
           type: 'error',
-          title: 'Error',
-          text: 'El tamaño del archivo debe ser menor a 1mb',
+          //title: 'Error',
+          text: 'El tamaño del archivo debe ser menor o igual a 1mb',
           showConfirmButton: true
         });
         return;
@@ -5545,7 +5651,7 @@ __webpack_require__.r(__webpack_exports__);
         e.target.value = '';
         swal({
           type: 'error',
-          title: 'Error',
+          //title: 'Error',
           text: 'El archivo debe ser PDF, por favor intente subiendo otro archivo',
           showConfirmButton: true
         });
@@ -5558,12 +5664,12 @@ __webpack_require__.r(__webpack_exports__);
       var size = e.target.files[0].size;
       var type = e.target.files[0].type;
 
-      if (size > 1024000) {
+      if (size > 1024001) {
         e.target.value = '';
         swal({
           type: 'error',
-          title: 'Error',
-          text: 'El tamaño del archivo debe ser menor a 1mb',
+          //title: 'Error',
+          text: 'El tamaño del archivo debe ser menor o igual a 1mb',
           showConfirmButton: true
         });
         return;
@@ -5582,7 +5688,7 @@ __webpack_require__.r(__webpack_exports__);
         e.target.value = '';
         swal({
           type: 'error',
-          title: 'Error',
+          //title: 'Error',
           text: 'El archivo debe ser una imagen, por favor intente subiendo otro archivo',
           showConfirmButton: true
         });
@@ -5608,8 +5714,10 @@ __webpack_require__.r(__webpack_exports__);
 
       if (this.expedito.codigo == null || this.expedito.dni == null || this.expedito.alumno == null || this.expedito.carrera == null || this.expedito.tomo == null || this.expedito.folio == null || this.expedito.asiento == null || this.expedito.sesion == null || this.expedito.sfecha == null || this.expedito.stipo == null || this.expedito.ingreso == null) {
         swal({
-          type: 'error',
-          title: 'Llenar los datos obligatorios'
+          type: 'warning',
+          title: 'Llenar los campos obligatorios',
+          //allowOutsideClick: false,
+          timer: 3000
         });
         return;
       }
@@ -5617,7 +5725,7 @@ __webpack_require__.r(__webpack_exports__);
       if (this.archivos.foto == null || this.archivos.egresado == null || this.archivos.matricula == null) {
         swal({
           type: 'error',
-          title: 'Subir archivos, con los formatos requeridos'
+          title: 'Subir archivos con los formatos requeridos'
         });
         return;
       } else {
@@ -5647,8 +5755,8 @@ __webpack_require__.r(__webpack_exports__);
           console.log(error);
           swal({
             type: 'error',
-            title: 'Error',
-            text: 'Comuniquese con un administrador',
+            //title: 'Error',
+            text: 'Hay un problema, comuníquese con un administrador',
             showConfirmButton: true
           });
         });
@@ -5667,6 +5775,48 @@ __webpack_require__.r(__webpack_exports__);
         $('#mas').show();
       }
     },
+    validafecha: function validafecha() {
+      /*if(this.comision.inicio == null || this.comision.fin == null)
+      {
+          return;
+      }
+      if(this.comision.inicio >= this.comision.fin)
+      {
+          swal({
+                  type: 'error',
+                  //title: 'Error',
+                  text: 'Fecha inicio debe ser menor a Fecha Fin',
+                  showConfirmButton: true,
+              });
+          this.comision.inicio = null;
+          this.comision.fin = null;
+      }*/
+      if (this.expedito.ingreso != null) {
+        var inicio = this.expedito.ingreso;
+        var _final = '2022-01-01';
+
+        if (_final <= inicio) {
+          swal({
+            type: 'warning',
+            title: 'Ingresar una fecha correcta'
+          });
+          this.expedito.ingreso = null;
+        }
+      }
+
+      if (this.expedito.comienzo != null) {
+        var inicio = this.expedito.comienzo;
+        var _final = '2026-01-01';
+
+        if (_final <= inicio) {
+          swal({
+            type: 'warning',
+            title: 'Ingresar una fecha correcta'
+          });
+          this.expedito.comienzo = null;
+        }
+      }
+    },
     estado: function estado(id, tipo) {
       var _this9 = this;
 
@@ -5675,18 +5825,18 @@ __webpack_require__.r(__webpack_exports__);
       if (tipo == 1) {
         swal({
           title: '¿Deseas cambiar el estado de este expedito?',
-          text: "El estado cambiara a En Proceso!",
+          text: "El estado cambiará a En Proceso",
           type: 'warning',
           showCancelButton: true,
           confirmButtonColor: '#3085d6',
           cancelButtonColor: '#d33',
-          confirmButtonText: 'Si',
-          cancelButtonText: 'cancelar'
+          confirmButtonText: 'Sí',
+          cancelButtonText: 'Cancelar'
         }).then(function (result) {
           if (result.value) {
             axios.get('/updateExpedito/' + id + '/' + tipo).then(function (data) {
               if (data.data == "OK") {
-                swal('Actualizado!', 'El Expedito cambio a En Proceso.', 'success');
+                swal('¡Actualizado!', 'El Expedito está ahora En Proceso', 'success');
 
                 _this9.$Progress.finish();
 
@@ -5695,7 +5845,7 @@ __webpack_require__.r(__webpack_exports__);
                 }, 2000);
               }
             })["catch"](function (error) {
-              console.log('Ocurrio un error ' + error);
+              console.log('Ocurrió un problema ' + error);
 
               _this9.$Progress.fail();
             });
@@ -5704,18 +5854,18 @@ __webpack_require__.r(__webpack_exports__);
       } else {
         swal({
           title: '¿Deseas cambiar el estado de este expedito?',
-          text: "El estado cambiara a Finalizado!",
+          text: "El estado cambiará a Finalizado",
           type: 'warning',
           showCancelButton: true,
           confirmButtonColor: '#3085d6',
           cancelButtonColor: '#d33',
-          confirmButtonText: 'Si',
-          cancelButtonText: 'cancelar'
+          confirmButtonText: 'Sí',
+          cancelButtonText: 'Cancelar'
         }).then(function (result) {
           if (result.value) {
             axios.get('/updateExpedito/' + id + '/' + tipo).then(function (data) {
               if (data.data == "OK") {
-                swal('Actualizado!', 'El Expedito cambio a Finalizado.', 'success');
+                swal('¡Actualizado!', 'El Expedito cambió a Finalizado.', 'success');
 
                 _this9.$Progress.finish();
 
@@ -5724,7 +5874,7 @@ __webpack_require__.r(__webpack_exports__);
                 }, 2000);
               }
             })["catch"](function (error) {
-              console.log('Ocurrio un error ' + error);
+              console.log('Ocurrió un problema ' + error);
 
               _this9.$Progress.fail();
             });
@@ -6742,8 +6892,10 @@ __webpack_require__.r(__webpack_exports__);
 
       if (this.sesion.sesion == null || this.sesion.tipo == null || this.sesion.fecha == null) {
         swal({
-          type: 'error',
-          title: 'Llenar los datos obligatorios'
+          type: 'warning',
+          title: 'Llenar los campos obligatorios',
+          //allowOutsideClick: false,
+          timer: 3000
         });
       } else if (e == 1) {
         this.$Progress.start();
@@ -6763,11 +6915,13 @@ __webpack_require__.r(__webpack_exports__);
           _this2.getDatos();
 
           _this2.load();
+
+          $("#exampleModal").modal('hide');
         })["catch"](function (error) {
           console.log(error);
           swal({
             type: 'error',
-            title: 'Error',
+            title: 'Ocurrió un problema',
             text: 'Comuniquese con un administrador',
             showConfirmButton: true
           });
@@ -6794,7 +6948,7 @@ __webpack_require__.r(__webpack_exports__);
           console.log(error);
           swal({
             type: 'error',
-            title: 'Error',
+            title: 'Ocurrió un problema',
             text: 'Comuniquese con un administrador',
             showConfirmButton: true
           });
@@ -6808,6 +6962,20 @@ __webpack_require__.r(__webpack_exports__);
       this.sesion.sesion = null;
       this.sesion.fecha = null;
       this.sesion.tipo = null;
+    },
+    validaFecha: function validaFecha() {
+      if (this.sesion.fecha != null) {
+        var inicio = this.sesion.fecha;
+        var _final = '2022-01-01';
+
+        if (_final <= inicio) {
+          swal({
+            type: 'warning',
+            title: 'Ingresar una fecha correcta'
+          });
+          this.sesion.fecha = null;
+        }
+      }
     },
     edit: function edit(IDSesion, NumSesion, Fecha, Tipo) {
       $('#editar').show();
@@ -53314,7 +53482,7 @@ var render = function() {
                         "button",
                         {
                           staticClass: "btn btn-success",
-                          attrs: { id: "add", "data-dismiss": "modal" },
+                          attrs: { id: "add" },
                           on: {
                             click: function($event) {
                               return _vm.addCarrera(1)
@@ -53915,7 +54083,7 @@ var render = function() {
                         "button",
                         {
                           staticClass: "btn btn-success",
-                          attrs: { id: "add", "data-dismiss": "modal" },
+                          attrs: { id: "add" },
                           on: {
                             click: function($event) {
                               return _vm.addComision(1)
@@ -53932,7 +54100,7 @@ var render = function() {
                         "button",
                         {
                           staticClass: "btn btn-success",
-                          attrs: { id: "editar", "data-dismiss": "modal" },
+                          attrs: { id: "editar" },
                           on: {
                             click: function($event) {
                               return _vm.addComision(2)
@@ -54347,7 +54515,7 @@ var render = function() {
                         "button",
                         {
                           staticClass: "btn btn-success",
-                          attrs: { id: "add", "data-dismiss": "modal" },
+                          attrs: { id: "add" },
                           on: {
                             click: function($event) {
                               return _vm.addDecano(1)
@@ -54364,7 +54532,7 @@ var render = function() {
                         "button",
                         {
                           staticClass: "btn btn-success",
-                          attrs: { id: "editar", "data-dismiss": "modal" },
+                          attrs: { id: "editar" },
                           on: {
                             click: function($event) {
                               return _vm.addDecano(2)
@@ -54957,7 +55125,7 @@ var render = function() {
                         "button",
                         {
                           staticClass: "btn btn-success",
-                          attrs: { id: "add", "data-dismiss": "modal" },
+                          attrs: { id: "add" },
                           on: {
                             click: function($event) {
                               return _vm.addDocente(1)
@@ -56297,7 +56465,7 @@ var render = function() {
                         "button",
                         {
                           staticClass: "btn btn-success",
-                          attrs: { id: "add", "data-dismiss": "modal" },
+                          attrs: { id: "add" },
                           on: {
                             click: function($event) {
                               return _vm.addEgresado(1)
@@ -56314,7 +56482,7 @@ var render = function() {
                         "button",
                         {
                           staticClass: "btn btn-success",
-                          attrs: { id: "editar", "data-dismiss": "modal" },
+                          attrs: { id: "editar" },
                           on: {
                             click: function($event) {
                               return _vm.addEgresado(2)
@@ -56805,7 +56973,7 @@ var render = function() {
                         "button",
                         {
                           staticClass: "btn btn-success",
-                          attrs: { id: "add", "data-dismiss": "modal" },
+                          attrs: { id: "add" },
                           on: {
                             click: function($event) {
                               return _vm.addEstado(1)
@@ -57086,7 +57254,12 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-control form-control-sm",
-                      attrs: { type: "text", id: "dni", readonly: "" },
+                      attrs: {
+                        type: "text",
+                        id: "dni",
+                        readonly: "",
+                        maxlength: "8"
+                      },
                       domProps: { value: _vm.expedito.dni },
                       on: {
                         input: function($event) {
@@ -57112,7 +57285,12 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-control form-control-sm",
-                      attrs: { type: "text", id: "codigo", readonly: "" },
+                      attrs: {
+                        type: "text",
+                        id: "codigo",
+                        readonly: "",
+                        maxlength: "10"
+                      },
                       domProps: { value: _vm.expedito.codigo },
                       on: {
                         input: function($event) {
@@ -57531,6 +57709,9 @@ var render = function() {
                       },
                       domProps: { value: _vm.expedito.ingreso },
                       on: {
+                        change: function($event) {
+                          return _vm.validafecha()
+                        },
                         input: function($event) {
                           if ($event.target.composing) {
                             return
@@ -57572,6 +57753,9 @@ var render = function() {
                       },
                       domProps: { value: _vm.expedito.comienzo },
                       on: {
+                        change: function($event) {
+                          return _vm.validafecha()
+                        },
                         input: function($event) {
                           if ($event.target.composing) {
                             return
@@ -60142,6 +60326,9 @@ var render = function() {
                           attrs: { type: "date", max: "2030-12-31" },
                           domProps: { value: _vm.sesion.fecha },
                           on: {
+                            change: function($event) {
+                              return _vm.validaFecha()
+                            },
                             input: function($event) {
                               if ($event.target.composing) {
                                 return
@@ -60213,7 +60400,7 @@ var render = function() {
                         "button",
                         {
                           staticClass: "btn btn-success",
-                          attrs: { id: "add", "data-dismiss": "modal" },
+                          attrs: { id: "add" },
                           on: {
                             click: function($event) {
                               return _vm.addSesion(1)
@@ -65077,11 +65264,11 @@ module.exports = function () {
     skin: false,
     columnsDisplay: {},
     columnsDropdown: false,
-    texts: {      
+    texts: {
       count: "Mostrando {from} al {to} de {count} registros|{count} registros|Un registro",
       first: 'Primero',
       last: 'Ultimo',
-      /*filter: "Buscar:                                    ",*/
+      //filter: "Buscar:                                    ",
       filterPlaceholder: "Buscador..",
       limit: "Registros:",
       page: "Pagina:",
@@ -65090,18 +65277,6 @@ module.exports = function () {
       loading: 'Cargando...',
       defaultOption: 'Seleccionar {column}',
       columns: 'Columnas'
-      /*count: "Showing {from} to {to} of {count} records|{count} records|One record",
-      first: 'First',
-      last: 'Last',
-      filter: "Filter:",
-      filterPlaceholder: "Search query",
-      limit: "Records:",
-      page: "Page:",
-      noResults: "No matching records",
-      filterBy: "Filter by {column}",
-      loading: 'Loading...',
-      defaultOption: 'Select {column}',
-      columns: 'Columns'*/
     },
     sortIcon: {
       is: 'glyphicon-sort',

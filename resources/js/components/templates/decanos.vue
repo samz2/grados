@@ -50,8 +50,8 @@
                                 </div>    
                             </div>
                         <div class="modal-footer">
-                            <button @click="addDecano(1)" id="add" class="btn btn-success" data-dismiss="modal">Guardar <i class="fa fa-save"></i></button>
-                            <button @click="addDecano(2)" id="editar" class="btn btn-success" data-dismiss="modal">Editar <i class="far fa-edit"></i></button>
+                            <button @click="addDecano(1)" id="add" class="btn btn-success">Guardar <i class="fa fa-save"></i></button>
+                            <button @click="addDecano(2)" id="editar" class="btn btn-success">Editar <i class="far fa-edit"></i></button>
                             <button type="button" class="btn btn-danger" @click="load()" data-dismiss="modal">Cancelar <i class="fas fa-times"></i></button>
                         </div>
                         </div>
@@ -152,10 +152,23 @@
                this.decano.inicio == null || this.decano.fin == null)
             {
                 swal({
-					type: 'error',
-					title: 'Llenar los datos obligatorios',
-				});
+                    type: 'warning',
+                    title: 'Llenar los campos obligatorios',
+                    //allowOutsideClick: false,
+                    timer: 3000
+                });
             }else if(e == 1){
+                if(this.decano.inicio >= this.decano.fin){
+
+                    swal({
+                        type: 'warning',
+                        title: 'La fecha de inicio no puede ser mayor a la fecha de fin',
+                       
+                    });
+                    this.decano.inicio = null;
+                    this.decano.fin = null;
+
+                }else{
                 this.$Progress.start();
                 axios.post("addDecano",{
                     decano:this.decano
@@ -170,16 +183,29 @@
                     this.$Progress.finish();
                     this.getDatos();
                     this.load();
+                    $("#exampleModal").modal('hide');
                     }).catch(error=>{
                     console.log(error);	
                     swal({
                         type: 'error',
-                        title: 'Error',
+                        title: 'Ocurrió un problema',
                         text: 'Comuniquese con un administrador',
                         showConfirmButton: true,
                     });
                 })
+                }
             }else if(e == 2){
+                if(this.decano.inicio >= this.decano.fin){
+
+                    swal({
+                        type: 'warning',
+                        title: 'La fecha de inicio no puede ser mayor a la fecha de fin',
+                       
+                    });
+                    this.decano.inicio = null;
+                    this.decano.fin = null;
+
+                }else{
                 this.$Progress.start();
                 axios.post("updateDecano",{
                     decano:this.decano
@@ -194,15 +220,17 @@
                     this.$Progress.finish();
                     this.getDatos();
                     this.load();
+                    $("#exampleModal").modal('hide');
                     }).catch(error=>{
                     console.log(error);	
                     swal({
                         type: 'error',
-                        title: 'Error',
+                        title: 'Ocurrió un problema',
                         text: 'Comuniquese con un administrador',
                         showConfirmButton: true,
                     });
                 })
+            }
             }
 		},
 		load(){
@@ -212,7 +240,7 @@
                 this.decano.decano      = null;
                 this.decano.inicio      = null;
                 this.decano.fin         = null;
-		},
+        },        
 		edit(IDDecano,CodDocente,PeriodoInicio,PeriodoFin)
 		{
             $('#editar').show();
@@ -226,7 +254,7 @@
         
         validafecha()
         {
-            if(this.decano.inicio == null || this.decano.fin == null)
+            /*if(this.decano.inicio == null || this.decano.fin == null)
             {
                 return;
             }
@@ -240,6 +268,34 @@
                     });
                 this.decano.inicio = null;
                 this.decano.fin = null;
+            }*/
+             if(this.decano.inicio !=null)
+            {
+                var inicio = this.decano.inicio;
+                var final  = '2022-01-01';
+                if(final<=inicio)
+                {
+                    swal({
+                        type: 'warning',
+                        title: 'Ingresar una fecha correcta',
+                       
+                    });
+                    this.decano.inicio = null;
+                }
+            }
+             if(this.decano.fin !=null)
+            {
+                var inicio = this.decano.fin;
+                var final  = '2026-01-01';
+                if(final<=inicio)
+                {
+                    swal({
+                        type: 'warning',
+                        title: 'Ingresar una fecha correcta',
+                       
+                    });
+                    this.decano.fin = null;
+                }
             }
         },
     }

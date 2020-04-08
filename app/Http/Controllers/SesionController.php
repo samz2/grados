@@ -49,7 +49,7 @@ class SesionController extends Controller
         $sesion->Tipo       = $request->sesion["tipo"];
         $sesion->save();
         $type   = "success";
-        $title  = "Bien";
+        //$title  = "Bien";
         $text   = "Sesión creada con éxito";
         return compact("type","title","text");
     }
@@ -105,11 +105,11 @@ class SesionController extends Controller
         if($sesion)
         {
             $type   = "success";
-            $title  = "Bien";
-            $text   = "Sesion actualizada con éxito";
+            //$title  = "Bien";
+            $text   = "Sesion editada con éxito";
         }else{
             $type   = "warning";
-            $title  = "Ups";
+            //$title  = "Ups";
             $text   = "Ocurrió un problema";
         }
         return compact("type","title","text");

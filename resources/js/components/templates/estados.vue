@@ -37,7 +37,7 @@
                                 </div>
                             </div>
                         <div class="modal-footer">
-                            <button @click="addEstado(1)" id="add" class="btn btn-success" data-dismiss="modal">Guardar <i class="fa fa-save"></i></button>
+                            <button @click="addEstado(1)" id="add" class="btn btn-success">Guardar <i class="fa fa-save"></i></button>
                             <button @click="addEstado(2)" id="editar" class="btn btn-success" data-dismiss="modal">Editar <i class="fa fa-save"></i></button>
                             <button type="button" class="btn btn-danger" @click="load()" data-dismiss="modal">Cancelar <i class="fas fa-times"></i></button>
                         </div>
@@ -121,9 +121,11 @@
             if(this.estado.posicion == null || this.estado.estado == null)
             {
                 swal({
-					type: 'error',
-					title: 'Llenar los datos obligatorios',
-				});
+                    type: 'warning',
+                    title: 'Llenar los campos obligatorios',
+                    //allowOutsideClick: false,
+                    timer: 3000
+                });
             }else if(e == 1){
                 this.$Progress.start();
                 axios.post("addEstado",{
@@ -139,11 +141,12 @@
                     this.$Progress.finish();
                     this.getDatos();
                     this.load();
+                    $("#exampleModal").modal('hide');
                     }).catch(error=>{
                     console.log(error);	
                     swal({
                         type: 'error',
-                        title: 'Error',
+                        title: 'Ocurrió un problema',
                         text: 'Comuniquese con un administrador',
                         showConfirmButton: true,
                     });
@@ -167,7 +170,7 @@
                     console.log(error);	
                     swal({
                         type: 'error',
-                        title: 'Error',
+                        title: 'Ocurrió un problema',
                         text: 'Comuniquese con un administrador',
                         showConfirmButton: true,
                     });

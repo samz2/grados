@@ -34,13 +34,13 @@
                                 <label>Nro. DNI:</label>   
                                 </div>                             
                                 <div class="col-md-2">
-                                    <input type="text" v-model="expedito.dni" id="dni" readonly class="form-control form-control-sm">
+                                    <input type="text" v-model="expedito.dni" id="dni" readonly class="form-control form-control-sm" maxlength="8">
                                 </div>
                                  <div class="col-md-2 text-left">
                                         <label>Nro. Código:</label>
                                  </div>
                                 <div class="col-md-2">
-                                    <input type="text" v-model="expedito.codigo" id="codigo" readonly class="form-control form-control-sm">
+                                    <input type="text" v-model="expedito.codigo" id="codigo" readonly class="form-control form-control-sm" maxlength="10">
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -139,13 +139,13 @@
                                 
                                 <label for="ingreso" class="col-md-4 col-form-label">Fecha de Ingreso de la solicitud(*)</label>
                                 <div class="col-md-3">
-                                    <input type="date" max="2030-12-31" id="ingreso" v-model="expedito.ingreso" onKeyPress="return soloNumeros(event)" maxlength="3" class="form-control form-control-sm">
+                                    <input type="date" max="2030-12-31" id="ingreso" v-model="expedito.ingreso" @change="validafecha()" onKeyPress="return soloNumeros(event)" maxlength="3" class="form-control form-control-sm">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="comienzo" class="col-md-4 col-form-label">Fecha que empieza el trámite</label>
                                 <div class="col-md-3">
-                                    <input type="date" max="2030-12-31" id="comienzo" v-model="expedito.comienzo" onKeyPress="return soloNumeros(event)" maxlength="3" class="form-control form-control-sm">
+                                    <input type="date" max="2030-12-31" id="comienzo" v-model="expedito.comienzo" @change="validafecha()" onKeyPress="return soloNumeros(event)" maxlength="3" class="form-control form-control-sm">
                                 </div>
                             </div>
                         </fieldset>
@@ -175,10 +175,7 @@
                             <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <div class="modal-body">
-                            
-                    
-                    
+                        <div class="modal-body">                    
                             <div class="form-group row">
                                 <div class="col-md-12"><label><mark style="background-color: #dc354526; color: #520606f7">Ingresar DNI o Código.</mark></label></div>
                                 <label for="dni1" class="col-md-2 col-form-label">DNI: </label>
@@ -322,7 +319,7 @@
                 {
                     swal({
                         type: 'error',
-                        title: 'no se encontraron registros',
+                        title: 'No se encontraron registros',
                     });
                 }else{
                     this.alumnos = data.data.alumnos[0];
@@ -403,13 +400,13 @@
         {
             var size = e.target.files[0].size;
             var type = e.target.files[0].type;
-            if(size > 1024000)
+            if(size > 1024001)
             {
                e.target.value = '';
                swal({
                         type: 'error',
-                        title: 'Error',
-                        text: 'El tamaño del archivo debe ser menor a 1mb',
+                        //title: 'Error',
+                        text: 'El tamaño del archivo debe ser menor o igual a 1mb',
                         showConfirmButton: true,
                     });
                 return;    
@@ -429,7 +426,7 @@
                 this.archivos.matricula = null;
                 swal({
                         type: 'error',
-                        title: 'Error',
+                        //title: 'Error',
                         text: 'El archivo debe ser PDF, por favor intente subiendo otro archivo',
                         showConfirmButton: true,
                     });
@@ -441,13 +438,13 @@
         {
             var size = e.target.files[0].size;
             var type = e.target.files[0].type;
-            if(size > 1024000)
+            if(size > 1024001)
             {
                 e.target.value = '';
                 swal({
                         type: 'error',
-                        title: 'Error',
-                        text: 'El tamaño del archivo debe ser menor a 1mb',
+                        //title: 'Error',
+                        text: 'El tamaño del archivo debe ser menor o igual a 1mb',
                         showConfirmButton: true,
                     });
                 return;    
@@ -466,7 +463,7 @@
                 e.target.value = '';
                 swal({
                         type: 'error',
-                        title: 'Error',
+                        //title: 'Error',
                         text: 'El archivo debe ser PDF, por favor intente subiendo otro archivo',
                         showConfirmButton: true,
                     });
@@ -478,13 +475,13 @@
         {
             var size = e.target.files[0].size;
             var type = e.target.files[0].type;
-            if(size > 1024000)
+            if(size > 1024001)
             {
                 e.target.value = '';
                 swal({
                         type: 'error',
-                        title: 'Error',
-                        text: 'El tamaño del archivo debe ser menor a 1mb',
+                        //title: 'Error',
+                        text: 'El tamaño del archivo debe ser menor o igual a 1mb',
                         showConfirmButton: true,
                     });
                 return;    
@@ -505,7 +502,7 @@
                 e.target.value = '';
                 swal({
                         type: 'error',
-                        title: 'Error',
+                        //title: 'Error',
                         text: 'El archivo debe ser una imagen, por favor intente subiendo otro archivo',
                         showConfirmButton: true,
                     });
@@ -537,8 +534,10 @@
                 this.expedito.ingreso==null)
             {
                 swal({
-					type: 'error',
-					title: 'Llenar los datos obligatorios',
+                    type: 'warning',
+                    title: 'Llenar los campos obligatorios',
+                    //allowOutsideClick: false,
+                    timer: 3000
                 });
                 return;
             }
@@ -548,7 +547,7 @@
             {
                 swal({
 					type: 'error',
-					title: 'Subir archivos, con los formatos requeridos',
+					title: 'Subir archivos con los formatos requeridos',
                 });
                 return;
             }
@@ -576,8 +575,8 @@
                     console.log(error);	
                     swal({
                         type: 'error',
-                        title: 'Error',
-                        text: 'Comuniquese con un administrador',
+                        //title: 'Error',
+                        text: 'Hay un problema, comuníquese con un administrador',
                         showConfirmButton: true,
                     });
                 })
@@ -601,6 +600,53 @@
 			}
 			
         },
+        validafecha()
+        {
+            /*if(this.comision.inicio == null || this.comision.fin == null)
+            {
+                return;
+            }
+            if(this.comision.inicio >= this.comision.fin)
+            {
+                swal({
+                        type: 'error',
+                        //title: 'Error',
+                        text: 'Fecha inicio debe ser menor a Fecha Fin',
+                        showConfirmButton: true,
+                    });
+                this.comision.inicio = null;
+                this.comision.fin = null;
+            }*/
+            if(this.expedito.ingreso !=null)
+            {
+                var inicio = this.expedito.ingreso;
+                var final  = '2022-01-01';
+                if(final<=inicio)
+                {
+                    swal({
+                        type: 'warning',
+                        title: 'Ingresar una fecha correcta',
+                       
+                    });
+                    this.expedito.ingreso = null;
+                }
+            }
+             if(this.expedito.comienzo !=null)
+            {
+                var inicio = this.expedito.comienzo;
+                var final  = '2026-01-01';
+                if(final<=inicio)
+                {
+                    swal({
+                        type: 'warning',
+                        title: 'Ingresar una fecha correcta',
+                       
+                    });
+                    this.expedito.comienzo = null;
+                }
+            }
+            
+        },
         estado(id,tipo)
         {
 			this.$Progress.start();
@@ -609,21 +655,21 @@
             {
                 swal({
                     title: '¿Deseas cambiar el estado de este expedito?',
-                    text: "El estado cambiara a En Proceso!",
+                    text: "El estado cambiará a En Proceso",
                     type: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
                     cancelButtonColor: '#d33',
-                    confirmButtonText: 'Si',
-                    cancelButtonText: 'cancelar',
+                    confirmButtonText: 'Sí',
+                    cancelButtonText: 'Cancelar',
                 }).then((result) => {
                     if (result.value) {
                         axios.get('/updateExpedito/'+id+'/'+tipo)
                             .then(data => {
                             if(data.data=="OK"){
                                 swal(
-                                'Actualizado!',
-                                'El Expedito cambio a En Proceso.',
+                                '¡Actualizado!',
+                                'El Expedito está ahora En Proceso',
                                 'success'
                                 );
                             this.$Progress.finish();
@@ -632,7 +678,7 @@
                             }, 2000);
                             }
                             }).catch(error => {
-                                console.log('Ocurrio un error ' + error);
+                                console.log('Ocurrió un problema ' + error);
                                 this.$Progress.fail();
                             });
                         }
@@ -640,21 +686,21 @@
             }else{
                 swal({
                     title: '¿Deseas cambiar el estado de este expedito?',
-                    text: "El estado cambiara a Finalizado!",
+                    text: "El estado cambiará a Finalizado",
                     type: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
                     cancelButtonColor: '#d33',
-                    confirmButtonText: 'Si',
-                    cancelButtonText: 'cancelar',
+                    confirmButtonText: 'Sí',
+                    cancelButtonText: 'Cancelar',
                 }).then((result) => {
                     if (result.value) {
                         axios.get('/updateExpedito/'+id+'/'+tipo)
                             .then(data => {
                             if(data.data=="OK"){
                                 swal(
-                                'Actualizado!',
-                                'El Expedito cambio a Finalizado.',
+                                '¡Actualizado!',
+                                'El Expedito cambió a Finalizado.',
                                 'success'
                                 );
                             this.$Progress.finish();
@@ -663,7 +709,7 @@
                             }, 2000);
                             }
                             }).catch(error => {
-                                console.log('Ocurrio un error ' + error);
+                                console.log('Ocurrió un problema ' + error);
                                 this.$Progress.fail();
                             });
                         }
