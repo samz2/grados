@@ -91,7 +91,7 @@
                                     <label>Correo*</label>
                                 </div>
                                 <div class="col-md-9">
-                                    <input v-model="egresado.correo" type="email" onKeyPress="return soloEmail(event)" maxlength="30" class="form-control">
+                                    <input v-model="egresado.correo" type="email" onKeyPress="return soloEmail(event)" maxlength="40" class="form-control">
                                 </div>
                             </div>
                             <br>
@@ -274,8 +274,8 @@
         
         addEgresado(e)
 		{   
-            if(this.egresado.nombre == null || this.egresado.paterno == null || this.egresado.materno == null 
-                || this.egresado.genero == null || this.egresado.ingreso == null || this.egresado.egreso == null)
+            if(this.egresado.nombre == null || this.egresado.paterno == null || this.egresado.materno == null || this.egresado.codigo == null || this.egresado.dni == null || this.egresado.celular == null || this.egresado.correo == null || this.egresado.escuela == null ||
+                this.egresado.genero == null || this.egresado.ingreso == null || this.egresado.egreso == null)
                 {
                     swal({
                     type: 'warning',

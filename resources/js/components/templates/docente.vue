@@ -107,7 +107,7 @@
                             </div>      
                         <div class="modal-footer">
                             <button @click="addDocente(1)" id="add" class="btn btn-success">Guardar <i class="fa fa-save"></i></button>
-                            <button @click="addDocente(2)" id="editar" class="btn btn-success" data-dismiss="modal">Editar <i class="far fa-edit"></i></button>
+                            <button @click="addDocente(2)" id="editar" class="btn btn-success">Editar <i class="far fa-edit"></i></button>
                             <button type="button" class="btn btn-danger" @click="load()" data-dismiss="modal">Cancelar <i class="fas fa-times"></i></button>
                         </div>
                         </div>
@@ -225,7 +225,6 @@
                 swal({
                     type: 'warning',
                     title: 'Llenar los campos obligatorios',
-                    //allowOutsideClick: false,
                     timer: 3000
                 });
                 
@@ -269,6 +268,7 @@
                     this.$Progress.finish();
                     this.getDatos();
                     this.load();
+                    $("#exampleModal").modal('hide');
                     }).catch(error=>{
                     console.log(error);	
                     swal({

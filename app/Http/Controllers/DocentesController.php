@@ -111,7 +111,7 @@ class DocentesController extends Controller
         {
             $type   = "success";
             //$title  = "Bien";
-            $text   = "El docente editado con éxito";
+            $text   = "Docente editado con éxito";
         }else{
             $type   = "warning";
             //$title  = "Ups";

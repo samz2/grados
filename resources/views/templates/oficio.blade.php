@@ -65,6 +65,9 @@
         filter:alpha(opacity=90);
         opacity:.90;
     }
+    .t7{font-size: 7px;}
+    .t8{font-size: 8px;}
+    .t9{font-size: 9px;}
     .t10{font-size: 10px;}
     .t11{font-size: 11px;}
     .t12{font-size: 12px;}
@@ -81,14 +84,6 @@
     .t23{font-size: 23px;}
     .t24{font-size: 24px;}
     .t25{font-size: 25px;}
-    .t26{font-size: 26px;}
-    .t27{font-size: 27px;}
-    .t28{font-size: 28px;}
-    .t29{font-size: 29px;}
-    .t30{font-size: 30px;}
-    .t31{font-size: 31px;}
-    .t32{font-size: 32px;}
-    .t33{font-size: 33px;}
 </style>
 <body>
     @php
@@ -140,7 +135,7 @@
             </tr>
         </table>
         <p class="justificado t15 arial" style="line-height : 20px;"><b class="vacio justificado">aaaaaaaaaaaaaaiaaaaaa</b>Mediante el presente remito adjunto el expediente del Ex alumno:
-            <b class="justificado">{{$dato->Apellido}}, {{$dato->Nombre}};</b> de la <b class="justificado">Carrera Profesional de {{$dato->Escuela}}</b> en condición de EXPEDITO, 
+            <b class="justificado">{{$dato->Paterno}} {{$dato->Materno}}, {{ucwords(strtolower($dato->Nombre))}};</b> de la <b class="justificado">Carrera Profesional de {{$dato->Escuela}}</b> en condición de EXPEDITO, 
             para que se le dé el trámite correspondiente a fin de otorgarle el<b class="justificado"> Grado Académico de  
             Bachiller en {{$dato->Escuela}}</b>, cuyo registro en el libro de Grados de la Facultad es el siguiente: </p>
         <table class="center centrartabla t15 arial" border="1" cellspacing=0 cellspadding=0>
@@ -153,7 +148,7 @@
             </tr>
             <tr>
                 <td width=30 style="margin: 13px; padding: 13px;"><b>01</b></td>
-                <td width=150 style="margin: 13px; padding: 13px;"><b>{{$dato->Apellido}}, {{$dato->Nombre}}</b></td>
+                <td width=150 style="margin: 13px; padding: 13px;"><b>{{$dato->Paterno}} {{$dato->Materno}}, {{ucwords(strtolower($dato->Nombre))}}</b></td>
                 <td width=60 style="margin: 13px; padding: 13px;"><b>{{$dato->Tomo}}</b></td>
                 <td width=60 style="margin: 13px; padding: 13px;"><b>{{$dato->Folio}}</b></td>
                 <td width=90 style="margin: 13px; padding: 13px;"><b>{{$dato->Asiento}}</b></td>
@@ -190,6 +185,20 @@
             </tr>            
         </table>
         <div class="center t10 arial">{{"PRESIDENTE"}}</div>
+        <table class="centrartabla" style="width: 100%;">            
+            <tr>
+                <td class="t7">Cc.</td>
+                <td class="derecho"></td>
+            </tr>
+            <tr>
+                <td class="t7">Decanatura</td>
+                <td class="derecho"></td>
+            </tr>
+            <tr>
+                <td class="t7">ARCHIVO</td>
+                <td class="derecho t9" style="font-style: italic;">DMDE</td>
+            </tr>
+        </table>
     </div>
 
 </body>

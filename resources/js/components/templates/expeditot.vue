@@ -177,8 +177,8 @@
                             </div>
                             <div class="form-group row">
 
-                                <div class="col-md-6">
-                                    <label><mark style="background-color: #dc354526; color: #520606f7">Nota: Obligatorio tener marcado los 4 documentos para continuar.</mark></label>
+                                <div class="col-md-12">
+                                    <label><mark style="background-color: #dc354526; color: #520606f7; text-align : justify;">Nota: Verificar si se cuenta con estos documentos obligatorios marcando el check que le corresponde, si no se cuenta con uno o más de éstos no se podrá continuar.</mark></label>
                                 </div>
                                 
                                 

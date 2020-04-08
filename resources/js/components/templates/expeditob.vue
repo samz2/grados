@@ -34,13 +34,13 @@
                                 <label>Nro. DNI:</label>   
                                 </div>                             
                                 <div class="col-md-2">
-                                    <input type="text" v-model="expedito.dni" id="dni" readonly class="form-control form-control-sm" maxlength="8">
+                                    <input type="text" v-model="expedito.dni" id="dni" readonly class="form-control form-control-sm" >
                                 </div>
                                  <div class="col-md-2 text-left">
                                         <label>Nro. Código:</label>
                                  </div>
                                 <div class="col-md-2">
-                                    <input type="text" v-model="expedito.codigo" id="codigo" readonly class="form-control form-control-sm" maxlength="10">
+                                    <input type="text" v-model="expedito.codigo" id="codigo" readonly class="form-control form-control-sm" >
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -106,13 +106,13 @@
                                     <label>Const. Matrícula(*)</label>
                                 </div>
                                 <div class="col-md-4">
-                                    <input type="file" id="matricula" @change="validarMatricula" class="form-control form-control-sm">
+                                    <input type="file" id="matricula" @change="validarMatricula" class="form-control form-control-sm" accept="application/pdf">
                                 </div>
                                 <div class="col-md-2">
                                 <label>Const. Egresado(*)</label>
                                 </div>
                                 <div class="col-md-4">
-                                    <input type="file" id="egresado"  @change="validarEgresado" name="egresado" class="form-control form-control-sm">
+                                    <input type="file" id="egresado"  @change="validarEgresado" name="egresado" class="form-control form-control-sm" accept="application/pdf">
                                 </div>
                             </div>                            
                             <div class="form-group row">
@@ -120,7 +120,7 @@
                                 <label>Foto(*)</label>
                                 </div>
                                 <div class="col-md-4">
-                                    <input type="file" id="foto" @change="validarFoto" class="form-control form-control-sm">
+                                    <input type="file" id="foto" @change="validarFoto" class="form-control form-control-sm" accept="image/jpeg">
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -154,7 +154,7 @@
                             <div class="col-md-4" style="text-align: center;">
                             </div>
                             <div class="col-md-2" style="text-align: center;">
-                                <button class="btn btn-success"  @click="addExpedito()">Guardar <i class="fa fa-save"></i></button>
+                                <button class="btn btn-success"  @click="addExpedito(1)">Guardar <i class="fa fa-save"></i></button>
                             </div>
                             <div class="col-md-2" style="text-align: center;">
                                 <button class="btn btn-danger" @click="cancelar()">Cancelar <i class="fas fa-times"></i></button>
@@ -180,11 +180,11 @@
                                 <div class="col-md-12"><label><mark style="background-color: #dc354526; color: #520606f7">Ingresar DNI o Código.</mark></label></div>
                                 <label for="dni1" class="col-md-2 col-form-label">DNI: </label>
                                 <div class="col-md-4">
-                                    <input type="text" v-model="alumno.dni" id="dni1" onKeyPress="return solonumeros(event)" class="form-control form-control-sm">
+                                    <input type="text" v-model="alumno.dni" id="dni1" onKeyPress="return solonumeros(event)" class="form-control form-control-sm" maxlength="8">
                                 </div>
                                 <label for="codigo1" class="col-md-2 col-form-label">Código: </label>
                                 <div class="col-md-4">
-                                    <input type="text" v-model="alumno.codigo" onKeyPress="return solonumeros(event)" id="codigo1" class="form-control form-control-sm">
+                                    <input type="text" v-model="alumno.codigo" onKeyPress="return solonumeros(event)" id="codigo1" class="form-control form-control-sm" maxlength="10">
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -224,6 +224,7 @@
                                         <button v-if="props.row.Estado == 'EN PROCESO'" v-on:click="estado(props.row.IDExpedito,2)"  class="btn btn-warning" data-toggle="tooltip" data-placement="left" >En Proceso</button>
                                         <button v-if="props.row.Estado == 'FINALIZADO'"  class="btn btn-success" data-toggle="tooltip" data-placement="left" >Finalizado</button>
                                         <!-- <button class="btn btn-info" data-toggle="tooltip" v-on:click="reg(props.row.IDExpedito)" data-placement="left" title="Registrar"><i class="fas fa-edit" style="color: white" aria-hidden="true"></i></button> -->
+                                        <button data-target="#exampleModal" v-if="props.row.Estado == 'PENDIENTE' || props.row.Estado == 'EN PROCESO'" class="btn btn-info" data-toggle="modal"  v-on:click="edit(props.row.IDEgresado,props.row.Codigo,props.row.DNI,props.row.Paterno,props.row.Materno,props.row.Celular,props.row.Ingreso,props.row.Egreso,props.row.Nombre,props.row.Genero,props.row.Correo,props.row.IDEscuela)" data-placement="left" title="Editar"><i class="fas fa-edit" style="color: white" aria-hidden="true"></i></button>
                                         <router-link v-if="props.row.Estado == 'FINALIZADO'" class="btn btn-success" target="_blank" :to="'/oficio/'+props.row.IDExpedito" data-toggle="tooltip"  data-placement="left" title="Ver Acta"><i class="far fa-file-pdf" aria-hidden="true"></i></router-link>
                                         <!-- <button class="btn btn-success" data-toggle="tooltip" v-on:click="edit(props.row.IDExpedito)" data-placement="left" title="Acta"><i class="far fa-file-pdf" style="color: white" aria-hidden="true"></i></button> -->
                                     </div>
@@ -524,14 +525,14 @@
                 console.log(error);
             })
 		},
-		addExpedito()
+		addExpedito(e)
 		{
            
             if( this.expedito.codigo==null || this.expedito.dni==null ||
                 this.expedito.alumno==null || this.expedito.carrera==null ||
                 this.expedito.tomo==null || this.expedito.folio==null || this.expedito.asiento==null ||
                 this.expedito.sesion==null || this.expedito.sfecha==null || this.expedito.stipo==null ||
-                this.expedito.ingreso==null)
+                this.expedito.ingreso==null || this.archivos.foto == null || this.archivos.egresado == null || this.archivos.matricula == null)
             {
                 swal({
                     type: 'warning',
@@ -540,8 +541,8 @@
                     timer: 3000
                 });
                 return;
-            }
-            if(this.archivos.foto == null 
+            }else if(e == 1){
+            /*if(this.archivos.foto == null 
             || this.archivos.egresado == null 
             || this.archivos.matricula == null)
             {
@@ -551,7 +552,7 @@
                 });
                 return;
             }
-            else{
+            else{*/
                 this.$Progress.start();
                 axios.post("addExpedito",{
                     expedito:this.expedito,

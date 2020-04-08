@@ -4074,7 +4074,6 @@ __webpack_require__.r(__webpack_exports__);
         swal({
           type: 'warning',
           title: 'Llenar los campos obligatorios',
-          //allowOutsideClick: false,
           timer: 3000
         });
       } else if (e == 1) {
@@ -4124,6 +4123,8 @@ __webpack_require__.r(__webpack_exports__);
           _this3.getDatos();
 
           _this3.load();
+
+          $("#exampleModal").modal('hide');
         })["catch"](function (error) {
           console.log(error);
           swal({
@@ -4798,7 +4799,7 @@ __webpack_require__.r(__webpack_exports__);
     addEgresado: function addEgresado(e) {
       var _this3 = this;
 
-      if (this.egresado.nombre == null || this.egresado.paterno == null || this.egresado.materno == null || this.egresado.genero == null || this.egresado.ingreso == null || this.egresado.egreso == null) {
+      if (this.egresado.nombre == null || this.egresado.paterno == null || this.egresado.materno == null || this.egresado.codigo == null || this.egresado.dni == null || this.egresado.celular == null || this.egresado.correo == null || this.egresado.escuela == null || this.egresado.genero == null || this.egresado.ingreso == null || this.egresado.egreso == null) {
         swal({
           type: 'warning',
           title: 'Llenar los campos obligatorios',
@@ -5437,6 +5438,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -5709,10 +5711,10 @@ __webpack_require__.r(__webpack_exports__);
         console.log(error);
       });
     },
-    addExpedito: function addExpedito() {
+    addExpedito: function addExpedito(e) {
       var _this8 = this;
 
-      if (this.expedito.codigo == null || this.expedito.dni == null || this.expedito.alumno == null || this.expedito.carrera == null || this.expedito.tomo == null || this.expedito.folio == null || this.expedito.asiento == null || this.expedito.sesion == null || this.expedito.sfecha == null || this.expedito.stipo == null || this.expedito.ingreso == null) {
+      if (this.expedito.codigo == null || this.expedito.dni == null || this.expedito.alumno == null || this.expedito.carrera == null || this.expedito.tomo == null || this.expedito.folio == null || this.expedito.asiento == null || this.expedito.sesion == null || this.expedito.sfecha == null || this.expedito.stipo == null || this.expedito.ingreso == null || this.archivos.foto == null || this.archivos.egresado == null || this.archivos.matricula == null) {
         swal({
           type: 'warning',
           title: 'Llenar los campos obligatorios',
@@ -5720,15 +5722,18 @@ __webpack_require__.r(__webpack_exports__);
           timer: 3000
         });
         return;
-      }
-
-      if (this.archivos.foto == null || this.archivos.egresado == null || this.archivos.matricula == null) {
-        swal({
-          type: 'error',
-          title: 'Subir archivos con los formatos requeridos'
-        });
-        return;
-      } else {
+      } else if (e == 1) {
+        /*if(this.archivos.foto == null 
+        || this.archivos.egresado == null 
+        || this.archivos.matricula == null)
+        {
+            swal({
+        type: 'error',
+        title: 'Subir archivos con los formatos requeridos',
+            });
+            return;
+        }
+        else{*/
         this.$Progress.start();
         axios.post("addExpedito", {
           expedito: this.expedito,
@@ -6944,6 +6949,8 @@ __webpack_require__.r(__webpack_exports__);
           _this2.getDatos();
 
           _this2.load();
+
+          $("#exampleModal").modal('hide');
         })["catch"](function (error) {
           console.log(error);
           swal({
@@ -55142,7 +55149,7 @@ var render = function() {
                         "button",
                         {
                           staticClass: "btn btn-success",
-                          attrs: { id: "editar", "data-dismiss": "modal" },
+                          attrs: { id: "editar" },
                           on: {
                             click: function($event) {
                               return _vm.addDocente(2)
@@ -56276,7 +56283,7 @@ var render = function() {
                           attrs: {
                             type: "email",
                             onKeyPress: "return soloEmail(event)",
-                            maxlength: "30"
+                            maxlength: "40"
                           },
                           domProps: { value: _vm.egresado.correo },
                           on: {
@@ -57254,12 +57261,7 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-control form-control-sm",
-                      attrs: {
-                        type: "text",
-                        id: "dni",
-                        readonly: "",
-                        maxlength: "8"
-                      },
+                      attrs: { type: "text", id: "dni", readonly: "" },
                       domProps: { value: _vm.expedito.dni },
                       on: {
                         input: function($event) {
@@ -57285,12 +57287,7 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-control form-control-sm",
-                      attrs: {
-                        type: "text",
-                        id: "codigo",
-                        readonly: "",
-                        maxlength: "10"
-                      },
+                      attrs: { type: "text", id: "codigo", readonly: "" },
                       domProps: { value: _vm.expedito.codigo },
                       on: {
                         input: function($event) {
@@ -57643,7 +57640,11 @@ var render = function() {
                   _c("div", { staticClass: "col-md-4" }, [
                     _c("input", {
                       staticClass: "form-control form-control-sm",
-                      attrs: { type: "file", id: "matricula" },
+                      attrs: {
+                        type: "file",
+                        id: "matricula",
+                        accept: "application/pdf"
+                      },
                       on: { change: _vm.validarMatricula }
                     })
                   ]),
@@ -57653,7 +57654,12 @@ var render = function() {
                   _c("div", { staticClass: "col-md-4" }, [
                     _c("input", {
                       staticClass: "form-control form-control-sm",
-                      attrs: { type: "file", id: "egresado", name: "egresado" },
+                      attrs: {
+                        type: "file",
+                        id: "egresado",
+                        name: "egresado",
+                        accept: "application/pdf"
+                      },
                       on: { change: _vm.validarEgresado }
                     })
                   ])
@@ -57665,7 +57671,7 @@ var render = function() {
                   _c("div", { staticClass: "col-md-4" }, [
                     _c("input", {
                       staticClass: "form-control form-control-sm",
-                      attrs: { type: "file", id: "foto" },
+                      attrs: { type: "file", id: "foto", accept: "image/jpeg" },
                       on: { change: _vm.validarFoto }
                     })
                   ])
@@ -57793,7 +57799,7 @@ var render = function() {
                         staticClass: "btn btn-success",
                         on: {
                           click: function($event) {
-                            return _vm.addExpedito()
+                            return _vm.addExpedito(1)
                           }
                         }
                       },
@@ -57930,7 +57936,8 @@ var render = function() {
                       attrs: {
                         type: "text",
                         id: "dni1",
-                        onKeyPress: "return solonumeros(event)"
+                        onKeyPress: "return solonumeros(event)",
+                        maxlength: "8"
                       },
                       domProps: { value: _vm.alumno.dni },
                       on: {
@@ -57967,7 +57974,8 @@ var render = function() {
                       attrs: {
                         type: "text",
                         onKeyPress: "return solonumeros(event)",
-                        id: "codigo1"
+                        id: "codigo1",
+                        maxlength: "10"
                       },
                       domProps: { value: _vm.alumno.codigo },
                       on: {
@@ -58189,6 +58197,47 @@ var render = function() {
                                     }
                                   },
                                   [_vm._v("Finalizado")]
+                                )
+                              : _vm._e(),
+                            _vm._v(" "),
+                            props.row.Estado == "PENDIENTE" ||
+                            props.row.Estado == "EN PROCESO"
+                              ? _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn btn-info",
+                                    attrs: {
+                                      "data-target": "#exampleModal",
+                                      "data-toggle": "modal",
+                                      "data-placement": "left",
+                                      title: "Editar"
+                                    },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.edit(
+                                          props.row.IDEgresado,
+                                          props.row.Codigo,
+                                          props.row.DNI,
+                                          props.row.Paterno,
+                                          props.row.Materno,
+                                          props.row.Celular,
+                                          props.row.Ingreso,
+                                          props.row.Egreso,
+                                          props.row.Nombre,
+                                          props.row.Genero,
+                                          props.row.Correo,
+                                          props.row.IDEscuela
+                                        )
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _c("i", {
+                                      staticClass: "fas fa-edit",
+                                      staticStyle: { color: "white" },
+                                      attrs: { "aria-hidden": "true" }
+                                    })
+                                  ]
                                 )
                               : _vm._e(),
                             _vm._v(" "),
@@ -59779,19 +59828,20 @@ var staticRenderFns = [
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "form-group row" }, [
-        _c("div", { staticClass: "col-md-6" }, [
+        _c("div", { staticClass: "col-md-12" }, [
           _c("label", [
             _c(
               "mark",
               {
                 staticStyle: {
                   "background-color": "#dc354526",
-                  color: "#520606f7"
+                  color: "#520606f7",
+                  "text-align": "justify"
                 }
               },
               [
                 _vm._v(
-                  "Nota: Obligatorio tener marcado los 4 documentos para continuar."
+                  "Nota: Verificar si se cuenta con estos documentos obligatorios marcando el check que le corresponde, si no se cuenta con uno o más de éstos no se podrá continuar."
                 )
               ]
             )
@@ -60417,7 +60467,7 @@ var render = function() {
                         "button",
                         {
                           staticClass: "btn btn-success",
-                          attrs: { id: "editar", "data-dismiss": "modal" },
+                          attrs: { id: "editar" },
                           on: {
                             click: function($event) {
                               return _vm.addSesion(2)
