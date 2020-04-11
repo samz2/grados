@@ -60,7 +60,7 @@ class DocentesController extends Controller
             //$title  = "Error";
             $text   = "Docente actualmente ya existe";
         }
-        return compact("type","title","text");
+        return compact("type","text");
         
     }
 
@@ -118,7 +118,7 @@ class DocentesController extends Controller
             $text   = "Ocurrió un problema";
         }
         //return compact("type","title","text");
-        return compact("type","title","text");
+        return compact("type","text");
     }
 
     /**

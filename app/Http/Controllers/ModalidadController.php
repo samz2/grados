@@ -41,16 +41,16 @@ class ModalidadController extends Controller
             $modalidad->Modalidad = mb_strtoupper($request->modalidad["modalidad"]);
             $modalidad->save();
             $type   = "success";
-            $title  = "Bien";
+            //$title  = "Bien";
             $text   = "Modalidad creada con éxito";
         } catch (\Throwable $th) {
             $type   = "error";
-            $title  = "Mal";
+            //$title  = "Mal";
             $text   = $th->errorInfo[2];
         }
         
         
-        return compact("type","title","text");
+        return compact("type","text");
     }
 
     /**
@@ -91,14 +91,14 @@ class ModalidadController extends Controller
         if($modalidad)
         {
             $type   = "success";
-            $title  = "Bien";
+            //$title  = "Bien";
             $text   = "Modalidad actualizada con éxito";
         }else{
             $type   = "warning";
-            $title  = "Ups";
+            //$title  = "Ups";
             $text   = "Ocurrió un problema";
         }
-        return compact("type","title","text");
+        return compact("type","text");
     }
 
     /**

@@ -96,7 +96,7 @@
                                 <label>Nombre Tesis(*)</label>
                                 </div>
                                 <div class="col-md-9">
-                                    <input type="text" v-model="expedito.tesis" onKeyPress="return alfa(event)" maxlength="200" class="form-control form-control-sm">
+                                    <input type="text" v-model="expedito.tesis" onKeyPress="return soloLetras(event)" maxlength="200" class="form-control form-control-sm">
                                 </div>
                             </div>
                             <div class="form-group row">

@@ -54,7 +54,7 @@ class DecanoController extends Controller
             //$title  = "Ups...";
             $text   = "Ya existe un decano para este periodo de tiempo";
         }
-        return compact("type","title","text");
+        return compact("type","text");
     }
 
     /**
@@ -104,7 +104,7 @@ class DecanoController extends Controller
             //$title  = "Ups";
             $text   = "Ocurrió un problema";
         }
-        return compact("type","title","text");
+        return compact("type","text");
     }
 
     /**

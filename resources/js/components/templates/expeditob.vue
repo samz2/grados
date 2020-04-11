@@ -18,7 +18,7 @@
 	                </div>
                     <div class="col-md-4"><label><mark style="background-color: #dc354526; color: #520606f7">- (*) Llenar datos obligatoriamente.</mark></label></div>
                     
-                    <div class="col-md-4"><label><mark style="background-color: #dc354526; color: #520606f7">- Primero realizar la búsqueda del egresado.</mark></label></div>
+                    <div class="col-md-4" id="labelInicio"><label><mark style="background-color: #dc354526; color: #520606f7">- Primero realizar la búsqueda del egresado.</mark></label></div>
                     
 					<div class="card-body">
                         <fieldset class="border p-2">
@@ -223,11 +223,11 @@
                             <div class="content table-responsive table-full-width t12">
                                 <v-client-table :data="expeditos" :columns="columns" :options="options">
                                     <div slot="Acciones" slot-scope="props">
-                                        <button v-if="props.row.Estado == 'PENDIENTE'" v-on:click="estado(props.row.IDExpedito,1)" class="btn btn-danger" data-toggle="tooltip" data-placement="left" >Pendiente</button>
-                                        <button v-if="props.row.Estado == 'EN PROCESO'" v-on:click="estado(props.row.IDExpedito,2)"  class="btn btn-warning" data-toggle="tooltip" data-placement="left" >En Proceso</button>
-                                        <button v-if="props.row.Estado == 'FINALIZADO'"  class="btn btn-success" data-toggle="tooltip" data-placement="left" >Finalizado</button>
+                                        <button v-if="props.row.Estado == 'PENDIENTE'" v-on:click="estado(props.row.IDExpedito,1)" class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Hacer click para cambiar de estado">Pendiente  </button>
+                                        <button v-if="props.row.Estado == 'EN PROCESO'" v-on:click="estado(props.row.IDExpedito,2)"  class="btn btn-warning" data-toggle="tooltip" data-placement="left" title="Hacer click para cambiar de estado">En Proceso</button>
+                                        <button v-if="props.row.Estado == 'FINALIZADO'"  class="btn btn-success" data-toggle="tooltip" data-placement="left" title="Estado final">Finalizado  </button>
                                         <button class="btn btn-info" v-on:click="edit(props.row.IDExpedito,props.row.Tipo,props.row.CodigoAlumno,props.row.Tomo,props.row.Folio,props.row.Asiento,props.row.NumSesion,props.row.FechaIngreso,props.row.FechaComienzo,props.row.IDSesion,props.row.Fecha,props.row.Escuela,props.row.Alumno,props.row.DNI)" data-placement="left" title="Editar"><i class="fas fa-edit" style="color: white" aria-hidden="true"></i></button>
-                                        <router-link v-if="props.row.Estado == 'FINALIZADO'" class="btn btn-success" target="_blank" :to="'/oficio/'+props.row.IDExpedito" data-toggle="tooltip"  data-placement="left" title="Ver Acta"><i class="far fa-file-pdf" aria-hidden="true"></i></router-link>
+                                        <router-link v-if="props.row.Estado == 'FINALIZADO'" class="btn btn-success" target="_blank" :to="'/oficio/'+props.row.IDExpedito" data-toggle="tooltip"  data-placement="left" title="Ver Oficio"><i class="far fa-file-pdf" aria-hidden="true"></i></router-link>
                                     </div>
                                 </v-client-table>
                             </div>
@@ -567,7 +567,7 @@
                     swal({
                         type: 'error',
                         //title: 'Error',
-                        text: 'Hay un problema, comuníquese con un administrador',
+                        text: 'Ocurrió un problema, comuníquese con un administrador',
                         showConfirmButton: true,
                     });
                 })
@@ -593,7 +593,7 @@
 				$('#archivos').hide();
 				$('#editar').hide();
 				$('#guardar').hide();
-				$('#buscar').hide();
+                $('#buscar').hide();                
                 $('#expeditos').show();	
                 $('#menos').hide();
                 $('#mas').show();
@@ -723,6 +723,7 @@
             $("#expeditos").hide();
             $("#archivos").hide();
             $("#buscar").hide();
+            $('#labelInicio').hide();
             $('#mas').hide();
             $('#editar').show();
             $('#guardar').hide();
