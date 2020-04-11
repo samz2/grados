@@ -24,7 +24,7 @@
                         <fieldset class="border p-2">
                             
                             <legend class="w-auto">Datos Egresado 
-                                <button  data-target="#exampleModal" class="btn btn-primary" data-toggle="modal" style="color:white;" data-placement="left">
+                                <button  data-target="#exampleModal" id="buscar" class="btn btn-primary" data-toggle="modal" style="color:white;" data-placement="left">
 								Buscar Egresado <i class="fas fa-search"></i>
 							    </button>
                             </legend>                            
@@ -99,7 +99,7 @@
                                 </div>
                             </div>
                         </fieldset>
-                        <fieldset class="border p-2">
+                        <fieldset class="border p-2" id="archivos">
                             <legend class="w-auto">Archivos</legend>
                             <div class="form-group row">
                                 <div class="col-md-2">
@@ -153,8 +153,11 @@
                         <div class="row">
                             <div class="col-md-4" style="text-align: center;">
                             </div>
-                            <div class="col-md-2" style="text-align: center;">
+                            <div class="col-md-2" id="guardar" style="text-align: center;">
                                 <button class="btn btn-success"  @click="addExpedito(1)">Guardar <i class="fa fa-save"></i></button>
+                            </div>
+                            <div class="col-md-2"  id="editar" style="text-align: center;">
+                                <button class="btn btn-success" @click="editExpedito()">Editar <i class="fa fa-edit"></i></button>
                             </div>
                             <div class="col-md-2" style="text-align: center;">
                                 <button class="btn btn-danger" @click="cancelar()">Cancelar <i class="fas fa-times"></i></button>
@@ -223,10 +226,8 @@
                                         <button v-if="props.row.Estado == 'PENDIENTE'" v-on:click="estado(props.row.IDExpedito,1)" class="btn btn-danger" data-toggle="tooltip" data-placement="left" >Pendiente</button>
                                         <button v-if="props.row.Estado == 'EN PROCESO'" v-on:click="estado(props.row.IDExpedito,2)"  class="btn btn-warning" data-toggle="tooltip" data-placement="left" >En Proceso</button>
                                         <button v-if="props.row.Estado == 'FINALIZADO'"  class="btn btn-success" data-toggle="tooltip" data-placement="left" >Finalizado</button>
-                                        <!-- <button class="btn btn-info" data-toggle="tooltip" v-on:click="reg(props.row.IDExpedito)" data-placement="left" title="Registrar"><i class="fas fa-edit" style="color: white" aria-hidden="true"></i></button> -->
-                                        <button data-target="#exampleModal" v-if="props.row.Estado == 'PENDIENTE' || props.row.Estado == 'EN PROCESO'" class="btn btn-info" data-toggle="modal"  v-on:click="edit(props.row.IDEgresado,props.row.Codigo,props.row.DNI,props.row.Paterno,props.row.Materno,props.row.Celular,props.row.Ingreso,props.row.Egreso,props.row.Nombre,props.row.Genero,props.row.Correo,props.row.IDEscuela)" data-placement="left" title="Editar"><i class="fas fa-edit" style="color: white" aria-hidden="true"></i></button>
+                                        <button class="btn btn-info" v-on:click="edit(props.row.IDExpedito,props.row.Tipo,props.row.CodigoAlumno,props.row.Tomo,props.row.Folio,props.row.Asiento,props.row.NumSesion,props.row.FechaIngreso,props.row.FechaComienzo,props.row.IDSesion,props.row.Fecha,props.row.Escuela,props.row.Alumno,props.row.DNI)" data-placement="left" title="Editar"><i class="fas fa-edit" style="color: white" aria-hidden="true"></i></button>
                                         <router-link v-if="props.row.Estado == 'FINALIZADO'" class="btn btn-success" target="_blank" :to="'/oficio/'+props.row.IDExpedito" data-toggle="tooltip"  data-placement="left" title="Ver Acta"><i class="far fa-file-pdf" aria-hidden="true"></i></router-link>
-                                        <!-- <button class="btn btn-success" data-toggle="tooltip" v-on:click="edit(props.row.IDExpedito)" data-placement="left" title="Acta"><i class="far fa-file-pdf" style="color: white" aria-hidden="true"></i></button> -->
                                     </div>
                                 </v-client-table>
                             </div>
@@ -249,6 +250,7 @@
                 foto:null,
             },
 			expedito:{
+                idexpedito:null,
                 codigo:null,
                 dni:null,
                 alumno:null,
@@ -472,7 +474,7 @@
             }
             
         },
-         validarFoto(e)
+        validarFoto(e)
         {
             var size = e.target.files[0].size;
             var type = e.target.files[0].type;
@@ -540,19 +542,7 @@
                     //allowOutsideClick: false,
                     timer: 3000
                 });
-                return;
             }else if(e == 1){
-            /*if(this.archivos.foto == null 
-            || this.archivos.egresado == null 
-            || this.archivos.matricula == null)
-            {
-                swal({
-					type: 'error',
-					title: 'Subir archivos con los formatos requeridos',
-                });
-                return;
-            }
-            else{*/
                 this.$Progress.start();
                 axios.post("addExpedito",{
                     expedito:this.expedito,
@@ -561,7 +551,7 @@
                     swal({
                         // position: 'top-end',
                         type: data.data.type,
-                        title: data.data.title,
+                        // title: data.data.title,
                         text: data.data.text,
                         showConfirmButton: false,
                         timer: 2000
@@ -582,19 +572,28 @@
                     });
                 })
             }
+            
 			
 		},
 		ocultar(id){
 			if(id == '1')
 			{
                 $('#objetivo').show();
+                $('#buscar').show();
+                $('#archivos').show();
+                $('#guardar').show();
                 $('#expeditos').hide();
+                $('#editar').hide();
                 $('#menos').show();
                 $('#mas').hide();
 			}
 			else if(id == '2')
 			{
 				$('#objetivo').hide();
+				$('#archivos').hide();
+				$('#editar').hide();
+				$('#guardar').hide();
+				$('#buscar').hide();
                 $('#expeditos').show();	
                 $('#menos').hide();
                 $('#mas').show();
@@ -717,8 +716,73 @@
                     });
             }
             
-		},
-        
+        },
+        edit(IDExpedito,Tipo,CodigoAlumno,Tomo,Folio,Asiento,NumSesion,FechaIngreso,FechaComienzo,IDSesion,Fecha,Escuela,Alumno,DNI)
+        {
+            $("#objetivo").show();
+            $("#expeditos").hide();
+            $("#archivos").hide();
+            $("#buscar").hide();
+            $('#mas').hide();
+            $('#editar').show();
+            $('#guardar').hide();
+            this.expedito.idexpedito = IDExpedito;
+            this.expedito.codigo     = CodigoAlumno;
+            this.expedito.dni        = DNI;
+            this.expedito.alumno     = Alumno;
+            this.expedito.carrera    = Escuela;
+            this.expedito.tomo       = Tomo;
+            this.expedito.folio      = Folio;
+            this.expedito.asiento    = Asiento;
+            this.expedito.sesion     = NumSesion;
+            this.expedito.sfecha     = Fecha;
+            this.expedito.stipo      = Tipo;
+            this.expedito.ingreso    = FechaIngreso;
+            this.expedito.comienzo   = FechaComienzo;
+        },
+        editExpedito()
+        {
+            if( this.expedito.codigo==null || this.expedito.dni==null ||
+                this.expedito.alumno==null || this.expedito.carrera==null ||
+                this.expedito.tomo==null || this.expedito.folio==null || this.expedito.asiento==null ||
+                this.expedito.sesion==null || this.expedito.sfecha==null || this.expedito.stipo==null ||
+                this.expedito.ingreso==null)
+            {
+                swal({
+                    type: 'warning',
+                    title: 'Llenar los campos obligatorios',
+                    timer: 3000
+                });
+                return;
+            }else{
+                this.$Progress.start();
+                axios.post("updateExpedito",{
+                    expedito:this.expedito,
+                }).then(data=>{
+                    swal({
+                        type: data.data.type,
+                        text: data.data.text,
+                        showConfirmButton: false,
+                        timer: 2000
+                    });
+                    this.$Progress.finish();
+                    // setTimeout(() => {
+                    //     location.reload();
+                    // }, 1500);
+                    this.cancelar();
+                    this.getExpeditos();
+                    }).catch(error=>{
+                    console.log(error);	
+                    swal({
+                        type: 'error',
+                        //title: 'Error',
+                        text: 'Hay un problema, comuníquese con un administrador',
+                        showConfirmButton: true,
+                    });
+                })
+            }
+        }
     }
+    
 }
 </script>

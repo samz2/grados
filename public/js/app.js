@@ -5439,6 +5439,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -5449,6 +5450,7 @@ __webpack_require__.r(__webpack_exports__);
         foto: null
       },
       expedito: {
+        idexpedito: null,
         codigo: null,
         dni: null,
         alumno: null,
@@ -5721,19 +5723,7 @@ __webpack_require__.r(__webpack_exports__);
           //allowOutsideClick: false,
           timer: 3000
         });
-        return;
       } else if (e == 1) {
-        /*if(this.archivos.foto == null 
-        || this.archivos.egresado == null 
-        || this.archivos.matricula == null)
-        {
-            swal({
-        type: 'error',
-        title: 'Subir archivos con los formatos requeridos',
-            });
-            return;
-        }
-        else{*/
         this.$Progress.start();
         axios.post("addExpedito", {
           expedito: this.expedito,
@@ -5742,7 +5732,7 @@ __webpack_require__.r(__webpack_exports__);
           swal({
             // position: 'top-end',
             type: data.data.type,
-            title: data.data.title,
+            // title: data.data.title,
             text: data.data.text,
             showConfirmButton: false,
             timer: 2000
@@ -5770,11 +5760,19 @@ __webpack_require__.r(__webpack_exports__);
     ocultar: function ocultar(id) {
       if (id == '1') {
         $('#objetivo').show();
+        $('#buscar').show();
+        $('#archivos').show();
+        $('#guardar').show();
         $('#expeditos').hide();
+        $('#editar').hide();
         $('#menos').show();
         $('#mas').hide();
       } else if (id == '2') {
         $('#objetivo').hide();
+        $('#archivos').hide();
+        $('#editar').hide();
+        $('#guardar').hide();
+        $('#buscar').hide();
         $('#expeditos').show();
         $('#menos').hide();
         $('#mas').show();
@@ -5884,6 +5882,69 @@ __webpack_require__.r(__webpack_exports__);
               _this9.$Progress.fail();
             });
           }
+        });
+      }
+    },
+    edit: function edit(IDExpedito, Tipo, CodigoAlumno, Tomo, Folio, Asiento, NumSesion, FechaIngreso, FechaComienzo, IDSesion, Fecha, Escuela, Alumno, DNI) {
+      $("#objetivo").show();
+      $("#expeditos").hide();
+      $("#archivos").hide();
+      $("#buscar").hide();
+      $('#mas').hide();
+      $('#editar').show();
+      $('#guardar').hide();
+      this.expedito.idexpedito = IDExpedito;
+      this.expedito.codigo = CodigoAlumno;
+      this.expedito.dni = DNI;
+      this.expedito.alumno = Alumno;
+      this.expedito.carrera = Escuela;
+      this.expedito.tomo = Tomo;
+      this.expedito.folio = Folio;
+      this.expedito.asiento = Asiento;
+      this.expedito.sesion = NumSesion;
+      this.expedito.sfecha = Fecha;
+      this.expedito.stipo = Tipo;
+      this.expedito.ingreso = FechaIngreso;
+      this.expedito.comienzo = FechaComienzo;
+    },
+    editExpedito: function editExpedito() {
+      var _this10 = this;
+
+      if (this.expedito.codigo == null || this.expedito.dni == null || this.expedito.alumno == null || this.expedito.carrera == null || this.expedito.tomo == null || this.expedito.folio == null || this.expedito.asiento == null || this.expedito.sesion == null || this.expedito.sfecha == null || this.expedito.stipo == null || this.expedito.ingreso == null) {
+        swal({
+          type: 'warning',
+          title: 'Llenar los campos obligatorios',
+          timer: 3000
+        });
+        return;
+      } else {
+        this.$Progress.start();
+        axios.post("updateExpedito", {
+          expedito: this.expedito
+        }).then(function (data) {
+          swal({
+            type: data.data.type,
+            text: data.data.text,
+            showConfirmButton: false,
+            timer: 2000
+          });
+
+          _this10.$Progress.finish(); // setTimeout(() => {
+          //     location.reload();
+          // }, 1500);
+
+
+          _this10.cancelar();
+
+          _this10.getExpeditos();
+        })["catch"](function (error) {
+          console.log(error);
+          swal({
+            type: 'error',
+            //title: 'Error',
+            text: 'Hay un problema, comuníquese con un administrador',
+            showConfirmButton: true
+          });
         });
       }
     }
@@ -57631,54 +57692,62 @@ var render = function() {
                 ])
               ]),
               _vm._v(" "),
-              _c("fieldset", { staticClass: "border p-2" }, [
-                _c("legend", { staticClass: "w-auto" }, [_vm._v("Archivos")]),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-group row" }, [
-                  _vm._m(7),
+              _c(
+                "fieldset",
+                { staticClass: "border p-2", attrs: { id: "archivos" } },
+                [
+                  _c("legend", { staticClass: "w-auto" }, [_vm._v("Archivos")]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "col-md-4" }, [
-                    _c("input", {
-                      staticClass: "form-control form-control-sm",
-                      attrs: {
-                        type: "file",
-                        id: "matricula",
-                        accept: "application/pdf"
-                      },
-                      on: { change: _vm.validarMatricula }
-                    })
+                  _c("div", { staticClass: "form-group row" }, [
+                    _vm._m(7),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-md-4" }, [
+                      _c("input", {
+                        staticClass: "form-control form-control-sm",
+                        attrs: {
+                          type: "file",
+                          id: "matricula",
+                          accept: "application/pdf"
+                        },
+                        on: { change: _vm.validarMatricula }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(8),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-md-4" }, [
+                      _c("input", {
+                        staticClass: "form-control form-control-sm",
+                        attrs: {
+                          type: "file",
+                          id: "egresado",
+                          name: "egresado",
+                          accept: "application/pdf"
+                        },
+                        on: { change: _vm.validarEgresado }
+                      })
+                    ])
                   ]),
                   _vm._v(" "),
-                  _vm._m(8),
+                  _c("div", { staticClass: "form-group row" }, [
+                    _vm._m(9),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-md-4" }, [
+                      _c("input", {
+                        staticClass: "form-control form-control-sm",
+                        attrs: {
+                          type: "file",
+                          id: "foto",
+                          accept: "image/jpeg"
+                        },
+                        on: { change: _vm.validarFoto }
+                      })
+                    ])
+                  ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "col-md-4" }, [
-                    _c("input", {
-                      staticClass: "form-control form-control-sm",
-                      attrs: {
-                        type: "file",
-                        id: "egresado",
-                        name: "egresado",
-                        accept: "application/pdf"
-                      },
-                      on: { change: _vm.validarEgresado }
-                    })
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-group row" }, [
-                  _vm._m(9),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-md-4" }, [
-                    _c("input", {
-                      staticClass: "form-control form-control-sm",
-                      attrs: { type: "file", id: "foto", accept: "image/jpeg" },
-                      on: { change: _vm.validarFoto }
-                    })
-                  ])
-                ]),
-                _vm._v(" "),
-                _vm._m(10)
-              ]),
+                  _vm._m(10)
+                ]
+              ),
               _vm._v(" "),
               _c("fieldset", { staticClass: "border p-2" }, [
                 _c("legend", { staticClass: "w-auto" }, [
@@ -57790,7 +57859,8 @@ var render = function() {
                   "div",
                   {
                     staticClass: "col-md-2",
-                    staticStyle: { "text-align": "center" }
+                    staticStyle: { "text-align": "center" },
+                    attrs: { id: "guardar" }
                   },
                   [
                     _c(
@@ -57806,6 +57876,32 @@ var render = function() {
                       [
                         _vm._v("Guardar "),
                         _c("i", { staticClass: "fa fa-save" })
+                      ]
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "col-md-2",
+                    staticStyle: { "text-align": "center" },
+                    attrs: { id: "editar" }
+                  },
+                  [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-success",
+                        on: {
+                          click: function($event) {
+                            return _vm.editExpedito()
+                          }
+                        }
+                      },
+                      [
+                        _vm._v("Editar "),
+                        _c("i", { staticClass: "fa fa-edit" })
                       ]
                     )
                   ]
@@ -58200,46 +58296,43 @@ var render = function() {
                                 )
                               : _vm._e(),
                             _vm._v(" "),
-                            props.row.Estado == "PENDIENTE" ||
-                            props.row.Estado == "EN PROCESO"
-                              ? _c(
-                                  "button",
-                                  {
-                                    staticClass: "btn btn-info",
-                                    attrs: {
-                                      "data-target": "#exampleModal",
-                                      "data-toggle": "modal",
-                                      "data-placement": "left",
-                                      title: "Editar"
-                                    },
-                                    on: {
-                                      click: function($event) {
-                                        return _vm.edit(
-                                          props.row.IDEgresado,
-                                          props.row.Codigo,
-                                          props.row.DNI,
-                                          props.row.Paterno,
-                                          props.row.Materno,
-                                          props.row.Celular,
-                                          props.row.Ingreso,
-                                          props.row.Egreso,
-                                          props.row.Nombre,
-                                          props.row.Genero,
-                                          props.row.Correo,
-                                          props.row.IDEscuela
-                                        )
-                                      }
-                                    }
-                                  },
-                                  [
-                                    _c("i", {
-                                      staticClass: "fas fa-edit",
-                                      staticStyle: { color: "white" },
-                                      attrs: { "aria-hidden": "true" }
-                                    })
-                                  ]
-                                )
-                              : _vm._e(),
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-info",
+                                attrs: {
+                                  "data-placement": "left",
+                                  title: "Editar"
+                                },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.edit(
+                                      props.row.IDExpedito,
+                                      props.row.Tipo,
+                                      props.row.CodigoAlumno,
+                                      props.row.Tomo,
+                                      props.row.Folio,
+                                      props.row.Asiento,
+                                      props.row.NumSesion,
+                                      props.row.FechaIngreso,
+                                      props.row.FechaComienzo,
+                                      props.row.IDSesion,
+                                      props.row.Fecha,
+                                      props.row.Escuela,
+                                      props.row.Alumno,
+                                      props.row.DNI
+                                    )
+                                  }
+                                }
+                              },
+                              [
+                                _c("i", {
+                                  staticClass: "fas fa-edit",
+                                  staticStyle: { color: "white" },
+                                  attrs: { "aria-hidden": "true" }
+                                })
+                              ]
+                            ),
                             _vm._v(" "),
                             props.row.Estado == "FINALIZADO"
                               ? _c(
@@ -58341,6 +58434,7 @@ var staticRenderFns = [
           staticStyle: { color: "white" },
           attrs: {
             "data-target": "#exampleModal",
+            id: "buscar",
             "data-toggle": "modal",
             "data-placement": "left"
           }
@@ -65315,18 +65409,18 @@ module.exports = function () {
     columnsDisplay: {},
     columnsDropdown: false,
     texts: {
-      count: "Mostrando {from} al {to} de {count} registros|{count} registros|Un registro",
-      first: 'Primero',
-      last: 'Ultimo',
-      //filter: "Buscar:                                    ",
-      filterPlaceholder: "Buscador..",
-      limit: "Registros:",
-      page: "Pagina:",
-      noResults: "No hay registros",
-      filterBy: "Filtrar por {column}",
-      loading: 'Cargando...',
-      defaultOption: 'Seleccionar {column}',
-      columns: 'Columnas'
+      count: "Showing {from} to {to} of {count} records|{count} records|One record",
+      first: 'First',
+      last: 'Last',
+      filter: "Filter:",
+      filterPlaceholder: "Search query",
+      limit: "Records:",
+      page: "Page:",
+      noResults: "No matching records",
+      filterBy: "Filter by {column}",
+      loading: 'Loading...',
+      defaultOption: 'Select {column}',
+      columns: 'Columns'
     },
     sortIcon: {
       is: 'glyphicon-sort',
@@ -84121,8 +84215,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\Sistemas\SISTEMA GRADOS\grados\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\Sistemas\SISTEMA GRADOS\grados\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\grados\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\grados\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

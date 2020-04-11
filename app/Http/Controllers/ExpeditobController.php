@@ -18,7 +18,7 @@ class ExpeditobController extends Controller
                         ->join("sesion AS s","expedito.NumSesion","s.NumSesion")
                         ->join("estados AS es","expedito.Estado","es.Posicion")
                         ->join("escuela AS esc","e.IDEscuela","esc.IDEscuela")
-                        ->select("expedito.*",\DB::raw("concat_ws('-',expedito.Tomo,expedito.Folio,expedito.Asiento) AS Acta"),\DB::raw("date_format(expedito.FechaIngreso,'%d-%m-%Y') AS FechaIngresoAux"),\DB::raw("date_format(expedito.FechaComienzo,'%d-%m-%Y') AS FechaComienzoAux"),\DB::raw("date_format(s.Fecha,'%d-%m-%Y') AS FechaAux"),"esc.Escuela","s.*","es.Estado",\DB::raw("concat_ws(' ',e.Nombre,e.Paterno,e.Materno) as Alumno"))
+                        ->select("expedito.*",\DB::raw("concat_ws('-',expedito.Tomo,expedito.Folio,expedito.Asiento) AS Acta"),\DB::raw("date_format(expedito.FechaIngreso,'%d-%m-%Y') AS FechaIngresoAux"),\DB::raw("date_format(expedito.FechaComienzo,'%d-%m-%Y') AS FechaComienzoAux"),\DB::raw("date_format(s.Fecha,'%d-%m-%Y') AS FechaAux"),"esc.Escuela","s.*","es.Estado",\DB::raw("concat_ws(' ',e.Nombre,e.Paterno,e.Materno) as Alumno"),"e.DNI")
                         ->where("expedito.Tipo","BACHILLER")->get();
         
         $expeditost =   Expeditob::join("egresado AS e","expedito.CodigoAlumno","e.Codigo")
@@ -95,7 +95,7 @@ class ExpeditobController extends Controller
             $text = "Egresado ya cuenta con un expedito";
         }
         
-        return compact("type","title","text");
+        return compact("type","text");
     }
 
     /**
@@ -115,9 +115,33 @@ class ExpeditobController extends Controller
      * @param  \App\expeditob  $expeditob
      * @return \Illuminate\Http\Response
      */
-    public function edit(expeditob $expeditob)
+    public function edit(Request $request)
     {
-        //
+        $hoy = date("Y-m-d");
+        $IDExpedito = $request->expedito["idexpedito"];
+        $expedito = Expeditob::where("IDExpedito",$IDExpedito)->update(
+        [
+            "Tipo"          => $request->expedito["tipo"],
+            "CodigoAlumno"  => $request->expedito["codigo"],
+            "Tomo"          => $request->expedito["tomo"],
+            "Folio"         => $request->expedito["folio"],
+            "Asiento"       => $request->expedito["asiento"],
+            "NumSesion"     => $request->expedito["sesion"],
+            "FechaIngreso"  => $request->expedito["ingreso"],
+            "FechaComienzo" => $request->expedito["comienzo"],
+            "updated_at"    => $hoy,
+            
+        ]);
+        if($expedito)
+        {
+            $type = "success";
+            $text = "Expedito editado con éxito";  
+        }else
+        {
+            $type = "success";
+            $text = "Expedito editado con éxito";  
+        }
+        return compact("type","text");
     }
 
     /**
