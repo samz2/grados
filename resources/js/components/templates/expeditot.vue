@@ -399,7 +399,7 @@
                     FechaComienzo: "Comienzo trámite",
                     Fecha: "Fecha Sesión",
                     Alumno: "Egresado",
-                    Acta: "   T-F-A   "
+                    Acta: "   T-F-A-M   "
 				},
 				sortable    : ["Alumno","Acta","NumSesion","Fecha","FechaIngreso","FechaComienzo",],
 				filterable  : ["Alumno","Acta","NumSesion","Fecha","FechaIngreso","FechaComienzo",]

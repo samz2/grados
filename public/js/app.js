@@ -6363,7 +6363,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           FechaComienzo: "Comienzo trámite",
           Fecha: "Fecha Sesión",
           Alumno: "Egresado",
-          Acta: "   T-F-A   "
+          Acta: "   T-F-A-M   "
         },
         sortable: ["Alumno", "Acta", "NumSesion", "Fecha", "FechaIngreso", "FechaComienzo"],
         filterable: ["Alumno", "Acta", "NumSesion", "Fecha", "FechaIngreso", "FechaComienzo"]
@@ -65537,18 +65537,18 @@ module.exports = function () {
     columnsDisplay: {},
     columnsDropdown: false,
     texts: {
-      count: "Mostrando {from} al {to} de {count} registros|{count} registros|Un registro",
-      first: 'Primero',
-      last: 'Ultimo',
-      //filter: "Buscar:                                    ",
-      filterPlaceholder: "Buscador general..",
-      limit: "Registros:",
-      page: "Pagina:",
-      noResults: "No hay registros",
-      filterBy: "Filtrar por {column}",
-      loading: 'Cargando...',
-      defaultOption: 'Seleccionar {column}',
-      columns: 'Columnas'
+      count: "Showing {from} to {to} of {count} records|{count} records|One record",
+      first: 'First',
+      last: 'Last',
+      filter: "Filter:",
+      filterPlaceholder: "Search query",
+      limit: "Records:",
+      page: "Page:",
+      noResults: "No matching records",
+      filterBy: "Filter by {column}",
+      loading: 'Loading...',
+      defaultOption: 'Select {column}',
+      columns: 'Columns'
     },
     sortIcon: {
       is: 'glyphicon-sort',
@@ -84343,8 +84343,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\Sistemas\SISTEMA GRADOS\grados\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\Sistemas\SISTEMA GRADOS\grados\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\grados\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\grados\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
