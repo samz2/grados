@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\expeditob;
+use App\titulacion;
 use Illuminate\Http\Request;
 
 class ExpeditobController extends Controller
@@ -56,7 +57,7 @@ class ExpeditobController extends Controller
     {
         $hoy = date("Y-m-d");
         $expedito = new Expeditob();
-        $numEgresado = Expeditob::where("CodigoAlumno",$request->expedito["codigo"])->get()->count();
+        $numEgresado = Expeditob::where("CodigoAlumno",$request->expedito["codigo"])->where("Tipo","BACHILLER")->get()->count();
         if($numEgresado == 0)
         {
             $expedito->Tipo             = $request->expedito["tipo"];
@@ -98,6 +99,71 @@ class ExpeditobController extends Controller
         return compact("type","text");
     }
 
+    public function storeTitulo(Request $request)
+    {
+        $hoy = date("Y-m-d");
+        $year = date("Y");
+        $expedito = new Expeditob();
+        $titulacion = new Titulacion();
+        $numEgresado = Expeditob::where("CodigoAlumno",$request->expedito["codigo"])->where("Tipo","TITULO")->get()->count();
+        if($numEgresado == 0)
+        {
+            $expedito->Tipo             = $request->expedito["tipo"];
+            $expedito->CodigoAlumno     = $request->expedito["codigo"];
+            $expedito->Tomo             = $request->expedito["tomo"];
+            $expedito->Folio            = $request->expedito["folio"];
+            $expedito->Asiento          = $request->expedito["asiento"];
+            $expedito->NumSesion        = $request->expedito["sesion"];
+            $expedito->FechaIngreso     = $request->expedito["ingreso"];
+            $expedito->FechaComienzo    = $request->expedito["comienzo"];
+            $expedito->Estado           = 1;
+            $expedito->created_at       = $hoy;
+            $titulacion->CodAlumno      = $request->expedito["codigo"];
+            $titulacion->Asesor         = $request->expedito["asesor"];
+            $titulacion->IDModalidad    = $request->expedito["modalidad"];
+            $titulacion->NombreTesis    = mb_strtoupper($request->expedito["tesis"]);
+            $titulacion->Calificacion   = $request->expedito["calificacion"];
+            $titulacion->Fecha          = $request->expedito["sustentacion"];
+            $titulacion->created_at     = $hoy;
+            $titulacion->save();
+            $objMatricula  = explode(",",$request->archivos["matricula"]);
+            $objEgresado   = explode(",",$request->archivos["egresado"]);
+            $objFoto       = explode(",",$request->archivos["foto"]);
+            $objTesis      = explode(",",$request->archivos["tesis"]);
+            $objWord       = explode(",",$request->archivos["word"]);
+            $matricula  = base64_decode($objMatricula[1]);
+            $egresado   = base64_decode($objEgresado[1]);
+            $foto       = base64_decode($objFoto[1]);
+            $tesis      = base64_decode($objTesis[1]);
+            $word       = base64_decode($objWord[1]);
+            $matriculaNombre    = "CM035_".$request->expedito["dni"]."_T.pdf";
+            $egresadoNombre     = "CE035_".$request->expedito["dni"]."_T.pdf";
+            $fotoNombre         = "F035_".$request->expedito["dni"]."_T.jpg";
+            $tesisNombre        = "SISTEMAS_".$year."_T_".$request->expedito["dni"]."_T.pdf";
+            $WordNombre         = "SISTEMAS_".$year."_T_".$request->expedito["dni"]."_T.docx";
+            $rutaMatricula  = public_path()."/".$matriculaNombre;
+            $rutaEgresado   = public_path()."/".$egresadoNombre;
+            $rutaFoto       = public_path()."/".$fotoNombre;
+            $rutaTesis      = public_path()."/".$tesisNombre;
+            $rutaWord       = public_path()."/".$WordNombre;
+            file_put_contents($rutaMatricula,$matricula);
+            file_put_contents($rutaEgresado,$egresado);
+            file_put_contents($rutaFoto,$foto);
+            file_put_contents($rutaTesis,$tesis);
+            file_put_contents($rutaWord,$word);
+            $expedito->save();
+            $type = "success";
+            //$title = "OK";
+            $text = "Expedito creado con éxito";
+        }else
+        {
+            $type = "warning";
+            //$title = "Advertencia";
+            $text = "Egresado ya cuenta con un expedito";
+        }
+        
+        return compact("type","text");
+    }
     /**
      * Display the specified resource.
      *

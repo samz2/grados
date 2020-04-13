@@ -103,7 +103,7 @@
                                 <div class="col-md-2 text-left">
                                 <label>Asesor(*)</label>
                                 </div>
-                                <div class="col-md-9">
+                                <div class="col-md-6">
                                     <select v-model="expedito.asesor" class="form-control form-control-sm">
                                         <option v-for="d in docentes" :key="d.DNI" :value="d.DNI">
                                             {{d.Nombres}} {{d.Apellidos}}
@@ -191,13 +191,13 @@
                                     <label>Const. Matrícula(*)</label>
                                 </div>
                                 <div class="col-md-4">
-                                    <input type="file" name="pdf" class="form-control form-control-sm">
+                                    <input type="file" id="matricula" @change="validarMatricula" class="form-control form-control-sm">
                                 </div>
                                 <div class="col-md-2">
                                 <label>Const. Egresado(*)</label>
                                 </div>
                                 <div class="col-md-4">
-                                    <input type="file" name="pdf" class="form-control form-control-sm">
+                                    <input type="file" id="egresado"  @change="validarEgresado" class="form-control form-control-sm">
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -205,13 +205,13 @@
                                 <label>Arch. Tesis PDF(*)</label>
                                 </div>
                                 <div class="col-md-4">
-                                    <input type="file" name="pdf" class="form-control form-control-sm">
+                                    <input type="file" id="tesis" @change="validarTesis" class="form-control form-control-sm">
                                 </div>
                                 <div class="col-md-2">
                                 <label>Arch. Tesis Word(*)</label>
                                 </div>
                                 <div class="col-md-4">
-                                    <input type="file" name="pdf" class="form-control form-control-sm">
+                                    <input type="file" id="word" @change="validarWord" class="form-control form-control-sm">
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -219,7 +219,7 @@
                                 <label>Foto(*)</label>
                                 </div>
                                 <div class="col-md-4">
-                                    <input type="file" name="pdf" class="form-control form-control-sm">
+                                    <input type="file" id="foto" @change="validarFoto" class="form-control form-control-sm">
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -276,47 +276,21 @@
                             <div class="form-group row">
                                 <label for="dni1" class="col-md-2 col-form-label">DNI: </label>
                                 <div class="col-md-4">
-                                    <input type="text" v-model="alumno.dni" id="dni1" class="form-control form-control-sm">
+                                    <input type="text" v-model="alumno.dni" onKeyPress="return solonumeros(event)" maxlength="8" id="dni1" class="form-control form-control-sm">
                                 </div>
                                 <label for="codigo1" class="col-md-2 col-form-label">Código: </label>
                                 <div class="col-md-4">
-                                    <input type="text" v-model="alumno.codigo" id="codigo1" class="form-control form-control-sm">
+                                    <input type="text" v-model="alumno.codigo" onKeyPress="return solonumeros(event)" maxlength="10" id="codigo1" class="form-control form-control-sm">
                                 </div>
                             </div>
-                            <!--<div class="form-group row">
-                                <label for="nombre1" class="col-md-2 col-form-label">Apellido: </label>
-                                <div class="col-md-10">
-                                    <input type="text" id="nombre1"  v-model="alumno.apellido" class="form-control form-control-sm">
-                                </div>
-                            </div>-->
+                          
                             <div class="form-group row">
-                                <label for="nombre1" class="col-md-2 col-form-label">Input Creado: </label>
+                                <label for="nombre1" class="col-md-2 col-form-label">Egresado: </label>
                                 <div class="col-md-10">
-                                    <table colspadding=0 cellspacing=0 border="1">
-                                    <tr class="t10" v-for="a in alumnos" :key="a.Codigo">
-                                        <td><input type="text" class="form-control form-control-sm">{{a.Nombres}}</td>
-                                        <td><input data-dismiss="modal" type="checkbox" @click="seleccionar(a.DNI,a.Codigo,a.Nombres,a.Carrera)" class="form-control form-control-sm"></td>
-                                    </tr>
-                                    </table>
+                                    <input type="text" v-model="alumnos.Nombres" readonly class="form-control form-control-sm">
                                 </div>
                             </div>
-                            <!--<fieldset class="border p-2">
-                                <legend class="w-auto">Lista de egresados</legend>
-                                <table colspadding=0 cellspacing=0 border="1">
-                                    <tr>
-                                        <td class="text-center"><i class="blanco">aaa</i> DNI <i class="blanco">aaa</i></td>
-                                        <td class="text-center"><i class="blanco">a</i>CÓDIGO<i class="blanco">a</i></td>
-                                        <td class="text-center"><i class="blanco">aaaaaaaaa</i>NOMBRES<i class="blanco">aaaaaaaaa</i></td>
-                                        <td class="text-center">SELECCIONAR</td>
-                                    </tr>
-                                    <tr class="t10" v-for="a in alumnos" :key="a.Codigo">
-                                        <td>{{a.DNI}}</td>
-                                        <td>{{a.Codigo}}</td>
-                                        <td>{{a.Nombres}}</td>
-                                        <td><input data-dismiss="modal" type="checkbox" @click="seleccionar(a.DNI,a.Codigo,a.Nombres,a.Carrera)" class="form-control form-control-sm"></td>
-                                    </tr>
-                                </table>
-                            </fieldset>-->
+                            
                             <div class="row">
                                 <div class="col-md-4">
                                     <button class="btn btn-primary" @click="buscar(alumno.dni,alumno.codigo,alumno.apellido)">Buscar <i class="fa fa-search"></i></button>
@@ -325,7 +299,7 @@
                                     <button class="btn btn-warning" @click="borrar()">Limpiar <i class="fas fa-broom"></i></button>
                                 </div>
                                 <div class="col-md-4">
-                                    <button class="btn btn-success" data-dismiss="modal" type="checkbox" @click="seleccionar(a.DNI,a.Codigo,a.Nombres,a.Carrera)">Seleccionar <i class="fas fa-check"></i></button>
+                                    <button class="btn btn-success" data-dismiss="modal" type="checkbox" @click="seleccionar(alumnos.DNI,alumnos.Codigo,alumnos.Nombres,alumnos.Carrera)">Seleccionar <i class="fas fa-check"></i></button>
                                 </div>
                             </div>
                             
@@ -365,6 +339,14 @@
     data() {
         return {
             alumnoz:null,
+            archivos:
+            {
+                matricula:null,
+                egresado:null,
+                foto:null,
+                word:null,
+                tesis:null
+            },
 			expedito:{
                 codigo:null,
                 dni:null,
@@ -378,7 +360,13 @@
                 stipo:null,
                 ingreso:null,
                 comienzo:null,
-                tipo:"TITULO"
+                tipo:"TITULO",
+                tesis:null,
+                sustentacion:null,
+                calificacion:null,
+                asesor:null,
+                modalidad:null,
+
             },
             alumno:{
                 codigo:null,
@@ -457,13 +445,22 @@
         },
         buscar(d,c,a)
         {
-            if(d == '') d = null;
+             if(d == '') d = null;
             if(c == '') c = null;
             if(a == '') a = null;
             axios.get("getAlumnos/"+d+"/"+c+"/"+a)
             .then(data=>
             {
-                this.alumnos = data.data.alumnos;
+                if(data.data.alumnos[0] == null)
+                {
+                    swal({
+                        type: 'error',
+                        title: 'No se encontraron registros',
+                    });
+                }else{
+                    this.alumnos = data.data.alumnos[0];
+                }
+                
                 this.$Progress.finish();
             }
             ).catch(error=>{
@@ -555,7 +552,8 @@
                 this.expedito.alumno==null || this.expedito.carrera==null ||
                 this.expedito.tomo==null || this.expedito.folio==null || this.expedito.asiento==null ||
                 this.expedito.sesion==null || this.expedito.sfecha==null || this.expedito.stipo==null ||
-                this.expedito.ingreso==null)
+                this.expedito.ingreso==null || this.archivos.foto == null || this.archivos.egresado == null || 
+                this.archivos.matricula == null || this.archivos.tesis == null || this.archivos.word==null)
             {
                 swal({
 					type: 'error',
@@ -563,8 +561,9 @@
 				});
             }else{
                 this.$Progress.start();
-                axios.post("addExpedito",{
-                    expedito:this.expedito
+                axios.post("addExpeditoT",{
+                    expedito:this.expedito,
+                    archivos:this.archivos
                 }).then(data=>{
                     swal({
                         // position: 'top-end',
@@ -679,7 +678,199 @@
             }
             
 		},
-        
+        seleccionar(d,c,n,ca)
+        {
+            this.expedito.codigo     = c;
+            this.expedito.dni        = d;
+            this.expedito.alumno     = n;
+            this.expedito.carrera    = ca;
+
+        },
+        validarMatricula(e)
+        {
+            var size = e.target.files[0].size;
+            var type = e.target.files[0].type;
+            if(size > 1024001)
+            {
+               e.target.value = '';
+               swal({
+                        type: 'error',
+                        //title: 'Error',
+                        text: 'El tamaño del archivo debe ser menor o igual a 1mb',
+                        showConfirmButton: true,
+                    });
+                return;    
+            }
+            if(type.includes("pdf"))
+            {
+                var file = new FileReader();
+                file.readAsDataURL(e.target.files[0]);
+                file.onload = (e) =>
+                {
+                    this.archivos.matricula = e.target.result;
+                }
+            }else
+            {
+                e.target.value = '';
+                this.archivos.matricula = null;
+                swal({
+                        type: 'error',
+                        //title: 'Error',
+                        text: 'El archivo debe ser PDF, por favor intente subiendo otro archivo',
+                        showConfirmButton: true,
+                    });
+                return;     
+            }
+            
+        },
+        validarEgresado(e)
+        {
+            var size = e.target.files[0].size;
+            var type = e.target.files[0].type;
+            if(size > 1024001)
+            {
+                e.target.value = '';
+                swal({
+                        type: 'error',
+                        //title: 'Error',
+                        text: 'El tamaño del archivo debe ser menor o igual a 1mb',
+                        showConfirmButton: true,
+                    });
+                return;    
+            }
+            if(type.includes("pdf"))
+            {
+                var file = new FileReader();
+                file.readAsDataURL(e.target.files[0]);
+                file.onload = (e) =>
+                {
+                    this.archivos.egresado = e.target.result;
+                }
+            }else
+            {
+                e.target.value = '';
+                swal({
+                        type: 'error',
+                        //title: 'Error',
+                        text: 'El archivo debe ser PDF, por favor intente subiendo otro archivo',
+                        showConfirmButton: true,
+                    });
+                return;     
+            }
+            
+        },
+        validarFoto(e)
+        {
+            var size = e.target.files[0].size;
+            var type = e.target.files[0].type;
+            if(size > 1024001)
+            {
+                e.target.value = '';
+                swal({
+                        type: 'error',
+                        //title: 'Error',
+                        text: 'El tamaño del archivo debe ser menor o igual a 1mb',
+                        showConfirmButton: true,
+                    });
+                return;    
+            }
+            if(type.includes("image"))
+            {
+                var file = new FileReader();
+                file.readAsDataURL(e.target.files[0]);
+                file.onload = (e) =>
+                {
+                    this.archivos.foto = e.target.result;
+                }
+                
+            }else
+            {
+                e.target.value = '';
+                swal({
+                        type: 'error',
+                        //title: 'Error',
+                        text: 'El archivo debe ser una imagen, por favor intente subiendo otro archivo',
+                        showConfirmButton: true,
+                    });
+                return;     
+            }
+            
+        },
+        validarTesis(e)
+        {
+            var size = e.target.files[0].size;
+            var type = e.target.files[0].type;
+            if(size > 1024001)
+            {
+                e.target.value = '';
+                swal({
+                        type: 'error',
+                        //title: 'Error',
+                        text: 'El tamaño del archivo debe ser menor o igual a 1mb',
+                        showConfirmButton: true,
+                    });
+                return;    
+            }
+            if(type.includes("pdf"))
+            {
+                var file = new FileReader();
+                file.readAsDataURL(e.target.files[0]);
+                file.onload = (e) =>
+                {
+                    this.archivos.tesis = e.target.result;
+                }
+                
+            }else
+            {
+                e.target.value = '';
+                swal({
+                        type: 'error',
+                        //title: 'Error',
+                        text: 'El archivo debe ser PDF, por favor intente subiendo otro archivo',
+                        showConfirmButton: true,
+                    });
+                return;     
+            }
+            
+        },
+        validarWord(e)
+        {
+            var size = e.target.files[0].size;
+            var type = e.target.files[0].type;
+            console.log(type);
+            if(size > 1024001)
+            {
+                e.target.value = '';
+                swal({
+                        type: 'error',
+                        //title: 'Error',
+                        text: 'El tamaño del archivo debe ser menor o igual a 1mb',
+                        showConfirmButton: true,
+                    });
+                return;    
+            }
+            if(type.includes("word"))
+            {
+                var file = new FileReader();
+                file.readAsDataURL(e.target.files[0]);
+                file.onload = (e) =>
+                {
+                    this.archivos.word = e.target.result;
+                }
+                
+            }else
+            {
+                e.target.value = '';
+                swal({
+                        type: 'error',
+                        //title: 'Error',
+                        text: 'El archivo debe ser un documento en Word, por favor intente subiendo otro archivo',
+                        showConfirmButton: true,
+                    });
+                return;     
+            }
+            
+        },
     }
 }
 </script>

@@ -495,6 +495,7 @@ class ComposerStaticInit22427e75c100aaea966a2edfbf2eb07c
         'App\\expeditob' => __DIR__ . '/../..' . '/app/expeditob.php',
         'App\\modalidad' => __DIR__ . '/../..' . '/app/modalidad.php',
         'App\\sesion' => __DIR__ . '/../..' . '/app/sesion.php',
+        'App\\titulacion' => __DIR__ . '/../..' . '/app/titulacion.php',
         'App\\tramite' => __DIR__ . '/../..' . '/app/tramite.php',
         'App\\users' => __DIR__ . '/../..' . '/app/users.php',
         'Barryvdh\\DomPDF\\Facade' => __DIR__ . '/..' . '/barryvdh/laravel-dompdf/src/Facade.php',

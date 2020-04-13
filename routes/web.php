@@ -41,6 +41,7 @@ Route::get('/getDocentes','DocentesController@index');
 Route::get('/getPrincipales','DocentesController@show');
 
 Route::post('/addExpedito','ExpeditobController@store');
+Route::post('/addExpeditoT','ExpeditobController@storeTitulo');
 Route::get('/getExpeditos','ExpeditobController@index');
 Route::get('/updateExpedito/{id}/{tipo}','ExpeditobController@update');
 Route::post('/updateExpedito','ExpeditobController@edit');

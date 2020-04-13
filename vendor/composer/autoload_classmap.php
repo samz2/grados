@@ -54,6 +54,7 @@ return array(
     'App\\expeditob' => $baseDir . '/app/expeditob.php',
     'App\\modalidad' => $baseDir . '/app/modalidad.php',
     'App\\sesion' => $baseDir . '/app/sesion.php',
+    'App\\titulacion' => $baseDir . '/app/titulacion.php',
     'App\\tramite' => $baseDir . '/app/tramite.php',
     'App\\users' => $baseDir . '/app/users.php',
     'Barryvdh\\DomPDF\\Facade' => $vendorDir . '/barryvdh/laravel-dompdf/src/Facade.php',

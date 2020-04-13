@@ -135,7 +135,7 @@
             </tr>
         </table>
         <p class="justificado t15 arial" style="line-height : 20px;"><b class="vacio justificado">aaaaaaaaaaaaaaiaaaaaa</b>Mediante el presente remito adjunto el expediente del Ex alumno:
-            <b class="justificado">{{$dato->Paterno}} {{$dato->Materno}}, {{ucwords(strtolower($dato->Nombre))}};</b> de la <b class="justificado">Carrera Profesional de {{$dato->Escuela}}</b> en condición de EXPEDITO, 
+            <b class="justificado">{{$dato->Paterno}} {{$dato->Materno}}, {{ucwords(mb_strtolower($dato->Nombre))}};</b> de la <b class="justificado">Carrera Profesional de {{$dato->Escuela}}</b> en condición de EXPEDITO, 
             para que se le dé el trámite correspondiente a fin de otorgarle el<b class="justificado"> Grado Académico de  
             Bachiller en {{$dato->Escuela}}</b>, cuyo registro en el libro de Grados de la Facultad es el siguiente: </p>
         <table class="center centrartabla t15 arial" border="1" cellspacing=0 cellspadding=0>
@@ -148,7 +148,7 @@
             </tr>
             <tr>
                 <td width=30 style="margin: 13px; padding: 13px;"><b>01</b></td>
-                <td width=150 style="margin: 13px; padding: 13px;"><b>{{$dato->Paterno}} {{$dato->Materno}}, {{ucwords(strtolower($dato->Nombre))}}</b></td>
+                <td width=150 style="margin: 13px; padding: 13px;"><b>{{$dato->Paterno}} {{$dato->Materno}}, {{ucwords(mb_strtolower($dato->Nombre))}}</b></td>
                 <td width=60 style="margin: 13px; padding: 13px;"><b>{{$dato->Tomo}}</b></td>
                 <td width=60 style="margin: 13px; padding: 13px;"><b>{{$dato->Folio}}</b></td>
                 <td width=90 style="margin: 13px; padding: 13px;"><b>{{$dato->Asiento}}</b></td>

@@ -5962,32 +5962,10 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+var _methods;
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -6327,6 +6305,13 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       alumnoz: null,
+      archivos: {
+        matricula: null,
+        egresado: null,
+        foto: null,
+        word: null,
+        tesis: null
+      },
       expedito: {
         codigo: null,
         dni: null,
@@ -6340,7 +6325,12 @@ __webpack_require__.r(__webpack_exports__);
         stipo: null,
         ingreso: null,
         comienzo: null,
-        tipo: "TITULO"
+        tipo: "TITULO",
+        tesis: null,
+        sustentacion: null,
+        calificacion: null,
+        asesor: null,
+        modalidad: null
       },
       alumno: {
         codigo: null,
@@ -6389,7 +6379,7 @@ __webpack_require__.r(__webpack_exports__);
     $('#objetivo').hide();
     $('#menos').hide();
   },
-  methods: {
+  methods: (_methods = {
     getDocentes: function getDocentes() {
       var _this = this;
 
@@ -6421,7 +6411,14 @@ __webpack_require__.r(__webpack_exports__);
       if (c == '') c = null;
       if (a == '') a = null;
       axios.get("getAlumnos/" + d + "/" + c + "/" + a).then(function (data) {
-        _this3.alumnos = data.data.alumnos;
+        if (data.data.alumnos[0] == null) {
+          swal({
+            type: 'error',
+            title: 'No se encontraron registros'
+          });
+        } else {
+          _this3.alumnos = data.data.alumnos[0];
+        }
 
         _this3.$Progress.finish();
       })["catch"](function (error) {
@@ -6502,15 +6499,16 @@ __webpack_require__.r(__webpack_exports__);
     addExpedito: function addExpedito() {
       var _this7 = this;
 
-      if (this.expedito.codigo == null || this.expedito.dni == null || this.expedito.alumno == null || this.expedito.carrera == null || this.expedito.tomo == null || this.expedito.folio == null || this.expedito.asiento == null || this.expedito.sesion == null || this.expedito.sfecha == null || this.expedito.stipo == null || this.expedito.ingreso == null) {
+      if (this.expedito.codigo == null || this.expedito.dni == null || this.expedito.alumno == null || this.expedito.carrera == null || this.expedito.tomo == null || this.expedito.folio == null || this.expedito.asiento == null || this.expedito.sesion == null || this.expedito.sfecha == null || this.expedito.stipo == null || this.expedito.ingreso == null || this.archivos.foto == null || this.archivos.egresado == null || this.archivos.matricula == null || this.archivos.tesis == null || this.archivos.word == null) {
         swal({
           type: 'error',
           title: 'Llenar los datos obligatorios'
         });
       } else {
         this.$Progress.start();
-        axios.post("addExpedito", {
-          expedito: this.expedito
+        axios.post("addExpeditoT", {
+          expedito: this.expedito,
+          archivos: this.archivos
         }).then(function (data) {
           swal({
             // position: 'top-end',
@@ -6618,7 +6616,184 @@ __webpack_require__.r(__webpack_exports__);
         });
       }
     }
-  }
+  }, _defineProperty(_methods, "seleccionar", function seleccionar(d, c, n, ca) {
+    this.expedito.codigo = c;
+    this.expedito.dni = d;
+    this.expedito.alumno = n;
+    this.expedito.carrera = ca;
+  }), _defineProperty(_methods, "validarMatricula", function validarMatricula(e) {
+    var _this9 = this;
+
+    var size = e.target.files[0].size;
+    var type = e.target.files[0].type;
+
+    if (size > 1024001) {
+      e.target.value = '';
+      swal({
+        type: 'error',
+        //title: 'Error',
+        text: 'El tamaño del archivo debe ser menor o igual a 1mb',
+        showConfirmButton: true
+      });
+      return;
+    }
+
+    if (type.includes("pdf")) {
+      var file = new FileReader();
+      file.readAsDataURL(e.target.files[0]);
+
+      file.onload = function (e) {
+        _this9.archivos.matricula = e.target.result;
+      };
+    } else {
+      e.target.value = '';
+      this.archivos.matricula = null;
+      swal({
+        type: 'error',
+        //title: 'Error',
+        text: 'El archivo debe ser PDF, por favor intente subiendo otro archivo',
+        showConfirmButton: true
+      });
+      return;
+    }
+  }), _defineProperty(_methods, "validarEgresado", function validarEgresado(e) {
+    var _this10 = this;
+
+    var size = e.target.files[0].size;
+    var type = e.target.files[0].type;
+
+    if (size > 1024001) {
+      e.target.value = '';
+      swal({
+        type: 'error',
+        //title: 'Error',
+        text: 'El tamaño del archivo debe ser menor o igual a 1mb',
+        showConfirmButton: true
+      });
+      return;
+    }
+
+    if (type.includes("pdf")) {
+      var file = new FileReader();
+      file.readAsDataURL(e.target.files[0]);
+
+      file.onload = function (e) {
+        _this10.archivos.egresado = e.target.result;
+      };
+    } else {
+      e.target.value = '';
+      swal({
+        type: 'error',
+        //title: 'Error',
+        text: 'El archivo debe ser PDF, por favor intente subiendo otro archivo',
+        showConfirmButton: true
+      });
+      return;
+    }
+  }), _defineProperty(_methods, "validarFoto", function validarFoto(e) {
+    var _this11 = this;
+
+    var size = e.target.files[0].size;
+    var type = e.target.files[0].type;
+
+    if (size > 1024001) {
+      e.target.value = '';
+      swal({
+        type: 'error',
+        //title: 'Error',
+        text: 'El tamaño del archivo debe ser menor o igual a 1mb',
+        showConfirmButton: true
+      });
+      return;
+    }
+
+    if (type.includes("image")) {
+      var file = new FileReader();
+      file.readAsDataURL(e.target.files[0]);
+
+      file.onload = function (e) {
+        _this11.archivos.foto = e.target.result;
+      };
+    } else {
+      e.target.value = '';
+      swal({
+        type: 'error',
+        //title: 'Error',
+        text: 'El archivo debe ser una imagen, por favor intente subiendo otro archivo',
+        showConfirmButton: true
+      });
+      return;
+    }
+  }), _defineProperty(_methods, "validarTesis", function validarTesis(e) {
+    var _this12 = this;
+
+    var size = e.target.files[0].size;
+    var type = e.target.files[0].type;
+
+    if (size > 1024001) {
+      e.target.value = '';
+      swal({
+        type: 'error',
+        //title: 'Error',
+        text: 'El tamaño del archivo debe ser menor o igual a 1mb',
+        showConfirmButton: true
+      });
+      return;
+    }
+
+    if (type.includes("pdf")) {
+      var file = new FileReader();
+      file.readAsDataURL(e.target.files[0]);
+
+      file.onload = function (e) {
+        _this12.archivos.tesis = e.target.result;
+      };
+    } else {
+      e.target.value = '';
+      swal({
+        type: 'error',
+        //title: 'Error',
+        text: 'El archivo debe ser PDF, por favor intente subiendo otro archivo',
+        showConfirmButton: true
+      });
+      return;
+    }
+  }), _defineProperty(_methods, "validarWord", function validarWord(e) {
+    var _this13 = this;
+
+    var size = e.target.files[0].size;
+    var type = e.target.files[0].type;
+    console.log(type);
+
+    if (size > 1024001) {
+      e.target.value = '';
+      swal({
+        type: 'error',
+        //title: 'Error',
+        text: 'El tamaño del archivo debe ser menor o igual a 1mb',
+        showConfirmButton: true
+      });
+      return;
+    }
+
+    if (type.includes("word")) {
+      var file = new FileReader();
+      file.readAsDataURL(e.target.files[0]);
+
+      file.onload = function (e) {
+        _this13.archivos.word = e.target.result;
+      };
+    } else {
+      e.target.value = '';
+      swal({
+        type: 'error',
+        //title: 'Error',
+        text: 'El archivo debe ser un documento en Word, por favor intente subiendo otro archivo',
+        showConfirmButton: true
+      });
+      return;
+    }
+  }), _methods)
 });
 
 /***/ }),
@@ -58962,7 +59137,7 @@ var render = function() {
                 _c("div", { staticClass: "form-group row" }, [
                   _vm._m(9),
                   _vm._v(" "),
-                  _c("div", { staticClass: "col-md-9" }, [
+                  _c("div", { staticClass: "col-md-6" }, [
                     _c(
                       "select",
                       {
@@ -59236,7 +59411,67 @@ var render = function() {
               _vm._v(" "),
               _vm._m(12),
               _vm._v(" "),
-              _vm._m(13),
+              _c("fieldset", { staticClass: "border p-2" }, [
+                _c("legend", { staticClass: "w-auto" }, [_vm._v("Archivos")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group row" }, [
+                  _vm._m(13),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-4" }, [
+                    _c("input", {
+                      staticClass: "form-control form-control-sm",
+                      attrs: { type: "file", id: "matricula" },
+                      on: { change: _vm.validarMatricula }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(14),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-4" }, [
+                    _c("input", {
+                      staticClass: "form-control form-control-sm",
+                      attrs: { type: "file", id: "egresado" },
+                      on: { change: _vm.validarEgresado }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group row" }, [
+                  _vm._m(15),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-4" }, [
+                    _c("input", {
+                      staticClass: "form-control form-control-sm",
+                      attrs: { type: "file", id: "tesis" },
+                      on: { change: _vm.validarTesis }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(16),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-4" }, [
+                    _c("input", {
+                      staticClass: "form-control form-control-sm",
+                      attrs: { type: "file", id: "word" },
+                      on: { change: _vm.validarWord }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group row" }, [
+                  _vm._m(17),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-4" }, [
+                    _c("input", {
+                      staticClass: "form-control form-control-sm",
+                      attrs: { type: "file", id: "foto" },
+                      on: { change: _vm.validarFoto }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _vm._m(18)
+              ]),
               _vm._v(" "),
               _c("fieldset", { staticClass: "border p-2" }, [
                 _c("legend", { staticClass: "w-auto" }, [
@@ -59449,7 +59684,12 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-control form-control-sm",
-                      attrs: { type: "text", id: "dni1" },
+                      attrs: {
+                        type: "text",
+                        onKeyPress: "return solonumeros(event)",
+                        maxlength: "8",
+                        id: "dni1"
+                      },
                       domProps: { value: _vm.alumno.dni },
                       on: {
                         input: function($event) {
@@ -59482,7 +59722,12 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-control form-control-sm",
-                      attrs: { type: "text", id: "codigo1" },
+                      attrs: {
+                        type: "text",
+                        onKeyPress: "return solonumeros(event)",
+                        maxlength: "10",
+                        id: "codigo1"
+                      },
                       domProps: { value: _vm.alumno.codigo },
                       on: {
                         input: function($event) {
@@ -59503,52 +59748,31 @@ var render = function() {
                       staticClass: "col-md-2 col-form-label",
                       attrs: { for: "nombre1" }
                     },
-                    [_vm._v("Input Creado: ")]
+                    [_vm._v("Egresado: ")]
                   ),
                   _vm._v(" "),
                   _c("div", { staticClass: "col-md-10" }, [
-                    _c(
-                      "table",
-                      {
-                        attrs: {
-                          colspadding: "0",
-                          cellspacing: "0",
-                          border: "1"
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.alumnos.Nombres,
+                          expression: "alumnos.Nombres"
                         }
-                      },
-                      _vm._l(_vm.alumnos, function(a) {
-                        return _c("tr", { key: a.Codigo, staticClass: "t10" }, [
-                          _c("td", [
-                            _c("input", {
-                              staticClass: "form-control form-control-sm",
-                              attrs: { type: "text" }
-                            }),
-                            _vm._v(_vm._s(a.Nombres))
-                          ]),
-                          _vm._v(" "),
-                          _c("td", [
-                            _c("input", {
-                              staticClass: "form-control form-control-sm",
-                              attrs: {
-                                "data-dismiss": "modal",
-                                type: "checkbox"
-                              },
-                              on: {
-                                click: function($event) {
-                                  return _vm.seleccionar(
-                                    a.DNI,
-                                    a.Codigo,
-                                    a.Nombres,
-                                    a.Carrera
-                                  )
-                                }
-                              }
-                            })
-                          ])
-                        ])
-                      }),
-                      0
-                    )
+                      ],
+                      staticClass: "form-control form-control-sm",
+                      attrs: { type: "text", readonly: "" },
+                      domProps: { value: _vm.alumnos.Nombres },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.alumnos, "Nombres", $event.target.value)
+                        }
+                      }
+                    })
                   ])
                 ]),
                 _vm._v(" "),
@@ -59602,10 +59826,10 @@ var render = function() {
                         on: {
                           click: function($event) {
                             return _vm.seleccionar(
-                              _vm.a.DNI,
-                              _vm.a.Codigo,
-                              _vm.a.Nombres,
-                              _vm.a.Carrera
+                              _vm.alumnos.DNI,
+                              _vm.alumnos.Codigo,
+                              _vm.alumnos.Nombres,
+                              _vm.alumnos.Carrera
                             )
                           }
                         }
@@ -59627,7 +59851,7 @@ var render = function() {
     _c("div", { staticClass: "row", attrs: { id: "expeditos" } }, [
       _c("div", { staticClass: "col-md-12" }, [
         _c("div", { staticClass: "card card-default" }, [
-          _vm._m(14),
+          _vm._m(19),
           _vm._v(" "),
           _c("div", { staticClass: "card-body" }, [
             _c(
@@ -59948,118 +60172,93 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("fieldset", { staticClass: "border p-2" }, [
-      _c("legend", { staticClass: "w-auto" }, [_vm._v("Archivos")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group row" }, [
-        _c("div", { staticClass: "col-md-2" }, [
-          _c("label", [_vm._v("Const. Matrícula(*)")])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-4" }, [
-          _c("input", {
-            staticClass: "form-control form-control-sm",
-            attrs: { type: "file", name: "pdf" }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-2" }, [
-          _c("label", [_vm._v("Const. Egresado(*)")])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-4" }, [
-          _c("input", {
-            staticClass: "form-control form-control-sm",
-            attrs: { type: "file", name: "pdf" }
-          })
+    return _c("div", { staticClass: "col-md-2" }, [
+      _c("label", [_vm._v("Const. Matrícula(*)")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-2" }, [
+      _c("label", [_vm._v("Const. Egresado(*)")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-2" }, [
+      _c("label", [_vm._v("Arch. Tesis PDF(*)")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-2" }, [
+      _c("label", [_vm._v("Arch. Tesis Word(*)")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-2" }, [
+      _c("label", [_vm._v("Foto(*)")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group row" }, [
+      _c("div", { staticClass: "col-md-7" }, [
+        _c("label", [
+          _c(
+            "mark",
+            {
+              staticStyle: {
+                "background-color": "#dc354526",
+                color: "#520606f7"
+              }
+            },
+            [_vm._v("* Constancias en formato PDF (Tam. max. 1mb c/u)")]
+          )
         ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "form-group row" }, [
-        _c("div", { staticClass: "col-md-2" }, [
-          _c("label", [_vm._v("Arch. Tesis PDF(*)")])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-4" }, [
-          _c("input", {
-            staticClass: "form-control form-control-sm",
-            attrs: { type: "file", name: "pdf" }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-2" }, [
-          _c("label", [_vm._v("Arch. Tesis Word(*)")])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-4" }, [
-          _c("input", {
-            staticClass: "form-control form-control-sm",
-            attrs: { type: "file", name: "pdf" }
-          })
+      _c("div", { staticClass: "col-md-7" }, [
+        _c("label", [
+          _c(
+            "mark",
+            {
+              staticStyle: {
+                "background-color": "#dc354526",
+                color: "#520606f7"
+              }
+            },
+            [
+              _vm._v(
+                "* Archivo Tesis en formato PDF (Editable) y Word (Tam. max. 3mb c/u)"
+              )
+            ]
+          )
         ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "form-group row" }, [
-        _c("div", { staticClass: "col-md-2" }, [
-          _c("label", [_vm._v("Foto(*)")])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-4" }, [
-          _c("input", {
-            staticClass: "form-control form-control-sm",
-            attrs: { type: "file", name: "pdf" }
-          })
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group row" }, [
-        _c("div", { staticClass: "col-md-7" }, [
-          _c("label", [
-            _c(
-              "mark",
-              {
-                staticStyle: {
-                  "background-color": "#dc354526",
-                  color: "#520606f7"
-                }
-              },
-              [_vm._v("* Constancias en formato PDF (Tam. max. 1mb c/u)")]
-            )
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-7" }, [
-          _c("label", [
-            _c(
-              "mark",
-              {
-                staticStyle: {
-                  "background-color": "#dc354526",
-                  color: "#520606f7"
-                }
-              },
-              [
-                _vm._v(
-                  "* Archivo Tesis en formato PDF (Editable) y Word (Tam. max. 3mb c/u)"
-                )
-              ]
-            )
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-7" }, [
-          _c("label", [
-            _c(
-              "mark",
-              {
-                staticStyle: {
-                  "background-color": "#dc354526",
-                  color: "#520606f7"
-                }
-              },
-              [_vm._v("* Foto en formato JPG (Tam. max. 1mb)")]
-            )
-          ])
+      _c("div", { staticClass: "col-md-7" }, [
+        _c("label", [
+          _c(
+            "mark",
+            {
+              staticStyle: {
+                "background-color": "#dc354526",
+                color: "#520606f7"
+              }
+            },
+            [_vm._v("* Foto en formato JPG (Tam. max. 1mb)")]
+          )
         ])
       ])
     ])
