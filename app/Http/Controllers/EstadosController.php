@@ -52,7 +52,7 @@ class EstadosController extends Controller
             //$title  = "Ups...";
             $text   = "Ya existe un Estado con esa posición";
         }
-        return compact("type","title","text");
+        return compact("type","text");
     }
 
     /**
@@ -102,7 +102,7 @@ class EstadosController extends Controller
             //$title  = "Ups...";
             $text   = "Ya existe un Estado con esa posición";
         }
-        return compact("type","title","text");
+        return compact("type","text");
     }
 
     /**

@@ -53,7 +53,7 @@ class EgresadoController extends Controller
             $egresado->Ingreso      = $request->egresado["ingreso"];
             $egresado->Egreso       = $request->egresado["egreso"];
             $egresado->DNI          = $request->egresado["dni"];
-            $egresado->Correo       = strtolower($request->egresado["correo"]);
+            $egresado->Correo       = $request->egresado["correo"];
             $egresado->IDEscuela    = $request->egresado["escuela"];
             $egresado->created_at   = $hoy;
             $egresado->save();
@@ -65,7 +65,7 @@ class EgresadoController extends Controller
             $msj    = "Egresado actualmente ya existe";
             $val    = "warning";
         }
-        return compact("title","msj","val");
+        return compact("msj","val");
     }
 
     /**
@@ -115,13 +115,13 @@ class EgresadoController extends Controller
             "Ingreso"   => $request->egresado["ingreso"],
             "Egreso"    => $request->egresado["egreso"],
             "DNI"       => $request->egresado["dni"],
-            "Correo"    => strtolower($request->egresado["correo"]),
+            "Correo"    => $request->egresado["correo"],
             "IDEscuela" => $request->egresado["escuela"],
         ]);
         //$title  = "OK";
         $msj    = "Egresado editado con éxito";
         $val    = "success";   
-        return compact("title","msj","val");
+        return compact("msj","val");
     }
 
     /**

@@ -5751,7 +5751,7 @@ __webpack_require__.r(__webpack_exports__);
           swal({
             type: 'error',
             //title: 'Error',
-            text: 'Hay un problema, comuníquese con un administrador',
+            text: 'Ocurrió un problema, comuníquese con un administrador',
             showConfirmButton: true
           });
         });
@@ -5890,6 +5890,7 @@ __webpack_require__.r(__webpack_exports__);
       $("#expeditos").hide();
       $("#archivos").hide();
       $("#buscar").hide();
+      $('#labelInicio').hide();
       $('#mas').hide();
       $('#editar').show();
       $('#guardar').hide();
@@ -6938,6 +6939,8 @@ __webpack_require__.r(__webpack_exports__);
           _this2.getDatos();
 
           _this2.load();
+
+          $("#exampleModal").modal('hide');
         })["catch"](function (error) {
           console.log(error);
           swal({
@@ -6965,6 +6968,8 @@ __webpack_require__.r(__webpack_exports__);
           _this2.getDatos();
 
           _this2.load();
+
+          $("#exampleModal").modal('hide');
         })["catch"](function (error) {
           console.log(error);
           swal({
@@ -53672,7 +53677,9 @@ var render = function() {
               tabindex: "-1",
               role: "dialog",
               "aria-labelledby": "exampleModalLabel",
-              "aria-hidden": "true"
+              "aria-hidden": "true",
+              "data-backdrop": "static",
+              "data-keyboard": "false"
             }
           },
           [
@@ -53888,19 +53895,6 @@ var staticRenderFns = [
           "h5",
           { staticClass: "modal-titler", attrs: { id: "exampleModalLabel" } },
           [_vm._v("Datos Carrera")]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "close",
-            attrs: {
-              type: "button",
-              "data-dismiss": "modal",
-              "aria-label": "Close"
-            }
-          },
-          [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
         )
       ]
     )
@@ -53957,7 +53951,9 @@ var render = function() {
               tabindex: "-1",
               role: "dialog",
               "aria-labelledby": "exampleModalLabel",
-              "aria-hidden": "true"
+              "aria-hidden": "true",
+              "data-backdrop": "static",
+              "data-keyboard": "false"
             }
           },
           [
@@ -54498,19 +54494,6 @@ var staticRenderFns = [
           "h5",
           { staticClass: "modal-titler", attrs: { id: "exampleModalLabel" } },
           [_vm._v("Datos Comisión")]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "close",
-            attrs: {
-              type: "button",
-              "data-dismiss": "modal",
-              "aria-label": "Close"
-            }
-          },
-          [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
         )
       ]
     )
@@ -54615,7 +54598,9 @@ var render = function() {
               tabindex: "-1",
               role: "dialog",
               "aria-labelledby": "exampleModalLabel",
-              "aria-hidden": "true"
+              "aria-hidden": "true",
+              "data-backdrop": "static",
+              "data-keyboard": "false"
             }
           },
           [
@@ -54923,19 +54908,6 @@ var staticRenderFns = [
           "h5",
           { staticClass: "modal-titler", attrs: { id: "exampleModalLabel" } },
           [_vm._v("Datos Decano")]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "close",
-            attrs: {
-              type: "button",
-              "data-dismiss": "modal",
-              "aria-label": "Close"
-            }
-          },
-          [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
         )
       ]
     )
@@ -55008,7 +54980,9 @@ var render = function() {
               tabindex: "-1",
               role: "dialog",
               "aria-labelledby": "exampleModalLabel",
-              "aria-hidden": "true"
+              "aria-hidden": "true",
+              "data-backdrop": "static",
+              "data-keyboard": "false"
             }
           },
           [
@@ -55535,19 +55509,6 @@ var staticRenderFns = [
           "h5",
           { staticClass: "modal-titler", attrs: { id: "exampleModalLabel" } },
           [_vm._v("Datos Docente")]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "close",
-            attrs: {
-              type: "button",
-              "data-dismiss": "modal",
-              "aria-label": "Close"
-            }
-          },
-          [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
         )
       ]
     )
@@ -56225,7 +56186,9 @@ var render = function() {
               tabindex: "-1",
               role: "dialog",
               "aria-labelledby": "exampleModalLabel",
-              "aria-hidden": "true"
+              "aria-hidden": "true",
+              "data-backdrop": "static",
+              "data-keyboard": "false"
             }
           },
           [
@@ -56913,19 +56876,6 @@ var staticRenderFns = [
           "h5",
           { staticClass: "modal-titler", attrs: { id: "exampleModalLabel" } },
           [_vm._v("Datos Egresado")]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "close",
-            attrs: {
-              type: "button",
-              "data-dismiss": "modal",
-              "aria-label": "Close"
-            }
-          },
-          [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
         )
       ]
     )
@@ -57130,7 +57080,9 @@ var render = function() {
               tabindex: "-1",
               role: "dialog",
               "aria-labelledby": "exampleModalLabel",
-              "aria-hidden": "true"
+              "aria-hidden": "true",
+              "data-backdrop": "static",
+              "data-keyboard": "false"
             }
           },
           [
@@ -57380,19 +57332,6 @@ var staticRenderFns = [
           "h5",
           { staticClass: "modal-titler", attrs: { id: "exampleModalLabel" } },
           [_vm._v("Datos Estado")]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "close",
-            attrs: {
-              type: "button",
-              "data-dismiss": "modal",
-              "aria-label": "Close"
-            }
-          },
-          [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
         )
       ]
     )
@@ -58420,7 +58359,9 @@ var render = function() {
                                     staticClass: "btn btn-danger",
                                     attrs: {
                                       "data-toggle": "tooltip",
-                                      "data-placement": "left"
+                                      "data-placement": "left",
+                                      title:
+                                        "Hacer click para cambiar de estado"
                                     },
                                     on: {
                                       click: function($event) {
@@ -58431,7 +58372,7 @@ var render = function() {
                                       }
                                     }
                                   },
-                                  [_vm._v("Pendiente")]
+                                  [_vm._v("Pendiente  ")]
                                 )
                               : _vm._e(),
                             _vm._v(" "),
@@ -58442,7 +58383,9 @@ var render = function() {
                                     staticClass: "btn btn-warning",
                                     attrs: {
                                       "data-toggle": "tooltip",
-                                      "data-placement": "left"
+                                      "data-placement": "left",
+                                      title:
+                                        "Hacer click para cambiar de estado"
                                     },
                                     on: {
                                       click: function($event) {
@@ -58464,10 +58407,11 @@ var render = function() {
                                     staticClass: "btn btn-success",
                                     attrs: {
                                       "data-toggle": "tooltip",
-                                      "data-placement": "left"
+                                      "data-placement": "left",
+                                      title: "Estado final"
                                     }
                                   },
-                                  [_vm._v("Finalizado")]
+                                  [_vm._v("Finalizado  ")]
                                 )
                               : _vm._e(),
                             _vm._v(" "),
@@ -58519,7 +58463,7 @@ var render = function() {
                                       to: "/oficio/" + props.row.IDExpedito,
                                       "data-toggle": "tooltip",
                                       "data-placement": "left",
-                                      title: "Ver Acta"
+                                      title: "Ver Oficio"
                                     }
                                   },
                                   [
@@ -58584,17 +58528,24 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-4" }, [
-      _c("label", [
-        _c(
-          "mark",
-          {
-            staticStyle: { "background-color": "#dc354526", color: "#520606f7" }
-          },
-          [_vm._v("- Primero realizar la búsqueda del egresado.")]
-        )
-      ])
-    ])
+    return _c(
+      "div",
+      { staticClass: "col-md-4", attrs: { id: "labelInicio" } },
+      [
+        _c("label", [
+          _c(
+            "mark",
+            {
+              staticStyle: {
+                "background-color": "#dc354526",
+                color: "#520606f7"
+              }
+            },
+            [_vm._v("- Primero realizar la búsqueda del egresado.")]
+          )
+        ])
+      ]
+    )
   },
   function() {
     var _vm = this
@@ -59118,7 +59069,7 @@ var render = function() {
                       staticClass: "form-control form-control-sm",
                       attrs: {
                         type: "text",
-                        onKeyPress: "return alfa(event)",
+                        onKeyPress: "return soloLetras(event)",
                         maxlength: "200"
                       },
                       domProps: { value: _vm.expedito.tesis },
@@ -60316,7 +60267,9 @@ var render = function() {
               tabindex: "-1",
               role: "dialog",
               "aria-labelledby": "exampleModalLabel",
-              "aria-hidden": "true"
+              "aria-hidden": "true",
+              "data-backdrop": "static",
+              "data-keyboard": "false"
             }
           },
           [
@@ -60371,7 +60324,7 @@ var render = function() {
                         "button",
                         {
                           staticClass: "btn btn-success",
-                          attrs: { id: "add", "data-dismiss": "modal" },
+                          attrs: { id: "add" },
                           on: {
                             click: function($event) {
                               return _vm.addModalidad(1)
@@ -60388,7 +60341,7 @@ var render = function() {
                         "button",
                         {
                           staticClass: "btn btn-success",
-                          attrs: { id: "editar", "data-dismiss": "modal" },
+                          attrs: { id: "editar" },
                           on: {
                             click: function($event) {
                               return _vm.addModalidad(2)
@@ -60537,19 +60490,6 @@ var staticRenderFns = [
           "h5",
           { staticClass: "modal-titler", attrs: { id: "exampleModalLabel" } },
           [_vm._v("Datos Modalidad")]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "close",
-            attrs: {
-              type: "button",
-              "data-dismiss": "modal",
-              "aria-label": "Close"
-            }
-          },
-          [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
         )
       ]
     )
@@ -60606,7 +60546,9 @@ var render = function() {
               tabindex: "-1",
               role: "dialog",
               "aria-labelledby": "exampleModalLabel",
-              "aria-hidden": "true"
+              "aria-hidden": "true",
+              "data-backdrop": "static",
+              "data-keyboard": "false"
             }
           },
           [
@@ -60908,19 +60850,6 @@ var staticRenderFns = [
           "h5",
           { staticClass: "modal-titler", attrs: { id: "exampleModalLabel" } },
           [_vm._v("Datos Sesión")]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "close",
-            attrs: {
-              type: "button",
-              "data-dismiss": "modal",
-              "aria-label": "Close"
-            }
-          },
-          [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
         )
       ]
     )
@@ -65608,18 +65537,18 @@ module.exports = function () {
     columnsDisplay: {},
     columnsDropdown: false,
     texts: {
-      count: "Showing {from} to {to} of {count} records|{count} records|One record",
-      first: 'First',
-      last: 'Last',
-      filter: "Filter:",
-      filterPlaceholder: "Search query",
-      limit: "Records:",
-      page: "Page:",
-      noResults: "No matching records",
-      filterBy: "Filter by {column}",
-      loading: 'Loading...',
-      defaultOption: 'Select {column}',
-      columns: 'Columns'
+      count: "Mostrando {from} al {to} de {count} registros|{count} registros|Un registro",
+      first: 'Primero',
+      last: 'Ultimo',
+      //filter: "Buscar:                                    ",
+      filterPlaceholder: "Buscador general..",
+      limit: "Registros:",
+      page: "Pagina:",
+      noResults: "No hay registros",
+      filterBy: "Filtrar por {column}",
+      loading: 'Cargando...',
+      defaultOption: 'Seleccionar {column}',
+      columns: 'Columnas'
     },
     sortIcon: {
       is: 'glyphicon-sort',
@@ -84414,8 +84343,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\grados\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\grados\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\Sistemas\SISTEMA GRADOS\grados\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\Sistemas\SISTEMA GRADOS\grados\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

@@ -52,7 +52,7 @@ class ComisionController extends Controller
         $type   = "success";
         //$title  = "Bien";
         $text   = "Comisión creada con éxito";
-        return compact("type","title","text");
+        return compact("type","text");
     }
 
     /**
@@ -105,7 +105,7 @@ class ComisionController extends Controller
             //$title  = "Ups";
             $text   = "Ocurrió un problema";
         }
-        return compact("type","title","text");
+        return compact("type","text");
     }
 
     /**

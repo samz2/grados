@@ -9,14 +9,14 @@
 						</div>
 					</div>
 				</div>
-	            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                         <div class="modal-header text-center" style="background-color: #007bff55 !important; color:black; font-weight: bold;">
                             <h5 class="modal-titler" id="exampleModalLabel">Datos Modalidad</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
-                            </button>
+                            </button>-->
                         </div>
                         <div class="modal-body">
                             <div class="row">
@@ -29,8 +29,8 @@
                             </div>
                             <br>
                         <div class="modal-footer">
-                            <button @click="addModalidad(1)" id="add" class="btn btn-success" data-dismiss="modal">Guardar <i class="fa fa-save"></i></button>
-                            <button @click="addModalidad(2)" id="editar" class="btn btn-success" data-dismiss="modal">Editar <i class="far fa-edit"></i></button>
+                            <button @click="addModalidad(1)" id="add" class="btn btn-success">Guardar <i class="fa fa-save"></i></button>
+                            <button @click="addModalidad(2)" id="editar" class="btn btn-success">Editar <i class="far fa-edit"></i></button>
                             <button type="button" class="btn btn-danger" @click="load()" data-dismiss="modal">Cancelar <i class="fas fa-times"></i></button>
                         </div>
                         </div>
@@ -130,6 +130,7 @@
                     this.$Progress.finish();
                     this.getDatos();
                     this.load();
+                    $("#exampleModal").modal('hide');
                     }).catch(error=>{
                     console.log(error);	
                     swal({
@@ -154,6 +155,7 @@
                     this.$Progress.finish();
                     this.getDatos();
                     this.load();
+                    $("#exampleModal").modal('hide');
                     }).catch(error=>{
                     console.log(error);	
                     swal({

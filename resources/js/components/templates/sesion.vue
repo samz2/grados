@@ -9,14 +9,14 @@
 						</div>
 					</div>
 				</div>
-	            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                         <div class="modal-header text-center bg-secondary" style="background-color: #007bff55 !important; color:black; font-weight: bold;">
                             <h5 class="modal-titler" id="exampleModalLabel">Datos Sesión</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
-                            </button>
+                            </button>-->
                         </div>
                         <div class="modal-body">
                             <div class="row">

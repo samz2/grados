@@ -51,7 +51,7 @@ class SesionController extends Controller
         $type   = "success";
         //$title  = "Bien";
         $text   = "Sesión creada con éxito";
-        return compact("type","title","text");
+        return compact("type","text");
     }
 
     /**
@@ -112,7 +112,7 @@ class SesionController extends Controller
             //$title  = "Ups";
             $text   = "Ocurrió un problema";
         }
-        return compact("type","title","text");
+        return compact("type","text");
     }
 
     /**
