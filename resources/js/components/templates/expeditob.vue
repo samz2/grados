@@ -602,21 +602,7 @@
         },
         validafecha()
         {
-            /*if(this.comision.inicio == null || this.comision.fin == null)
-            {
-                return;
-            }
-            if(this.comision.inicio >= this.comision.fin)
-            {
-                swal({
-                        type: 'error',
-                        //title: 'Error',
-                        text: 'Fecha inicio debe ser menor a Fecha Fin',
-                        showConfirmButton: true,
-                    });
-                this.comision.inicio = null;
-                this.comision.fin = null;
-            }*/
+            
             if(this.expedito.ingreso !=null)
             {
                 var inicio = this.expedito.ingreso;

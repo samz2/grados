@@ -5779,21 +5779,6 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     validafecha: function validafecha() {
-      /*if(this.comision.inicio == null || this.comision.fin == null)
-      {
-          return;
-      }
-      if(this.comision.inicio >= this.comision.fin)
-      {
-          swal({
-                  type: 'error',
-                  //title: 'Error',
-                  text: 'Fecha inicio debe ser menor a Fecha Fin',
-                  showConfirmButton: true,
-              });
-          this.comision.inicio = null;
-          this.comision.fin = null;
-      }*/
       if (this.expedito.ingreso != null) {
         var inicio = this.expedito.ingreso;
         var _final = '2022-01-01';
@@ -6302,6 +6287,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -6352,7 +6340,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         FechaComienzo: null,
         Estado: null,
         Fecha: null,
-        Alumno: null
+        Alumno: null,
+        IDModalidad: null,
+        Modalidad: null,
+        NombreTesis: null,
+        Asesor: null,
+        Calificacion: null,
+        FechaT: null
       }],
       columns: ["Alumno", "Acta", "NumSesion", "Fecha", "FechaIngreso", "FechaComienzo", "Acciones"],
       options: {
@@ -6542,11 +6536,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     ocultar: function ocultar(id) {
       if (id == '1') {
         $('#objetivo').show();
+        $('#documentos').show();
+        $('#buscar').show();
+        $('#archivos').show();
+        $('#guardar').show();
         $('#expeditos').hide();
+        $('#editar').hide();
         $('#menos').show();
         $('#mas').hide();
       } else if (id == '2') {
         $('#objetivo').hide();
+        $('#archivos').hide();
+        $('#editar').hide();
+        $('#guardar').hide();
+        $('#buscar').hide();
         $('#expeditos').show();
         $('#menos').hide();
         $('#mas').show();
@@ -6793,6 +6796,75 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         showConfirmButton: true
       });
       return;
+    }
+  }), _defineProperty(_methods, "edit", function edit(IDExpedito, Tipo, CodigoAlumno, Tomo, Folio, Asiento, NumSesion, FechaIngreso, FechaComienzo, IDSesion, Fecha, Escuela, Alumno, DNI, IDModalidad, Modalidad, NombreTesis, Asesor, Calificacion, FechaT) {
+    $("#objetivo").show();
+    $("#expeditos").hide();
+    $("#archivos").hide();
+    $("#documentos").hide();
+    $("#buscar").hide();
+    $('#labelInicio').hide();
+    $('#mas').hide();
+    $('#editar').show();
+    $('#guardar').hide();
+    this.expedito.idexpedito = IDExpedito;
+    this.expedito.codigo = CodigoAlumno;
+    this.expedito.dni = DNI;
+    this.expedito.alumno = Alumno;
+    this.expedito.carrera = Escuela;
+    this.expedito.tomo = Tomo;
+    this.expedito.folio = Folio;
+    this.expedito.asiento = Asiento;
+    this.expedito.sesion = NumSesion;
+    this.expedito.sfecha = Fecha;
+    this.expedito.stipo = Tipo;
+    this.expedito.ingreso = FechaIngreso;
+    this.expedito.comienzo = FechaComienzo;
+    this.expedito.tesis = NombreTesis;
+    this.expedito.sustentacion = FechaT;
+    this.expedito.calificacion = Calificacion;
+    this.expedito.asesor = Asesor;
+    this.expedito.modalidad = IDModalidad;
+  }), _defineProperty(_methods, "editExpedito", function editExpedito() {
+    var _this14 = this;
+
+    if (this.expedito.codigo == null || this.expedito.dni == null || this.expedito.alumno == null || this.expedito.carrera == null || this.expedito.tomo == null || this.expedito.folio == null || this.expedito.asiento == null || this.expedito.sesion == null || this.expedito.sfecha == null || this.expedito.stipo == null || this.expedito.ingreso == null) {
+      swal({
+        type: 'warning',
+        title: 'Llenar los campos obligatorios',
+        timer: 3000
+      });
+      return;
+    } else {
+      this.$Progress.start();
+      axios.post("updateExpeditoT", {
+        expedito: this.expedito,
+        archivos: this.archivos
+      }).then(function (data) {
+        swal({
+          type: data.data.type,
+          text: data.data.text,
+          showConfirmButton: false,
+          timer: 2000
+        });
+
+        _this14.$Progress.finish(); // setTimeout(() => {
+        //     location.reload();
+        // }, 1500);
+
+
+        _this14.cancelar();
+
+        _this14.getExpeditos();
+      })["catch"](function (error) {
+        console.log(error);
+        swal({
+          type: 'error',
+          //title: 'Error',
+          text: 'Hay un problema, comuníquese con un administrador',
+          showConfirmButton: true
+        });
+      });
     }
   }), _methods)
 });
@@ -59362,67 +59434,71 @@ var render = function() {
               _vm._v(" "),
               _vm._m(12),
               _vm._v(" "),
-              _c("fieldset", { staticClass: "border p-2" }, [
-                _c("legend", { staticClass: "w-auto" }, [_vm._v("Archivos")]),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-group row" }, [
-                  _vm._m(13),
+              _c(
+                "fieldset",
+                { staticClass: "border p-2", attrs: { id: "archivos" } },
+                [
+                  _c("legend", { staticClass: "w-auto" }, [_vm._v("Archivos")]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "col-md-4" }, [
-                    _c("input", {
-                      staticClass: "form-control form-control-sm",
-                      attrs: { type: "file", id: "matricula" },
-                      on: { change: _vm.validarMatricula }
-                    })
+                  _c("div", { staticClass: "form-group row" }, [
+                    _vm._m(13),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-md-4" }, [
+                      _c("input", {
+                        staticClass: "form-control form-control-sm",
+                        attrs: { type: "file", id: "matricula" },
+                        on: { change: _vm.validarMatricula }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(14),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-md-4" }, [
+                      _c("input", {
+                        staticClass: "form-control form-control-sm",
+                        attrs: { type: "file", id: "egresado" },
+                        on: { change: _vm.validarEgresado }
+                      })
+                    ])
                   ]),
                   _vm._v(" "),
-                  _vm._m(14),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-md-4" }, [
-                    _c("input", {
-                      staticClass: "form-control form-control-sm",
-                      attrs: { type: "file", id: "egresado" },
-                      on: { change: _vm.validarEgresado }
-                    })
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-group row" }, [
-                  _vm._m(15),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-md-4" }, [
-                    _c("input", {
-                      staticClass: "form-control form-control-sm",
-                      attrs: { type: "file", id: "tesis" },
-                      on: { change: _vm.validarTesis }
-                    })
+                  _c("div", { staticClass: "form-group row" }, [
+                    _vm._m(15),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-md-4" }, [
+                      _c("input", {
+                        staticClass: "form-control form-control-sm",
+                        attrs: { type: "file", id: "tesis" },
+                        on: { change: _vm.validarTesis }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(16),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-md-4" }, [
+                      _c("input", {
+                        staticClass: "form-control form-control-sm",
+                        attrs: { type: "file", id: "word" },
+                        on: { change: _vm.validarWord }
+                      })
+                    ])
                   ]),
                   _vm._v(" "),
-                  _vm._m(16),
+                  _c("div", { staticClass: "form-group row" }, [
+                    _vm._m(17),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-md-4" }, [
+                      _c("input", {
+                        staticClass: "form-control form-control-sm",
+                        attrs: { type: "file", id: "foto" },
+                        on: { change: _vm.validarFoto }
+                      })
+                    ])
+                  ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "col-md-4" }, [
-                    _c("input", {
-                      staticClass: "form-control form-control-sm",
-                      attrs: { type: "file", id: "word" },
-                      on: { change: _vm.validarWord }
-                    })
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-group row" }, [
-                  _vm._m(17),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-md-4" }, [
-                    _c("input", {
-                      staticClass: "form-control form-control-sm",
-                      attrs: { type: "file", id: "foto" },
-                      on: { change: _vm.validarFoto }
-                    })
-                  ])
-                ]),
-                _vm._v(" "),
-                _vm._m(18)
-              ]),
+                  _vm._m(18)
+                ]
+              ),
               _vm._v(" "),
               _c("fieldset", { staticClass: "border p-2" }, [
                 _c("legend", { staticClass: "w-auto" }, [
@@ -59512,38 +59588,82 @@ var render = function() {
               _c("br"),
               _vm._v(" "),
               _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col-md-2" }, [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-success",
-                      on: {
-                        click: function($event) {
-                          return _vm.addExpedito()
+                _c(
+                  "div",
+                  {
+                    staticClass: "col-md-2",
+                    staticStyle: { "text-align": "center" },
+                    attrs: { id: "guardar" }
+                  },
+                  [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-success",
+                        on: {
+                          click: function($event) {
+                            return _vm.addExpedito(1)
+                          }
                         }
-                      }
-                    },
-                    [_vm._v("Guardar "), _c("i", { staticClass: "fa fa-save" })]
-                  )
-                ]),
+                      },
+                      [
+                        _vm._v("Guardar "),
+                        _c("i", { staticClass: "fa fa-save" })
+                      ]
+                    )
+                  ]
+                ),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-md-2" }, [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-danger",
-                      on: {
-                        click: function($event) {
-                          return _vm.cancelar()
+                _c(
+                  "div",
+                  {
+                    staticClass: "col-md-2",
+                    staticStyle: { "text-align": "center" },
+                    attrs: { id: "editar" }
+                  },
+                  [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-success",
+                        on: {
+                          click: function($event) {
+                            return _vm.editExpedito()
+                          }
                         }
-                      }
-                    },
-                    [
-                      _vm._v("Cancelar "),
-                      _c("i", { staticClass: "fas fa-times" })
-                    ]
-                  )
-                ])
+                      },
+                      [
+                        _vm._v("Editar "),
+                        _c("i", { staticClass: "fa fa-edit" })
+                      ]
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "col-md-2",
+                    staticStyle: { "text-align": "center" }
+                  },
+                  [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-danger",
+                        on: {
+                          click: function($event) {
+                            return _vm.cancelar()
+                          }
+                        }
+                      },
+                      [
+                        _vm._v("Cancelar "),
+                        _c("i", { staticClass: "fas fa-times" })
+                      ]
+                    )
+                  ]
+                )
               ])
             ])
           ]
@@ -59881,6 +60001,50 @@ var render = function() {
                                 )
                               : _vm._e(),
                             _vm._v(" "),
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-info",
+                                attrs: {
+                                  "data-placement": "left",
+                                  title: "Editar"
+                                },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.edit(
+                                      props.row.IDExpedito,
+                                      props.row.Tipo,
+                                      props.row.CodigoAlumno,
+                                      props.row.Tomo,
+                                      props.row.Folio,
+                                      props.row.Asiento,
+                                      props.row.NumSesion,
+                                      props.row.FechaIngreso,
+                                      props.row.FechaComienzo,
+                                      props.row.IDSesion,
+                                      props.row.Fecha,
+                                      props.row.Escuela,
+                                      props.row.Alumno,
+                                      props.row.DNI,
+                                      props.row.IDModalidad,
+                                      props.row.Modalidad,
+                                      props.row.NombreTesis,
+                                      props.row.Asesor,
+                                      props.row.Calificacion,
+                                      props.row.FechaT
+                                    )
+                                  }
+                                }
+                              },
+                              [
+                                _c("i", {
+                                  staticClass: "fas fa-edit",
+                                  staticStyle: { color: "white" },
+                                  attrs: { "aria-hidden": "true" }
+                                })
+                              ]
+                            ),
+                            _vm._v(" "),
                             props.row.Estado == "FINALIZADO"
                               ? _c(
                                   "router-link",
@@ -59980,6 +60144,7 @@ var staticRenderFns = [
           staticClass: "btn btn-primary",
           attrs: {
             "data-target": "#exampleModal",
+            id: "buscar",
             "data-toggle": "modal",
             "data-placement": "left"
           }
@@ -60059,65 +60224,69 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("fieldset", { staticClass: "border p-2" }, [
-      _c("legend", { staticClass: "w-auto" }, [
-        _vm._v("Documentos Titulación")
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group row" }, [
-        _c("div", { staticClass: "col-md-4" }, [
-          _c("label", [
-            _c("input", { attrs: { type: "checkbox", name: "check" } }),
-            _vm._v("   Tesis PDF")
+    return _c(
+      "fieldset",
+      { staticClass: "border p-2", attrs: { id: "documentos" } },
+      [
+        _c("legend", { staticClass: "w-auto" }, [
+          _vm._v("Documentos Titulación")
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group row" }, [
+          _c("div", { staticClass: "col-md-4" }, [
+            _c("label", [
+              _c("input", { attrs: { type: "checkbox", name: "check" } }),
+              _vm._v("   Tesis PDF")
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-4" }, [
+            _c("label", [
+              _c("input", { attrs: { type: "checkbox", name: "check" } }),
+              _vm._v("   Autorización de publicación")
+            ])
           ])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-md-4" }, [
-          _c("label", [
-            _c("input", { attrs: { type: "checkbox", name: "check" } }),
-            _vm._v("   Autorización de publicación")
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group row" }, [
-        _c("div", { staticClass: "col-md-4" }, [
-          _c("label", [
-            _c("input", { attrs: { type: "checkbox", name: "check" } }),
-            _vm._v("   Constancia antiplagio")
+        _c("div", { staticClass: "form-group row" }, [
+          _c("div", { staticClass: "col-md-4" }, [
+            _c("label", [
+              _c("input", { attrs: { type: "checkbox", name: "check" } }),
+              _vm._v("   Constancia antiplagio")
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-4" }, [
+            _c("label", [
+              _c("input", { attrs: { type: "checkbox", name: "check" } }),
+              _vm._v("   Constancia URL")
+            ])
           ])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-md-4" }, [
-          _c("label", [
-            _c("input", { attrs: { type: "checkbox", name: "check" } }),
-            _vm._v("   Constancia URL")
+        _c("div", { staticClass: "form-group row" }, [
+          _c("div", { staticClass: "col-md-12" }, [
+            _c("label", [
+              _c(
+                "mark",
+                {
+                  staticStyle: {
+                    "background-color": "#dc354526",
+                    color: "#520606f7",
+                    "text-align": "justify"
+                  }
+                },
+                [
+                  _vm._v(
+                    "Nota: Verificar si se cuenta con estos documentos obligatorios marcando el check que le corresponde, si no se cuenta con uno o más de éstos no se podrá continuar."
+                  )
+                ]
+              )
+            ])
           ])
         ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group row" }, [
-        _c("div", { staticClass: "col-md-12" }, [
-          _c("label", [
-            _c(
-              "mark",
-              {
-                staticStyle: {
-                  "background-color": "#dc354526",
-                  color: "#520606f7",
-                  "text-align": "justify"
-                }
-              },
-              [
-                _vm._v(
-                  "Nota: Verificar si se cuenta con estos documentos obligatorios marcando el check que le corresponde, si no se cuenta con uno o más de éstos no se podrá continuar."
-                )
-              ]
-            )
-          ])
-        ])
-      ])
-    ])
+      ]
+    )
   },
   function() {
     var _vm = this

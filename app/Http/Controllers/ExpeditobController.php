@@ -28,7 +28,7 @@ class ExpeditobController extends Controller
         ->join("escuela AS esc","e.IDEscuela","esc.IDEscuela")
         ->join("titulacion AS t","expedito.CodigoAlumno","t.CodAlumno")
         ->join("modalidad AS m","t.IDModalidad","m.IDModalidad")
-        ->select("expedito.*",\DB::raw("concat_ws('-',expedito.Tomo,expedito.Folio,expedito.Asiento,m.Modalidad) AS Acta"),\DB::raw("date_format(expedito.FechaIngreso,'%d-%m-%Y') AS FechaIngresoAux"),\DB::raw("date_format(expedito.FechaComienzo,'%d-%m-%Y') AS FechaComienzoAux"),\DB::raw("date_format(s.Fecha,'%d-%m-%Y') AS FechaAux"),"esc.Escuela","s.*","es.Estado",\DB::raw("concat_ws(' ',e.Nombre,e.Paterno,e.Materno) as Alumno"),"e.DNI")
+        ->select("m.*","t.Asesor","t.NombreTesis","t.Calificacion","t.Fecha AS FechaT","expedito.*",\DB::raw("concat_ws('-',expedito.Tomo,expedito.Folio,expedito.Asiento,m.Modalidad) AS Acta"),\DB::raw("date_format(expedito.FechaIngreso,'%d-%m-%Y') AS FechaIngresoAux"),\DB::raw("date_format(expedito.FechaComienzo,'%d-%m-%Y') AS FechaComienzoAux"),\DB::raw("date_format(s.Fecha,'%d-%m-%Y') AS FechaAux"),"esc.Escuela","s.*","es.Estado",\DB::raw("concat_ws(' ',e.Nombre,e.Paterno,e.Materno) as Alumno"),"e.DNI")
         ->where("expedito.Tipo","TITULO")->get();
         
         return compact("expeditosb","expeditost");
@@ -206,7 +206,52 @@ class ExpeditobController extends Controller
         }
         return compact("type","text");
     }
-
+    public function editTitulo(Request $request)
+    {
+        
+        $hoy = date("Y-m-d");
+        $IDExpedito = $request->expedito["idexpedito"];
+        try {
+            $expedito = Expeditob::where("IDExpedito",$IDExpedito)->update(
+                [
+                    "Tipo"          => $request->expedito["tipo"],
+                    "CodigoAlumno"  => $request->expedito["codigo"],
+                    "Tomo"          => $request->expedito["tomo"],
+                    "Folio"         => $request->expedito["folio"],
+                    "Asiento"       => $request->expedito["asiento"],
+                    "NumSesion"     => $request->expedito["sesion"],
+                    "FechaIngreso"  => $request->expedito["ingreso"],
+                    "FechaComienzo" => $request->expedito["comienzo"],
+                    "updated_at"    => $hoy,
+                    
+                ]);
+            $titulacion = Titulacion::where("CodAlumno",$request->expedito["codigo"])->update(
+                [
+                    "Asesor"        => $request->expedito["asesor"],
+                    "IDModalidad"   => $request->expedito["modalidad"],
+                    "NombreTesis"   => mb_strtoupper($request->expedito["tesis"]),
+                    "Calificacion"  => $request->expedito["calificacion"],
+                    "Fecha"         => $request->expedito["sustentacion"],
+                ]
+            );
+            $type = "success";
+            $text = "Expedito editado con éxito";  
+        } catch (\Throwable $th) {
+            $type = "success";
+            $text = $th;  
+        }
+       
+        // if($expedito && $titulacion)
+        // {
+        //     $type = "success";
+        //     $text = "Expedito editado con éxito";  
+        // }else
+        // {
+        //     $type = "warning";
+        //     $text = "Comuniquese con un administrador";  
+        // }
+        return compact("type","text");
+    }
     /**
      * Update the specified resource in storage.
      *
@@ -238,7 +283,7 @@ class ExpeditobController extends Controller
             return "fail";
         }
     }
-
+    
     /**
      * Remove the specified resource from storage.
      *
