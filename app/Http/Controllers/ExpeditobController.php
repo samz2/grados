@@ -19,7 +19,7 @@ class ExpeditobController extends Controller
                         ->join("sesion AS s","expedito.NumSesion","s.NumSesion")
                         ->join("estados AS es","expedito.Estado","es.Posicion")
                         ->join("escuela AS esc","e.IDEscuela","esc.IDEscuela")
-                        ->select("expedito.*",\DB::raw("concat_ws('-',expedito.Tomo,expedito.Folio,expedito.Asiento) AS Acta"),\DB::raw("date_format(expedito.FechaIngreso,'%d-%m-%Y') AS FechaIngresoAux"),\DB::raw("date_format(expedito.FechaComienzo,'%d-%m-%Y') AS FechaComienzoAux"),\DB::raw("date_format(s.Fecha,'%d-%m-%Y') AS FechaAux"),"esc.Escuela","s.*","es.Estado",\DB::raw("concat_ws(' ',e.Nombre,e.Paterno,e.Materno) as Alumno"),"e.DNI")
+                        ->select("expedito.*",\DB::raw("concat_ws('/',expedito.Tomo,expedito.Folio,expedito.Asiento) AS Acta"),\DB::raw("date_format(expedito.FechaIngreso,'%d/%m/%Y') AS FechaIngresoAux"),\DB::raw("date_format(expedito.FechaComienzo,'%d/%m/%Y') AS FechaComienzoAux"),\DB::raw("date_format(s.Fecha,'%d/%m/%Y') AS FechaAux"),"esc.Escuela","s.*","es.Estado",\DB::raw("concat_ws(' ',e.Nombre,e.Paterno,e.Materno) as Alumno"),"e.DNI")
                         ->where("expedito.Tipo","BACHILLER")->get();
         
         $expeditost =   Expeditob::join("egresado AS e","expedito.CodigoAlumno","e.Codigo")
@@ -28,7 +28,7 @@ class ExpeditobController extends Controller
         ->join("escuela AS esc","e.IDEscuela","esc.IDEscuela")
         ->join("titulacion AS t","expedito.CodigoAlumno","t.CodAlumno")
         ->join("modalidad AS m","t.IDModalidad","m.IDModalidad")
-        ->select("m.*","t.Asesor","t.NombreTesis","t.Calificacion","t.Fecha AS FechaT","expedito.*",\DB::raw("concat_ws('-',expedito.Tomo,expedito.Folio,expedito.Asiento,m.Modalidad) AS Acta"),\DB::raw("date_format(expedito.FechaIngreso,'%d-%m-%Y') AS FechaIngresoAux"),\DB::raw("date_format(expedito.FechaComienzo,'%d-%m-%Y') AS FechaComienzoAux"),\DB::raw("date_format(s.Fecha,'%d-%m-%Y') AS FechaAux"),"esc.Escuela","s.*","es.Estado",\DB::raw("concat_ws(' ',e.Nombre,e.Paterno,e.Materno) as Alumno"),"e.DNI")
+        ->select("m.*","t.Asesor","t.NombreTesis","t.Calificacion","t.Fecha AS FechaT","expedito.*",\DB::raw("concat_ws('/',expedito.Tomo,expedito.Folio,expedito.Asiento,m.Modalidad) AS Acta"),\DB::raw("date_format(expedito.FechaIngreso,'%d/%m/%Y') AS FechaIngresoAux"),\DB::raw("date_format(expedito.FechaComienzo,'%d/%m/%Y') AS FechaComienzoAux"),\DB::raw("date_format(s.Fecha,'%d/%m/%Y') AS FechaAux"),"esc.Escuela","s.*","es.Estado",\DB::raw("concat_ws(' ',e.Nombre,e.Paterno,e.Materno) as Alumno"),"e.DNI")
         ->where("expedito.Tipo","TITULO")->get();
         
         return compact("expeditosb","expeditost");
@@ -136,8 +136,8 @@ class ExpeditobController extends Controller
             $matriculaNombre    = "CM035_".$request->expedito["dni"]."_T.pdf";
             $egresadoNombre     = "CE035_".$request->expedito["dni"]."_T.pdf";
             $fotoNombre         = "F035_".$request->expedito["dni"]."_T.jpg";
-            $tesisNombre        = "SISTEMAS_".$year."_T_".$request->expedito["dni"]."_T.pdf";
-            $WordNombre         = "SISTEMAS_".$year."_T_".$request->expedito["dni"]."_T.docx";
+            $tesisNombre        = "T035_".$request->expedito["dni"]."_T.pdf";
+            $WordNombre         = "T035_".$request->expedito["dni"]."_T.docx";
             $rutaMatricula  = public_path()."/".$matriculaNombre;
             $rutaEgresado   = public_path()."/".$egresadoNombre;
             $rutaFoto       = public_path()."/".$fotoNombre;

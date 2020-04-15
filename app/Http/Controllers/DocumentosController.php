@@ -60,6 +60,26 @@ class DocumentosController extends Controller
         $pdf = PDF::loadView('templates.oficio',compact("dato","anio","mes","dia"));
         return $pdf->stream('oficio.pdf');
     }
+
+    public function oficio2($id)
+    {
+        $expeditosb =   Expeditob::join("egresado AS e","expedito.CodigoAlumno","e.Codigo")
+                        ->join("sesion AS s","expedito.NumSesion","s.NumSesion")
+                        ->join("escuela AS esc","e.IDEscuela","esc.IDEscuela")
+                        ->select("expedito.*","s.*","e.Paterno as Paterno","e.Materno as Materno", "e.Nombre","esc.Escuela")
+                        ->where("expedito.IDExpedito",$id)->get();
+        // $datos = Documentos::join("egresado AS e","documentos.Codigo","e.Codigo")                      CONCAT(UPPER(LEFT(, 1)), LOWER(SUBSTRING(, 2))) ----- \DB::raw("ucwords(e.Nombre,' ') as Nombre")
+        //                                                                                                \DB::raw("concat(upper(left(e.Nombre, 1)), lower(substring(e.Nombre, 2))) as Nombre")
+        // ->join("escuela AS es","e.IDEscuela","es.IDEscuela")
+        // ->select("e.*","documentos.*","es.*")
+        // ->where("IDDocumento",$id)->get();
+        $dato = $expeditosb[0];
+        $anio = substr($dato->Fecha,0,4);
+        $mes  = $this->mes(substr($dato->Fecha,5,2)) ;
+        $dia  = substr($dato->Fecha,8,2);
+        $pdf = PDF::loadView('templates.oficio2',compact("dato","anio","mes","dia"));
+        return $pdf->stream('oficio.pdf');
+    }
     public function mes($indice)
     {
         $meses["01"]   = "enero";

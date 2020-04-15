@@ -5487,13 +5487,13 @@ __webpack_require__.r(__webpack_exports__);
       columns: ["Alumno", "Acta", "NumSesion", "FechaAux", "FechaIngresoAux", "FechaComienzoAux", "Acciones"],
       options: {
         headings: {
-          CodigoAlumno: "Código",
+          CodigoAlumno: "Código Egresado",
           NumSesion: "Sesión",
-          FechaIngresoAux: "Ingreso trámite",
-          FechaComienzoAux: "Comienzo trámite",
-          FechaAux: "Fecha Sesión",
-          Alumno: "Egresado",
-          Acta: "   T-F-A   "
+          FechaIngresoAux: "Ingr. trámite",
+          FechaComienzoAux: "Inic. trámite",
+          FechaAux: "F. Sesión",
+          Alumno: "Nombre Completo",
+          Acta: "   T/F/A   "
         },
         sortable: ["Alumno", "Acta", "NumSesion", "FechaAux", "FechaIngresoAux", "FechaComienzoAux"],
         filterable: ["Alumno", "Acta", "NumSesion", "FechaAux", "FechaIngresoAux", "FechaComienzoAux"]
@@ -5767,6 +5767,7 @@ __webpack_require__.r(__webpack_exports__);
         $('#editar').hide();
         $('#menos').show();
         $('#mas').hide();
+        $('#labelInicio').show();
       } else if (id == '2') {
         $('#objetivo').hide();
         $('#archivos').hide();
@@ -5776,6 +5777,7 @@ __webpack_require__.r(__webpack_exports__);
         $('#expeditos').show();
         $('#menos').hide();
         $('#mas').show();
+        $('#labelInicio').hide();
       }
     },
     validafecha: function validafecha() {
@@ -6290,6 +6292,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -6336,10 +6340,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         CodigoAlumno: null,
         Acta: null,
         NumSesion: null,
-        FechaIngreso: null,
-        FechaComienzo: null,
+        FechaIngresoAux: null,
+        FechaComienzoAux: null,
         Estado: null,
-        Fecha: null,
+        FechaAux: null,
         Alumno: null,
         IDModalidad: null,
         Modalidad: null,
@@ -6348,19 +6352,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         Calificacion: null,
         FechaT: null
       }],
-      columns: ["Alumno", "Acta", "NumSesion", "Fecha", "FechaIngreso", "FechaComienzo", "Acciones"],
+      columns: ["Alumno", "Acta", "NumSesion", "FechaAux", "FechaIngresoAux", "FechaComienzoAux", "Acciones"],
       options: {
         headings: {
           CodigoAlumno: "Código",
           NumSesion: "Sesión",
-          FechaIngreso: "Ingreso trámite",
-          FechaComienzo: "Comienzo trámite",
-          Fecha: "Fecha Sesión",
-          Alumno: "Egresado",
-          Acta: "   T-F-A-M   "
+          FechaIngresoAux: "Ingr. trámite",
+          FechaComienzoAux: "Inic. trámite",
+          FechaAux: "F. Sesión",
+          Alumno: "Nombre Completo",
+          Acta: "   T/F/A/M   "
         },
-        sortable: ["Alumno", "Acta", "NumSesion", "Fecha", "FechaIngreso", "FechaComienzo"],
-        filterable: ["Alumno", "Acta", "NumSesion", "Fecha", "FechaIngreso", "FechaComienzo"]
+        sortable: ["Alumno", "Acta", "NumSesion", "FechaAux", "FechaIngresoAux", "FechaComienzoAux"],
+        filterable: ["Alumno", "Acta", "NumSesion", "FechaAux", "FechaIngresoAux", "FechaComienzoAux"]
       }
     };
   },
@@ -6399,6 +6403,46 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         console.log(error);
       });
     },
+    validafecha: function validafecha() {
+      if (this.expedito.ingreso != null) {
+        var inicio = this.expedito.ingreso;
+        var _final = '2022-01-01';
+
+        if (_final <= inicio) {
+          swal({
+            type: 'warning',
+            title: 'Ingresar una fecha correcta'
+          });
+          this.expedito.ingreso = null;
+        }
+      }
+
+      if (this.expedito.comienzo != null) {
+        var inicio = this.expedito.comienzo;
+        var _final = '2026-01-01';
+
+        if (_final <= inicio) {
+          swal({
+            type: 'warning',
+            title: 'Ingresar una fecha correcta'
+          });
+          this.expedito.comienzo = null;
+        }
+      }
+
+      if (this.expedito.sustentacion != null) {
+        var inicio = this.expedito.sustentacion;
+        var _final = '2026-01-01';
+
+        if (_final <= inicio) {
+          swal({
+            type: 'warning',
+            title: 'Ingresar una fecha correcta'
+          });
+          this.expedito.sustentacion = null;
+        }
+      }
+    },
     buscar: function buscar(d, c, a) {
       var _this3 = this;
 
@@ -6428,6 +6472,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.expedito.tomo = null;
       this.expedito.folio = null;
       this.expedito.asiento = null;
+      this.expedito.tesis = null;
+      this.expedito.sustentacion = null;
+      this.expedito.calificacion = null;
+      this.expedito.asesor = null;
+      this.expedito.modalidad = null;
       this.expedito.sesion = null;
       this.expedito.sfecha = null;
       this.expedito.stipo = null;
@@ -6494,10 +6543,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     addExpedito: function addExpedito() {
       var _this7 = this;
 
-      if (this.expedito.codigo == null || this.expedito.dni == null || this.expedito.alumno == null || this.expedito.carrera == null || this.expedito.tomo == null || this.expedito.folio == null || this.expedito.asiento == null || this.expedito.sesion == null || this.expedito.sfecha == null || this.expedito.stipo == null || this.expedito.ingreso == null || this.archivos.foto == null || this.archivos.egresado == null || this.archivos.matricula == null || this.archivos.tesis == null || this.archivos.word == null) {
+      if (this.expedito.codigo == null || this.expedito.dni == null || this.expedito.alumno == null || this.expedito.carrera == null || this.expedito.tomo == null || this.expedito.folio == null || this.expedito.asiento == null || this.expedito.sesion == null || this.expedito.sfecha == null || this.expedito.stipo == null || this.expedito.ingreso == null || this.archivos.foto == null || this.archivos.egresado == null || this.archivos.matricula == null || this.archivos.tesis == null || this.archivos.word == null || this.expedito.tesis == null || this.expedito.sustentacion == null || this.expedito.calificacion == null || this.expedito.asesor == null || this.expedito.modalidad == null) {
         swal({
-          type: 'error',
-          title: 'Llenar los datos obligatorios'
+          type: 'warning',
+          title: 'Llenar los datos obligatorios',
+          timer: 3000
         });
       } else {
         this.$Progress.start();
@@ -6526,8 +6576,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           console.log(error);
           swal({
             type: 'error',
-            title: 'Error',
-            text: 'Comuniquese con un administrador',
+            //title: 'Error',
+            text: 'Ocurrió un problema, comuníquese con un administrador',
             showConfirmButton: true
           });
         });
@@ -6544,6 +6594,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         $('#editar').hide();
         $('#menos').show();
         $('#mas').hide();
+        $('#labelInicio').show();
       } else if (id == '2') {
         $('#objetivo').hide();
         $('#archivos').hide();
@@ -6553,6 +6604,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         $('#expeditos').show();
         $('#menos').hide();
         $('#mas').show();
+        $('#labelInicio').hide();
       }
     },
     estado: function estado(id, tipo) {
@@ -6828,7 +6880,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   }), _defineProperty(_methods, "editExpedito", function editExpedito() {
     var _this14 = this;
 
-    if (this.expedito.codigo == null || this.expedito.dni == null || this.expedito.alumno == null || this.expedito.carrera == null || this.expedito.tomo == null || this.expedito.folio == null || this.expedito.asiento == null || this.expedito.sesion == null || this.expedito.sfecha == null || this.expedito.stipo == null || this.expedito.ingreso == null) {
+    if (this.expedito.codigo == null || this.expedito.dni == null || this.expedito.alumno == null || this.expedito.carrera == null || this.expedito.tomo == null || this.expedito.folio == null || this.expedito.asiento == null || this.expedito.sesion == null || this.expedito.sfecha == null || this.expedito.stipo == null || this.expedito.ingreso == null || this.expedito.tesis == null || this.expedito.sustentacion == null || this.expedito.calificacion == null || this.expedito.asesor == null || this.expedito.modalidad == null) {
       swal({
         type: 'warning',
         title: 'Llenar los campos obligatorios',
@@ -56827,7 +56879,10 @@ var render = function() {
                               "button",
                               {
                                 staticClass: "btn btn-danger",
-                                staticStyle: { padding: "2px 8px" },
+                                staticStyle: {
+                                  padding: "2px 4px",
+                                  "font-size": "11px"
+                                },
                                 attrs: {
                                   "data-toggle": "tooltip",
                                   "data-placement": "left",
@@ -56853,7 +56908,10 @@ var render = function() {
                               "button",
                               {
                                 staticClass: "btn btn-info",
-                                staticStyle: { padding: "2px 8px" },
+                                staticStyle: {
+                                  padding: "2px 4px",
+                                  "font-size": "11px"
+                                },
                                 attrs: {
                                   "data-target": "#exampleModal",
                                   "data-toggle": "modal",
@@ -58429,6 +58487,10 @@ var render = function() {
                                   "button",
                                   {
                                     staticClass: "btn btn-danger",
+                                    staticStyle: {
+                                      padding: "2px 8px",
+                                      "font-size": "12px"
+                                    },
                                     attrs: {
                                       "data-toggle": "tooltip",
                                       "data-placement": "left",
@@ -58453,6 +58515,10 @@ var render = function() {
                                   "button",
                                   {
                                     staticClass: "btn btn-warning",
+                                    staticStyle: {
+                                      padding: "2px 8px",
+                                      "font-size": "12px"
+                                    },
                                     attrs: {
                                       "data-toggle": "tooltip",
                                       "data-placement": "left",
@@ -58477,6 +58543,10 @@ var render = function() {
                                   "button",
                                   {
                                     staticClass: "btn btn-success",
+                                    staticStyle: {
+                                      padding: "2px 8px",
+                                      "font-size": "12px"
+                                    },
                                     attrs: {
                                       "data-toggle": "tooltip",
                                       "data-placement": "left",
@@ -58490,7 +58560,11 @@ var render = function() {
                             _c(
                               "button",
                               {
-                                staticClass: "btn btn-info",
+                                staticClass: "btn btn-primary",
+                                staticStyle: {
+                                  padding: "2px 8px",
+                                  "font-size": "12px"
+                                },
                                 attrs: {
                                   "data-placement": "left",
                                   title: "Editar"
@@ -58529,13 +58603,18 @@ var render = function() {
                               ? _c(
                                   "router-link",
                                   {
-                                    staticClass: "btn btn-success",
+                                    staticClass: "btn btn-info",
+                                    staticStyle: {
+                                      padding: "2px 8px",
+                                      "font-size": "12px",
+                                      color: "white"
+                                    },
                                     attrs: {
                                       target: "_blank",
                                       to: "/oficio/" + props.row.IDExpedito,
                                       "data-toggle": "tooltip",
                                       "data-placement": "left",
-                                      title: "Ver Oficio"
+                                      title: "Ver oficio"
                                     }
                                   },
                                   [
@@ -59141,8 +59220,8 @@ var render = function() {
                       staticClass: "form-control form-control-sm",
                       attrs: {
                         type: "text",
-                        onKeyPress: "return soloLetras(event)",
-                        maxlength: "200"
+                        onKeyPress: "return soloTesis(event)",
+                        maxlength: "300"
                       },
                       domProps: { value: _vm.expedito.tesis },
                       on: {
@@ -59160,7 +59239,7 @@ var render = function() {
                 _c("div", { staticClass: "form-group row" }, [
                   _vm._m(9),
                   _vm._v(" "),
-                  _c("div", { staticClass: "col-md-6" }, [
+                  _c("div", { staticClass: "col-md-9" }, [
                     _c(
                       "select",
                       {
@@ -59256,6 +59335,14 @@ var render = function() {
                         _vm._v(" "),
                         _c("option", { attrs: { value: "UNANIMIDAD" } }, [
                           _vm._v("UNANIMIDAD")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "MAYORIA" } }, [
+                          _vm._v("MAYORIA")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "DESAPROBADO" } }, [
+                          _vm._v("DESAPROBADO")
                         ])
                       ]
                     )
@@ -59277,6 +59364,9 @@ var render = function() {
                       attrs: { type: "date" },
                       domProps: { value: _vm.expedito.sustentacion },
                       on: {
+                        change: function($event) {
+                          return _vm.validafecha()
+                        },
                         input: function($event) {
                           if ($event.target.composing) {
                             return
@@ -59446,7 +59536,11 @@ var render = function() {
                     _c("div", { staticClass: "col-md-4" }, [
                       _c("input", {
                         staticClass: "form-control form-control-sm",
-                        attrs: { type: "file", id: "matricula" },
+                        attrs: {
+                          type: "file",
+                          id: "matricula",
+                          accept: "application/pdf"
+                        },
                         on: { change: _vm.validarMatricula }
                       })
                     ]),
@@ -59456,7 +59550,11 @@ var render = function() {
                     _c("div", { staticClass: "col-md-4" }, [
                       _c("input", {
                         staticClass: "form-control form-control-sm",
-                        attrs: { type: "file", id: "egresado" },
+                        attrs: {
+                          type: "file",
+                          id: "egresado",
+                          accept: "application/pdf"
+                        },
                         on: { change: _vm.validarEgresado }
                       })
                     ])
@@ -59468,7 +59566,11 @@ var render = function() {
                     _c("div", { staticClass: "col-md-4" }, [
                       _c("input", {
                         staticClass: "form-control form-control-sm",
-                        attrs: { type: "file", id: "tesis" },
+                        attrs: {
+                          type: "file",
+                          id: "tesis",
+                          accept: "application/pdf"
+                        },
                         on: { change: _vm.validarTesis }
                       })
                     ]),
@@ -59478,7 +59580,11 @@ var render = function() {
                     _c("div", { staticClass: "col-md-4" }, [
                       _c("input", {
                         staticClass: "form-control form-control-sm",
-                        attrs: { type: "file", id: "word" },
+                        attrs: {
+                          type: "file",
+                          id: "word",
+                          accept: ".doc, .docx"
+                        },
                         on: { change: _vm.validarWord }
                       })
                     ])
@@ -59490,7 +59596,11 @@ var render = function() {
                     _c("div", { staticClass: "col-md-4" }, [
                       _c("input", {
                         staticClass: "form-control form-control-sm",
-                        attrs: { type: "file", id: "foto" },
+                        attrs: {
+                          type: "file",
+                          id: "foto",
+                          accept: "image/jpeg"
+                        },
                         on: { change: _vm.validarFoto }
                       })
                     ])
@@ -59528,12 +59638,16 @@ var render = function() {
                       staticClass: "form-control form-control-sm",
                       attrs: {
                         type: "date",
+                        max: "2030-12-31",
                         id: "ingreso",
                         onKeyPress: "return soloNumeros(event)",
                         maxlength: "3"
                       },
                       domProps: { value: _vm.expedito.ingreso },
                       on: {
+                        change: function($event) {
+                          return _vm.validafecha()
+                        },
                         input: function($event) {
                           if ($event.target.composing) {
                             return
@@ -59566,9 +59680,16 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-control form-control-sm",
-                      attrs: { type: "date", id: "comienzo" },
+                      attrs: {
+                        type: "date",
+                        max: "2030-12-31",
+                        id: "comienzo"
+                      },
                       domProps: { value: _vm.expedito.comienzo },
                       on: {
+                        change: function($event) {
+                          return _vm.validafecha()
+                        },
                         input: function($event) {
                           if ($event.target.composing) {
                             return
@@ -59948,9 +60069,15 @@ var render = function() {
                                   "button",
                                   {
                                     staticClass: "btn btn-danger",
+                                    staticStyle: {
+                                      padding: "2px 6px",
+                                      "font-size": "11px"
+                                    },
                                     attrs: {
                                       "data-toggle": "tooltip",
-                                      "data-placement": "left"
+                                      "data-placement": "left",
+                                      title:
+                                        "Hacer click para cambiar de estado"
                                     },
                                     on: {
                                       click: function($event) {
@@ -59961,7 +60088,7 @@ var render = function() {
                                       }
                                     }
                                   },
-                                  [_vm._v("Pendiente")]
+                                  [_vm._v("Pendiente   ")]
                                 )
                               : _vm._e(),
                             _vm._v(" "),
@@ -59970,9 +60097,15 @@ var render = function() {
                                   "button",
                                   {
                                     staticClass: "btn btn-warning",
+                                    staticStyle: {
+                                      padding: "2px 8px",
+                                      "font-size": "11px"
+                                    },
                                     attrs: {
                                       "data-toggle": "tooltip",
-                                      "data-placement": "left"
+                                      "data-placement": "left",
+                                      title:
+                                        "Hacer click para cambiar de estado"
                                     },
                                     on: {
                                       click: function($event) {
@@ -59992,19 +60125,28 @@ var render = function() {
                                   "button",
                                   {
                                     staticClass: "btn btn-success",
+                                    staticStyle: {
+                                      padding: "2px 8px",
+                                      "font-size": "11px"
+                                    },
                                     attrs: {
                                       "data-toggle": "tooltip",
-                                      "data-placement": "left"
+                                      "data-placement": "left",
+                                      title: "Estado final"
                                     }
                                   },
-                                  [_vm._v("Finalizado")]
+                                  [_vm._v("Finalizado  ")]
                                 )
                               : _vm._e(),
                             _vm._v(" "),
                             _c(
                               "button",
                               {
-                                staticClass: "btn btn-info",
+                                staticClass: "btn btn-primary",
+                                staticStyle: {
+                                  padding: "2px 5px",
+                                  "font-size": "12px"
+                                },
                                 attrs: {
                                   "data-placement": "left",
                                   title: "Editar"
@@ -60049,13 +60191,18 @@ var render = function() {
                               ? _c(
                                   "router-link",
                                   {
-                                    staticClass: "btn btn-success",
+                                    staticClass: "btn btn-info",
+                                    staticStyle: {
+                                      padding: "2px 8px",
+                                      "font-size": "12px",
+                                      color: "white"
+                                    },
                                     attrs: {
                                       target: "_blank",
-                                      to: "/oficio/" + props.row.IDExpedito,
+                                      to: "/oficio2/" + props.row.IDExpedito,
                                       "data-toggle": "tooltip",
                                       "data-placement": "left",
-                                      title: "Ver Acta"
+                                      title: "Ver oficio"
                                     }
                                   },
                                   [
@@ -60120,17 +60267,24 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-4" }, [
-      _c("label", [
-        _c(
-          "mark",
-          {
-            staticStyle: { "background-color": "#dc354526", color: "#520606f7" }
-          },
-          [_vm._v("- Primero realizar la búsqueda del bachiller.")]
-        )
-      ])
-    ])
+    return _c(
+      "div",
+      { staticClass: "col-md-4", attrs: { id: "labelInicio" } },
+      [
+        _c("label", [
+          _c(
+            "mark",
+            {
+              staticStyle: {
+                "background-color": "#dc354526",
+                color: "#520606f7"
+              }
+            },
+            [_vm._v("- Primero realizar la búsqueda del bachiller.")]
+          )
+        ])
+      ]
+    )
   },
   function() {
     var _vm = this
@@ -60235,14 +60389,18 @@ var staticRenderFns = [
         _c("div", { staticClass: "form-group row" }, [
           _c("div", { staticClass: "col-md-4" }, [
             _c("label", [
-              _c("input", { attrs: { type: "checkbox", name: "check" } }),
+              _c("input", {
+                attrs: { type: "checkbox", id: "chbx1", name: "check" }
+              }),
               _vm._v("   Tesis PDF")
             ])
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "col-md-4" }, [
             _c("label", [
-              _c("input", { attrs: { type: "checkbox", name: "check" } }),
+              _c("input", {
+                attrs: { type: "checkbox", id: "chbx2", name: "check" }
+              }),
               _vm._v("   Autorización de publicación")
             ])
           ])
@@ -60251,14 +60409,18 @@ var staticRenderFns = [
         _c("div", { staticClass: "form-group row" }, [
           _c("div", { staticClass: "col-md-4" }, [
             _c("label", [
-              _c("input", { attrs: { type: "checkbox", name: "check" } }),
+              _c("input", {
+                attrs: { type: "checkbox", id: "chbx3", name: "check" }
+              }),
               _vm._v("   Constancia antiplagio")
             ])
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "col-md-4" }, [
             _c("label", [
-              _c("input", { attrs: { type: "checkbox", name: "check" } }),
+              _c("input", {
+                attrs: { type: "checkbox", id: "chbx4", name: "check" }
+              }),
               _vm._v("   Constancia URL")
             ])
           ])
@@ -84512,8 +84674,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\grados\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\grados\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\Sistemas\SISTEMA GRADOS\grados\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\Sistemas\SISTEMA GRADOS\grados\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

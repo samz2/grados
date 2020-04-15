@@ -25,6 +25,7 @@ Route::get('/error','UsersController@error');
 
 Route::get('/getAnios','DocumentosController@fechas');
 Route::get('/oficio/{id}','DocumentosController@oficio');
+Route::get('/oficio2/{id}','DocumentosController@oficio2');
 Route::post('/addDocumento','DocumentosController@store');
 Route::get('/getDocumentos','DocumentosController@index');
 

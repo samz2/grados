@@ -223,11 +223,11 @@
                             <div class="content table-responsive table-full-width t12">
                                 <v-client-table :data="expeditos" :columns="columns" :options="options">
                                     <div slot="Acciones" slot-scope="props">
-                                        <button v-if="props.row.Estado == 'PENDIENTE'" v-on:click="estado(props.row.IDExpedito,1)" class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Hacer click para cambiar de estado">Pendiente  </button>
-                                        <button v-if="props.row.Estado == 'EN PROCESO'" v-on:click="estado(props.row.IDExpedito,2)"  class="btn btn-warning" data-toggle="tooltip" data-placement="left" title="Hacer click para cambiar de estado">En Proceso</button>
-                                        <button v-if="props.row.Estado == 'FINALIZADO'"  class="btn btn-success" data-toggle="tooltip" data-placement="left" title="Estado final">Finalizado  </button>
-                                        <button class="btn btn-info" v-on:click="edit(props.row.IDExpedito,props.row.Tipo,props.row.CodigoAlumno,props.row.Tomo,props.row.Folio,props.row.Asiento,props.row.NumSesion,props.row.FechaIngreso,props.row.FechaComienzo,props.row.IDSesion,props.row.Fecha,props.row.Escuela,props.row.Alumno,props.row.DNI)" data-placement="left" title="Editar"><i class="fas fa-edit" style="color: white" aria-hidden="true"></i></button>
-                                        <router-link v-if="props.row.Estado == 'FINALIZADO'" class="btn btn-success" target="_blank" :to="'/oficio/'+props.row.IDExpedito" data-toggle="tooltip"  data-placement="left" title="Ver Oficio"><i class="far fa-file-pdf" aria-hidden="true"></i></router-link>
+                                        <button v-if="props.row.Estado == 'PENDIENTE'" v-on:click="estado(props.row.IDExpedito,1)" class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Hacer click para cambiar de estado" style="padding: 2px 8px; font-size: 12px;">Pendiente  </button>
+                                        <button v-if="props.row.Estado == 'EN PROCESO'" v-on:click="estado(props.row.IDExpedito,2)"  class="btn btn-warning" data-toggle="tooltip" data-placement="left" title="Hacer click para cambiar de estado" style="padding: 2px 8px; font-size: 12px;">En Proceso</button>
+                                        <button v-if="props.row.Estado == 'FINALIZADO'"  class="btn btn-success" data-toggle="tooltip" data-placement="left" title="Estado final" style="padding: 2px 8px; font-size: 12px;">Finalizado  </button>
+                                        <button class="btn btn-primary" v-on:click="edit(props.row.IDExpedito,props.row.Tipo,props.row.CodigoAlumno,props.row.Tomo,props.row.Folio,props.row.Asiento,props.row.NumSesion,props.row.FechaIngreso,props.row.FechaComienzo,props.row.IDSesion,props.row.Fecha,props.row.Escuela,props.row.Alumno,props.row.DNI)" data-placement="left" title="Editar" style="padding: 2px 8px; font-size: 12px;"><i class="fas fa-edit" style="color: white" aria-hidden="true"></i></button>
+                                        <router-link v-if="props.row.Estado == 'FINALIZADO'" class="btn btn-info" target="_blank" :to="'/oficio/'+props.row.IDExpedito" data-toggle="tooltip"  data-placement="left" title="Ver oficio" style="padding: 2px 8px; font-size: 12px; color:white;"><i class="far fa-file-pdf" aria-hidden="true"></i></router-link>
                                     </div>
                                 </v-client-table>
                             </div>
@@ -288,13 +288,13 @@
             options: {
 				headings:
 				{
-                    CodigoAlumno: "Código",
+                    CodigoAlumno: "Código Egresado",
                     NumSesion: "Sesión",
-                    FechaIngresoAux: "Ingreso trámite",
-                    FechaComienzoAux: "Comienzo trámite",
-                    FechaAux: "Fecha Sesión",
-                    Alumno: "Egresado",
-                    Acta: "   T-F-A   "
+                    FechaIngresoAux: "Ingr. trámite",
+                    FechaComienzoAux: "Inic. trámite",
+                    FechaAux: "F. Sesión",
+                    Alumno: "Nombre Completo",
+                    Acta: "   T/F/A   "
 				},
 				sortable    : ["Alumno","Acta","NumSesion","FechaAux","FechaIngresoAux","FechaComienzoAux",],
 				filterable  : ["Alumno","Acta","NumSesion","FechaAux","FechaIngresoAux","FechaComienzoAux",]
@@ -586,6 +586,7 @@
                 $('#editar').hide();
                 $('#menos').show();
                 $('#mas').hide();
+                $('#labelInicio').show();
 			}
 			else if(id == '2')
 			{
@@ -597,6 +598,7 @@
                 $('#expeditos').show();	
                 $('#menos').hide();
                 $('#mas').show();
+                $('#labelInicio').hide();
 			}
 			
         },

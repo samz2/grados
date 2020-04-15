@@ -151,8 +151,8 @@
                         <div class="content table-responsive table-full-width">
                             <v-client-table :data="egresados" :columns="columns" :options="options">
                                 <div slot="Acciones" slot-scope="props">
-                                <button class="btn btn-danger" data-toggle="tooltip" style="padding: 2px 8px;" v-on:click="deleteEgresado(props.row.IDEgresado)" data-placement="left" title="Eliminar"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                                <button data-target="#exampleModal" class="btn btn-info" data-toggle="modal" style="padding: 2px 8px;" v-on:click="edit(props.row.IDEgresado,props.row.Codigo,props.row.DNI,props.row.Paterno,props.row.Materno,props.row.Celular,props.row.Ingreso,props.row.Egreso,props.row.Nombre,props.row.Genero,props.row.Correo,props.row.IDEscuela)" data-placement="left" title="Editar"><i class="fas fa-edit" style="color: white" aria-hidden="true"></i></button>
+                                <button class="btn btn-danger" data-toggle="tooltip" style="padding: 2px 4px; font-size: 11px;" v-on:click="deleteEgresado(props.row.IDEgresado)" data-placement="left" title="Eliminar"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                <button data-target="#exampleModal" class="btn btn-info" data-toggle="modal" style="padding: 2px 4px; font-size: 11px;" v-on:click="edit(props.row.IDEgresado,props.row.Codigo,props.row.DNI,props.row.Paterno,props.row.Materno,props.row.Celular,props.row.Ingreso,props.row.Egreso,props.row.Nombre,props.row.Genero,props.row.Correo,props.row.IDEscuela)" data-placement="left" title="Editar"><i class="fas fa-edit" style="color: white" aria-hidden="true"></i></button>
                                 </div>
                             </v-client-table>
                         </div>

@@ -18,7 +18,7 @@
 	                </div>
                     <div class="col-md-4"><label><mark style="background-color: #dc354526; color: #520606f7">- (*) Llenar datos obligatoriamente.</mark></label></div>
                     
-                    <div class="col-md-4"><label><mark style="background-color: #dc354526; color: #520606f7">- Primero realizar la búsqueda del bachiller.</mark></label></div>
+                    <div class="col-md-4" id="labelInicio"><label><mark style="background-color: #dc354526; color: #520606f7">- Primero realizar la búsqueda del bachiller.</mark></label></div>
                     
 					<div class="card-body">
                         <fieldset class="border p-2">
@@ -96,14 +96,14 @@
                                 <label>Nombre Tesis(*)</label>
                                 </div>
                                 <div class="col-md-9">
-                                    <input type="text" v-model="expedito.tesis" onKeyPress="return soloLetras(event)" maxlength="200" class="form-control form-control-sm">
+                                    <input type="text" v-model="expedito.tesis" onKeyPress="return soloTesis(event)" maxlength="300" class="form-control form-control-sm">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <div class="col-md-2 text-left">
                                 <label>Asesor(*)</label>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-9">
                                     <select v-model="expedito.asesor" class="form-control form-control-sm">
                                         <option v-for="d in docentes" :key="d.DNI" :value="d.DNI">
                                             {{d.Nombres}} {{d.Apellidos}}
@@ -119,13 +119,15 @@
                                     <select v-model="expedito.calificacion" class="form-control form-control-sm">
                                         <option value="SOBRESALIENTE">SOBRESALIENTE</option>
                                         <option value="UNANIMIDAD">UNANIMIDAD</option>
+                                        <option value="MAYORIA">MAYORIA</option>
+                                        <option value="DESAPROBADO">DESAPROBADO</option>
                                     </select>
                                 </div>
                                 <div class="col-md-3 text-left">
                                 <label>Fecha sustentación(*)</label>
                                 </div>
                                 <div class="col-md-3">
-                                    <input type="date" v-model="expedito.sustentacion" class="form-control form-control-sm">
+                                    <input type="date" v-model="expedito.sustentacion" @change="validafecha()" class="form-control form-control-sm">
                                 </div>
                             </div>
                         </fieldset>
@@ -155,11 +157,11 @@
                              <div class="form-group row">
                                 
                                 <div class="col-md-4">
-                                    <label><input type="checkbox" name="check" >   Tesis PDF</label>
+                                    <label><input type="checkbox" id="chbx1" name="check" >   Tesis PDF</label>
                                 </div>
 
                                 <div class="col-md-4">
-                                    <label><input type="checkbox" name="check" >   Autorización de publicación</label>
+                                    <label><input type="checkbox" id="chbx2" name="check" >   Autorización de publicación</label>
                                 </div>
                                 
                             </div> 
@@ -167,11 +169,11 @@
                             <div class="form-group row">
                                 
                                 <div class="col-md-4">
-                                    <label><input type="checkbox" name="check" >   Constancia antiplagio</label>
+                                    <label><input type="checkbox" id="chbx3" name="check" >   Constancia antiplagio</label>
                                 </div>
 
                                 <div class="col-md-4">
-                                    <label><input type="checkbox" name="check" >   Constancia URL</label>
+                                    <label><input type="checkbox" id="chbx4" name="check" >   Constancia URL</label>
                                 </div>
                                 
                             </div>
@@ -191,13 +193,13 @@
                                     <label>Const. Matrícula(*)</label>
                                 </div>
                                 <div class="col-md-4">
-                                    <input type="file" id="matricula" @change="validarMatricula" class="form-control form-control-sm">
+                                    <input type="file" id="matricula" @change="validarMatricula" class="form-control form-control-sm" accept="application/pdf"> 
                                 </div>
                                 <div class="col-md-2">
                                 <label>Const. Egresado(*)</label>
                                 </div>
                                 <div class="col-md-4">
-                                    <input type="file" id="egresado"  @change="validarEgresado" class="form-control form-control-sm">
+                                    <input type="file" id="egresado"  @change="validarEgresado" class="form-control form-control-sm" accept="application/pdf">
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -205,13 +207,13 @@
                                 <label>Arch. Tesis PDF(*)</label>
                                 </div>
                                 <div class="col-md-4">
-                                    <input type="file" id="tesis" @change="validarTesis" class="form-control form-control-sm">
+                                    <input type="file" id="tesis" @change="validarTesis" class="form-control form-control-sm" accept="application/pdf">
                                 </div>
                                 <div class="col-md-2">
                                 <label>Arch. Tesis Word(*)</label>
                                 </div>
                                 <div class="col-md-4">
-                                    <input type="file" id="word" @change="validarWord" class="form-control form-control-sm">
+                                    <input type="file" id="word" @change="validarWord" class="form-control form-control-sm" accept=".doc, .docx">
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -219,7 +221,7 @@
                                 <label>Foto(*)</label>
                                 </div>
                                 <div class="col-md-4">
-                                    <input type="file" id="foto" @change="validarFoto" class="form-control form-control-sm">
+                                    <input type="file" id="foto" @change="validarFoto" class="form-control form-control-sm" accept="image/jpeg">
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -240,13 +242,13 @@
                             <div class="form-group row">
                                 <label for="ingreso" class="col-md-4 col-form-label">Fecha de Ingreso de la solicitud(*)</label>
                                 <div class="col-md-3">
-                                    <input type="date" id="ingreso" v-model="expedito.ingreso" onKeyPress="return soloNumeros(event)" maxlength="3" class="form-control form-control-sm">
+                                    <input type="date" max="2030-12-31" id="ingreso" v-model="expedito.ingreso" @change="validafecha()" onKeyPress="return soloNumeros(event)" maxlength="3" class="form-control form-control-sm">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="comienzo" class="col-md-4 col-form-label">Fecha que empieza el trámite </label>
                                 <div class="col-md-3">
-                                    <input type="date" id="comienzo" v-model="expedito.comienzo" class="form-control form-control-sm">
+                                    <input type="date" max="2030-12-31" id="comienzo" v-model="expedito.comienzo" @change="validafecha()" class="form-control form-control-sm">
                                 </div>
                             </div>
                         </fieldset>
@@ -321,11 +323,11 @@
                             <div class="content table-responsive table-full-width t12">
                                 <v-client-table :data="expeditos" :columns="columns" :options="options">
                                     <div slot="Acciones" slot-scope="props">
-                                        <button v-if="props.row.Estado == 'PENDIENTE'" v-on:click="estado(props.row.IDExpedito,1)" class="btn btn-danger" data-toggle="tooltip" data-placement="left" >Pendiente</button>
-                                        <button v-if="props.row.Estado == 'EN PROCESO'" v-on:click="estado(props.row.IDExpedito,2)"  class="btn btn-warning" data-toggle="tooltip" data-placement="left" >En Proceso</button>
-                                        <button v-if="props.row.Estado == 'FINALIZADO'"  class="btn btn-success" data-toggle="tooltip" data-placement="left" >Finalizado</button>
-                                       <button class="btn btn-info" v-on:click="edit(props.row.IDExpedito,props.row.Tipo,props.row.CodigoAlumno,props.row.Tomo,props.row.Folio,props.row.Asiento,props.row.NumSesion,props.row.FechaIngreso,props.row.FechaComienzo,props.row.IDSesion,props.row.Fecha,props.row.Escuela,props.row.Alumno,props.row.DNI,props.row.IDModalidad,props.row.Modalidad,props.row.NombreTesis,props.row.Asesor,props.row.Calificacion,props.row.FechaT)" data-placement="left" title="Editar"><i class="fas fa-edit" style="color: white" aria-hidden="true"></i></button>
-                                        <router-link v-if="props.row.Estado == 'FINALIZADO'" class="btn btn-success" target="_blank" :to="'/oficio/'+props.row.IDExpedito" data-toggle="tooltip"  data-placement="left" title="Ver Acta"><i class="far fa-file-pdf" aria-hidden="true"></i></router-link>
+                                        <button v-if="props.row.Estado == 'PENDIENTE'" v-on:click="estado(props.row.IDExpedito,1)" class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Hacer click para cambiar de estado" style="padding: 2px 6px; font-size: 11px;">Pendiente   </button>
+                                        <button v-if="props.row.Estado == 'EN PROCESO'" v-on:click="estado(props.row.IDExpedito,2)"  class="btn btn-warning" data-toggle="tooltip" data-placement="left" title="Hacer click para cambiar de estado" style="padding: 2px 8px; font-size: 11px;">En Proceso</button>
+                                        <button v-if="props.row.Estado == 'FINALIZADO'"  class="btn btn-success" data-toggle="tooltip" data-placement="left" title="Estado final" style="padding: 2px 8px; font-size: 11px;">Finalizado  </button>
+                                       <button class="btn btn-primary" v-on:click="edit(props.row.IDExpedito,props.row.Tipo,props.row.CodigoAlumno,props.row.Tomo,props.row.Folio,props.row.Asiento,props.row.NumSesion,props.row.FechaIngreso,props.row.FechaComienzo,props.row.IDSesion,props.row.Fecha,props.row.Escuela,props.row.Alumno,props.row.DNI,props.row.IDModalidad,props.row.Modalidad,props.row.NombreTesis,props.row.Asesor,props.row.Calificacion,props.row.FechaT)" data-placement="left" title="Editar" style="padding: 2px 5px; font-size: 12px;"><i class="fas fa-edit" style="color: white" aria-hidden="true"></i></button>
+                                        <router-link v-if="props.row.Estado == 'FINALIZADO'" class="btn btn-info" target="_blank" :to="'/oficio2/'+props.row.IDExpedito" data-toggle="tooltip"  data-placement="left" title="Ver oficio" style="padding: 2px 8px; font-size: 12px; color: white;"><i class="far fa-file-pdf" aria-hidden="true"></i></router-link>
                                         <!-- <button class="btn btn-success" data-toggle="tooltip" v-on:click="edit(props.row.IDExpedito)" data-placement="left" title="Acta"><i class="far fa-file-pdf" style="color: white" aria-hidden="true"></i></button> -->
                                     </div>
                                 </v-client-table>
@@ -386,10 +388,10 @@
                 CodigoAlumno: null,
                 Acta: null,
                 NumSesion: null,
-                FechaIngreso: null,
-                FechaComienzo: null,
+                FechaIngresoAux: null,
+                FechaComienzoAux: null,
                 Estado: null,
-                Fecha: null,
+                FechaAux: null,
                 Alumno: null,
                 IDModalidad: null,
                 Modalidad: null,
@@ -398,20 +400,20 @@
                 Calificacion: null,
                 FechaT:null
             }],
-            columns: ["Alumno","Acta","NumSesion","Fecha","FechaIngreso","FechaComienzo","Acciones"],
+            columns: ["Alumno","Acta","NumSesion","FechaAux","FechaIngresoAux","FechaComienzoAux","Acciones"],
             options: {
 				headings:
 				{
                     CodigoAlumno: "Código",
                     NumSesion: "Sesión",
-                    FechaIngreso: "Ingreso trámite",
-                    FechaComienzo: "Comienzo trámite",
-                    Fecha: "Fecha Sesión",
-                    Alumno: "Egresado",
-                    Acta: "   T-F-A-M   "
+                    FechaIngresoAux: "Ingr. trámite",
+                    FechaComienzoAux: "Inic. trámite",
+                    FechaAux: "F. Sesión",
+                    Alumno: "Nombre Completo",
+                    Acta: "   T/F/A/M   "
 				},
-				sortable    : ["Alumno","Acta","NumSesion","Fecha","FechaIngreso","FechaComienzo",],
-				filterable  : ["Alumno","Acta","NumSesion","Fecha","FechaIngreso","FechaComienzo",]
+				sortable    : ["Alumno","Acta","NumSesion","FechaAux","FechaIngresoAux","FechaComienzoAux",],
+				filterable  : ["Alumno","Acta","NumSesion","FechaAux","FechaIngresoAux","FechaComienzoAux",]
             },
         }
 	},
@@ -452,6 +454,55 @@
                 console.log(error);
             })
         },
+        validafecha()
+        {
+            
+            if(this.expedito.ingreso !=null)
+            {
+                var inicio = this.expedito.ingreso;
+                var final  = '2022-01-01';
+                if(final<=inicio)
+                {
+                    swal({
+                        type: 'warning',
+                        title: 'Ingresar una fecha correcta',
+                       
+                    });
+                    this.expedito.ingreso = null;
+                }
+            }
+             if(this.expedito.comienzo !=null)
+            {
+                var inicio = this.expedito.comienzo;
+                var final  = '2026-01-01';
+                if(final<=inicio)
+                {
+                    swal({
+                        type: 'warning',
+                        title: 'Ingresar una fecha correcta',
+                       
+                    });
+                    this.expedito.comienzo = null;
+                }
+            }
+
+            if(this.expedito.sustentacion !=null)
+            {
+                var inicio = this.expedito.sustentacion;
+                var final  = '2026-01-01';
+                if(final<=inicio)
+                {
+                    swal({
+                        type: 'warning',
+                        title: 'Ingresar una fecha correcta',
+                       
+                    });
+                    this.expedito.sustentacion = null;
+                }
+            }
+            
+            
+        },
         buscar(d,c,a)
         {
             if(d == '') d = null;
@@ -485,6 +536,11 @@
             this.expedito.tomo        = null;
             this.expedito.folio       = null;
             this.expedito.asiento     = null;
+            this.expedito.tesis       = null;
+            this.expedito.sustentacion= null;
+            this.expedito.calificacion= null;
+            this.expedito.asesor      = null;
+            this.expedito.modalidad   = null;
             this.expedito.sesion      = null;
             this.expedito.sfecha      = null;
             this.expedito.stipo       = null;
@@ -555,20 +611,21 @@
             })
 		},
 		addExpedito()
-		{
-           
+		{          
             if( this.expedito.codigo==null || this.expedito.dni==null ||
                 this.expedito.alumno==null || this.expedito.carrera==null ||
                 this.expedito.tomo==null || this.expedito.folio==null || this.expedito.asiento==null ||
                 this.expedito.sesion==null || this.expedito.sfecha==null || this.expedito.stipo==null ||
                 this.expedito.ingreso==null || this.archivos.foto == null || this.archivos.egresado == null || 
-                this.archivos.matricula == null || this.archivos.tesis == null || this.archivos.word==null)
+                this.archivos.matricula == null || this.archivos.tesis == null || this.archivos.word==null || this.expedito.tesis== null || this.expedito.sustentacion == null || this.expedito.calificacion == null || this.expedito.asesor == null || this.expedito.modalidad  == null)
             {
                 swal({
-					type: 'error',
-					title: 'Llenar los datos obligatorios',
+					type: 'warning',
+                    title: 'Llenar los datos obligatorios',
+                    timer: 3000
 				});
             }else{
+                
                 this.$Progress.start();
                 axios.post("addExpeditoT",{
                     expedito:this.expedito,
@@ -592,8 +649,8 @@
                     console.log(error);	
                     swal({
                         type: 'error',
-                        title: 'Error',
-                        text: 'Comuniquese con un administrador',
+                        //title: 'Error',
+                        text: 'Ocurrió un problema, comuníquese con un administrador',
                         showConfirmButton: true,
                     });
                 })
@@ -613,6 +670,7 @@
                 $('#editar').hide();
                 $('#menos').show();
                 $('#mas').hide();
+                $('#labelInicio').show();
 			}
 			else if(id == '2')
 			{
@@ -624,6 +682,7 @@
                 $('#expeditos').show();	
                 $('#menos').hide();
                 $('#mas').show();
+                $('#labelInicio').hide();
 			}
 			
         },
@@ -926,7 +985,7 @@
                 this.expedito.alumno==null || this.expedito.carrera==null ||
                 this.expedito.tomo==null || this.expedito.folio==null || this.expedito.asiento==null ||
                 this.expedito.sesion==null || this.expedito.sfecha==null || this.expedito.stipo==null ||
-                this.expedito.ingreso==null)
+                this.expedito.ingreso==null || this.expedito.tesis== null || this.expedito.sustentacion == null || this.expedito.calificacion == null || this.expedito.asesor == null || this.expedito.modalidad  == null)
             {
                 swal({
                     type: 'warning',
