@@ -12,7 +12,7 @@
 	            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
-                        <div class="modal-header text-center bg-secondary" style="background-color: #007bff55 !important; color:black; font-weight: bold;">
+                        <div class="modal-header text-center bg-secondary" style="background-color: #007bff55 !important; color:black !important; font-weight: bold;">
                             <h5 class="modal-titler" id="exampleModalLabel">Datos Sesión</h5>
                             <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
@@ -21,7 +21,7 @@
                         <div class="modal-body">
                             <div class="row">
                                 <div class="col-md-2 text-left">
-                                        <label>Nro. Sesión*</label>
+                                        <label>Número Sesión*</label>
                                 </div>
                                 <div class="col-md-3">
                                     <input v-model="sesion.sesion" type="text" maxlength="3" class="form-control" onKeyPress="return solonumeros(event)">
@@ -45,9 +45,15 @@
                                     </select>
                                 </div>
                             </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-12 text-left">
+                                    <label>* Campos obligatorios</label>
+                                </div>                                
+                            </div>
                         <div class="modal-footer">
                             <button @click="addSesion(1)" id="add" class="btn btn-success">Guardar <i class="fa fa-save"></i></button>
-                            <button @click="addSesion(2)" id="editar" class="btn btn-success">Editar <i class="far fa-edit"></i></button>
+                            <button @click="addSesion(2)" id="editar" class="btn btn-success">Guardar <i class="fa fa-save"></i></button>
                             <button type="button" class="btn btn-danger" @click="load()" data-dismiss="modal">Cancelar <i class="fas fa-times"></i></button>
                         </div>
                         </div>

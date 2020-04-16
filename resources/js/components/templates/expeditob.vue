@@ -530,6 +530,7 @@
 		addExpedito(e)
 		{
            
+           
             if( this.expedito.codigo==null || this.expedito.dni==null ||
                 this.expedito.alumno==null || this.expedito.carrera==null ||
                 this.expedito.tomo==null || this.expedito.folio==null || this.expedito.asiento==null ||

@@ -290,7 +290,7 @@
                             </div>
                           
                             <div class="form-group row">
-                                <label for="nombre1" class="col-md-2 col-form-label">Egresado: </label>
+                                <label for="nombre1" class="col-md-2 col-form-label">Bachiller: </label>
                                 <div class="col-md-10">
                                     <input type="text" v-model="alumnos.Nombres" readonly class="form-control form-control-sm">
                                 </div>
@@ -612,12 +612,20 @@
 		},
 		addExpedito()
 		{          
+            var chbx1 = $("#chbx1").is(":checked");
+            var chbx2 = $("#chbx2").is(":checked");
+            var chbx3 = $("#chbx3").is(":checked");
+            var chbx4 = $("#chbx4").is(":checked");
+            var IsConsistent = chbx1 && chbx2 && chbx3 && chbx4;
             if( this.expedito.codigo==null || this.expedito.dni==null ||
                 this.expedito.alumno==null || this.expedito.carrera==null ||
                 this.expedito.tomo==null || this.expedito.folio==null || this.expedito.asiento==null ||
                 this.expedito.sesion==null || this.expedito.sfecha==null || this.expedito.stipo==null ||
                 this.expedito.ingreso==null || this.archivos.foto == null || this.archivos.egresado == null || 
-                this.archivos.matricula == null || this.archivos.tesis == null || this.archivos.word==null || this.expedito.tesis== null || this.expedito.sustentacion == null || this.expedito.calificacion == null || this.expedito.asesor == null || this.expedito.modalidad  == null)
+                this.archivos.matricula == null || this.archivos.tesis == null || this.archivos.word == null || 
+                this.expedito.tesis== null || this.expedito.sustentacion == null || 
+                this.expedito.calificacion == null || this.expedito.asesor == null || 
+                this.expedito.modalidad  == null )
             {
                 swal({
 					type: 'warning',
@@ -625,7 +633,15 @@
                     timer: 3000
 				});
             }else{
-                
+                if(!IsConsistent) 
+                {
+                    swal({
+                        type: 'warning',
+                    title: 'Marcar todos los checkbox para continuar',
+                    timer: 3000
+                    });
+                    return;
+                }
                 this.$Progress.start();
                 axios.post("addExpeditoT",{
                     expedito:this.expedito,

@@ -21,7 +21,7 @@
                         <div class="modal-body">
                             <div class="row">
                                 <div class="col-md-4 text-left">
-                                    <label>Decano(*)</label>
+                                    <label>Decano*</label>
                                 </div>
                                 <div class="col-md-8">
                                     <select v-model="decano.decano" class="form-control">
@@ -34,7 +34,7 @@
                             <br>
                             <div class="row">
                                 <div class="col-md-4 text-left">
-                                    <label>Fecha Inicio(*)</label>
+                                    <label>Fecha Inicio*</label>
                                 </div>
                                 <div class="col-md-8">
                                     <input v-model="decano.inicio" @change="validafecha()" type="date" class="form-control">
@@ -43,15 +43,21 @@
                             <br>
                             <div class="row">
                                 <div class="col-md-4 text-left">
-                                    <label>Fecha Fin(*)</label>
+                                    <label>Fecha Fin*</label>
                                 </div>
                                 <div class="col-md-8">
                                     <input v-model="decano.fin" @change="validafecha()" type="date" class="form-control">
                                 </div>    
                             </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-12 text-left">
+                                    <label>* Campos obligatorios</label>
+                                </div>                                
+                            </div>
                         <div class="modal-footer">
                             <button @click="addDecano(1)" id="add" class="btn btn-success">Guardar <i class="fa fa-save"></i></button>
-                            <button @click="addDecano(2)" id="editar" class="btn btn-success">Editar <i class="far fa-edit"></i></button>
+                            <button @click="addDecano(2)" id="editar" class="btn btn-success">Guardar <i class="fa fa-save"></i></button>
                             <button type="button" class="btn btn-danger" @click="load()" data-dismiss="modal">Cancelar <i class="fas fa-times"></i></button>
                         </div>
                         </div>
