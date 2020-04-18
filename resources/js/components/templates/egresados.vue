@@ -13,193 +13,180 @@
           </div>
         </div>
         <div class="card card-default" id="objetivo">
-              <div
-                class="card-header text-center"
-                style="background-color: #007bff55 !important; color:black; font-weight: bold;"
-              >
-                <h4 class="title">EGRESADOS</h4>
-              </div>
-              <div class="col-md-4">
-                <label>
-                * Campos obligatorios
-                </label>
-              </div>
+          <div
+            class="card-header text-center"
+            style="background-color: #007bff55 !important; color:black; font-weight: bold;"
+          >
+            <h4 class="title">EGRESADOS</h4>
+          </div>
+          <div class="col-md-4">
+            <label>* Campos obligatorios</label>
+          </div>
 
-              <div class="card-body">
-                <fieldset class="border p-2">
-                  <legend class="w-auto">Datos Personales</legend>
-                  <div class="form-group row">
-                    
-                      <div class="col-md-1 text-left">
-                        <label>DNI*</label>
-                      </div>
-                      <div class="col-md-3">
-                        <input
-                          v-model="egresado.dni"
-                          maxlength="8"
-                          onkeypress="return soloNumeros(event)"
-                          class="form-control"
-                        />
-                      </div>
-                      <div class="col-md-1 text-left">
-                        <label>Código estudiantil*</label>
-                      </div>
-                      <div class="col-md-3">
-                        <input
-                          v-model="egresado.codigo"
-                          maxlength="10"
-                          onkeypress="return soloNumeros(event)"
-                          class="form-control"
-                        />
-                      </div>
-                      <div class="col-md-1 text-left">
-                        <label>Género*</label>
-                      </div>
-                      <div class="col-md-3">
-                        <select class="form-control" v-model="egresado.genero">   
-                          <!-- <option :value="null" disabled>Seleccionar una opción</option>-->
-                          <option value="M">Masculino</option>
-                          <option value="F">Femenino</option>
-                        </select>
-                      </div>
-                  </div>
-                  <div class="form-group row">
-                    
-                      <div class="col-md-1 text-left">
-                        <label>Nombres*</label>
-                      </div>
-                      <div class="col-md-3">
-                        <input
-                          v-model="egresado.nombre"
-                          maxlength="41"
-                          class="form-control"
-                          onkeypress="return soloLetras(event)"
-                        />
-                      </div>
-                      <div class="col-md-1 text-left">
-                        <label>Apellido paterno*</label>
-                      </div>
-                      <div class="col-md-3">
-                        <input
-                          v-model="egresado.paterno"
-                          maxlength="41"
-                          onkeypress="return soloLetras(event)"
-                          class="form-control"
-                        />
-                      </div>
-                      <div class="col-md-1 text-left">
-                        <label>Apellido materno*</label>
-                      </div>
-                      <div class="col-md-3">
-                        <input
-                          v-model="egresado.materno"
-                          maxlength="41"
-                          onkeypress="return soloLetras(event)"
-                          class="form-control"
-                        />
-                      </div>
-                  </div>
-                </fieldset>
-                <fieldset class="border p-2">
-                  <legend class="w-auto">Datos Adicionales</legend>
-                  <div class="form-group row">
-                      <div class="col-md-1 text-left">
-                        <label>Celular</label>
-                      </div>
-                      <div class="col-md-3">
-                        <input
-                          v-model="egresado.celular"
-                          maxlength="9"
-                          onkeypress="return soloNumeros(event)"
-                          class="form-control"
-                        />
-                      </div>
-                      <div class="col-md-1 text-left">
-                        <label>Correo electrónico</label>
-                      </div>
-                      <div class="col-md-5">
-                        <input
-                          v-model="egresado.correo"
-                          type="email"
-                          onkeypress="return soloEmail(event)"
-                          maxlength="50"
-                          class="form-control"
-                        />
-                      </div>
-                  </div>
-                </fieldset>
-                <fieldset class="border p-2">
-                  <legend class="w-auto">Datos Académicos</legend>
-                  <div class="form-group row">
-                    <div class="col-md-1 text-left">
-                      <label>Año ingreso*</label>
-                    </div>
-                    <div class="col-md-3">
-                      <select
-                        class="form-control"
-                        v-model="egresado.ingreso"
-                        @change="validaFecha()"
-                      >
-                        <option v-for="a in anios" :key="a" :value="a">{{a}}</option>
-                      </select>
-                    </div>
-                    <div class="col-md-1 text-left">
-                      <label>Año egreso*</label>
-                    </div>
-                    <div class="col-md-3">
-                      <select
-                        class="form-control"
-                        v-model="egresado.egreso"
-                        @change="validaFecha()"
-                      >
-                        <option v-for="a in anios" :key="a" :value="a">{{a}}</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <div class="col-md-1 text-left">
-                      <label>Carrera Profesional*</label>
-                    </div>
-                    <div class="col-md-7">
-                      <select v-model="egresado.escuela" class="form-control">
-                        <option
-                          v-for="e in escuelas"
-                          :key="e.IDEscuela"
-                          :value="e.IDEscuela"
-                        >{{e.Escuela}}</option>
-                      </select>
-                    </div>
-                  </div>
-                </fieldset>
-
-                <br />
-                <div class="row">
-                  <div class="col-md-4" style="text-align: center;"></div>
-                  <div class="col-md-2" id="guardar" style="text-align: center;">
-                    <button class="btn btn-success" @click="addEgresado(1)">
-                      Guardar
-                      <i class="fa fa-save"></i>
-                    </button>
-                  </div>
-                  <div class="col-md-2" id="editar" style="text-align: center;">
-                    <button class="btn btn-success" @click="addEgresado(2)">
-                      Guardar
-                      <i class="fa fa-save"></i>
-                    </button>
-                  </div>
-                  <div class="col-md-2" style="text-align: center;">
-                    <button class="btn btn-danger" @click="cancelar()">
-                      Cancelar
-                      <i class="fas fa-times"></i>
-                    </button>
-                  </div>
-                  <div class="col-md-4" style="text-align: center;"></div>
+          <div class="card-body">
+            <fieldset class="border p-2">
+              <legend class="w-auto">Datos Personales</legend>
+              <div class="form-group row">
+                <div class="col-md-1 text-left">
+                  <label>DNI*</label>
                 </div>
-                
+                <div class="col-md-3">
+                  <input
+                    v-model="egresado.dni"
+                    maxlength="8"
+                    onkeypress="return soloNumeros(event)"
+                    class="form-control"
+                  />
+                </div>
+                <div class="col-md-1 text-left">
+                  <label>Código estudiantil*</label>
+                </div>
+                <div class="col-md-3">
+                  <input
+                    v-model="egresado.codigo"
+                    maxlength="10"
+                    onkeypress="return soloNumeros(event)"
+                    class="form-control"
+                  />
+                </div>
+                <div class="col-md-1 text-left">
+                  <label>Género*</label>
+                </div>
+                <div class="col-md-3">
+                  <select class="form-control" v-model="egresado.genero">
+                    <!-- <option :value="null" disabled>Seleccionar una opción</option>-->
+                    <option value="M">Masculino</option>
+                    <option value="F">Femenino</option>
+                  </select>
+                </div>
               </div>
-            </div>        
+              <div class="form-group row">
+                <div class="col-md-1 text-left">
+                  <label>Nombres*</label>
+                </div>
+                <div class="col-md-3">
+                  <input
+                    v-model="egresado.nombre"
+                    maxlength="41"
+                    class="form-control"
+                    onkeypress="return soloLetras(event)"
+                  />
+                </div>
+                <div class="col-md-1 text-left">
+                  <label>Apellido paterno*</label>
+                </div>
+                <div class="col-md-3">
+                  <input
+                    v-model="egresado.paterno"
+                    maxlength="41"
+                    onkeypress="return soloLetras(event)"
+                    class="form-control"
+                  />
+                </div>
+                <div class="col-md-1 text-left">
+                  <label>Apellido materno*</label>
+                </div>
+                <div class="col-md-3">
+                  <input
+                    v-model="egresado.materno"
+                    maxlength="41"
+                    onkeypress="return soloLetras(event)"
+                    class="form-control"
+                  />
+                </div>
+              </div>
+            </fieldset>
+            <fieldset class="border p-2">
+              <legend class="w-auto">Datos Adicionales</legend>
+              <div class="form-group row">
+                <div class="col-md-1 text-left">
+                  <label>Celular</label>
+                </div>
+                <div class="col-md-3">
+                  <input
+                    v-model="egresado.celular"
+                    maxlength="9"
+                    onkeypress="return soloNumeros(event)"
+                    class="form-control"
+                  />
+                </div>
+                <div class="col-md-1 text-left">
+                  <label>Correo electrónico</label>
+                </div>
+                <div class="col-md-5">
+                  <input
+                    v-model="egresado.correo"
+                    type="email"
+                    onkeypress="return soloEmail(event)"
+                    maxlength="50"
+                    class="form-control"
+                  />
+                </div>
+              </div>
+            </fieldset>
+            <fieldset class="border p-2">
+              <legend class="w-auto">Datos Académicos</legend>
+              <div class="form-group row">
+                <div class="col-md-1 text-left">
+                  <label>Año ingreso*</label>
+                </div>
+                <div class="col-md-3">
+                  <select class="form-control" v-model="egresado.ingreso" @change="validaFecha()">
+                    <option v-for="a in anios" :key="a" :value="a">{{a}}</option>
+                  </select>
+                </div>
+                <div class="col-md-1 text-left">
+                  <label>Año egreso*</label>
+                </div>
+                <div class="col-md-3">
+                  <select class="form-control" v-model="egresado.egreso" @change="validaFecha()">
+                    <option v-for="a in anios" :key="a" :value="a">{{a}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-md-1 text-left">
+                  <label>Carrera Profesional*</label>
+                </div>
+                <div class="col-md-7">
+                  <select v-model="egresado.escuela" class="form-control">
+                    <option
+                      v-for="e in escuelas"
+                      :key="e.IDEscuela"
+                      :value="e.IDEscuela"
+                    >{{e.Escuela}}</option>
+                  </select>
+                </div>
+              </div>
+            </fieldset>
+
+            <br />
+            <div class="row">
+              <div class="col-md-4" style="text-align: center;"></div>
+              <div class="col-md-2" id="guardar" style="text-align: center;">
+                <button class="btn btn-success" @click="addEgresado(1)">
+                  Guardar
+                  <i class="fa fa-save"></i>
+                </button>
+              </div>
+              <div class="col-md-2" id="editar" style="text-align: center;">
+                <button class="btn btn-success" @click="addEgresado(2)">
+                  Guardar
+                  <i class="fa fa-save"></i>
+                </button>
+              </div>
+              <div class="col-md-2" style="text-align: center;">
+                <button class="btn btn-danger" @click="cancelar()">
+                  Cancelar
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+              <div class="col-md-4" style="text-align: center;"></div>
+            </div>
+          </div>
         </div>
       </div>
+    </div>
 
     <div class="row t12" id="egresados">
       <div class="col-md-12">
@@ -208,40 +195,39 @@
             class="card-header text-center"
             style="background-color: #007bff55 !important; color:black; font-weight: bold;"
           >
-            <h4 class="title">EXPEDITOS BACHILLER</h4>
+            <h4 class="title">EGRESADOS</h4>
           </div>
           <div class="card-body">
             <div class="content table-responsive table-full-width">
-                  <v-client-table :data="egresados" :columns="columns" :options="options">
-                    <div slot="Acciones" slot-scope="props">
-                      <button
-                        class="btn btn-danger"
-                        data-toggle="tooltip"
-                        style="padding: 2px 4px; font-size: 11px;"
-                        v-on:click="deleteEgresado(props.row.IDEgresado)"
-                        data-placement="left"
-                        title="Eliminar"
-                      >
-                        <i class="fa fa-trash" aria-hidden="true"></i>
-                      </button>
-                      <button                        
-                        class="btn btn-info"
-                        style="padding: 2px 4px; font-size: 11px;"
-                        v-on:click="edit(props.row.IDEgresado,props.row.Codigo,props.row.DNI,props.row.Paterno,props.row.Materno,props.row.Celular,props.row.Ingreso,props.row.Egreso,props.row.Nombre,props.row.Genero,props.row.Correo,props.row.IDEscuela)"
-                        data-placement="left"
-                        title="Editar"
-                      >
-                        <i class="fas fa-edit" style="color: white" aria-hidden="true"></i>
-                      </button>
-                    </div>
-                  </v-client-table>
+              <v-client-table :data="egresados" :columns="columns" :options="options">
+                <div slot="Acciones" slot-scope="props">
+                  <button
+                    class="btn btn-danger"
+                    data-toggle="tooltip"
+                    style="padding: 2px 4px; font-size: 11px;"
+                    v-on:click="deleteEgresado(props.row.IDEgresado)"
+                    data-placement="left"
+                    title="Eliminar"
+                  >
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                  </button>
+                  <button
+                    class="btn btn-info"
+                    style="padding: 2px 4px; font-size: 11px;"
+                    v-on:click="edit(props.row.IDEgresado,props.row.Codigo,props.row.DNI,props.row.Paterno,props.row.Materno,props.row.Celular,props.row.Ingreso,props.row.Egreso,props.row.Nombre,props.row.Genero,props.row.Correo,props.row.IDEscuela)"
+                    data-placement="left"
+                    title="Editar"
+                  >
+                    <i class="fas fa-edit" style="color: white" aria-hidden="true"></i>
+                  </button>
                 </div>
+              </v-client-table>
+            </div>
           </div>
         </div>
       </div>
     </div>
- </div>
-   
+  </div>
 </template>
 <script>
 export default {
@@ -348,17 +334,17 @@ export default {
         });
     },
     cancelar() {
-      this.egresado.dni=null;
-      this.egresado.codigo=null;
-      this.egresado.nombre=null;
-      this.egresado.paterno=null;
-      this.egresado.materno=null;
-      this.egresado.genero=null;
-      this.egresado.celular=null;
-      this.egresado.correo=null;
-      this.egresado.ingreso=null;
-      this.egresado.egreso=null;
-      this.egresado.escuela=null;
+      this.egresado.dni = null;
+      this.egresado.codigo = null;
+      this.egresado.nombre = null;
+      this.egresado.paterno = null;
+      this.egresado.materno = null;
+      this.egresado.genero = null;
+      this.egresado.celular = null;
+      this.egresado.correo = null;
+      this.egresado.ingreso = null;
+      this.egresado.egreso = null;
+      this.egresado.escuela = null;
       $("#objetivo").hide();
       $("#egresados").show();
       $("#menos").hide();

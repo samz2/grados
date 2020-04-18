@@ -16,7 +16,24 @@
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<style>
+<style>     
+
+.subir{
+    padding: 2px 30px;
+    background: #00caa9;
+    color:#fff;
+    border:0px solid #fff;
+
+    border-radius: 131px 131px 131px 131px;
+    -moz-border-radius: 131px 131px 131px 131px;
+    -webkit-border-radius: 131px 131px 131px 131px;
+    border: 0px solid #000000;
+}
+ 
+.subir:hover{
+    color:#fff;
+    background: #f7cb15;
+}
   .blanco
   {
     color: #ffffff;
@@ -297,7 +314,8 @@
 <!-- ./wrapper -->
 
 <!-- jQuery -->
-<script src="plugins/jquery/jquery.min.js"></script>
+<script src="plugins/jquery/jquery.min.js">
+</script>
 <!-- jQuery UI 1.11.4 -->
 {{-- <script src="plugins/jquery-ui/jquery-ui.min.js"></script> --}}
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
@@ -309,15 +327,52 @@
 <!-- ChartJS -->
 <script src="dist/js/adminlte.js"></script>
 <script src="{{ asset('js/app.js') }}" defer></script>
+
 <script type="text/javascript">
-  // Solo permite ingresar numeros.
-  function soloNumeros(e){
-    var key = window.Event ? e.which : e.keyCode
-    return (key >= 48 && key <= 57)
-  }
   
+
 </script>
+
+
 <script type="text/javascript">
+
+  const realFileBtn = document.getElementById("real-file");
+  const customBtn = document.getElementById("custom-button");
+  const customTxt = document.getElementById("custom-text");
+
+customBtn.addEventListener("click", function() {
+  realFileBtn.click();
+});
+
+realFileBtn.addEventListener("change", function() {
+  if (realFileBtn.value) {
+    customTxt.innerHTML = realFileBtn.value.match(/[\/\\]([\w\d\s\.\-\(\)]+)$/)[1];
+  } else {
+    customTxt.innerHTML = "No file chosen, yet.";
+  }
+});
+
+
+function cambiarMatriculaBachiller(){
+    var pdrs = document.getElementById('matricula').files[0].name;
+    document.getElementById('info').innerHTML = pdrs;
+}
+function cambiarEgresadoBachiller(){
+    var pdrs = document.getElementById('egresado').files[0].name;
+    document.getElementById('info2').innerHTML = pdrs;
+}
+function cambiarFotoBachiller(){
+    var pdrs = document.getElementById('foto').files[0].name;
+    document.getElementById('info3').innerHTML = pdrs;
+}
+
+function cambiarCancelarBachiller(){
+    //var pdrs = document.getElementById('file-upload').files[0].name;
+    document.getElementById('info').innerHTML = 'Ningún archivo seleccionado';
+    document.getElementById('info2').innerHTML = 'Ningún archivo seleccionado';
+    document.getElementById('info3').innerHTML = 'Ningún archivo seleccionado';
+}
+
   function solonumeros(event)
   {
     return event.charCode >= 48 && event.charCode <= 57
@@ -382,6 +437,8 @@
             return false;
         }
     }
+    
+    
 
     function soloCodigoDocente(e){
        key = e.keyCode || e.which;
@@ -430,6 +487,8 @@
   {
     return ((event.charCode >= 48 && event.charCode <= 57) || event.charCode == 45)
   }
+
+
 </script>	
 </body>
 </html>
