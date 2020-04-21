@@ -11,9 +11,23 @@ import swal from 'sweetalert2';
 import { ServerTable, ClientTable, Event } from 'vue-tables-2';
 import vSelect from 'vue-select';
 
+const options = {
+  color: '#bffaf3',
+  failedColor: '#874b4b',
+  thickness: '5px',
+  transition: {
+    speed: '0.2s',
+    opacity: '0.6s',
+    termination: 300
+  },
+  autoRevert: true,
+  location: 'left',
+  inverse: false
+}
 window.Vue = require('vue');
 window.swal = swal;
 Vue.use(ClientTable);
+Vue.use(VueProgressBar, options);
 Vue.use(VueRouter);
 
 const routes = [
@@ -31,20 +45,7 @@ const routes = [
     { path: '/modalidad', component: require('./components/admin/modalidad.vue').default },
     { path: '/sesion', component: require('./components/admin/sesiones.vue').default },
   ];
-const options = {
-  color: '#bffaf3',
-  failedColor: '#874b4b',
-  thickness: '5px',
-  transition: {
-    speed: '0.2s',
-    opacity: '0.6s',
-    termination: 300
-  },
-  autoRevert: true,
-  location: 'left',
-  inverse: false
-}
-Vue.use(VueProgressBar, options);
+
 
 const router = new VueRouter({
     mode: "history",
