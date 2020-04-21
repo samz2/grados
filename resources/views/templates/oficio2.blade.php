@@ -103,11 +103,11 @@
         </table>
         <div class="center t24 negrita timesnewroman">UNIVERSIDAD NACIONAL DE UCAYALI</div>
         <div class="center t16 negrita arial" >FACULTAD DE INGENIERÍA DE SISTEMAS E INGENIERÍA CIVIL</div>
-        <div class="center t16 arial">COMISIÓN DE GRADOS y TÍTULOS - FIS e IC</div><br>
+        <div class="center t16 arial">COMISIÓN DE GRADOS y TÍTULOS - FISeIC</div><br>
         <p class="derecho t15 arial">Pucallpa, {{$dia}} {{"de"}} {{$mes}} del {{$anio}}</p>
-        <div class="izquierdo subrayado negrita arial">OFICIO  No        <b class="t17">/{{$anio}}</b> – UNU-FIS e IC-CG y T</div>
+        <div class="izquierdo subrayado negrita arial">OFICIO  No        <b class="t17">/{{$anio}}</b> – UNU-FISeIC-CG y T</div>
         <div class="izquierdo t15 arial">Señor {{"Ing. Mg."}}</div>
-        <div class="izquierdo t15 arial">{{"ROMEL PINEDO RIOS"}}</div>
+        <div class="izquierdo t15 arial">{{$dato2->Nombre}}</div>
         <div class="izquierdo t15 arial">Decano de la Facultad de Ingeniería de Sistemas e Ingeniería Civil – UNU</div>
         
         <p class="subrayado t15 arial">Presente.-</p>
@@ -116,7 +116,7 @@
             <tr class="izquierdo t15 arial">
                 <td width="80" class="arriba"><b>ASUNTO</b></td>
                 <td width="40" class="arriba"><b>:</b></td>
-                <td class="justificado" style="line-height : 20px;"><b>DECLARACIÓN DE EXPEDITO PARA OBTENCIÓN DEL TÍTULO PROFESIONAL POR {{"TESIS"}} EN {{$dato->Escuela}}</b></td>
+                <td class="justificado" style="line-height : 20px;"><b>DECLARACIÓN DE EXPEDITO PARA OBTENCIÓN DEL TÍTULO PROFESIONAL POR {{$dato->Modalidad}} EN {{$dato->Escuela}}</b></td>
             </tr>
             <tr>
                 <td colspan="3">&nbsp;</td>
@@ -124,7 +124,7 @@
             <tr class="izquierdo t15 arial">
                 <td width="80" class="arriba"><b>REFERENCIA</b></td>
                 <td width="40" class="arriba"><b>:</b></td>
-                <td class="justificado" style="line-height : 20px;"><b>ACTA DE {{$dato->Tipo}} N° {{$dato->NumSesion}} Comisión de Grados y Títulos de la FIS e IC</b></td>
+                <td class="justificado" style="line-height : 20px;"><b>ACTA DE {{$dato->Tipo}} N° {{$dato->NumSesion}} Comisión de Grados y Títulos de la FISeIC ({{$dia}}/{{$mes2}}/{{$anio}})</b></td>
             </tr>
             <tr>
                 <td colspan="3">&nbsp;</td>
@@ -136,7 +136,7 @@
         </table>
         <p class="justificado t15 arial" style="line-height : 20px;"><b class="vacio justificado">aaaaaaaaaaaaaaiaaaaaa</b>Mediante el presente remito adjunto el expediente del Bachiller:
             <b class="justificado">{{$dato->Paterno}} {{$dato->Materno}}, {{ucwords(mb_strtolower($dato->Nombre))}};</b> de la <b class="justificado">Carrera Profesional de {{$dato->Escuela}}</b> en condición de EXPEDITO, 
-            para que se le dé el trámite correspondiente a fin de otorgarle el<b class="justificado"> TÍTULO PROFESIONAL POR {{"TESIS"}}  
+            para que se le dé el trámite correspondiente a fin de otorgarle el<b class="justificado"> TÍTULO PROFESIONAL POR {{$dato->Modalidad}}  
              EN {{$dato->Escuela}}</b>, cuyo registro en el libro de Grados de la Facultad es el siguiente: </p>
         <table class="center centrartabla t15 arial" border="1" cellspacing=0 cellspadding=0>
             <tr>
@@ -180,7 +180,7 @@
                 <td class="center">______________________________</td>
             </tr>
             <tr>
-                <td class="center negrita" style="font-size: 11px">{{"Ing. Mg. DIANA MARGARITA DIAZ ESTRADA"}}</td>
+                <td class="center negrita" style="font-size: 11px">Ing. Mg. {{$dato3->Presidente}}</td>
                 
             </tr>            
         </table>

@@ -29,6 +29,7 @@ const routes = [
     { path: '/comisiones', component: require('./components/admin/comisiones.vue').default },
     { path: '/decano', component: require('./components/admin/decano.vue').default },
     { path: '/modalidad', component: require('./components/admin/modalidad.vue').default },
+    { path: '/calificacion', component: require('./components/admin/calificacion.vue').default },
     { path: '/sesion', component: require('./components/admin/sesiones.vue').default },
   ];
 const options = {
@@ -74,6 +75,7 @@ Vue.component('carrera', require('./components/templates/carrera.vue').default);
 Vue.component('comision', require('./components/templates/comision.vue').default);
 Vue.component('decanos', require('./components/templates/decanos.vue').default);
 Vue.component('modalidades', require('./components/templates/modalidades.vue').default);
+Vue.component('calificaciones', require('./components/templates/calificaciones.vue').default);
 Vue.component('sesiones', require('./components/templates/sesion.vue').default);
 Vue.component('v-select', vSelect);
 

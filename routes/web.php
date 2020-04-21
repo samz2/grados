@@ -79,4 +79,8 @@ Route::post('/addModalidad','ModalidadController@store');
 Route::get('/getModalidades','ModalidadController@index');
 Route::post('/updateModalidad','ModalidadController@update');
 
+Route::post('/addCalificacion','CalificacionController@store');
+Route::get('/getCalificaciones','CalificacionController@index');
+Route::post('/updateCalificacion','CalificacionController@update');
+
 Route::get('{path}', 'HomeController@index');

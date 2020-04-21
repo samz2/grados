@@ -24,7 +24,7 @@
                                         <label>Número Sesión*</label>
                                 </div>
                                 <div class="col-md-3">
-                                    <input v-model="sesion.sesion" type="text" maxlength="3" class="form-control" onKeyPress="return solonumeros(event)">
+                                    <input v-model="sesion.sesion" type="text" maxlength="3" class="form-control" onKeyPress="return soloNumeros(event)">
                                 </div> 
                                 <div class="col-md-2 text-left">
                                     <label>Fecha*</label>

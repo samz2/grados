@@ -28,7 +28,8 @@ class ExpeditobController extends Controller
         ->join("escuela AS esc","e.IDEscuela","esc.IDEscuela")
         ->join("titulacion AS t","expedito.CodigoAlumno","t.CodAlumno")
         ->join("modalidad AS m","t.IDModalidad","m.IDModalidad")
-        ->select("m.*","t.Asesor","t.NombreTesis","t.Calificacion","t.Fecha AS FechaT","expedito.*",\DB::raw("concat_ws('/',expedito.Tomo,expedito.Folio,expedito.Asiento,m.Modalidad) AS Acta"),\DB::raw("date_format(expedito.FechaIngreso,'%d/%m/%Y') AS FechaIngresoAux"),\DB::raw("date_format(expedito.FechaComienzo,'%d/%m/%Y') AS FechaComienzoAux"),\DB::raw("date_format(s.Fecha,'%d/%m/%Y') AS FechaAux"),"esc.Escuela","s.*","es.Estado",\DB::raw("concat_ws(' ',e.Nombre,e.Paterno,e.Materno) as Alumno"),"e.DNI")
+        ->join("calificacion AS c","t.IDCalificacion","c.IDCalificacion")
+        ->select("m.*","t.Asesor","t.NombreTesis","c.*","t.Fecha AS FechaT","expedito.*",\DB::raw("concat_ws('/',expedito.Tomo,expedito.Folio,expedito.Asiento,m.Modalidad) AS Acta"),\DB::raw("date_format(expedito.FechaIngreso,'%d/%m/%Y') AS FechaIngresoAux"),\DB::raw("date_format(expedito.FechaComienzo,'%d/%m/%Y') AS FechaComienzoAux"),\DB::raw("date_format(s.Fecha,'%d/%m/%Y') AS FechaAux"),"esc.Escuela","s.*","es.Estado",\DB::raw("concat_ws(' ',e.Nombre,e.Paterno,e.Materno) as Alumno"),"e.DNI")
         ->where("expedito.Tipo","TITULO")->get();
         
         return compact("expeditosb","expeditost");
@@ -119,7 +120,7 @@ class ExpeditobController extends Controller
             $titulacion->Asesor         = $request->expedito["asesor"];
             $titulacion->IDModalidad    = $request->expedito["modalidad"];
             $titulacion->NombreTesis    = mb_strtoupper($request->expedito["tesis"]);
-            $titulacion->Calificacion   = $request->expedito["calificacion"];
+            $titulacion->IDCalificacion   = $request->expedito["calificacion"];
             $titulacion->Fecha          = $request->expedito["sustentacion"];
             $titulacion->created_at     = $hoy;
             $titulacion->save();
@@ -230,7 +231,7 @@ class ExpeditobController extends Controller
                     "Asesor"        => $request->expedito["asesor"],
                     "IDModalidad"   => $request->expedito["modalidad"],
                     "NombreTesis"   => mb_strtoupper($request->expedito["tesis"]),
-                    "Calificacion"  => $request->expedito["calificacion"],
+                    "IDCalificacion"  => $request->expedito["calificacion"],
                     "Fecha"         => $request->expedito["sustentacion"],
                 ]
             );

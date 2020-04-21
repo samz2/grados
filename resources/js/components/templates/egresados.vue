@@ -97,7 +97,7 @@
               </div>
             </fieldset>
             <fieldset class="border p-2">
-              <legend class="w-auto">Datos Adicionales</legend>
+              <legend class="w-auto">Datos de Contacto</legend>
               <div class="form-group row">
                 <div class="col-md-1 text-left">
                   <label>Celular</label>
@@ -285,7 +285,7 @@ export default {
           Ingreso: "Ingreso",
           Egreso: "Egreso",
           NombreAux: "Nombres y Apellidos",
-          Correo: "Correo",
+          Correo: "Correo Electrónico",
           Escuela: "Carrera Profesional"
         },
         //sortable    : ["Escuela","DNI","NombreAux","Ingreso","Egreso"],

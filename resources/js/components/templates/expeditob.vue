@@ -16,7 +16,7 @@
         <div class="card card-default" id="objetivo">
           <div
             class="card-header text-center"
-            style="background-color: #007bff55 !important; color:black; font-weight: bold;"
+            style="background-color: powderblue !important; color:black; font-weight: bold;"
           >
             <h4 class="title">Expedito Bachiller</h4>
           </div>
@@ -38,6 +38,7 @@
                   class="btn btn-primary"
                   data-toggle="modal"
                   style="color:white;"
+                  @click="borrar()"
                   data-placement="left"
                 >
                   Buscar Egresado
@@ -46,7 +47,7 @@
               </legend>
               <div class="form-group row">
                 <div class="col-md-2">
-                  <label>Número DNI</label>
+                  <label>Número DNI:</label>
                 </div>
                 <div class="col-md-2">
                   <input
@@ -58,7 +59,7 @@
                   />
                 </div>
                 <div class="col-md-3 text-left">
-                  <label>Código Universitario</label>
+                  <label>Código Universitario:</label>
                 </div>
                 <div class="col-md-2">
                   <input
@@ -72,7 +73,7 @@
               </div>
               <div class="form-group row">
                 <div class="col-md-2 text-left">
-                  <label>Nombre Completo</label>
+                  <label>Nombre Completo:</label>
                 </div>
                 <div class="col-md-7">
                   <input
@@ -86,7 +87,7 @@
               </div>
               <div class="form-group row">
                 <div class="col-md-2">
-                  <label for="carrera">Carrera Profesional</label>
+                  <label for="carrera">Carrera Profesional:</label>
                 </div>
                 <div class="col-md-7">
                   <input
@@ -103,7 +104,7 @@
               <legend class="w-auto">Datos del Libro de Actas</legend>
               <div class="form-group row">
                 <div class="col-md-2">
-                  <label for="tomo">Número Tomo*</label>
+                  <label for="tomo">Número Tomo* :</label>
                 </div>
                 <div class="col-md-2">
                   <input
@@ -116,7 +117,7 @@
                   />
                 </div>
                 <div class="col-md-2">
-                  <label for="folio">Número Folio*</label>
+                  <label for="folio">Número Folio* :</label>
                 </div>
                 <div class="col-md-2">
                   <input
@@ -129,7 +130,7 @@
                   />
                 </div>
                 <div class="col-md-2">
-                  <label for="asiento">Número Asiento*</label>
+                  <label for="asiento">Número Asiento* :</label>
                 </div>
                 <div class="col-md-2">
                   <input
@@ -147,7 +148,7 @@
               <legend class="w-auto">Sesión</legend>
               <div class="form-group row">
                 <div class="col-md-2">
-                  <label for="sesion">Número Sesión*</label>
+                  <label for="sesion">Número Sesión* :</label>
                 </div>
                 <div class="col-md-2">
                   <select
@@ -164,7 +165,7 @@
                   </select>
                 </div>
                 <div class="col-md-1">
-                  <label for="fecha">Fecha</label>
+                  <label for="fecha">Fecha:</label>
                 </div>
                 <div class="col-md-3">
                   <input
@@ -177,7 +178,7 @@
                   />
                 </div>
                 <div class="col-md-1">
-                  <label for="Tipo">Tipo</label>
+                  <label for="Tipo">Tipo:</label>
                 </div>
                 <div class="col-md-3">
                   <input
@@ -194,40 +195,23 @@
             <fieldset class="border p-2" id="archivos">
               <legend class="w-auto">Archivos</legend>
               <div class="form-group row">
-                <div class="col-md-2">
-                  <label>Constancia Matrícula*</label>
+                <div class="col-md-3">
+                  <label>Constancia de Matrícula* :</label>
                 </div>
-
-                
-
                 <div class="col-md-5">
                     <label for="matricula" class="subir">
                         <i class="fas fa-cloud-upload-alt"></i> Subir archivo
                     </label>
                     <input id="matricula" @change="validarMatricula" onchange='cambiarMatriculaBachiller()' type="file" accept="application/pdf" style='display: none;'/>
                     <span id="info">Ningún archivo seleccionado</span>
-                </div>                
-
-                <!--<div class="col-md-4">
-                  <input
-                    type="file"
-                    id="matricula"
-                    @change="validarMatricula"
-                    class="form-control form-control-sm"
-                    accept="application/pdf"
-                  />
-                </div>-->
-
-                <!--<div class="col-md-4">
-                  <label>( Formato PDF - Tamaño Max. 1MB )</label>
-                </div>-->
+                </div>  
                 <div class="col-md-4">
                   <label>( Formato PDF - Tamaño Max. 1MB )</label>
                 </div>
               </div>
               <div class="form-group row">
-                <div class="col-md-2">
-                  <label>Constancia Egresado*</label>
+                <div class="col-md-3">
+                  <label>Constancia de Egresado* :</label>
                 </div>
                 
                 <div class="col-md-5">
@@ -242,8 +226,8 @@
                 </div>
               </div>
               <div class="form-group row">
-                <div class="col-md-2">
-                  <label>Foto*</label>
+                <div class="col-md-3">
+                  <label>Foto del Solicitante* :</label>
                 </div>
                 <div class="col-md-5">
                     <label for="foto" class="subir">
@@ -252,16 +236,6 @@
                     <input id="foto" @change="validarFoto" onchange='cambiarFotoBachiller()' type="file" accept="image/jpeg" style='display: none;'/>
                     <span id="info3">Ningún archivo seleccionado</span>
                 </div> 
-                <!--
-                <div class="col-md-4">
-                  <input
-                    type="file"
-                    id="foto"
-                    @change="validarFoto"
-                    class="form-control form-control-sm"
-                    accept="image/jpeg"
-                  />
-                </div>-->
                 <div class="col-md-4">
                   <label>( Formato JPG - Tamaño Max. 1MB )</label>
                 </div>
@@ -270,8 +244,8 @@
             <fieldset class="border p-2">
               <legend class="w-auto">Datos del trámite</legend>
               <div class="form-group row">
-                <div class="col-md-2">
-                  <label for="ingreso">Fecha de ingreso de solicitud*</label>
+                <div class="col-md-3">
+                  <label for="ingreso">Fecha de ingreso de solicitud* :</label>
                 </div>
                 <div class="col-md-3">
                   <input
@@ -285,8 +259,8 @@
                     class="form-control form-control-sm"
                   />
                 </div>
-                <div class="col-md-2">
-                  <label for="comienzo">Fecha de inicio de trámite</label>
+                <div class="col-md-3">
+                  <label for="comienzo">Fecha de inicio de trámite:</label>
                 </div>
                 <div class="col-md-3">
                   <input
@@ -313,12 +287,12 @@
               </div>
               <div class="col-md-2" id="editar" style="text-align: center;">
                 <button class="btn btn-success" @click="editExpedito()">
-                  Editar
+                  Guardar
                   <i class="fa fa-edit"></i>
                 </button>
               </div>
               <div class="col-md-2" style="text-align: center;">
-                <button class="btn btn-danger" onclick='cambiarCancelarBachiller()' @click="cancelar()">
+                <button class="btn btn-danger" @click="cancelar()">
                   Cancelar
                   <i class="fas fa-times"></i>
                 </button>
@@ -342,7 +316,7 @@
         <div class="modal-content">
           <div
             class="modal-header text-center"
-            style="background-color: #007bff55 !important; color:black; font-weight: bold;"
+            style="background-color: powderblue !important; color:black; font-weight: bold;"
           >
             <h5 class="modal-titler" id="exampleModalLabel">Buscar Egresado</h5>
             <button
@@ -363,26 +337,26 @@
             </div>
             <div class="form-group row">
               <div class="col-md-2">
-                <label for="dni1">DNI</label>
+                <label for="dni1">DNI:</label>
               </div>
               <div class="col-md-4">
                 <input
                   type="text"
                   v-model="alumno.dni"
                   id="dni1"
-                  onkeypress="return solonumeros(event)"
+                  onkeypress="return soloNumeros(event)"
                   class="form-control form-control-sm"
                   maxlength="8"
                 />
               </div>
               <div class="col-md-2">
-                <label for="codigo1">Código</label>
+                <label for="codigo1">Código:</label>
               </div>
               <div class="col-md-4">
                 <input
                   type="text"
                   v-model="alumno.codigo"
-                  onkeypress="return solonumeros(event)"
+                  onkeypress="return soloNumeros(event)"
                   id="codigo1"
                   class="form-control form-control-sm"
                   maxlength="10"
@@ -391,7 +365,7 @@
             </div>
             <div class="form-group row">
               <div class="col-md-2">
-                <label for="nombre1">Egresado</label>
+                <label for="nombre1">Egresado:</label>
               </div>
               <div class="col-md-10">
                 <input
@@ -440,7 +414,7 @@
         <div class="card card-default">
           <div
             class="card-header text-center"
-            style="background-color: #007bff55 !important; color:black; font-weight: bold;"
+            style="background-color: powderblue !important; color:black; font-weight: bold;"
           >
             <h4 class="title">EXPEDITOS BACHILLER</h4>
           </div>
@@ -456,7 +430,7 @@
                     data-placement="left"
                     title="Hacer click para cambiar de estado"
                     style="padding: 2px 8px; font-size: 12px;"
-                  >Pendiente</button>
+                  >Pendiente  </button>
                   <button
                     v-if="props.row.Estado == 'EN PROCESO'"
                     v-on:click="estado(props.row.IDExpedito,2)"
@@ -473,7 +447,7 @@
                     data-placement="left"
                     title="Estado final"
                     style="padding: 2px 8px; font-size: 12px;"
-                  >Finalizado</button>
+                  >Finalizado  </button>
                   <button
                     class="btn btn-primary"
                     v-on:click="edit(props.row.IDExpedito,props.row.Tipo,props.row.CodigoAlumno,props.row.Tomo,props.row.Folio,props.row.Asiento,props.row.NumSesion,props.row.FechaIngreso,props.row.FechaComienzo,props.row.IDSesion,props.row.Fecha,props.row.Escuela,props.row.Alumno,props.row.DNI)"
@@ -636,13 +610,8 @@ export default {
       this.expedito.stipo = null;
       this.expedito.ingreso = null;
       this.expedito.comienzo = null;
+      this.cambiarCancelarBachiller();
       $("#matricula").val("");
-      //$("#info").val("");
-      //$("#info").files("");
-      //$("#info").value("");
-      $("#file-upload").val("");
-      //$("#file-upload").files("");
-      //$("#file-upload").value("");
       $("#egresado").val("");
       $("#foto").val("");
       $("#objetivo").hide();
@@ -695,10 +664,11 @@ export default {
         e.target.value = "";
         swal({
           type: "error",
-          //title: 'Error',
-          text: "El tamaño del archivo debe ser menor o igual a 1mb",
+          title: 'Ocurrió un problema',
+          text: "El tamaño del archivo debe ser menor o igual a 1MB",
           showConfirmButton: true
         });
+        document.getElementById('info').innerHTML = 'Ningún archivo seleccionado';
         return;
       }
       if (type.includes("pdf")) {
@@ -728,10 +698,11 @@ export default {
         e.target.value = "";
         swal({
           type: "error",
-          //title: 'Error',
-          text: "El tamaño del archivo debe ser menor o igual a 1mb",
+          title: 'Ocurrió un problema',
+          text: "El tamaño del archivo debe ser menor o igual a 1MB",
           showConfirmButton: true
         });
+        document.getElementById('info2').innerHTML = 'Ningún archivo seleccionado';
         return;
       }
       if (type.includes("pdf")) {
@@ -760,10 +731,11 @@ export default {
         e.target.value = "";
         swal({
           type: "error",
-          //title: 'Error',
-          text: "El tamaño del archivo debe ser menor o igual a 1mb",
+          title: 'Ocurrió un problema',
+          text: "El tamaño del archivo debe ser menor o igual a 1MB",
           showConfirmButton: true
         });
+        document.getElementById('info3').innerHTML = 'Ningún archivo seleccionado';
         return;
       }
       if (type.includes("image")) {
@@ -798,6 +770,11 @@ export default {
         .catch(error => {
           console.log(error);
         });
+    },
+    cambiarCancelarBachiller(){    
+    document.getElementById('info').innerHTML = 'Ningún archivo seleccionado';
+    document.getElementById('info2').innerHTML = 'Ningún archivo seleccionado';
+    document.getElementById('info3').innerHTML = 'Ningún archivo seleccionado';
     },
     addExpedito(e) {
       if (
