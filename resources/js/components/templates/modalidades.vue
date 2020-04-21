@@ -21,16 +21,21 @@
                         <div class="modal-body">
                             <div class="row">
                                 <div class="col-md-3 text-left">
-                                    <label>Modalidad(*)</label>
+                                    <label>Modalidad*</label>
                                 </div>
                                 <div class="col-md-9">
                                     <input type="text" class="form-control form-control-sm" v-model="modalidad.modalidad" onkeypress="return soloLetras(event)" maxlength="30">
                                 </div>    
                             </div>
                             <br>
+                            <div class="row">
+                                <div class="col-md-12 text-left">
+                                    <label>* Campo obligatorio</label>
+                                </div>                                
+                            </div>
                         <div class="modal-footer">
                             <button @click="addModalidad(1)" id="add" class="btn btn-success">Guardar <i class="fa fa-save"></i></button>
-                            <button @click="addModalidad(2)" id="editar" class="btn btn-success">Editar <i class="far fa-edit"></i></button>
+                            <button @click="addModalidad(2)" id="editar" class="btn btn-success">Guardar <i class="fa fa-save"></i></button>
                             <button type="button" class="btn btn-danger" @click="load()" data-dismiss="modal">Cancelar <i class="fas fa-times"></i></button>
                         </div>
                         </div>

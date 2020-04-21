@@ -45,6 +45,7 @@ class DocentesController extends Controller
             $docente->Nombres       = mb_strtoupper($request->docente["nombres"]);
             $docente->Apellidos     = mb_strtoupper($request->docente["apellidos"]);
             $docente->Celular       = $request->docente["celular"];
+            $docente->Correo       = $request->docente["correo"];
             $docente->IDEscuela     = $request->docente["escuela"];
             $docente->Dedicacion    = $request->docente["dedicacion"];
             $docente->Categoria     = $request->docente["categoria"];
@@ -101,6 +102,7 @@ class DocentesController extends Controller
             "Nombres"       => mb_strtoupper($request->docente["nombres"]),
             "Apellidos"     => mb_strtoupper($request->docente["apellidos"]),
             "Celular"       => $request->docente["celular"],
+            "Correo"       => $request->docente["correo"],
             "IDEscuela"     => $request->docente["escuela"],
             "Dedicacion"    => $request->docente["dedicacion"],
             "Categoria"     => $request->docente["categoria"],

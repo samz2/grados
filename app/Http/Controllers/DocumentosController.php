@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\documentos;
 use App\expeditob;
+use App\decano;
+use App\comision;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade as PDF;
 
@@ -60,6 +62,38 @@ class DocumentosController extends Controller
         $pdf = PDF::loadView('templates.oficio',compact("dato","anio","mes","dia"));
         return $pdf->stream('oficio.pdf');
     }
+
+    public function oficio2($id)
+    {
+        $expeditosb =   Expeditob::join("egresado AS e","expedito.CodigoAlumno","e.Codigo")
+                        ->join("sesion AS s","expedito.NumSesion","s.NumSesion")
+                        ->join("escuela AS esc","e.IDEscuela","esc.IDEscuela")
+                        ->join("titulacion AS t","expedito.CodigoAlumno","t.CodAlumno")
+                        ->join("modalidad AS m","t.IDModalidad","m.IDModalidad")
+                        ->select("expedito.*","m.Modalidad","s.*","e.Paterno as Paterno","e.Materno as Materno", "e.Nombre","esc.Escuela")
+                        ->where("expedito.IDExpedito",$id)->get();
+
+        $decanitos = Decano::join("docentes AS d","decano.CodDocente","d.DNI")
+                        ->select(\DB::raw("concat_ws(' ',d.Nombres,d.Apellidos) as Nombre"))
+                        ->where("decano.Estado","ACTIVO")
+                        ->get();
+
+        $comisiones =   Comision::join("docentes AS d","comision.Presidente","d.DNI")
+                        ->select(\DB::raw("concat_ws(' ',d.Nombres,d.Apellidos) as Presidente"))
+                        ->where("comision.Estado","ACTIVO")
+                        ->get(); 
+                
+        $dato = $expeditosb[0];
+        $dato2 = $decanitos[0];
+        $dato3 = $comisiones[0];
+        $anio = substr($dato->Fecha,0,4);
+        $mes  = $this->mes(substr($dato->Fecha,5,2)) ;
+        $mes2  = substr($dato->Fecha,5,2) ;
+        $dia  = substr($dato->Fecha,8,2);
+        $pdf = PDF::loadView('templates.oficio2',compact("dato3","dato2","dato","anio","mes","mes2","dia"));
+        return $pdf->stream('oficio.pdf');
+    }
+
     public function mes($indice)
     {
         $meses["01"]   = "enero";

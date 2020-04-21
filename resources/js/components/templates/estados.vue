@@ -20,8 +20,8 @@
                         </div>
                         <div class="modal-body">
                             <div class="row">
-                                <div class="col-md-4 text-left">
-                                        <label>Posición(*)</label>
+                                <div class="col-md-3 text-left">
+                                        <label>Posición*</label>
                                 </div>
                                 <div class="col-md-3">
                                     <input v-model="estado.posicion" type="number" min="1" max="5" class="form-control">
@@ -29,18 +29,26 @@
                             </div>
                             <br>
                             <div class="row">
-                                <div class="col-md-4 text-left">
-                                    <label>Estado(*)</label>
+                                <div class="col-md-3 text-left">
+                                    <label>Estado*</label>
                                 </div>
                                 <div class="col-md-8">
                                     <input v-model="estado.estado" maxlength="35" class="form-control" onKeyPress="return soloLetras(event)">
                                 </div>
                             </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-12 text-left">
+                                    <label>* Campos obligatorios</label>
+                                </div>                                
+                            </div>
                         <div class="modal-footer">
                             <button @click="addEstado(1)" id="add" class="btn btn-success">Guardar <i class="fa fa-save"></i></button>
-                            <button @click="addEstado(2)" id="editar" class="btn btn-success" data-dismiss="modal">Editar <i class="fa fa-save"></i></button>
+                            <button @click="addEstado(2)" id="editar" class="btn btn-success" data-dismiss="modal">Guardar <i class="fa fa-save"></i></button>
                             <button type="button" class="btn btn-danger" @click="load()" data-dismiss="modal">Cancelar <i class="fas fa-times"></i></button>
+                            
                         </div>
+                        
                         </div>
                     </div>
                 </div>

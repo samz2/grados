@@ -13,30 +13,30 @@
 					</div>
 				</div>
 	            <div class="card card-default"  id="objetivo">
-	                <div class="card-header text-center" style="background-color: #007bff55 !important; color:black; font-weight: bold;">
+	                <div class="card-header text-center" style="background-color: powderblue !important; color:black; font-weight: bold;">
 	                    <h4 class="title">Expeditos Títulación</h4>  
 	                </div>
-                    <div class="col-md-4"><label><mark style="background-color: #dc354526; color: #520606f7">- (*) Llenar datos obligatoriamente.</mark></label></div>
+                    <div class="col-md-5"><label>* Campos obligatoriamente.</label></div>
                     
-                    <div class="col-md-4"><label><mark style="background-color: #dc354526; color: #520606f7">- Primero realizar la búsqueda del bachiller.</mark></label></div>
+                    <div class="col-md-5" id="labelInicio"><label>Nota: Primero realizar la búsqueda del bachiller</label></div>
                     
 					<div class="card-body">
                         <fieldset class="border p-2">
                             <legend class="w-auto">Datos Bachiller 
-                                <button  data-target="#exampleModal" id="buscar" class="btn btn-primary" data-toggle="modal" data-placement="left">
+                                <button  data-target="#exampleModal" id="buscar" @click="borrar()" class="btn btn-primary" data-toggle="modal" data-placement="left">
 								Buscar Bachiller <i class="fas fa-search"></i>
 							    </button>
                             </legend>
                             <div class="form-group row">  
                                 
                                 <div class="col-md-2">
-                                <label>Nro. DNI:</label>   
+                                <label>Número DNI:</label>   
                                 </div>                             
                                 <div class="col-md-2">
                                     <input type="text" v-model="expedito.dni" id="dni" readonly class="form-control form-control-sm">
                                 </div>
-                                 <div class="col-md-2 text-left">
-                                        <label>Nro. Código:</label>
+                                 <div class="col-md-3 text-left">
+                                        <label>Código Universitario:</label>
                                  </div>
                                 <div class="col-md-2">
                                     <input type="text" v-model="expedito.codigo" id="codigo" readonly class="form-control form-control-sm">
@@ -47,31 +47,31 @@
                                 <div class="col-md-2 text-left">
                                         <label>Nombre Completo:</label>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-7">
                                     <input type="text" v-model="expedito.alumno" id="nombre" readonly class="form-control form-control-sm">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 
-                                <label for="carrera" class="col-md-2 col-form-label">Carrera Profesional: </label>
-                                <div class="col-md-6">
+                                <label for="carrera" class="col-md-2 col-form-label">Carrera Profesional:</label>
+                                <div class="col-md-7">
                                     <input type="text" v-model="expedito.carrera" id="carrera" readonly class="form-control form-control-sm">
                                 </div>
                             </div>
                         </fieldset>
                         <fieldset class="border p-2">
-                            <legend class="w-auto">Datos del Libro de Actas</legend>
+                            <legend class="w-auto">Datos del Libro de Actas:</legend>
                             <div class="form-group row">
                                 
-                                <label for="tomo" class="col-md-2 col-form-label">Número Tomo(*)</label>
+                                <label for="tomo" class="col-md-2 col-form-label">Número Tomo* :</label>
                                 <div class="col-md-2">
                                     <input type="text" id="tomo" v-model="expedito.tomo" onKeyPress="return soloNumeros(event)" maxlength="3" class="form-control form-control-sm">
                                 </div>
-                                <label for="folio" class="col-md-2 col-form-label">Número Folio(*)</label>
+                                <label for="folio" class="col-md-2 col-form-label">Número Folio* :</label>
                                 <div class="col-md-2">
                                     <input type="text" id="folio" v-model="expedito.folio" onKeyPress="return soloNumeros(event)" maxlength="3" class="form-control form-control-sm">
                                 </div>
-                                <label for="asiento" class="col-md-2 col-form-label">Número Asiento(*)</label>
+                                <label for="asiento" class="col-md-2 col-form-label">Número Asiento* :</label>
                                 <div class="col-md-2">
                                     <input type="text" id="asiento" v-model="expedito.asiento" onKeyPress="return soloNumeros(event)" maxlength="3" class="form-control form-control-sm">
                                 </div>
@@ -81,7 +81,7 @@
                             <legend class="w-auto">Datos titulación</legend>
                             <div class="form-group row">
                                 <div class="col-md-2 text-left">
-                                <label>Modalidad(*)</label>
+                                <label>Modalidad* :</label>
                                 </div>
                                 <div class="col-md-3">
                                     <select v-model="expedito.modalidad" class="form-control form-control-sm">
@@ -93,17 +93,17 @@
                             </div>
                             <div class="form-group row">
                                 <div class="col-md-2 text-left">
-                                <label>Nombre Tesis(*)</label>
+                                <label>Nombre Tesis* :</label>
                                 </div>
                                 <div class="col-md-9">
-                                    <input type="text" v-model="expedito.tesis" onKeyPress="return soloLetras(event)" maxlength="200" class="form-control form-control-sm">
+                                    <input type="text" v-model="expedito.tesis" onKeyPress="return soloTesis(event)" maxlength="300" class="form-control form-control-sm">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <div class="col-md-2 text-left">
-                                <label>Asesor(*)</label>
+                                <label>Asesor* :</label>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-9">
                                     <select v-model="expedito.asesor" class="form-control form-control-sm">
                                         <option v-for="d in docentes" :key="d.DNI" :value="d.DNI">
                                             {{d.Nombres}} {{d.Apellidos}}
@@ -113,19 +113,30 @@
                             </div>
                             <div class="form-group row">
                                 <div class="col-md-2 text-left">
-                                <label>Calificación(*)</label>
+                                <label>Calificación* :</label>
                                 </div>
+
                                 <div class="col-md-3">
+                                    <select v-model="expedito.calificacion" class="form-control form-control-sm">
+                                        <option v-for="m in calificaciones" :key="m.IDCalificacion" :value="m.IDCalificacion">
+                                            {{m.Calificacion}}
+                                        </option>                                            
+                                    </select>
+                                </div>
+                                    
+                                <!--<div class="col-md-3">
                                     <select v-model="expedito.calificacion" class="form-control form-control-sm">
                                         <option value="SOBRESALIENTE">SOBRESALIENTE</option>
                                         <option value="UNANIMIDAD">UNANIMIDAD</option>
+                                        <option value="MAYORIA">MAYORIA</option>
+                                        <option value="DESAPROBADO">DESAPROBADO</option>
                                     </select>
-                                </div>
+                                </div>-->
                                 <div class="col-md-3 text-left">
-                                <label>Fecha sustentación(*)</label>
+                                <label>Fecha sustentación* :</label>
                                 </div>
                                 <div class="col-md-3">
-                                    <input type="date" v-model="expedito.sustentacion" class="form-control form-control-sm">
+                                    <input type="date" v-model="expedito.sustentacion" @change="validafecha()" class="form-control form-control-sm">
                                 </div>
                             </div>
                         </fieldset>
@@ -133,17 +144,17 @@
                             <legend class="w-auto">Sesión</legend>
                             <div class="form-group row">
                                 
-                                <label for="sesion" class="col-md-2 col-form-label">Nro. Sesión(*)</label>
+                                <label for="sesion" class="col-md-2 col-form-label">Número Sesión* :</label>
                                 <div class="col-md-2">
                                     <select id="sesion" v-model="expedito.sesion" @change="getSession(expedito.sesion)" class="form-control form-control-sm">
                                         <option v-for="s in sesiones" :key="s.NumSesion" :value="s.NumSesion">{{s.NumSesion}}</option>    
                                     </select>
                                 </div>
-                                <label for="fecha" class="col-md-1 col-form-label">Fecha</label>
+                                <label for="fecha" class="col-md-1 col-form-label">Fecha:</label>
                                 <div class="col-md-3">
                                     <input type="date" id="fecha" v-model="expedito.sfecha" readonly class="form-control form-control-sm">
                                 </div>
-                                <label for="Tipo" class="col-md-1 col-form-label">Tipo</label>
+                                <label for="Tipo" class="col-md-1 col-form-label">Tipo:</label>
                                 <div class="col-md-3">
                                     <input type="text" id="tipo" v-model="expedito.stipo" readonly maxlength="3" class="form-control form-control-sm">
                                 </div>
@@ -155,11 +166,11 @@
                              <div class="form-group row">
                                 
                                 <div class="col-md-4">
-                                    <label><input type="checkbox" name="check" >   Tesis PDF</label>
+                                    <label><input type="checkbox" id="chbx1" name="check" >   Tesis PDF*</label>
                                 </div>
 
                                 <div class="col-md-4">
-                                    <label><input type="checkbox" name="check" >   Autorización de publicación</label>
+                                    <label><input type="checkbox" id="chbx2" name="check" >   Autorización de publicación*</label>
                                 </div>
                                 
                             </div> 
@@ -167,18 +178,18 @@
                             <div class="form-group row">
                                 
                                 <div class="col-md-4">
-                                    <label><input type="checkbox" name="check" >   Constancia antiplagio</label>
+                                    <label><input type="checkbox" id="chbx3" name="check" >   Constancia antiplagio*</label>
                                 </div>
 
                                 <div class="col-md-4">
-                                    <label><input type="checkbox" name="check" >   Constancia URL</label>
+                                    <label><input type="checkbox" id="chbx4" name="check" >   Constancia URL*</label>
                                 </div>
                                 
                             </div>
                             <div class="form-group row">
 
                                 <div class="col-md-12">
-                                    <label><mark style="background-color: #dc354526; color: #520606f7; text-align : justify;">Nota: Verificar si se cuenta con estos documentos obligatorios marcando el check que le corresponde, si no se cuenta con uno o más de éstos no se podrá continuar.</mark></label>
+                                    <label style="text-align : justify;">Nota: Verificar si se cuenta con estos documentos obligatorios marcando el check que le corresponde, si no se cuenta con uno o más de éstos no se podrá continuar.</label>
                                 </div>
                                 
                                 
@@ -187,80 +198,127 @@
                         <fieldset class="border p-2" id="archivos">
                             <legend class="w-auto">Archivos</legend>
                             <div class="form-group row">
-                                <div class="col-md-2">
-                                    <label>Const. Matrícula(*)</label>
+                                <div class="col-md-3">
+                                    <label>Constancia de Matrícula* :</label>
                                 </div>
+                                <div class="col-md-5">
+                                    <label for="matricula" class="subir">
+                                        <i class="fas fa-cloud-upload-alt"></i> Subir archivo
+                                    </label>
+                                    <input id="matricula" @change="validarMatricula" onchange='cambiarMatriculaTitulo()' type="file" accept="application/pdf" style='display: none;'/>
+                                    <span id="info">Ningún archivo seleccionado</span>
+                                </div>  
                                 <div class="col-md-4">
-                                    <input type="file" id="matricula" @change="validarMatricula" class="form-control form-control-sm">
+                                    <label>( Formato PDF - Tamaño Max. 1MB )</label>
                                 </div>
-                                <div class="col-md-2">
-                                <label>Const. Egresado(*)</label>
-                                </div>
-                                <div class="col-md-4">
-                                    <input type="file" id="egresado"  @change="validarEgresado" class="form-control form-control-sm">
-                                </div>
+                                <!--<div class="col-md-4">
+                                    <input type="file" id="matricula" @change="validarMatricula" class="form-control form-control-sm" accept="application/pdf"> 
+                                </div>-->
                             </div>
                             <div class="form-group row">
-                                <div class="col-md-2">
-                                <label>Arch. Tesis PDF(*)</label>
+                                <div class="col-md-3">
+                                <label>Constancia de Egresado* :</label>
                                 </div>
+                                <div class="col-md-5">
+                                    <label for="egresado" class="subir">
+                                        <i class="fas fa-cloud-upload-alt"></i> Subir archivo
+                                    </label>
+                                    <input id="egresado" @change="validarEgresado" onchange='cambiarEgresadoTitulo()' type="file" accept="application/pdf" style='display: none;'/>
+                                    <span id="info2">Ningún archivo seleccionado</span>
+                                </div> 
                                 <div class="col-md-4">
-                                    <input type="file" id="tesis" @change="validarTesis" class="form-control form-control-sm">
+                                <label>( Formato PDF - Tamaño Max. 1MB )</label>
                                 </div>
-                                <div class="col-md-2">
-                                <label>Arch. Tesis Word(*)</label>
-                                </div>
-                                <div class="col-md-4">
-                                    <input type="file" id="word" @change="validarWord" class="form-control form-control-sm">
-                                </div>
+                                <!--<div class="col-md-4">
+                                    <input type="file" id="egresado"  @change="validarEgresado" class="form-control form-control-sm" accept="application/pdf">
+                                </div>-->
                             </div>
                             <div class="form-group row">
-                                <div class="col-md-2">
-                                <label>Foto(*)</label>
+                                <div class="col-md-3">
+                                <label>Archivo Tesis en PDF* :</label>
                                 </div>
+                                <div class="col-md-5">
+                                    <label for="tesis" class="subir">
+                                        <i class="fas fa-cloud-upload-alt"></i> Subir archivo
+                                    </label>
+                                    <input id="tesis" @change="validarTesis" onchange='cambiarTesisTitulo()' type="file" accept="application/pdf" style='display: none;'/>
+                                    <span id="info4">Ningún archivo seleccionado</span>
+                                </div> 
                                 <div class="col-md-4">
-                                    <input type="file" id="foto" @change="validarFoto" class="form-control form-control-sm">
+                                    <label>( Formato PDF - Tamaño Max. 5MB )</label>
                                 </div>
+                                <!--<div class="col-md-4">
+                                    <input type="file" id="tesis" @change="validarTesis" class="form-control form-control-sm" accept="application/pdf">
+                                </div>-->
                             </div>
                             <div class="form-group row">
-                                <div class="col-md-7">
-                                    <label><mark style="background-color: #dc354526; color: #520606f7">* Constancias en formato PDF (Tam. max. 1mb c/u)</mark></label>
+                                <div class="col-md-3">
+                                <label>Archivo Tesis en Word* :</label>
                                 </div>
-                                <div class="col-md-7">
-                                    <label><mark style="background-color: #dc354526; color: #520606f7">* Archivo Tesis en formato PDF (Editable) y Word (Tam. max. 3mb c/u)</mark></label>
+                                <div class="col-md-5">
+                                    <label for="word" class="subir">
+                                        <i class="fas fa-cloud-upload-alt"></i> Subir archivo
+                                    </label>
+                                    <input id="word" @change="validarWord" onchange='cambiarWordTitulo()' type="file" accept=".doc, .docx" style='display: none;'/>
+                                    <span id="info5">Ningún archivo seleccionado</span>
+                                </div> 
+                                <div class="col-md-4">
+                                    <label>( Formato Word-Tamaño Max. 5MB )</label>
                                 </div>
-                                <div class="col-md-7">
-                                    <label><mark style="background-color: #dc354526; color: #520606f7">* Foto en formato JPG (Tam. max. 1mb)</mark></label>
+                                <!--<div class="col-md-4">
+                                    <input type="file" id="word" @change="validarWord" class="form-control form-control-sm" accept=".doc, .docx">
+                                </div>-->
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-3">
+                                <label>Foto del Solicitante* :</label>
                                 </div>
+                                <div class="col-md-5">
+                                    <label for="foto" class="subir">
+                                        <i class="fas fa-cloud-upload-alt"></i> Subir archivo
+                                    </label>
+                                    <input id="foto" @change="validarFoto" onchange='cambiarFotoTitulo()' type="file" accept="image/jpeg" style='display: none;'/>
+                                    <span id="info3">Ningún archivo seleccionado</span>
+                                </div> 
+                                <div class="col-md-4">
+                                    <label>( Formato JPG - Tamaño Max. 1MB )</label>
+                                </div>
+                                <!--<div class="col-md-4">
+                                    <input type="file" id="foto" @change="validarFoto" class="form-control form-control-sm" accept="image/jpeg">
+                                </div>-->
                             </div>
                             
                         </fieldset>
                         <fieldset class="border p-2">
                             <legend class="w-auto">Datos del trámite</legend>
                             <div class="form-group row">
-                                <label for="ingreso" class="col-md-4 col-form-label">Fecha de Ingreso de la solicitud(*)</label>
                                 <div class="col-md-3">
-                                    <input type="date" id="ingreso" v-model="expedito.ingreso" onKeyPress="return soloNumeros(event)" maxlength="3" class="form-control form-control-sm">
+                                <label for="ingreso">Fecha de ingreso de solicitud* :</label>
                                 </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="comienzo" class="col-md-4 col-form-label">Fecha que empieza el trámite </label>
                                 <div class="col-md-3">
-                                    <input type="date" id="comienzo" v-model="expedito.comienzo" class="form-control form-control-sm">
+                                    <input type="date" max="2030-12-31" id="ingreso" v-model="expedito.ingreso" @change="validafecha()" onKeyPress="return soloNumeros(event)" maxlength="3" class="form-control form-control-sm">
+                                </div>
+                                <div class="col-md-3">
+                                <label for="comienzo">Fecha de inicio de trámite:</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="date" max="2030-12-31" id="comienzo" v-model="expedito.comienzo" @change="validafecha()" class="form-control form-control-sm">
                                 </div>
                             </div>
                         </fieldset>
                         <br>
                         <div class="row">
+                            <div class="col-md-4" style="text-align: center;"></div>
                             <div class="col-md-2" id="guardar" style="text-align: center;">
                                 <button class="btn btn-success"  @click="addExpedito(1)">Guardar <i class="fa fa-save"></i></button>
                             </div>
                             <div class="col-md-2"  id="editar" style="text-align: center;">
-                                <button class="btn btn-success" @click="editExpedito()">Editar <i class="fa fa-edit"></i></button>
+                                <button class="btn btn-success" @click="editExpedito()">Guardar <i class="fa fa-edit"></i></button>
                             </div>
                             <div class="col-md-2" style="text-align: center;">
                                 <button class="btn btn-danger" @click="cancelar()">Cancelar <i class="fas fa-times"></i></button>
                             </div>
+                            <div class="col-md-4" style="text-align: center;"></div>
                         </div>
 	                </div>
 				</div>
@@ -269,7 +327,7 @@
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
-                        <div class="modal-header text-center" style="background-color: #007bff55 !important; color:black; font-weight: bold;">
+                        <div class="modal-header text-center" style="background-color: powderblue !important; color:black; font-weight: bold;">
                             <h5 class="modal-titler" id="exampleModalLabel">Buscar Bachiller</h5>
                             <button type="button" class="close" data-dismiss="modal" @click="borrar()" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
@@ -277,18 +335,23 @@
                         </div>
                         <div class="modal-body">
                             <div class="form-group row">
+                            <div class="col-md-12">
+                                <label>Nota: Ingresar DNI o Código Universitario</label>
+                            </div>
+                            </div>
+                            <div class="form-group row">
                                 <label for="dni1" class="col-md-2 col-form-label">DNI: </label>
                                 <div class="col-md-4">
-                                    <input type="text" v-model="alumno.dni" onKeyPress="return solonumeros(event)" maxlength="8" id="dni1" class="form-control form-control-sm">
+                                    <input type="text" v-model="alumno.dni" onKeyPress="return soloNumeros(event)" maxlength="8" id="dni1" class="form-control form-control-sm">
                                 </div>
                                 <label for="codigo1" class="col-md-2 col-form-label">Código: </label>
                                 <div class="col-md-4">
-                                    <input type="text" v-model="alumno.codigo" onKeyPress="return solonumeros(event)" maxlength="10" id="codigo1" class="form-control form-control-sm">
+                                    <input type="text" v-model="alumno.codigo" onKeyPress="return soloNumeros(event)" maxlength="10" id="codigo1" class="form-control form-control-sm">
                                 </div>
                             </div>
                           
                             <div class="form-group row">
-                                <label for="nombre1" class="col-md-2 col-form-label">Egresado: </label>
+                                <label for="nombre1" class="col-md-2 col-form-label">Bachiller: </label>
                                 <div class="col-md-10">
                                     <input type="text" v-model="alumnos.Nombres" readonly class="form-control form-control-sm">
                                 </div>
@@ -296,7 +359,7 @@
                             
                             <div class="row">
                                 <div class="col-md-4">
-                                    <button class="btn btn-primary" @click="buscar(alumno.dni,alumno.codigo,alumno.apellido)">Buscar <i class="fa fa-search"></i></button>
+                                    <button class="btn btn-primary" id="boton" @click="buscar(alumno.dni,alumno.codigo,alumno.apellido)">Buscar <i class="fa fa-search"></i></button>
                                 </div>
                                 <div class="col-md-4">
                                     <button class="btn btn-warning" @click="borrar()">Limpiar <i class="fas fa-broom"></i></button>
@@ -314,18 +377,18 @@
             <div class="row" id="expeditos">
                 <div class="col-md-12">
                     <div class="card card-default" >
-                            <div class="card-header text-center" style="background-color: #007bff55 !important; color:black; font-weight: bold;">
+                            <div class="card-header text-center" style="background-color: powderblue !important; color:black; font-weight: bold;">
                                 <h4 class="title">EXPEDITOS TITULACIÓN</h4>  
                             </div>
                         <div class="card-body">
                             <div class="content table-responsive table-full-width t12">
                                 <v-client-table :data="expeditos" :columns="columns" :options="options">
                                     <div slot="Acciones" slot-scope="props">
-                                        <button v-if="props.row.Estado == 'PENDIENTE'" v-on:click="estado(props.row.IDExpedito,1)" class="btn btn-danger" data-toggle="tooltip" data-placement="left" >Pendiente</button>
-                                        <button v-if="props.row.Estado == 'EN PROCESO'" v-on:click="estado(props.row.IDExpedito,2)"  class="btn btn-warning" data-toggle="tooltip" data-placement="left" >En Proceso</button>
-                                        <button v-if="props.row.Estado == 'FINALIZADO'"  class="btn btn-success" data-toggle="tooltip" data-placement="left" >Finalizado</button>
-                                       <button class="btn btn-info" v-on:click="edit(props.row.IDExpedito,props.row.Tipo,props.row.CodigoAlumno,props.row.Tomo,props.row.Folio,props.row.Asiento,props.row.NumSesion,props.row.FechaIngreso,props.row.FechaComienzo,props.row.IDSesion,props.row.Fecha,props.row.Escuela,props.row.Alumno,props.row.DNI,props.row.IDModalidad,props.row.Modalidad,props.row.NombreTesis,props.row.Asesor,props.row.Calificacion,props.row.FechaT)" data-placement="left" title="Editar"><i class="fas fa-edit" style="color: white" aria-hidden="true"></i></button>
-                                        <router-link v-if="props.row.Estado == 'FINALIZADO'" class="btn btn-success" target="_blank" :to="'/oficio/'+props.row.IDExpedito" data-toggle="tooltip"  data-placement="left" title="Ver Acta"><i class="far fa-file-pdf" aria-hidden="true"></i></router-link>
+                                        <button v-if="props.row.Estado == 'PENDIENTE'" v-on:click="estado(props.row.IDExpedito,1)" class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Hacer click para cambiar de estado" style="padding: 2px 6px; font-size: 11px;">Pendiente   </button>
+                                        <button v-if="props.row.Estado == 'EN PROCESO'" v-on:click="estado(props.row.IDExpedito,2)"  class="btn btn-warning" data-toggle="tooltip" data-placement="left" title="Hacer click para cambiar de estado" style="padding: 2px 8px; font-size: 11px;">En Proceso</button>
+                                        <button v-if="props.row.Estado == 'FINALIZADO'"  class="btn btn-success" data-toggle="tooltip" data-placement="left" title="Estado final" style="padding: 2px 8px; font-size: 11px;">Finalizado  </button>
+                                       <button class="btn btn-primary" v-on:click="edit(props.row.IDExpedito,props.row.Tipo,props.row.CodigoAlumno,props.row.Tomo,props.row.Folio,props.row.Asiento,props.row.NumSesion,props.row.FechaIngreso,props.row.FechaComienzo,props.row.IDSesion,props.row.Fecha,props.row.Escuela,props.row.Alumno,props.row.DNI,props.row.IDModalidad,props.row.Modalidad,props.row.NombreTesis,props.row.Asesor,props.row.IDCalificacion,props.row.Calificacion,props.row.FechaT)" data-placement="left" title="Editar" style="padding: 2px 5px; font-size: 12px;"><i class="fas fa-edit" style="color: white" aria-hidden="true"></i></button>
+                                        <router-link v-if="props.row.Estado == 'FINALIZADO'" class="btn btn-info" target="_blank" :to="'/oficio2/'+props.row.IDExpedito" data-toggle="tooltip"  data-placement="left" title="Ver oficio" style="padding: 2px 8px; font-size: 12px; color: white;"><i class="far fa-file-pdf" aria-hidden="true"></i></router-link>
                                         <!-- <button class="btn btn-success" data-toggle="tooltip" v-on:click="edit(props.row.IDExpedito)" data-placement="left" title="Acta"><i class="far fa-file-pdf" style="color: white" aria-hidden="true"></i></button> -->
                                     </div>
                                 </v-client-table>
@@ -380,38 +443,40 @@
             sesiones:[],
             docentes:[],
             modalidades:[],
+            calificaciones:[],
             expeditos	:[{
 				IDExpedito: null,
                 Tipo: null,
                 CodigoAlumno: null,
                 Acta: null,
                 NumSesion: null,
-                FechaIngreso: null,
-                FechaComienzo: null,
+                FechaIngresoAux: null,
+                FechaComienzoAux: null,
                 Estado: null,
-                Fecha: null,
+                FechaAux: null,
                 Alumno: null,
                 IDModalidad: null,
                 Modalidad: null,
                 NombreTesis: null,
                 Asesor: null,
+                IDCalificacion: null,
                 Calificacion: null,
                 FechaT:null
             }],
-            columns: ["Alumno","Acta","NumSesion","Fecha","FechaIngreso","FechaComienzo","Acciones"],
+            columns: ["Alumno","Acta","NumSesion","FechaAux","FechaIngresoAux","FechaComienzoAux","Acciones"],
             options: {
 				headings:
 				{
                     CodigoAlumno: "Código",
                     NumSesion: "Sesión",
-                    FechaIngreso: "Ingreso trámite",
-                    FechaComienzo: "Comienzo trámite",
-                    Fecha: "Fecha Sesión",
-                    Alumno: "Egresado",
-                    Acta: "   T-F-A-M   "
+                    FechaIngresoAux: "Ingr. trámite",
+                    FechaComienzoAux: "Inic. trámite",
+                    FechaAux: "F. Sesión",
+                    Alumno: "Nombre Completo",
+                    Acta: "   T/F/A/M   "
 				},
-				sortable    : ["Alumno","Acta","NumSesion","Fecha","FechaIngreso","FechaComienzo",],
-				filterable  : ["Alumno","Acta","NumSesion","Fecha","FechaIngreso","FechaComienzo",]
+				sortable    : ["Alumno","Acta","NumSesion","FechaAux","FechaIngresoAux","FechaComienzoAux",],
+				filterable  : ["Alumno","Acta","NumSesion","FechaAux","FechaIngresoAux","FechaComienzoAux",]
             },
         }
 	},
@@ -419,6 +484,7 @@
         this.getExpeditos();
         this.getSesiones();
         this.getModalidades();
+        this.getCalificaciones();
         this.getDocentes();
 	},
 	mounted(){
@@ -451,6 +517,68 @@
             ).catch(error=>{
                 console.log(error);
             })
+        },
+        getCalificaciones()
+        {
+            this.$Progress.start();
+            axios.get("getCalificaciones")
+            .then(data=>
+            {
+                this.calificaciones = data.data.calificaciones;
+                this.$Progress.finish();
+            }
+            ).catch(error=>{
+                console.log(error);
+            })
+        },
+        validafecha()
+        {
+            
+            if(this.expedito.ingreso !=null)
+            {
+                var inicio = this.expedito.ingreso;
+                var final  = '2022-01-01';
+                if(final<=inicio)
+                {
+                    swal({
+                        type: 'warning',
+                        title: 'Ingresar una fecha correcta',
+                       
+                    });
+                    this.expedito.ingreso = null;
+                }
+            }
+             if(this.expedito.comienzo !=null)
+            {
+                var inicio = this.expedito.comienzo;
+                var final  = '2026-01-01';
+                if(final<=inicio)
+                {
+                    swal({
+                        type: 'warning',
+                        title: 'Ingresar una fecha correcta',
+                       
+                    });
+                    this.expedito.comienzo = null;
+                }
+            }
+
+            if(this.expedito.sustentacion !=null)
+            {
+                var inicio = this.expedito.sustentacion;
+                var final  = '2026-01-01';
+                if(final<=inicio)
+                {
+                    swal({
+                        type: 'warning',
+                        title: 'Ingresar una fecha correcta',
+                       
+                    });
+                    this.expedito.sustentacion = null;
+                }
+            }
+            
+            
         },
         buscar(d,c,a)
         {
@@ -485,11 +613,22 @@
             this.expedito.tomo        = null;
             this.expedito.folio       = null;
             this.expedito.asiento     = null;
+            this.expedito.tesis       = null;
+            this.expedito.sustentacion= null;
+            this.expedito.calificacion= null;
+            this.expedito.asesor      = null;
+            this.expedito.modalidad   = null;
             this.expedito.sesion      = null;
             this.expedito.sfecha      = null;
             this.expedito.stipo       = null;
             this.expedito.ingreso     = null;
             this.expedito.comienzo    = null;
+            this.cambiarCancelarTitulo();
+            $("#matricula").val("");
+            $("#egresado").val("");
+            $("#foto").val("");
+            $("#tesis").val("");
+            $("#word").val("");
             $('#objetivo').hide();
             $('#expeditos').show();	
             $('#menos').hide();
@@ -499,15 +638,9 @@
         {
             this.alumno.codigo      = null;
             this.alumno.dni         = null;
-            this.alumno.apellido    = null;
-        },
-        seleccionar(d,c,n,ca)
-        {
-            this.expedito.codigo     = c;
-            this.expedito.dni        = d;
-            this.expedito.alumno     = n;
-            this.expedito.carrera    = ca;
+            this.alumnos.Nombres    = null;
 
+            this.alumnos = [];
         },
         getSesiones()
         {
@@ -553,22 +686,46 @@
             ).catch(error=>{
                 console.log(error);
             })
-		},
+        },
+        cambiarCancelarTitulo(){    
+        document.getElementById('info').innerHTML = 'Ningún archivo seleccionado';
+        document.getElementById('info2').innerHTML = 'Ningún archivo seleccionado';
+        document.getElementById('info3').innerHTML = 'Ningún archivo seleccionado';
+        document.getElementById('info4').innerHTML = 'Ningún archivo seleccionado';
+        document.getElementById('info5').innerHTML = 'Ningún archivo seleccionado';
+        },
 		addExpedito()
-		{
-           
+		{          
+            var chbx1 = $("#chbx1").is(":checked");
+            var chbx2 = $("#chbx2").is(":checked");
+            var chbx3 = $("#chbx3").is(":checked");
+            var chbx4 = $("#chbx4").is(":checked");
+            var IsConsistent = chbx1 && chbx2 && chbx3 && chbx4;
             if( this.expedito.codigo==null || this.expedito.dni==null ||
                 this.expedito.alumno==null || this.expedito.carrera==null ||
                 this.expedito.tomo==null || this.expedito.folio==null || this.expedito.asiento==null ||
                 this.expedito.sesion==null || this.expedito.sfecha==null || this.expedito.stipo==null ||
                 this.expedito.ingreso==null || this.archivos.foto == null || this.archivos.egresado == null || 
-                this.archivos.matricula == null || this.archivos.tesis == null || this.archivos.word==null)
+                this.archivos.matricula == null || this.archivos.tesis == null || this.archivos.word == null || 
+                this.expedito.tesis== null || this.expedito.sustentacion == null || 
+                this.expedito.calificacion == null || this.expedito.asesor == null || 
+                this.expedito.modalidad  == null )
             {
                 swal({
-					type: 'error',
-					title: 'Llenar los datos obligatorios',
+					type: 'warning',
+                    title: 'Llenar los datos obligatorios',
+                    timer: 3000
 				});
             }else{
+                if(!IsConsistent) 
+                {
+                    swal({
+                        type: 'warning',
+                    title: 'Marcar todos los checkbox para continuar',
+                    timer: 3000
+                    });
+                    return;
+                }
                 this.$Progress.start();
                 axios.post("addExpeditoT",{
                     expedito:this.expedito,
@@ -592,8 +749,8 @@
                     console.log(error);	
                     swal({
                         type: 'error',
-                        title: 'Error',
-                        text: 'Comuniquese con un administrador',
+                        //title: 'Error',
+                        text: 'Ocurrió un problema, comuníquese con un administrador',
                         showConfirmButton: true,
                     });
                 })
@@ -613,6 +770,7 @@
                 $('#editar').hide();
                 $('#menos').show();
                 $('#mas').hide();
+                $('#labelInicio').show();
 			}
 			else if(id == '2')
 			{
@@ -624,6 +782,7 @@
                 $('#expeditos').show();	
                 $('#menos').hide();
                 $('#mas').show();
+                $('#labelInicio').hide();
 			}
 			
         },
@@ -718,6 +877,7 @@
                         text: 'El tamaño del archivo debe ser menor o igual a 1mb',
                         showConfirmButton: true,
                     });
+                document.getElementById('info').innerHTML = 'Ningún archivo seleccionado';
                 return;    
             }
             if(type.includes("pdf"))
@@ -755,6 +915,7 @@
                         text: 'El tamaño del archivo debe ser menor o igual a 1mb',
                         showConfirmButton: true,
                     });
+                document.getElementById('info2').innerHTML = 'Ningún archivo seleccionado';
                 return;    
             }
             if(type.includes("pdf"))
@@ -791,6 +952,7 @@
                         text: 'El tamaño del archivo debe ser menor o igual a 1mb',
                         showConfirmButton: true,
                     });
+                document.getElementById('info3').innerHTML = 'Ningún archivo seleccionado';
                 return;    
             }
             if(type.includes("image"))
@@ -819,7 +981,7 @@
         {
             var size = e.target.files[0].size;
             var type = e.target.files[0].type;
-            if(size > 1024001)
+            if(size > 5000001)
             {
                 e.target.value = '';
                 swal({
@@ -828,6 +990,7 @@
                         text: 'El tamaño del archivo debe ser menor o igual a 1mb',
                         showConfirmButton: true,
                     });
+                document.getElementById('info4').innerHTML = 'Ningún archivo seleccionado';
                 return;    
             }
             if(type.includes("pdf"))
@@ -857,7 +1020,7 @@
             var size = e.target.files[0].size;
             var type = e.target.files[0].type;
             console.log(type);
-            if(size > 1024001)
+            if(size > 5000001)
             {
                 e.target.value = '';
                 swal({
@@ -866,6 +1029,7 @@
                         text: 'El tamaño del archivo debe ser menor o igual a 1mb',
                         showConfirmButton: true,
                     });
+                document.getElementById('info5').innerHTML = 'Ningún archivo seleccionado';
                 return;    
             }
             if(type.includes("word"))
@@ -890,7 +1054,7 @@
             }
             
         },
-        edit(IDExpedito,Tipo,CodigoAlumno,Tomo,Folio,Asiento,NumSesion,FechaIngreso,FechaComienzo,IDSesion,Fecha,Escuela,Alumno,DNI,IDModalidad,Modalidad,NombreTesis,Asesor,Calificacion,FechaT)
+        edit(IDExpedito,Tipo,CodigoAlumno,Tomo,Folio,Asiento,NumSesion,FechaIngreso,FechaComienzo,IDSesion,Fecha,Escuela,Alumno,DNI,IDModalidad,Modalidad,NombreTesis,Asesor,IDCalificacion,Calificacion,FechaT)
         {
             $("#objetivo").show();
             $("#expeditos").hide();
@@ -916,7 +1080,7 @@
             this.expedito.comienzo   = FechaComienzo;
             this.expedito.tesis      = NombreTesis;
             this.expedito.sustentacion = FechaT;
-            this.expedito.calificacion = Calificacion;
+            this.expedito.calificacion = IDCalificacion;
             this.expedito.asesor     = Asesor;
             this.expedito.modalidad  = IDModalidad;
         },
@@ -926,7 +1090,7 @@
                 this.expedito.alumno==null || this.expedito.carrera==null ||
                 this.expedito.tomo==null || this.expedito.folio==null || this.expedito.asiento==null ||
                 this.expedito.sesion==null || this.expedito.sfecha==null || this.expedito.stipo==null ||
-                this.expedito.ingreso==null)
+                this.expedito.ingreso==null || this.expedito.tesis== null || this.expedito.sustentacion == null || this.expedito.calificacion == null || this.expedito.asesor == null || this.expedito.modalidad  == null)
             {
                 swal({
                     type: 'warning',

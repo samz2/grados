@@ -25,6 +25,7 @@ Route::get('/error','UsersController@error');
 
 Route::get('/getAnios','DocumentosController@fechas');
 Route::get('/oficio/{id}','DocumentosController@oficio');
+Route::get('/oficio2/{id}','DocumentosController@oficio2');
 Route::post('/addDocumento','DocumentosController@store');
 Route::get('/getDocumentos','DocumentosController@index');
 
@@ -77,5 +78,9 @@ Route::post('/updateDecano','DecanoController@update');
 Route::post('/addModalidad','ModalidadController@store');
 Route::get('/getModalidades','ModalidadController@index');
 Route::post('/updateModalidad','ModalidadController@update');
+
+Route::post('/addCalificacion','CalificacionController@store');
+Route::get('/getCalificaciones','CalificacionController@index');
+Route::post('/updateCalificacion','CalificacionController@update');
 
 Route::get('{path}', 'HomeController@index');

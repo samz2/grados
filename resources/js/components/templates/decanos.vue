@@ -21,7 +21,7 @@
                         <div class="modal-body">
                             <div class="row">
                                 <div class="col-md-4 text-left">
-                                    <label>Decano(*)</label>
+                                    <label>Decano*</label>
                                 </div>
                                 <div class="col-md-8">
                                     <select v-model="decano.decano" class="form-control">
@@ -34,7 +34,7 @@
                             <br>
                             <div class="row">
                                 <div class="col-md-4 text-left">
-                                    <label>Fecha Inicio(*)</label>
+                                    <label>Fecha Inicio*</label>
                                 </div>
                                 <div class="col-md-8">
                                     <input v-model="decano.inicio" @change="validafecha()" type="date" class="form-control">
@@ -43,15 +43,33 @@
                             <br>
                             <div class="row">
                                 <div class="col-md-4 text-left">
-                                    <label>Fecha Fin(*)</label>
+                                    <label>Fecha Fin*</label>
                                 </div>
                                 <div class="col-md-8">
                                     <input v-model="decano.fin" @change="validafecha()" type="date" class="form-control">
                                 </div>    
                             </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-4 text-left">
+                                    <label>Estado*</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <select v-model="decano.estado" class="form-control">
+                                        <option value="ACTIVO">ACTIVO</option>
+                                        <option value="INACTIVO">INACTIVO</option>
+                                    </select>
+                                </div>    
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-12 text-left">
+                                    <label>* Campos obligatorios</label>
+                                </div>                                
+                            </div>
                         <div class="modal-footer">
                             <button @click="addDecano(1)" id="add" class="btn btn-success">Guardar <i class="fa fa-save"></i></button>
-                            <button @click="addDecano(2)" id="editar" class="btn btn-success">Editar <i class="far fa-edit"></i></button>
+                            <button @click="addDecano(2)" id="editar" class="btn btn-success">Guardar <i class="fa fa-save"></i></button>
                             <button type="button" class="btn btn-danger" @click="load()" data-dismiss="modal">Cancelar <i class="fas fa-times"></i></button>
                         </div>
                         </div>
@@ -70,7 +88,7 @@
                             <div class="content table-responsive table-full-width">
                                 <v-client-table :data="decanos" :columns="columns" :options="options">
                                     <div slot="Acciones" slot-scope="props">
-                                     <button data-target="#exampleModal" class="btn btn-info" data-toggle="modal" v-on:click="edit(props.row.IDDecano,props.row.CodDocente,props.row.PeriodoInicio,props.row.PeriodoFin )" data-placement="left" style="color: white" title="Editar">Editar <i class="fas fa-edit" style="color: white" aria-hidden="true"></i></button>
+                                     <button data-target="#exampleModal" class="btn btn-info" data-toggle="modal" v-on:click="edit(props.row.IDDecano,props.row.CodDocente,props.row.PeriodoInicio,props.row.PeriodoFin,props.row.Estado)" data-placement="left" style="color: white" title="Editar">Editar <i class="fas fa-edit" style="color: white" aria-hidden="true"></i></button>
                                     </div>
                                 </v-client-table>
                             </div>
@@ -91,6 +109,7 @@
                 decano:null,
                 inicio:null,
                 fin:null,
+                estado:null,
             },
             decanos	:[{
                 IDDecano:null,
@@ -98,17 +117,19 @@
                 CodDocente:null,
                 FechaInicioAux:null,
                 FechaFinAux:null,
+                Estado:null,
             }],
-            columns: ["auxDecano","FechaInicioAux","FechaFinAux","Acciones"],
+            columns: ["auxDecano","FechaInicioAux","FechaFinAux","Estado","Acciones"],
             options: {
 				headings:
 				{
                     auxDecano:"Decano",
                     FechaInicioAux:"Fecha de Inicio",
                     FechaFinAux:"Fecha de Fin",
+                    Estado:"Estado",
 				},
-				sortable    : ["auxDecano","FechaInicioAux","FechaFinAux"],
-				filterable  : ["auxDecano","FechaInicioAux","FechaFinAux"]
+				sortable    : ["auxDecano","FechaInicioAux","FechaFinAux","Estado"],
+				filterable  : ["auxDecano","FechaInicioAux","FechaFinAux","Estado"]
             },
             docentes:[]
         }
@@ -149,7 +170,7 @@
         addDecano(e)
 		{
             if(this.decano.decano == null||  
-               this.decano.inicio == null || this.decano.fin == null)
+               this.decano.inicio == null || this.decano.fin == null || this.decano.estado == null)
             {
                 swal({
                     type: 'warning',
@@ -240,8 +261,9 @@
                 this.decano.decano      = null;
                 this.decano.inicio      = null;
                 this.decano.fin         = null;
+                this.decano.estado         = null;
         },        
-		edit(IDDecano,CodDocente,PeriodoInicio,PeriodoFin)
+		edit(IDDecano,CodDocente,PeriodoInicio,PeriodoFin,Estado)
 		{
             $('#editar').show();
             $('#add').hide();
@@ -249,6 +271,7 @@
             this.decano.decano      = CodDocente;
             this.decano.inicio      = PeriodoInicio;
             this.decano.fin         = PeriodoFin;
+            this.decano.estado      = Estado;
                
 		},
         

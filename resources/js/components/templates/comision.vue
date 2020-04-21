@@ -21,7 +21,7 @@
                         <div class="modal-body">
                             <div class="row">
                                 <div class="col-md-4 text-left">
-                                    <label>Semestre(*)</label>
+                                    <label>Semestre*</label>
                                 </div>
                                 <div class="col-md-8">
                                     <input v-model="comision.semestre" style="text-transform:uppercase" type="text" maxlength="7" class="form-control" onKeyPress="return soloSemestre(event)">
@@ -30,7 +30,7 @@
                             <br>
                             <div class="row">
                                 <div class="col-md-4 text-left">
-                                    <label>Presidente(*)</label>
+                                    <label>Presidente*</label>
                                 </div>
                                 <div class="col-md-8">
                                     <select v-model="comision.presidente" @change="valida()" class="form-control">
@@ -43,7 +43,7 @@
                             <br>
                             <div class="row">
                                 <div class="col-md-4 text-left">
-                                    <label>Miembro 1(*)</label>
+                                    <label>Miembro 1*</label>
                                 </div>
                                 <div class="col-md-8">
                                     <select v-model="comision.miembro1" @change="valida()" class="form-control">
@@ -56,7 +56,7 @@
                             <br>
                             <div class="row">
                                 <div class="col-md-4 text-left">
-                                    <label>Miembro 2(*)</label>
+                                    <label>Miembro 2*</label>
                                 </div>
                                 <div class="col-md-8">
                                     <select v-model="comision.miembro2" @change="valida()" class="form-control">
@@ -69,7 +69,7 @@
                             <br>
                             <div class="row">
                                 <div class="col-md-4 text-left">
-                                    <label>Fecha Inicio(*)</label>
+                                    <label>Fecha Inicio*</label>
                                 </div>
                                 <div class="col-md-8">
                                     <input v-model="comision.inicio" @change="validafecha()" type="date" class="form-control">
@@ -78,7 +78,7 @@
                             <br>
                             <div class="row">
                                 <div class="col-md-4 text-left">
-                                    <label>Fecha Fin(*)</label>
+                                    <label>Fecha Fin*</label>
                                 </div>
                                 <div class="col-md-8">
                                     <input v-model="comision.fin" @change="validafecha()" type="date" class="form-control">
@@ -87,7 +87,7 @@
                             <br>
                             <div class="row">
                                 <div class="col-md-4 text-left">
-                                    <label>Estado(*)</label>
+                                    <label>Estado*</label>
                                 </div>
                                 <div class="col-md-8">
                                     <select v-model="comision.estado" class="form-control">
@@ -97,9 +97,14 @@
                                 </div>    
                             </div>
                             <br>
+                            <div class="row">
+                                <div class="col-md-12 text-left">
+                                    <label>* Campos obligatorios</label>
+                                </div>                                
+                            </div>
                         <div class="modal-footer">
                             <button @click="addComision(1)" id="add" class="btn btn-success">Guardar <i class="fa fa-save"></i></button>
-                            <button @click="addComision(2)" id="editar" class="btn btn-success">Editar <i class="far fa-edit"></i></button>
+                            <button @click="addComision(2)" id="editar" class="btn btn-success">Guardar <i class="fa fa-save"></i></button>
                             <button type="button" class="btn btn-danger" @click="load()" data-dismiss="modal">Cancelar <i class="fas fa-times"></i></button>
                         </div>
                         </div>

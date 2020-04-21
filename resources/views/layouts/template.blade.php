@@ -16,7 +16,24 @@
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<style>
+<style>     
+
+.subir{
+    padding: 2px 30px;
+    background-color: rgba(170, 220, 250, 1);
+    color:#000;
+    border:0px solid #fff;
+
+    border-radius: 131px 131px 131px 131px;
+    -moz-border-radius: 131px 131px 131px 131px;
+    -webkit-border-radius: 131px 131px 131px 131px;
+    border: 0px solid #000000;
+}
+ 
+.subir:hover{
+    color:#fff;
+    background: #f7cb15;
+}
   .blanco
   {
     color: #ffffff;
@@ -100,7 +117,7 @@
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-dark-primary elevation-4" >
+  <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color: powderblue !important;">
     <!-- Brand Logo -->
     <router-link to="/home" class="brand-link">
         <!--<img src="" alt="GyT" class="brand-image img-circle elevation-3"> -->
@@ -139,45 +156,50 @@
                   <ul class="nav nav-treeview">
                     <li class="nav-item">
                       <router-link to="docentes" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
+                             <i class="fas fa-user-tie"></i>
                         <p>Docentes</p>
                       </router-link>
                     </li>
                     <li class="nav-item">
                       <router-link to="estados" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
+                             <i class="fas fa-chart-line"></i>
                         <p>Estados</p>
                       </router-link>
                     </li>
                     <li class="nav-item">
                       <router-link to="sesion" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Sesión</p>
+                             <i class="far fa-calendar-alt"></i>
+                         <p>Sesión</p>
                       </router-link>
                     </li>
                     <li class="nav-item">
                       <router-link to="carreras" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
+                             <i class="fas fa-school"></i>
                         <p>Carrera</p>
                       </router-link>
                     </li>
                     <li class="nav-item">
                       <router-link to="comisiones" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
+                             <i class="fas fa-users"></i>
                         <p>Comisión</p>
                       </router-link>
                     </li>
                     <li class="nav-item">
                       <router-link to="decano" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Decano</p>
+                             <i class="fas fa-user-tie"></i>
+                      <p>Decano</p>
                       </router-link>
                     </li>
                     <li class="nav-item">
                       <router-link to="modalidad" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Modalidad</p>
+                            <i class="far fa-list-alt"></i>
+                      <p>Modalidad</p>
                       </router-link>
+                      <li class="nav-item">
+                        <router-link to="calificacion" class="nav-link">
+                              <i class="far fa-list-alt"></i>
+                        <p>Calificación</p>
+                        </router-link>
                     </li>
                     <!--<li class="nav-item">
                       <router-link to="usuarios" class="nav-link">
@@ -198,7 +220,7 @@
                   <ul class="nav nav-treeview">
                     <li class="nav-item">
                       <router-link to="egresados" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
+                            <i class="fas fa-user-graduate"></i>
                         <p>Egresados</p>
                       </router-link>
                     </li>
@@ -222,13 +244,13 @@
                     </li>-->
                     <li class="nav-item">
                       <router-link to="expeditobachiller" class="nav-link">
-                        <i class="far fa-circle fa-1x nav-icon"></i>
+                              <i class="fas fa-copy"></i>
                         <p>Expedito Bachiller</p>
                       </router-link>
                     </li>
                     <li class="nav-item">
                       <router-link to="expeditotitulo" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
+                              <i class="fas fa-copy"></i>
                         <p>Expedito Título</p>
                       </router-link>
                     </li>
@@ -297,7 +319,8 @@
 <!-- ./wrapper -->
 
 <!-- jQuery -->
-<script src="plugins/jquery/jquery.min.js"></script>
+<script src="plugins/jquery/jquery.min.js">
+</script>
 <!-- jQuery UI 1.11.4 -->
 {{-- <script src="plugins/jquery-ui/jquery-ui.min.js"></script> --}}
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
@@ -309,27 +332,93 @@
 <!-- ChartJS -->
 <script src="dist/js/adminlte.js"></script>
 <script src="{{ asset('js/app.js') }}" defer></script>
+
 <script type="text/javascript">
-  // Solo permite ingresar numeros.
-  function soloNumeros(e){
-    var key = window.Event ? e.which : e.keyCode
-    return (key >= 48 && key <= 57)
-  }
   
+
 </script>
+
+
 <script type="text/javascript">
-  function solonumeros(event)
+
+function cambiarMatriculaBachiller(){
+    var pdrs = document.getElementById('matricula').files[0].name;
+    document.getElementById('info').innerHTML = pdrs;
+}
+function cambiarEgresadoBachiller(){
+    var pdrs = document.getElementById('egresado').files[0].name;
+    document.getElementById('info2').innerHTML = pdrs;
+}
+function cambiarFotoBachiller(){
+    var pdrs = document.getElementById('foto').files[0].name;
+    document.getElementById('info3').innerHTML = pdrs;
+}
+
+
+function cambiarMatriculaTitulo(){
+    var pdrs = document.getElementById('matricula').files[0].name;
+    document.getElementById('info').innerHTML = pdrs;
+}
+function cambiarEgresadoTitulo(){
+    var pdrs = document.getElementById('egresado').files[0].name;
+    document.getElementById('info2').innerHTML = pdrs;
+}
+function cambiarFotoTitulo(){
+    var pdrs = document.getElementById('foto').files[0].name;
+    document.getElementById('info3').innerHTML = pdrs;
+}
+function cambiarTesisTitulo(){
+    var pdrs = document.getElementById('tesis').files[0].name;
+    document.getElementById('info4').innerHTML = pdrs;
+}
+function cambiarWordTitulo(){
+    var pdrs = document.getElementById('word').files[0].name;
+    document.getElementById('info5').innerHTML = pdrs;
+}
+
+function pulsar(e) {
+    if (e.keyCode === 13 && !e.shiftKey) {
+        e.preventDefault();
+        var boton = document.getElementById("boton");
+        angular.element(boton).triggerHandler('click');
+    }
+}
+
+//function cambiarCancelarBachiller(){
+    //var pdrs = document.getElementById('file-upload').files[0].name;
+    //document.getElementById('info').innerHTML = 'Ningún archivo seleccionado';
+    //document.getElementById('info2').innerHTML = 'Ningún archivo seleccionado';
+    //document.getElementById('info3').innerHTML = 'Ningún archivo seleccionado';
+//}
+
+  function soloNumeros(event)
   {
     return event.charCode >= 48 && event.charCode <= 57
   }
-  //function sololetras(event)
-  //{
-    //return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode == 239 || event.charCode == 164 || event.charCode == 165) || (event.charCode >= 97 && event.charCode <= 122) || event.charCode <= 39)
-  //}
+
   function soloLetras(e){
        key = e.keyCode || e.which;
        tecla = String.fromCharCode(key).toLowerCase();
        letras = " áéíóúabcdefghijklmnñopqrstuvwxyz'";
+       especiales = "8-37-38-46-164";
+
+       tecla_especial = false
+       for(var i in especiales){
+            if(key == especiales[i]){
+                tecla_especial = true;
+                break;
+            }
+        }
+
+        if(letras.indexOf(tecla)==-1 && !tecla_especial){
+            return false;
+        }
+    }
+
+    function soloTesis(e){
+       key = e.keyCode || e.which;
+       tecla = String.fromCharCode(key).toLowerCase();
+       letras = " áéíóúabcdefghijklmnñopqrstuvwxyz'-_0123456789.,;:/()";
        especiales = "8-37-38-46-164";
 
        tecla_especial = false
@@ -363,6 +452,8 @@
             return false;
         }
     }
+    
+    
 
     function soloCodigoDocente(e){
        key = e.keyCode || e.which;
@@ -411,6 +502,8 @@
   {
     return ((event.charCode >= 48 && event.charCode <= 57) || event.charCode == 45)
   }
+
+
 </script>	
 </body>
 </html>

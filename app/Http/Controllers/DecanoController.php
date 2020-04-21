@@ -45,6 +45,7 @@ class DecanoController extends Controller
             $decano->CodDocente     = $request->decano["decano"];
             $decano->PeriodoInicio  = $request->decano["inicio"];
             $decano->PeriodoFin     = $request->decano["fin"];
+            $decano->Estado         = $request->decano["estado"];
             $decano->save();
             $type   = "success";
             //$title  = "Bien";
@@ -92,6 +93,7 @@ class DecanoController extends Controller
             "CodDocente"  => $request->decano["decano"],
             "PeriodoInicio"  => $request->decano["inicio"],
             "PeriodoFin"  => $request->decano["fin"],
+            "Estado"  => $request->decano["estado"],
         ]);
 
         if($decano)
