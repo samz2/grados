@@ -64,7 +64,7 @@
                         <div class="card-body">
                             <div class="content table-responsive table-full-width">
                                 <v-client-table :data="estados" :columns="columns" :options="options">
-                                    <div slot="Acciones" slot-scope="props">
+                                    <div slot="Accion" slot-scope="props">
                                      <button data-target="#exampleModal" class="btn btn-info" data-toggle="modal" style="color: white" v-on:click="edit(props.row.IDEstado,props.row.Posicion,props.row.Estado)" data-placement="left" title="Editar">Editar <i class="fas fa-edit" style="color: white" aria-hidden="true"></i></button>
                                     </div>
                                 </v-client-table>
@@ -91,7 +91,7 @@
                 Posicion:null,
                 Estado:null,
             }],
-            columns: ["Posicion","Estado","Acciones"],
+            columns: ["Posicion","Estado","Accion"],
             options: {
 				headings:
 				{
@@ -144,7 +144,7 @@
                         title: data.data.title,
                         text: data.data.text,
                         showConfirmButton: false,
-                        timer: 2000
+                        timer: 3000
                     });
                     this.$Progress.finish();
                     this.getDatos();
@@ -154,8 +154,8 @@
                     console.log(error);	
                     swal({
                         type: 'error',
-                        title: 'Ocurrió un problema',
-                        text: 'Comuniquese con un administrador',
+                        title: 'Ha ocurrido un error',
+                        text: 'Comuníquese con un administrador',
                         showConfirmButton: true,
                     });
                 })
@@ -169,7 +169,7 @@
                         title: data.data.title,
                         text: data.data.text,
                         showConfirmButton: false,
-                        timer: 2000
+                        timer: 3000
                     });
                     this.$Progress.finish();
                     this.getDatos();
@@ -178,8 +178,8 @@
                     console.log(error);	
                     swal({
                         type: 'error',
-                        title: 'Ocurrió un problema',
-                        text: 'Comuniquese con un administrador',
+                        title: 'Ha ocurrido un error',
+                        text: 'Comuníquese con un administrador',
                         showConfirmButton: true,
                     });
                 })

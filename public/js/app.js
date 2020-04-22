@@ -3072,7 +3072,7 @@ __webpack_require__.r(__webpack_exports__);
         IDCalificacion: null,
         Calificacion: null
       }],
-      columns: ["IDCalificacion", "Calificacion", "Acciones"],
+      columns: ["IDCalificacion", "Calificacion", "Accion"],
       options: {
         headings: {
           IDCalificacion: "ID",
@@ -3108,8 +3108,8 @@ __webpack_require__.r(__webpack_exports__);
 
       if (this.calificacion.calificacion == null) {
         swal({
-          type: 'error',
-          title: 'Llenar los datos obligatorios'
+          type: 'warning',
+          title: 'Llenar el campo obligatorio'
         });
       } else if (e == 1) {
         this.$Progress.start();
@@ -3121,7 +3121,7 @@ __webpack_require__.r(__webpack_exports__);
             title: data.data.title,
             text: data.data.text,
             showConfirmButton: false,
-            timer: 2000
+            timer: 3000
           });
 
           _this2.$Progress.finish();
@@ -3135,8 +3135,8 @@ __webpack_require__.r(__webpack_exports__);
           console.log(error);
           swal({
             type: 'error',
-            title: 'Error',
-            text: 'Comuniquese con un administrador',
+            title: 'Ha ocurrido un error',
+            text: 'Comuníquese con un administrador',
             showConfirmButton: true
           });
         });
@@ -3150,7 +3150,7 @@ __webpack_require__.r(__webpack_exports__);
             title: data.data.title,
             text: data.data.text,
             showConfirmButton: false,
-            timer: 2000
+            timer: 3000
           });
 
           _this2.$Progress.finish();
@@ -3164,8 +3164,8 @@ __webpack_require__.r(__webpack_exports__);
           console.log(error);
           swal({
             type: 'error',
-            title: 'Error',
-            text: 'Comuniquese con un administrador',
+            title: 'Ha ocurrido un error',
+            text: 'Comuníquese con un administrador',
             showConfirmButton: true
           });
         });
@@ -3276,7 +3276,7 @@ __webpack_require__.r(__webpack_exports__);
         IDEscuela: null,
         Escuela: null
       }],
-      columns: ["Escuela", "Acciones"],
+      columns: ["Escuela", "Accion"],
       options: {
         headings: {
           Escuela: "Nombre Carrera"
@@ -3311,7 +3311,7 @@ __webpack_require__.r(__webpack_exports__);
       if (this.carrera.carrera == null) {
         swal({
           type: 'warning',
-          title: 'Llenar los campos obligatorios',
+          title: 'Llenar el campo obligatorio',
           //allowOutsideClick: false,
           timer: 3000
         });
@@ -3325,7 +3325,7 @@ __webpack_require__.r(__webpack_exports__);
             title: data.data.title,
             text: data.data.text,
             showConfirmButton: false,
-            timer: 2000
+            timer: 4000
           });
 
           _this2.$Progress.finish();
@@ -3339,8 +3339,8 @@ __webpack_require__.r(__webpack_exports__);
           console.log(error);
           swal({
             type: 'error',
-            title: 'Ocurrió un problema',
-            text: 'Comuniquese con un administrador',
+            title: "Ha ocurrido un error",
+            text: "Contáctese con un administrador",
             showConfirmButton: true
           });
         });
@@ -3354,7 +3354,7 @@ __webpack_require__.r(__webpack_exports__);
             title: data.data.title,
             text: data.data.text,
             showConfirmButton: false,
-            timer: 2000
+            timer: 4000
           });
 
           _this2.$Progress.finish();
@@ -3366,8 +3366,8 @@ __webpack_require__.r(__webpack_exports__);
           console.log(error);
           swal({
             type: 'error',
-            title: 'Ocurrió un problema',
-            text: 'Comuniquese con un administrador',
+            title: "Ha ocurrido un error",
+            text: "Contáctese con un administrador",
             showConfirmButton: true
           });
         });
@@ -3562,7 +3562,7 @@ __webpack_require__.r(__webpack_exports__);
         FechaFinAux: null,
         Estado: null
       }],
-      columns: ["Semestre", "auxPresidente", "auxMiembro1", "auxMiembro2", "FechaInicioAux", "FechaFinAux", "Estado", "Acciones"],
+      columns: ["Semestre", "auxPresidente", "auxMiembro1", "auxMiembro2", "FechaInicioAux", "FechaFinAux", "Estado", "Accion"],
       options: {
         headings: {
           Semestre: "Semestre",
@@ -3623,7 +3623,8 @@ __webpack_require__.r(__webpack_exports__);
         if (this.comision.inicio >= this.comision.fin) {
           swal({
             type: 'warning',
-            title: 'La fecha de inicio no puede ser mayor a la fecha de fin'
+            title: 'Ha ocurrido un error',
+            text: 'La fecha de inicio no puede ser mayor a la fecha de fin'
           });
           this.comision.inicio = null;
           this.comision.fin = null;
@@ -3637,7 +3638,7 @@ __webpack_require__.r(__webpack_exports__);
               title: data.data.title,
               text: data.data.text,
               showConfirmButton: false,
-              timer: 2000
+              timer: 3000
             });
 
             _this3.$Progress.finish();
@@ -3651,8 +3652,8 @@ __webpack_require__.r(__webpack_exports__);
             console.log(error);
             swal({
               type: 'error',
-              title: 'Ocurrió un problema',
-              text: 'Comuniquese con un administrador',
+              title: 'Ha ocurrido un error',
+              text: 'Comuníquese con un administrador',
               showConfirmButton: true
             });
           });
@@ -3661,7 +3662,8 @@ __webpack_require__.r(__webpack_exports__);
         if (this.comision.inicio >= this.comision.fin) {
           swal({
             type: 'warning',
-            title: 'La fecha de inicio no puede ser mayor a la fecha de fin'
+            title: 'Ha ocurrido un error',
+            text: 'La fecha de inicio no puede ser mayor a la fecha de fin'
           });
           this.comision.inicio = null;
           this.comision.fin = null;
@@ -3675,7 +3677,7 @@ __webpack_require__.r(__webpack_exports__);
               title: data.data.title,
               text: data.data.text,
               showConfirmButton: false,
-              timer: 2000
+              timer: 3000
             });
 
             _this3.$Progress.finish();
@@ -3689,8 +3691,8 @@ __webpack_require__.r(__webpack_exports__);
             console.log(error);
             swal({
               type: 'error',
-              title: 'Ocurrió un problema',
-              text: 'Comuniquese con un administrador',
+              title: 'Ha ocurrido un error',
+              text: 'Comuníquese con un administrador',
               showConfirmButton: true
             });
           });
@@ -3728,8 +3730,8 @@ __webpack_require__.r(__webpack_exports__);
 
       if (this.comision.presidente == this.comision.miembro1) {
         swal({
-          type: 'error',
-          //title: 'Error',
+          type: 'warning',
+          title: 'Ha ocurrido un error',
           text: 'Presidente debe ser diferente al Miembro 1',
           showConfirmButton: true
         });
@@ -3739,8 +3741,8 @@ __webpack_require__.r(__webpack_exports__);
 
       if (this.comision.miembro1 == this.comision.miembro2) {
         swal({
-          type: 'error',
-          //title: 'Error',
+          type: 'warning',
+          title: 'Ha ocurrido un error',
           text: 'Miembro 1 debe ser diferente al Miembro 2',
           showConfirmButton: true
         });
@@ -3750,8 +3752,8 @@ __webpack_require__.r(__webpack_exports__);
 
       if (this.comision.presidente == this.comision.miembro2) {
         swal({
-          type: 'error',
-          //title: 'Error',
+          type: 'warning',
+          title: 'Ha ocurrido un error',
           text: 'Presidente debe ser diferente al Miembro 2',
           showConfirmButton: true
         });
@@ -3935,7 +3937,7 @@ __webpack_require__.r(__webpack_exports__);
         FechaFinAux: null,
         Estado: null
       }],
-      columns: ["auxDecano", "FechaInicioAux", "FechaFinAux", "Estado", "Acciones"],
+      columns: ["auxDecano", "FechaInicioAux", "FechaFinAux", "Estado", "Accion"],
       options: {
         headings: {
           auxDecano: "Decano",
@@ -3994,7 +3996,8 @@ __webpack_require__.r(__webpack_exports__);
         if (this.decano.inicio >= this.decano.fin) {
           swal({
             type: 'warning',
-            title: 'La fecha de inicio no puede ser mayor a la fecha de fin'
+            title: 'Ha ocurrido un error',
+            text: 'La fecha de inicio no puede ser mayor a la fecha de fin'
           });
           this.decano.inicio = null;
           this.decano.fin = null;
@@ -4008,7 +4011,7 @@ __webpack_require__.r(__webpack_exports__);
               title: data.data.title,
               text: data.data.text,
               showConfirmButton: false,
-              timer: 2000
+              timer: 3000
             });
 
             _this3.$Progress.finish();
@@ -4022,8 +4025,8 @@ __webpack_require__.r(__webpack_exports__);
             console.log(error);
             swal({
               type: 'error',
-              title: 'Ocurrió un problema',
-              text: 'Comuniquese con un administrador',
+              title: 'Ha ocurrido un error',
+              text: 'Comuníquese con un administrador',
               showConfirmButton: true
             });
           });
@@ -4032,7 +4035,8 @@ __webpack_require__.r(__webpack_exports__);
         if (this.decano.inicio >= this.decano.fin) {
           swal({
             type: 'warning',
-            title: 'La fecha de inicio no puede ser mayor a la fecha de fin'
+            title: 'Ha ocurrido un error',
+            text: 'La fecha de inicio no puede ser mayor a la fecha de fin'
           });
           this.decano.inicio = null;
           this.decano.fin = null;
@@ -4046,7 +4050,7 @@ __webpack_require__.r(__webpack_exports__);
               title: data.data.title,
               text: data.data.text,
               showConfirmButton: false,
-              timer: 2000
+              timer: 3000
             });
 
             _this3.$Progress.finish();
@@ -4060,8 +4064,8 @@ __webpack_require__.r(__webpack_exports__);
             console.log(error);
             swal({
               type: 'error',
-              title: 'Ocurrió un problema',
-              text: 'Comuniquese con un administrador',
+              title: 'Ha ocurrido un error',
+              text: 'Comuníquese con un administrador',
               showConfirmButton: true
             });
           });
@@ -4464,7 +4468,7 @@ __webpack_require__.r(__webpack_exports__);
         Categoria: null
       }],
       //columns: ["DNI","Codigo","Nombres","Apellidos","Celular","Categoria","Dedicacion","Escuela","Acciones"],
-      columns: ["DNI", "Codigo", "NombreAux", "Celular", "Categoria", "Dedicacion", "Escuela", "Acciones"],
+      columns: ["DNI", "Codigo", "NombreAux", "Celular", "Categoria", "Dedicacion", "Escuela", "Accion"],
       options: {
         headings: {
           DNI: "DNI",
@@ -4544,7 +4548,7 @@ __webpack_require__.r(__webpack_exports__);
             title: data.data.title,
             text: data.data.text,
             showConfirmButton: false,
-            timer: 2000
+            timer: 3000
           });
 
           _this3.$Progress.finish();
@@ -4557,8 +4561,8 @@ __webpack_require__.r(__webpack_exports__);
           console.log(error);
           swal({
             type: "error",
-            title: "Ocurrió un problema",
-            text: "Comuniquese con un administrador",
+            title: "Ha ocurrido un error",
+            text: "Comuníquese con un administrador",
             showConfirmButton: true
           });
         });
@@ -4572,7 +4576,7 @@ __webpack_require__.r(__webpack_exports__);
             title: data.data.title,
             text: data.data.text,
             showConfirmButton: false,
-            timer: 2000
+            timer: 3000
           });
 
           _this3.$Progress.finish();
@@ -4585,7 +4589,7 @@ __webpack_require__.r(__webpack_exports__);
           console.log(error);
           swal({
             type: "error",
-            title: "Ocurrió un problema",
+            title: "Ha ocurrido un error",
             text: "Comuníquese con un administrador",
             showConfirmButton: true
           });
@@ -5382,7 +5386,7 @@ __webpack_require__.r(__webpack_exports__);
             title: data.data.title,
             text: data.data.msj,
             showConfirmButton: false,
-            timer: 2000
+            timer: 3000
           });
 
           _this3.$Progress.finish();
@@ -5399,8 +5403,8 @@ __webpack_require__.r(__webpack_exports__);
           console.log(error);
           swal({
             type: "error",
-            title: "Ocurrió un problema",
-            text: "Comuniquese con un administrador",
+            title: "Ha ocurrido un error",
+            text: "Comuníquese con un administrador",
             showConfirmButton: true
           });
         });
@@ -5415,7 +5419,7 @@ __webpack_require__.r(__webpack_exports__);
             title: data.data.title,
             text: data.data.msj,
             showConfirmButton: false,
-            timer: 2000
+            timer: 3000
           });
 
           _this3.$Progress.finish();
@@ -5429,8 +5433,8 @@ __webpack_require__.r(__webpack_exports__);
           console.log(error);
           swal({
             type: "error",
-            title: "Ocurrió un problema",
-            text: "Comuniquese con un administrador",
+            title: "Ha ocurrido un error",
+            text: "Comuníquese con un administrador",
             showConfirmButton: true
           });
         });
@@ -5470,14 +5474,14 @@ __webpack_require__.r(__webpack_exports__);
         if (result.value) {
           axios.get("/deleteEgresado/".concat(id)).then(function (data) {
             if (data.data == "OK") {
-              swal("Egresado eliminado con éxito", "", "success");
+              swal("¡Buen trabajo!", "Egresado eliminado con éxito", "success");
 
               _this4.$Progress.finish();
 
               _this4.getDatos();
             }
           })["catch"](function (error) {
-            console.log("Ocurrió un problema " + error);
+            console.log("Ha ocurrido un error " + error);
 
             _this4.$Progress.fail();
           });
@@ -5660,7 +5664,7 @@ __webpack_require__.r(__webpack_exports__);
         Posicion: null,
         Estado: null
       }],
-      columns: ["Posicion", "Estado", "Acciones"],
+      columns: ["Posicion", "Estado", "Accion"],
       options: {
         headings: {
           Posicion: "Posición",
@@ -5710,7 +5714,7 @@ __webpack_require__.r(__webpack_exports__);
             title: data.data.title,
             text: data.data.text,
             showConfirmButton: false,
-            timer: 2000
+            timer: 3000
           });
 
           _this2.$Progress.finish();
@@ -5724,8 +5728,8 @@ __webpack_require__.r(__webpack_exports__);
           console.log(error);
           swal({
             type: 'error',
-            title: 'Ocurrió un problema',
-            text: 'Comuniquese con un administrador',
+            title: 'Ha ocurrido un error',
+            text: 'Comuníquese con un administrador',
             showConfirmButton: true
           });
         });
@@ -5739,7 +5743,7 @@ __webpack_require__.r(__webpack_exports__);
             title: data.data.title,
             text: data.data.text,
             showConfirmButton: false,
-            timer: 2000
+            timer: 3000
           });
 
           _this2.$Progress.finish();
@@ -5751,8 +5755,8 @@ __webpack_require__.r(__webpack_exports__);
           console.log(error);
           swal({
             type: 'error',
-            title: 'Ocurrió un problema',
-            text: 'Comuniquese con un administrador',
+            title: 'Ha ocurrido un error',
+            text: 'Comuníquese con un administrador',
             showConfirmButton: true
           });
         });
@@ -6345,7 +6349,8 @@ __webpack_require__.r(__webpack_exports__);
         if (data.data.alumnos[0] == null) {
           swal({
             type: "error",
-            title: "No se encontraron registros"
+            title: "Ha ocurrido un error",
+            text: "No se encontraron registros"
           });
         } else {
           _this.alumnos = data.data.alumnos[0];
@@ -6425,7 +6430,7 @@ __webpack_require__.r(__webpack_exports__);
         e.target.value = "";
         swal({
           type: "error",
-          title: 'Ocurrió un problema',
+          title: 'Ha ocurrido un error',
           text: "El tamaño del archivo debe ser menor o igual a 1MB",
           showConfirmButton: true
         });
@@ -6446,7 +6451,7 @@ __webpack_require__.r(__webpack_exports__);
         this.archivos.matricula = null;
         swal({
           type: "error",
-          //title: 'Error',
+          title: 'Ha ocurrido un error',
           text: "El archivo debe ser PDF, por favor intente subiendo otro archivo",
           showConfirmButton: true
         });
@@ -6463,7 +6468,7 @@ __webpack_require__.r(__webpack_exports__);
         e.target.value = "";
         swal({
           type: "error",
-          title: 'Ocurrió un problema',
+          title: 'Ha ocurrido un error',
           text: "El tamaño del archivo debe ser menor o igual a 1MB",
           showConfirmButton: true
         });
@@ -6484,7 +6489,7 @@ __webpack_require__.r(__webpack_exports__);
         e.target.value = "";
         swal({
           type: "error",
-          //title: 'Error',
+          title: 'Ha ocurrido un error',
           text: "El archivo debe ser PDF, por favor intente subiendo otro archivo",
           showConfirmButton: true
         });
@@ -6501,7 +6506,7 @@ __webpack_require__.r(__webpack_exports__);
         e.target.value = "";
         swal({
           type: "error",
-          title: 'Ocurrió un problema',
+          title: 'Ha ocurrido un error',
           text: "El tamaño del archivo debe ser menor o igual a 1MB",
           showConfirmButton: true
         });
@@ -6522,7 +6527,7 @@ __webpack_require__.r(__webpack_exports__);
         e.target.value = "";
         swal({
           type: "error",
-          //title: 'Error',
+          title: 'Ha ocurrido un error',
           text: "El archivo debe ser una imagen, por favor intente subiendo otro archivo",
           showConfirmButton: true
         });
@@ -6567,10 +6572,10 @@ __webpack_require__.r(__webpack_exports__);
           swal({
             // position: 'top-end',
             type: data.data.type,
-            // title: data.data.title,
+            title: data.data.title,
             text: data.data.text,
             showConfirmButton: false,
-            timer: 2000
+            timer: 3000
           });
 
           _this8.$Progress.finish(); // setTimeout(() => {
@@ -6585,8 +6590,8 @@ __webpack_require__.r(__webpack_exports__);
           console.log(error);
           swal({
             type: "error",
-            //title: 'Error',
-            text: "Ocurrió un problema, comuníquese con un administrador",
+            title: 'Ha ocurrido un error',
+            text: "Comuníquese con un administrador",
             showConfirmButton: true
           });
         });
@@ -6661,7 +6666,7 @@ __webpack_require__.r(__webpack_exports__);
           if (result.value) {
             axios.get("/updateExpedito/" + id + "/" + tipo).then(function (data) {
               if (data.data == "OK") {
-                swal("¡Actualizado!", "El Expedito está ahora En Proceso", "success");
+                swal("¡Buen trabajo!", "El Expedito está ahora En Proceso", "success");
 
                 _this9.$Progress.finish();
 
@@ -6670,7 +6675,7 @@ __webpack_require__.r(__webpack_exports__);
                 }, 2000);
               }
             })["catch"](function (error) {
-              console.log("Ocurrió un problema " + error);
+              console.log("Ocurrió un error " + error);
 
               _this9.$Progress.fail();
             });
@@ -6690,7 +6695,7 @@ __webpack_require__.r(__webpack_exports__);
           if (result.value) {
             axios.get("/updateExpedito/" + id + "/" + tipo).then(function (data) {
               if (data.data == "OK") {
-                swal("¡Actualizado!", "El Expedito cambió a Finalizado.", "success");
+                swal("¡Buen trabajo!", "El Expedito cambió a Finalizado.", "success");
 
                 _this9.$Progress.finish();
 
@@ -6699,7 +6704,7 @@ __webpack_require__.r(__webpack_exports__);
                 }, 2000);
               }
             })["catch"](function (error) {
-              console.log("Ocurrió un problema " + error);
+              console.log("Ocurrió un error " + error);
 
               _this9.$Progress.fail();
             });
@@ -6747,9 +6752,10 @@ __webpack_require__.r(__webpack_exports__);
         }).then(function (data) {
           swal({
             type: data.data.type,
+            title: data.data.title,
             text: data.data.text,
             showConfirmButton: false,
-            timer: 2000
+            timer: 3000
           });
 
           _this10.$Progress.finish(); // setTimeout(() => {
@@ -6764,8 +6770,8 @@ __webpack_require__.r(__webpack_exports__);
           console.log(error);
           swal({
             type: "error",
-            //title: 'Error',
-            text: "Hay un problema, comuníquese con un administrador",
+            title: 'Ha ocurrido un error',
+            text: "Comuníquese con un administrador",
             showConfirmButton: true
           });
         });
@@ -7390,6 +7396,10 @@ __webpack_require__.r(__webpack_exports__);
       this.expedito.ingreso = null;
       this.expedito.comienzo = null;
       this.cambiarCancelarTitulo();
+      document.getElementById("chbx1").checked = false;
+      document.getElementById("chbx2").checked = false;
+      document.getElementById("chbx3").checked = false;
+      document.getElementById("chbx4").checked = false;
       $("#matricula").val("");
       $("#egresado").val("");
       $("#foto").val("");
@@ -7491,7 +7501,7 @@ __webpack_require__.r(__webpack_exports__);
             title: data.data.title,
             text: data.data.text,
             showConfirmButton: false,
-            timer: 2000
+            timer: 3000
           });
 
           _this8.$Progress.finish(); // setTimeout(() => {
@@ -7506,8 +7516,8 @@ __webpack_require__.r(__webpack_exports__);
           console.log(error);
           swal({
             type: 'error',
-            //title: 'Error',
-            text: 'Ocurrió un problema, comuníquese con un administrador',
+            title: 'Ha ocurrido un error',
+            text: 'Comuníquese con un administrador',
             showConfirmButton: true
           });
         });
@@ -7545,7 +7555,7 @@ __webpack_require__.r(__webpack_exports__);
       if (tipo == 1) {
         swal({
           title: '¿Deseas cambiar el estado de este expedito?',
-          text: "El estado cambiara a En Proceso!",
+          text: "El estado cambiara a En Proceso",
           type: 'warning',
           showCancelButton: true,
           confirmButtonColor: '#3085d6',
@@ -7556,7 +7566,7 @@ __webpack_require__.r(__webpack_exports__);
           if (result.value) {
             axios.get('/updateExpedito/' + id + '/' + tipo).then(function (data) {
               if (data.data == "OK") {
-                swal('Actualizado!', 'El Expedito cambio a En Proceso.', 'success');
+                swal('¡Buen trabajo!', 'El Expedito cambió a En Proceso.', 'success');
 
                 _this9.$Progress.finish();
 
@@ -7565,7 +7575,7 @@ __webpack_require__.r(__webpack_exports__);
                 }, 2000);
               }
             })["catch"](function (error) {
-              console.log('Ocurrio un error ' + error);
+              console.log('Ha ocurrido un error ' + error);
 
               _this9.$Progress.fail();
             });
@@ -7574,7 +7584,7 @@ __webpack_require__.r(__webpack_exports__);
       } else {
         swal({
           title: '¿Deseas cambiar el estado de este expedito?',
-          text: "El estado cambiara a Finalizado!",
+          text: "El estado cambiará a Finalizado",
           type: 'warning',
           showCancelButton: true,
           confirmButtonColor: '#3085d6',
@@ -7585,7 +7595,7 @@ __webpack_require__.r(__webpack_exports__);
           if (result.value) {
             axios.get('/updateExpedito/' + id + '/' + tipo).then(function (data) {
               if (data.data == "OK") {
-                swal('Actualizado!', 'El Expedito cambio a Finalizado.', 'success');
+                swal('¡Buen trabajo!', 'El Expedito cambió a Finalizado', 'success');
 
                 _this9.$Progress.finish();
 
@@ -7594,7 +7604,7 @@ __webpack_require__.r(__webpack_exports__);
                 }, 2000);
               }
             })["catch"](function (error) {
-              console.log('Ocurrio un error ' + error);
+              console.log('Ha ocurrido un error ' + error);
 
               _this9.$Progress.fail();
             });
@@ -7618,7 +7628,7 @@ __webpack_require__.r(__webpack_exports__);
         e.target.value = '';
         swal({
           type: 'error',
-          //title: 'Error',
+          title: 'Ha ocurrido un error',
           text: 'El tamaño del archivo debe ser menor o igual a 1mb',
           showConfirmButton: true
         });
@@ -7638,7 +7648,7 @@ __webpack_require__.r(__webpack_exports__);
         this.archivos.matricula = null;
         swal({
           type: 'error',
-          //title: 'Error',
+          title: 'Ha ocurrido un error',
           text: 'El archivo debe ser PDF, por favor intente subiendo otro archivo',
           showConfirmButton: true
         });
@@ -7655,7 +7665,7 @@ __webpack_require__.r(__webpack_exports__);
         e.target.value = '';
         swal({
           type: 'error',
-          //title: 'Error',
+          title: 'Ha ocurrido un error',
           text: 'El tamaño del archivo debe ser menor o igual a 1mb',
           showConfirmButton: true
         });
@@ -7674,7 +7684,7 @@ __webpack_require__.r(__webpack_exports__);
         e.target.value = '';
         swal({
           type: 'error',
-          //title: 'Error',
+          title: 'Ha ocurrido un error',
           text: 'El archivo debe ser PDF, por favor intente subiendo otro archivo',
           showConfirmButton: true
         });
@@ -7691,7 +7701,7 @@ __webpack_require__.r(__webpack_exports__);
         e.target.value = '';
         swal({
           type: 'error',
-          //title: 'Error',
+          title: 'Ha ocurrido un error',
           text: 'El tamaño del archivo debe ser menor o igual a 1mb',
           showConfirmButton: true
         });
@@ -7710,7 +7720,7 @@ __webpack_require__.r(__webpack_exports__);
         e.target.value = '';
         swal({
           type: 'error',
-          //title: 'Error',
+          title: 'Ha ocurrido un error',
           text: 'El archivo debe ser una imagen, por favor intente subiendo otro archivo',
           showConfirmButton: true
         });
@@ -7727,7 +7737,7 @@ __webpack_require__.r(__webpack_exports__);
         e.target.value = '';
         swal({
           type: 'error',
-          //title: 'Error',
+          title: 'Ha ocurrido un error',
           text: 'El tamaño del archivo debe ser menor o igual a 1mb',
           showConfirmButton: true
         });
@@ -7746,7 +7756,7 @@ __webpack_require__.r(__webpack_exports__);
         e.target.value = '';
         swal({
           type: 'error',
-          //title: 'Error',
+          title: 'Ha ocurrido un error',
           text: 'El archivo debe ser PDF, por favor intente subiendo otro archivo',
           showConfirmButton: true
         });
@@ -7764,7 +7774,7 @@ __webpack_require__.r(__webpack_exports__);
         e.target.value = '';
         swal({
           type: 'error',
-          //title: 'Error',
+          title: 'Ha ocurrido un error',
           text: 'El tamaño del archivo debe ser menor o igual a 1mb',
           showConfirmButton: true
         });
@@ -7783,7 +7793,7 @@ __webpack_require__.r(__webpack_exports__);
         e.target.value = '';
         swal({
           type: 'error',
-          //title: 'Error',
+          title: 'Ha ocurrido un error',
           text: 'El archivo debe ser un documento en Word, por favor intente subiendo otro archivo',
           showConfirmButton: true
         });
@@ -7837,9 +7847,10 @@ __webpack_require__.r(__webpack_exports__);
         }).then(function (data) {
           swal({
             type: data.data.type,
+            title: data.data.title,
             text: data.data.text,
             showConfirmButton: false,
-            timer: 2000
+            timer: 3000
           });
 
           _this15.$Progress.finish(); // setTimeout(() => {
@@ -7854,8 +7865,8 @@ __webpack_require__.r(__webpack_exports__);
           console.log(error);
           swal({
             type: 'error',
-            //title: 'Error',
-            text: 'Hay un problema, comuníquese con un administrador',
+            title: 'Ha ocurrido un error',
+            text: 'Comuníquese con un administrador',
             showConfirmButton: true
           });
         });
@@ -7954,7 +7965,7 @@ __webpack_require__.r(__webpack_exports__);
         IDModalidad: null,
         Modalidad: null
       }],
-      columns: ["IDModalidad", "Modalidad", "Acciones"],
+      columns: ["IDModalidad", "Modalidad", "Accion"],
       options: {
         headings: {
           IDModalidad: "ID",
@@ -7990,8 +8001,8 @@ __webpack_require__.r(__webpack_exports__);
 
       if (this.modalidad.modalidad == null) {
         swal({
-          type: 'error',
-          title: 'Llenar los datos obligatorios'
+          type: 'warning',
+          title: 'Llenar el campo obligatorio'
         });
       } else if (e == 1) {
         this.$Progress.start();
@@ -8003,7 +8014,7 @@ __webpack_require__.r(__webpack_exports__);
             title: data.data.title,
             text: data.data.text,
             showConfirmButton: false,
-            timer: 2000
+            timer: 3000
           });
 
           _this2.$Progress.finish();
@@ -8017,8 +8028,8 @@ __webpack_require__.r(__webpack_exports__);
           console.log(error);
           swal({
             type: 'error',
-            title: 'Error',
-            text: 'Comuniquese con un administrador',
+            title: 'Ha ocurrido un error',
+            text: 'Comuníquese con un administrador',
             showConfirmButton: true
           });
         });
@@ -8032,7 +8043,7 @@ __webpack_require__.r(__webpack_exports__);
             title: data.data.title,
             text: data.data.text,
             showConfirmButton: false,
-            timer: 2000
+            timer: 3000
           });
 
           _this2.$Progress.finish();
@@ -8046,8 +8057,8 @@ __webpack_require__.r(__webpack_exports__);
           console.log(error);
           swal({
             type: 'error',
-            title: 'Error',
-            text: 'Comuniquese con un administrador',
+            title: 'Ha ocurrido un error',
+            text: 'Comuníquese con un administrador',
             showConfirmButton: true
           });
         });
@@ -8180,7 +8191,7 @@ __webpack_require__.r(__webpack_exports__);
         FechaAux: null,
         Tipo: null
       }],
-      columns: ["NumSesion", "Tipo", "FechaAux", "Acciones"],
+      columns: ["NumSesion", "Tipo", "FechaAux", "Accion"],
       options: {
         headings: {
           NumSesion: "Número de Sesión",
@@ -8231,7 +8242,7 @@ __webpack_require__.r(__webpack_exports__);
             title: data.data.title,
             text: data.data.text,
             showConfirmButton: false,
-            timer: 2000
+            timer: 3000
           });
 
           _this2.$Progress.finish();
@@ -8245,8 +8256,8 @@ __webpack_require__.r(__webpack_exports__);
           console.log(error);
           swal({
             type: 'error',
-            title: 'Ocurrió un problema',
-            text: 'Comuniquese con un administrador',
+            title: 'Ha ocurrido un error',
+            text: 'Comuníquese con un administrador',
             showConfirmButton: true
           });
         });
@@ -8260,7 +8271,7 @@ __webpack_require__.r(__webpack_exports__);
             title: data.data.title,
             text: data.data.text,
             showConfirmButton: false,
-            timer: 2000
+            timer: 3000
           });
 
           _this2.$Progress.finish();
@@ -8274,8 +8285,8 @@ __webpack_require__.r(__webpack_exports__);
           console.log(error);
           swal({
             type: 'error',
-            title: 'Ocurrió un problema',
-            text: 'Comuniquese con un administrador',
+            title: 'Ha ocurrido un error',
+            text: 'Comuníquese con un administrador',
             showConfirmButton: true
           });
         });
@@ -54918,7 +54929,7 @@ var render = function() {
                       },
                       scopedSlots: _vm._u([
                         {
-                          key: "Acciones",
+                          key: "Accion",
                           fn: function(props) {
                             return _c("div", {}, [
                               _c(
@@ -55209,7 +55220,7 @@ var render = function() {
                       },
                       scopedSlots: _vm._u([
                         {
-                          key: "Acciones",
+                          key: "Accion",
                           fn: function(props) {
                             return _c("div", {}, [
                               _c(
@@ -55813,7 +55824,7 @@ var render = function() {
                       },
                       scopedSlots: _vm._u([
                         {
-                          key: "Acciones",
+                          key: "Accion",
                           fn: function(props) {
                             return _c("div", {}, [
                               _c(
@@ -56297,7 +56308,7 @@ var render = function() {
                       },
                       scopedSlots: _vm._u([
                         {
-                          key: "Acciones",
+                          key: "Accion",
                           fn: function(props) {
                             return _c("div", {}, [
                               _c(
@@ -56975,7 +56986,7 @@ var render = function() {
                   },
                   scopedSlots: _vm._u([
                     {
-                      key: "Acciones",
+                      key: "Accion",
                       fn: function(props) {
                         return _c("div", {}, [
                           _c(
@@ -58731,7 +58742,7 @@ var render = function() {
                       },
                       scopedSlots: _vm._u([
                         {
-                          key: "Acciones",
+                          key: "Accion",
                           fn: function(props) {
                             return _c("div", {}, [
                               _c(
@@ -62210,7 +62221,7 @@ var render = function() {
                       },
                       scopedSlots: _vm._u([
                         {
-                          key: "Acciones",
+                          key: "Accion",
                           fn: function(props) {
                             return _c("div", {}, [
                               _c(
@@ -62585,7 +62596,7 @@ var render = function() {
                       },
                       scopedSlots: _vm._u([
                         {
-                          key: "Acciones",
+                          key: "Accion",
                           fn: function(props) {
                             return _c("div", {}, [
                               _c(
@@ -62695,7 +62706,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-md-2 text-left" }, [
-      _c("label", [_vm._v("Fecha*")])
+      _c("label", [_vm._v("Fecha Sesión*")])
     ])
   },
   function() {
@@ -67375,18 +67386,18 @@ module.exports = function () {
     columnsDisplay: {},
     columnsDropdown: false,
     texts: {
-      count: "Showing {from} to {to} of {count} records|{count} records|One record",
-      first: 'First',
-      last: 'Last',
-      filter: "Filter:",
-      filterPlaceholder: "Search query",
-      limit: "Records:",
-      page: "Page:",
-      noResults: "No matching records",
-      filterBy: "Filter by {column}",
-      loading: 'Loading...',
-      defaultOption: 'Select {column}',
-      columns: 'Columns'
+      count: "Mostrando {from} al {to} de {count} registros|{count} registros|Un registro",
+      first: 'Primero',
+      last: 'Ultimo',
+      //filter: "Buscar:                                    ",
+      filterPlaceholder: "Buscador general..",
+      limit: "Registros:",
+      page: "Pagina:",
+      noResults: "No hay registros",
+      filterBy: "Filtrar por {column}",
+      loading: 'Cargando...',
+      defaultOption: 'Seleccionar {column}',
+      columns: 'Columnas'
     },
     sortIcon: {
       is: 'glyphicon-sort',

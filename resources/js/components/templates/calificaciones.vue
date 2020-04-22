@@ -53,7 +53,7 @@
                         <div class="card-body">
                             <div class="content table-responsive table-full-width">
                                 <v-client-table :data="calificaciones" :columns="columns" :options="options">
-                                    <div slot="Acciones" slot-scope="props">
+                                    <div slot="Accion" slot-scope="props">
                                      <button data-target="#exampleModal" class="btn btn-info" data-toggle="modal" v-on:click="edit(props.row.IDCalificacion,props.row.Calificacion)" data-placement="left" style="color: white" title="Editar">Editar <i class="fas fa-edit" style="color: white" aria-hidden="true"></i></button>
                                     </div>
                                 </v-client-table>
@@ -78,7 +78,7 @@
                 IDCalificacion:null,
                 Calificacion:null,
             }],
-            columns: ["IDCalificacion","Calificacion","Acciones"],
+            columns: ["IDCalificacion","Calificacion","Accion"],
             options: {
 				headings:
 				{
@@ -117,8 +117,8 @@
             if(this.calificacion.calificacion == null)
             {
                 swal({
-					type: 'error',
-					title: 'Llenar los datos obligatorios',
+					type: 'warning',
+					title: 'Llenar el campo obligatorio',
 				});
             }else if(e == 1){
                 this.$Progress.start();
@@ -130,7 +130,7 @@
                         title: data.data.title,
                         text: data.data.text,
                         showConfirmButton: false,
-                        timer: 2000
+                        timer: 3000
                     });
                     this.$Progress.finish();
                     this.getDatos();
@@ -140,8 +140,8 @@
                     console.log(error);	
                     swal({
                         type: 'error',
-                        title: 'Error',
-                        text: 'Comuniquese con un administrador',
+                        title: 'Ha ocurrido un error',
+                        text: 'Comuníquese con un administrador',
                         showConfirmButton: true,
                     });
                 })
@@ -155,7 +155,7 @@
                         title: data.data.title,
                         text: data.data.text,
                         showConfirmButton: false,
-                        timer: 2000
+                        timer: 3000
                     });
                     this.$Progress.finish();
                     this.getDatos();
@@ -165,8 +165,8 @@
                     console.log(error);	
                     swal({
                         type: 'error',
-                        title: 'Error',
-                        text: 'Comuniquese con un administrador',
+                        title: 'Ha ocurrido un error',
+                        text: 'Comuníquese con un administrador',
                         showConfirmButton: true,
                     });
                 })

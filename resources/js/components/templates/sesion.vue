@@ -27,7 +27,7 @@
                                     <input v-model="sesion.sesion" type="text" maxlength="3" class="form-control" onKeyPress="return soloNumeros(event)">
                                 </div> 
                                 <div class="col-md-2 text-left">
-                                    <label>Fecha*</label>
+                                    <label>Fecha Sesión*</label>
                                 </div>
                                 <div class="col-md-5">
                                     <input v-model="sesion.fecha" type="date" max="2030-12-31" class="form-control" @change="validaFecha()">
@@ -71,7 +71,7 @@
                         <div class="card-body">
                             <div class="content table-responsive table-full-width">
                                 <v-client-table :data="sesiones" :columns="columns" :options="options">
-                                    <div slot="Acciones" slot-scope="props">
+                                    <div slot="Accion" slot-scope="props">
                                      <button data-target="#exampleModal" class="btn btn-info" data-toggle="modal" v-on:click="edit(props.row.IDSesion,props.row.NumSesion,props.row.Fecha,props.row.Tipo)" data-placement="left" style="color: white" title="Editar">Editar <i class="fas fa-edit" style="color: white" aria-hidden="true"></i></button>
                                     </div>
                                 </v-client-table>
@@ -100,7 +100,7 @@
                 FechaAux:null,
                 Tipo:null,
             }],
-            columns: ["NumSesion","Tipo","FechaAux","Acciones"],
+            columns: ["NumSesion","Tipo","FechaAux","Accion"],
             options: {
 				headings:
 				{
@@ -154,7 +154,7 @@
                         title: data.data.title,
                         text: data.data.text,
                         showConfirmButton: false,
-                        timer: 2000
+                        timer: 3000
                     });
                     this.$Progress.finish();
                     this.getDatos();
@@ -164,8 +164,8 @@
                     console.log(error);	
                     swal({
                         type: 'error',
-                        title: 'Ocurrió un problema',
-                        text: 'Comuniquese con un administrador',
+                        title: 'Ha ocurrido un error',
+                        text: 'Comuníquese con un administrador',
                         showConfirmButton: true,
                     });
                 })
@@ -179,7 +179,7 @@
                         title: data.data.title,
                         text: data.data.text,
                         showConfirmButton: false,
-                        timer: 2000
+                        timer: 3000
                     });
                     this.$Progress.finish();
                     this.getDatos();
@@ -189,8 +189,8 @@
                     console.log(error);	
                     swal({
                         type: 'error',
-                        title: 'Ocurrió un problema',
-                        text: 'Comuniquese con un administrador',
+                        title: 'Ha ocurrido un error',
+                        text: 'Comuníquese con un administrador',
                         showConfirmButton: true,
                     });
                 })

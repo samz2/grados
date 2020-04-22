@@ -43,9 +43,9 @@ class EscuelasController extends Controller
         $escuela->created_at    = $hoy;
         $escuela->save();
         $type   = "success";
-        //$title  = "Bien";
-        $text   = "Carrera creada con éxito";
-        return compact("type","text");
+        $title  = "¡Buen trabajo!";
+        $text   = "Carrera profesional creada con éxito";
+        return compact("type","title","text");
     }
 
     /**
@@ -86,14 +86,14 @@ class EscuelasController extends Controller
         if($escuela)
         {
             $type   = "success";
-            //$title  = "Bien";
-            $text   = "Carrera editada con éxito";
+            $title  = "¡Buen trabajo!";
+            $text   = "Carrera profesional guardada con éxito";
         }else{
             $type   = "warning";
-            //$title  = "Ups";
-            $text   = "Ocurrió un problema";
+            $title  = "Ha ocurrido un error";
+            $text   = "Contáctese con un administrador";
         }
-        return compact("type","text");
+        return compact("type","title","text");
     }
 
     /**

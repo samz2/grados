@@ -85,16 +85,16 @@ class ExpeditobController extends Controller
             file_put_contents($rutaFoto,$foto);
             $expedito->save();
             $type = "success";
-            //$title = "OK";
+            $title = "¡Buen trabajo!";
             $text = "Expedito creado con éxito";
         }else
         {
             $type = "warning";
-            //$title = "Advertencia";
+            $title = "Ha ocurrido un error";
             $text = "Egresado ya cuenta con un expedito";
         }
         
-        return compact("type","text");
+        return compact("type","title","text");
     }
 
     public function storeTitulo(Request $request)
@@ -151,16 +151,16 @@ class ExpeditobController extends Controller
             file_put_contents($rutaWord,$word);
             $expedito->save();
             $type = "success";
-            //$title = "OK";
+            $title = "¡Buen trabajo!";
             $text = "Expedito creado con éxito";
         }else
         {
             $type = "warning";
-            //$title = "Advertencia";
+            $title = "Ha ocurrido un error";
             $text = "Egresado ya cuenta con un expedito";
         }
         
-        return compact("type","text");
+        return compact("type","title","text");
     }
     /**
      * Display the specified resource.
@@ -199,13 +199,15 @@ class ExpeditobController extends Controller
         if($expedito)
         {
             $type = "success";
-            $text = "Expedito editado con éxito";  
+            $title = "¡Buen trabajo!";
+            $text = "Expedito guardado con éxito";  
         }else
         {
             $type = "success";
-            $text = "Expedito editado con éxito";  
+            $title = "¡Buen trabajo!";
+            $text = "Expedito guardado con éxito";  
         }
-        return compact("type","text");
+        return compact("type","title","text");
     }
     public function editTitulo(Request $request)
     {
@@ -236,22 +238,15 @@ class ExpeditobController extends Controller
                 ]
             );
             $type = "success";
-            $text = "Expedito editado con éxito";  
+            $title="¡Buen trabajo!";
+            $text = "Expedito guardado con éxito";  
         } catch (\Throwable $th) {
             $type = "success";
+            $title="¡Buen trabajo!";
             $text = $th;  
         }
        
-        // if($expedito && $titulacion)
-        // {
-        //     $type = "success";
-        //     $text = "Expedito editado con éxito";  
-        // }else
-        // {
-        //     $type = "warning";
-        //     $text = "Comuniquese con un administrador";  
-        // }
-        return compact("type","text");
+        return compact("type","title","text");
     }
     /**
      * Update the specified resource in storage.

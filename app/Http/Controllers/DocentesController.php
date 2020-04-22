@@ -53,15 +53,15 @@ class DocentesController extends Controller
             $docente->created_at    = $hoy;
             $docente->save();
             $type   = "success";
-            //$title  = "Bien";
+            $title  = "¡Buen trabajo!";
             $text   = "Docente creado con éxito";
         }else
         {
             $type   = "error";
-            //$title  = "Error";
+            $title  = "Ha ocurrido un error";
             $text   = "Docente actualmente ya existe";
         }
-        return compact("type","text");
+        return compact("type","title","text");
         
     }
 
@@ -112,15 +112,15 @@ class DocentesController extends Controller
         if($docente)
         {
             $type   = "success";
-            //$title  = "Bien";
-            $text   = "Docente editado con éxito";
+            $title  = "¡Buen trabajo!";
+            $text   = "Docente guardado con éxito";
         }else{
             $type   = "warning";
-            //$title  = "Ups";
-            $text   = "Ocurrió un problema";
+            $title  = "Ha ocurrido un error";
+            $text   = "Contáctese con un administrador";
         }
-        //return compact("type","title","text");
-        return compact("type","text");
+        return compact("type","title","text");
+        //return compact("type","text");
     }
 
     /**

@@ -585,7 +585,8 @@ export default {
           if (data.data.alumnos[0] == null) {
             swal({
               type: "error",
-              title: "No se encontraron registros"
+              title: "Ha ocurrido un error",
+              text: "No se encontraron registros"
             });
           } else {
             this.alumnos = data.data.alumnos[0];
@@ -664,7 +665,7 @@ export default {
         e.target.value = "";
         swal({
           type: "error",
-          title: 'Ocurrió un problema',
+          title: 'Ha ocurrido un error',
           text: "El tamaño del archivo debe ser menor o igual a 1MB",
           showConfirmButton: true
         });
@@ -683,7 +684,7 @@ export default {
         this.archivos.matricula = null;
         swal({
           type: "error",
-          //title: 'Error',
+         title: 'Ha ocurrido un error',
           text:
             "El archivo debe ser PDF, por favor intente subiendo otro archivo",
           showConfirmButton: true
@@ -698,7 +699,7 @@ export default {
         e.target.value = "";
         swal({
           type: "error",
-          title: 'Ocurrió un problema',
+          title: 'Ha ocurrido un error',
           text: "El tamaño del archivo debe ser menor o igual a 1MB",
           showConfirmButton: true
         });
@@ -716,7 +717,7 @@ export default {
         e.target.value = "";
         swal({
           type: "error",
-          //title: 'Error',
+          title: 'Ha ocurrido un error',
           text:
             "El archivo debe ser PDF, por favor intente subiendo otro archivo",
           showConfirmButton: true
@@ -731,7 +732,7 @@ export default {
         e.target.value = "";
         swal({
           type: "error",
-          title: 'Ocurrió un problema',
+          title: 'Ha ocurrido un error',
           text: "El tamaño del archivo debe ser menor o igual a 1MB",
           showConfirmButton: true
         });
@@ -750,7 +751,7 @@ export default {
         e.target.value = "";
         swal({
           type: "error",
-          //title: 'Error',
+          title: 'Ha ocurrido un error',
           text:
             "El archivo debe ser una imagen, por favor intente subiendo otro archivo",
           showConfirmButton: true
@@ -810,10 +811,10 @@ export default {
             swal({
               // position: 'top-end',
               type: data.data.type,
-              // title: data.data.title,
+              title: data.data.title,
               text: data.data.text,
               showConfirmButton: false,
-              timer: 2000
+              timer: 3000
             });
             this.$Progress.finish();
             // setTimeout(() => {
@@ -826,8 +827,8 @@ export default {
             console.log(error);
             swal({
               type: "error",
-              //title: 'Error',
-              text: "Ocurrió un problema, comuníquese con un administrador",
+              title: 'Ha ocurrido un error',
+              text: "Comuníquese con un administrador",
               showConfirmButton: true
             });
           });
@@ -900,7 +901,7 @@ export default {
               .then(data => {
                 if (data.data == "OK") {
                   swal(
-                    "¡Actualizado!",
+                    "¡Buen trabajo!",
                     "El Expedito está ahora En Proceso",
                     "success"
                   );
@@ -911,7 +912,7 @@ export default {
                 }
               })
               .catch(error => {
-                console.log("Ocurrió un problema " + error);
+                console.log("Ocurrió un error " + error);
                 this.$Progress.fail();
               });
           }
@@ -933,7 +934,7 @@ export default {
               .then(data => {
                 if (data.data == "OK") {
                   swal(
-                    "¡Actualizado!",
+                    "¡Buen trabajo!",
                     "El Expedito cambió a Finalizado.",
                     "success"
                   );
@@ -944,7 +945,7 @@ export default {
                 }
               })
               .catch(error => {
-                console.log("Ocurrió un problema " + error);
+                console.log("Ocurrió un error " + error);
                 this.$Progress.fail();
               });
           }
@@ -1018,9 +1019,10 @@ export default {
           .then(data => {
             swal({
               type: data.data.type,
+              title: data.data.title,
               text: data.data.text,
               showConfirmButton: false,
-              timer: 2000
+              timer: 3000
             });
             this.$Progress.finish();
             // setTimeout(() => {
@@ -1033,8 +1035,8 @@ export default {
             console.log(error);
             swal({
               type: "error",
-              //title: 'Error',
-              text: "Hay un problema, comuníquese con un administrador",
+              title: 'Ha ocurrido un error',
+              text: "Comuníquese con un administrador",
               showConfirmButton: true
             });
           });
