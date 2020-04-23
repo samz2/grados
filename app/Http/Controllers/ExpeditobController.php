@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\expeditob;
 use App\titulacion;
 use Illuminate\Http\Request;
+use File;
 
 class ExpeditobController extends Controller
 {
@@ -55,6 +56,7 @@ class ExpeditobController extends Controller
     {
         $hoy = date("Y-m-d");
         $expedito = new Expeditob();
+
         $numEgresado = Expeditob::where("CodigoAlumno",$request->expedito["codigo"])->where("Tipo","BACHILLER")->get()->count();
         if($numEgresado == 0)
         {
@@ -77,9 +79,14 @@ class ExpeditobController extends Controller
             $matriculaNombre    = "CM035_".$request->expedito["dni"]."_B.pdf";
             $egresadoNombre     = "CE035_".$request->expedito["dni"]."_B.pdf";
             $fotoNombre         = "F035_".$request->expedito["dni"]."_B.jpg";
-            $rutaMatricula  = public_path()."/".$matriculaNombre;
-            $rutaEgresado   = public_path()."/".$egresadoNombre;
-            $rutaFoto       = public_path()."/".$fotoNombre;
+            $dni=$request->expedito["dni"];
+
+            $path = public_path('Archivos bachiller/' . $dni . '/');
+            File::makeDirectory($path, 0777, true, true);
+            $rutaMatricula  = public_path('Archivos bachiller/'.$dni)."/".$matriculaNombre;
+            $rutaEgresado   = public_path('Archivos bachiller/'.$dni)."/".$egresadoNombre;
+            $rutaFoto       = public_path('Archivos bachiller/'.$dni)."/".$fotoNombre;
+
             file_put_contents($rutaMatricula,$matricula);
             file_put_contents($rutaEgresado,$egresado);
             file_put_contents($rutaFoto,$foto);
@@ -139,11 +146,17 @@ class ExpeditobController extends Controller
             $fotoNombre         = "F035_".$request->expedito["dni"]."_T.jpg";
             $tesisNombre        = "T035_".$request->expedito["dni"]."_T.pdf";
             $WordNombre         = "T035_".$request->expedito["dni"]."_T.docx";
-            $rutaMatricula  = public_path()."/".$matriculaNombre;
-            $rutaEgresado   = public_path()."/".$egresadoNombre;
-            $rutaFoto       = public_path()."/".$fotoNombre;
-            $rutaTesis      = public_path()."/".$tesisNombre;
-            $rutaWord       = public_path()."/".$WordNombre;
+            $dni=$request->expedito["dni"];
+
+            $path = public_path('Archivos titulo/' . $dni . '/');
+            File::makeDirectory($path, 0777, true, true);
+
+            $rutaMatricula  = public_path('Archivos titulo/'.$dni)."/".$matriculaNombre;
+            $rutaEgresado   = public_path('Archivos titulo/'.$dni)."/".$egresadoNombre;
+            $rutaFoto       = public_path('Archivos titulo/'.$dni)."/".$fotoNombre;
+            $rutaTesis      = public_path('Archivos titulo/'.$dni)."/".$tesisNombre;
+            $rutaWord       = public_path('Archivos titulo/'.$dni)."/".$WordNombre;
+
             file_put_contents($rutaMatricula,$matricula);
             file_put_contents($rutaEgresado,$egresado);
             file_put_contents($rutaFoto,$foto);
