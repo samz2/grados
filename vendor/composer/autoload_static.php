@@ -462,6 +462,13 @@ class ComposerStaticInit22427e75c100aaea966a2edfbf2eb07c
                 0 => __DIR__ . '/..' . '/scrivo/highlight.php',
             ),
         ),
+        'C' => 
+        array (
+            'ConvertApi\\' => 
+            array (
+                0 => __DIR__ . '/..' . '/convertapi/convertapi-php/lib',
+            ),
+        ),
     );
 
     public static $classMap = array (
@@ -485,6 +492,7 @@ class ComposerStaticInit22427e75c100aaea966a2edfbf2eb07c
         'App\\Http\\Controllers\\EstadosController' => __DIR__ . '/../..' . '/app/Http/Controllers/EstadosController.php',
         'App\\Http\\Controllers\\ExpeditobController' => __DIR__ . '/../..' . '/app/Http/Controllers/ExpeditobController.php',
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
+        'App\\Http\\Controllers\\LineaController' => __DIR__ . '/../..' . '/app/Http/Controllers/LineaController.php',
         'App\\Http\\Controllers\\ModalidadController' => __DIR__ . '/../..' . '/app/Http/Controllers/ModalidadController.php',
         'App\\Http\\Controllers\\SesionController' => __DIR__ . '/../..' . '/app/Http/Controllers/SesionController.php',
         'App\\Http\\Controllers\\TitulacionController' => __DIR__ . '/../..' . '/app/Http/Controllers/TitulacionController.php',
@@ -514,7 +522,9 @@ class ComposerStaticInit22427e75c100aaea966a2edfbf2eb07c
         'App\\escuelas' => __DIR__ . '/../..' . '/app/escuelas.php',
         'App\\estados' => __DIR__ . '/../..' . '/app/estados.php',
         'App\\expeditob' => __DIR__ . '/../..' . '/app/expeditob.php',
+        'App\\linea' => __DIR__ . '/../..' . '/app/linea.php',
         'App\\modalidad' => __DIR__ . '/../..' . '/app/modalidad.php',
+        'App\\proyecto' => __DIR__ . '/../..' . '/app/proyecto.php',
         'App\\sesion' => __DIR__ . '/../..' . '/app/sesion.php',
         'App\\titulacion' => __DIR__ . '/../..' . '/app/titulacion.php',
         'App\\tramite' => __DIR__ . '/../..' . '/app/tramite.php',
@@ -557,6 +567,17 @@ class ComposerStaticInit22427e75c100aaea966a2edfbf2eb07c
         'Carbon\\Traits\\Units' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Traits/Units.php',
         'Carbon\\Traits\\Week' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Traits/Week.php',
         'Carbon\\Translator' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Translator.php',
+        'ConvertApi\\Client' => __DIR__ . '/..' . '/convertapi/convertapi-php/lib/ConvertApi/Client.php',
+        'ConvertApi\\ConvertApi' => __DIR__ . '/..' . '/convertapi/convertapi-php/lib/ConvertApi/ConvertApi.php',
+        'ConvertApi\\Error\\Api' => __DIR__ . '/..' . '/convertapi/convertapi-php/lib/ConvertApi/Error/Api.php',
+        'ConvertApi\\Error\\Base' => __DIR__ . '/..' . '/convertapi/convertapi-php/lib/ConvertApi/Error/Base.php',
+        'ConvertApi\\Error\\Client' => __DIR__ . '/..' . '/convertapi/convertapi-php/lib/ConvertApi/Error/Client.php',
+        'ConvertApi\\FileParam' => __DIR__ . '/..' . '/convertapi/convertapi-php/lib/ConvertApi/FileParam.php',
+        'ConvertApi\\FileUpload' => __DIR__ . '/..' . '/convertapi/convertapi-php/lib/ConvertApi/FileUpload.php',
+        'ConvertApi\\FormatDetector' => __DIR__ . '/..' . '/convertapi/convertapi-php/lib/ConvertApi/FormatDetector.php',
+        'ConvertApi\\Result' => __DIR__ . '/..' . '/convertapi/convertapi-php/lib/ConvertApi/Result.php',
+        'ConvertApi\\ResultFile' => __DIR__ . '/..' . '/convertapi/convertapi-php/lib/ConvertApi/ResultFile.php',
+        'ConvertApi\\Task' => __DIR__ . '/..' . '/convertapi/convertapi-php/lib/ConvertApi/Task.php',
         'Cpdf' => __DIR__ . '/..' . '/dompdf/dompdf/lib/Cpdf.php',
         'Cron\\AbstractField' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/AbstractField.php',
         'Cron\\CronExpression' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/CronExpression.php',

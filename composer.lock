@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d30dc6a7db876844569c0891b2c73df2",
+    "content-hash": "2d64dabec85f521ea51ced2cd10e6e47",
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -61,6 +61,54 @@
                 "pdf"
             ],
             "time": "2019-08-23T14:30:33+00:00"
+        },
+        {
+            "name": "convertapi/convertapi-php",
+            "version": "v1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ConvertAPI/convertapi-php.git",
+                "reference": "76d523b202ec2bc0b93a939ddd446398a54d7a79"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ConvertAPI/convertapi-php/zipball/76d523b202ec2bc0b93a939ddd446398a54d7a79",
+                "reference": "76d523b202ec2bc0b93a939ddd446398a54d7a79",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-json": "*",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "ConvertApi\\": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "ConvertAPI and contributors",
+                    "homepage": "https://github.com/ConvertAPI/convertapi-php/graphs/contributors"
+                }
+            ],
+            "description": "Convert API PHP Client",
+            "homepage": "https://github.com/ConvertAPI/convertapi-php",
+            "keywords": [
+                "api",
+                "client",
+                "conversion",
+                "convert"
+            ],
+            "time": "2018-09-30T08:12:25+00:00"
         },
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -5572,5 +5620,6 @@
     "platform": {
         "php": "^7.2"
     },
-    "platform-dev": []
+    "platform-dev": [],
+    "plugin-api-version": "1.1.0"
 }

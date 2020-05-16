@@ -17,8 +17,15 @@
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <style>     
-
-.subir{
+  .centrartabla{
+        margin: auto;
+    }
+  .altoBoton
+  {
+    padding: 2px 6px; 
+    font-size: 11px;
+  }
+  .subir{
     padding: 2px 30px;
     background-color: rgba(170, 220, 250, 1);
     color:#000;
@@ -28,12 +35,12 @@
     -moz-border-radius: 131px 131px 131px 131px;
     -webkit-border-radius: 131px 131px 131px 131px;
     border: 0px solid #000000;
-}
+  }
  
-.subir:hover{
+  .subir:hover{
     color:#fff;
     background: #f7cb15;
-}
+  }
   .blanco
   {
     color: #ffffff;
@@ -195,11 +202,16 @@
                             <i class="far fa-list-alt"></i>
                       <p>Modalidad</p>
                       </router-link>
-                      <li class="nav-item">
-                        <router-link to="calificacion" class="nav-link">
-                              <i class="far fa-list-alt"></i>
-                        <p>Calificación</p>
-                        </router-link>
+                    <li class="nav-item">
+                      <router-link to="calificacion" class="nav-link">
+                            <i class="far fa-list-alt"></i>
+                      <p>Calificación</p>
+                      </router-link>
+                    <li class="nav-item">
+                      <router-link to="lineas-de-investigacion" class="nav-link">
+                            <i class="far fa-list-alt"></i>
+                      <p>Lineas de Investigación</p>
+                      </router-link>
                     </li>
                     <!--<li class="nav-item">
                       <router-link to="usuarios" class="nav-link">
@@ -231,17 +243,29 @@
                   <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-folder"></i>
                     <p>
+                      Proyecto de Tesis
+                      <i class="fas fa-angle-left right"></i>
+                    </p>
+                  </a>
+                  <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                      <router-link to="proyecto-de-tesis" class="nav-link">
+                            <i class="fas fa-user-graduate"></i>
+                        <p>Proyecto de Tesis</p>
+                      </router-link>
+                    </li>
+                    </li>
+                  </ul>
+                </li>
+                <li class="nav-item has-treeview">
+                  <a href="#" class="nav-link">
+                    <i class="nav-icon fas fa-folder"></i>
+                    <p>
                       Trámites
                       <i class="fas fa-angle-left right"></i>
                     </p>
                   </a>
                   <ul class="nav nav-treeview">
-                    <!--<li class="nav-item">
-                      <router-link to="tramite" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Trámite Titulación</p>
-                      </router-link>
-                    </li>-->
                     <li class="nav-item">
                       <router-link to="expeditobachiller" class="nav-link">
                               <i class="fas fa-copy"></i>
@@ -256,24 +280,31 @@
                     </li>
                   </ul>
                 </li>
-               <!-- <li class="nav-item has-treeview">
+                <li class="nav-item has-treeview">
                   <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-folder"></i>
                     <p>
-                      Documentos
+                      Reportes
                       <i class="fas fa-angle-left right"></i>
                     </p>
                   </a>
                   <ul class="nav nav-treeview">
+                   
                     <li class="nav-item">
-                      <router-link to="documentos" class="nav-link">
-                        <i class="fas fa-circle nav-icon"></i>
-                        <p>Lista</p>
+                      <router-link to="reporte-bachiller" class="nav-link">
+                              <i class="fas fa-copy"></i>
+                        <p>Expedito Bachiller</p>
                       </router-link>
                     </li>
-                    
+                    <li class="nav-item">
+                      <router-link to="reporte-titulo" class="nav-link">
+                              <i class="fas fa-copy"></i>
+                        <p>Expedito Título</p>
+                      </router-link>
+                    </li>
                   </ul>
-                </li> -->
+                </li>
+               
                   @break
               @case(2)
                   
@@ -331,7 +362,7 @@
 {{-- <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script> --}}
 <!-- ChartJS -->
 <script src="dist/js/adminlte.js"></script>
-<script src="{{ asset('js/app.js') }}" defer></script>
+<script src="{{ asset('js/app.js') }}"></script>
 
 <script type="text/javascript">
   

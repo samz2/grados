@@ -28,8 +28,13 @@ Route::get('/oficio/{id}','DocumentosController@oficio');
 Route::get('/oficio2/{id}','DocumentosController@oficio2');
 Route::post('/addDocumento','DocumentosController@store');
 Route::get('/getDocumentos','DocumentosController@index');
+Route::get('/reporte_bachiller/{inicio}/{final}/{carrera}','DocumentosController@reportBachiller');
+Route::get('/reporte_titulo/{inicio}/{final}/{carrera}','DocumentosController@reportTitulo');
+Route::get('/reporte_bachiller/{inicio}/{final}','DocumentosController@reportBachillerg');
+Route::get('/reporte_titulo/{inicio}/{final}','DocumentosController@reportTitulog');
 
 Route::post('/addEgresado','EgresadoController@store');
+Route::post('/tesistas','EgresadoController@tesistas');
 Route::get('/getEgresados','EgresadoController@index');
 Route::get('/getAlumnos/{d}/{c}/{a}','EgresadoController@show');
 Route::get('/getAlumnos','EgresadoController@alumnos');
@@ -40,6 +45,11 @@ Route::post('/addDocente','DocentesController@store');
 Route::post('/updateDocente','DocentesController@update');
 Route::get('/getDocentes','DocentesController@index');
 Route::get('/getPrincipales','DocentesController@show');
+
+Route::post('/addLinea','LineaController@store');
+Route::post('/updateLinea','LineaController@update');
+Route::get('/getLineas','LineaController@index');
+Route::get('/getLineas/{id}','LineaController@show');
 
 Route::post('/addExpedito','ExpeditobController@store');
 Route::post('/addExpeditoT','ExpeditobController@storeTitulo');
@@ -82,5 +92,9 @@ Route::post('/updateModalidad','ModalidadController@update');
 Route::post('/addCalificacion','CalificacionController@store');
 Route::get('/getCalificaciones','CalificacionController@index');
 Route::post('/updateCalificacion','CalificacionController@update');
+
+Route::post('/addProyecto','ProyectoController@store');
+Route::get('/getProyectos','ProyectoController@index');
+Route::post('/updateProyecto','ProyectoController@update');
 
 Route::get('{path}', 'HomeController@index');

@@ -11,4 +11,5 @@ return array(
     'Mockery' => array($vendorDir . '/mockery/mockery/library'),
     'Highlight\\' => array($vendorDir . '/scrivo/highlight.php'),
     'HighlightUtilities\\' => array($vendorDir . '/scrivo/highlight.php'),
+    'ConvertApi\\' => array($vendorDir . '/convertapi/convertapi-php/lib'),
 );

@@ -141,4 +141,18 @@ class EgresadoController extends Controller
         $egresados  = Egresado::select("Codigo AS code",\DB::raw("concat_ws(' ',Nombre,Paterno,Materno) AS label"))->get();
         return compact("egresados");
     }
+
+    public function tesistas(Request $request)
+    {
+        $tesistas = array();
+        foreach ($request->tesistas as $key) {
+            $egresado = Egresado::select("DNI","Codigo AS codigo",\DB::raw("concat_ws(' ',Nombre,Paterno,Materno) AS nombre"))
+                        ->where("DNI",$key)->get();
+            if(count($egresado) >=1)
+            {
+                array_push($tesistas,$egresado);
+            }
+        }
+        return compact("tesistas");
+    }
 }

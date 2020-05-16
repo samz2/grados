@@ -10,6 +10,7 @@ import VueProgressBar from 'vue-progressbar';
 import swal from 'sweetalert2';
 import { ServerTable, ClientTable, Event } from 'vue-tables-2';
 import vSelect from 'vue-select';
+import VueApexCharts from 'vue-apexcharts';
 
 const options = {
   color: '#bffaf3',
@@ -44,7 +45,11 @@ const routes = [
     { path: '/decano', component: require('./components/admin/decano.vue').default },
     { path: '/modalidad', component: require('./components/admin/modalidad.vue').default },
     { path: '/calificacion', component: require('./components/admin/calificacion.vue').default },
+    { path: '/reporte-bachiller', component: require('./components/admin/reporteb.vue').default },
+    { path: '/reporte-titulo', component: require('./components/admin/reportet.vue').default },
     { path: '/sesion', component: require('./components/admin/sesiones.vue').default },
+    { path: '/lineas-de-investigacion', component: require('./components/admin/linea.vue').default },
+    { path: '/proyecto-de-tesis', component: require('./components/admin/proyecto.vue').default },
   ];
 
 
@@ -77,17 +82,27 @@ Vue.component('comision', require('./components/templates/comision.vue').default
 Vue.component('decanos', require('./components/templates/decanos.vue').default);
 Vue.component('modalidades', require('./components/templates/modalidades.vue').default);
 Vue.component('calificaciones', require('./components/templates/calificaciones.vue').default);
+Vue.component('lineas', require('./components/templates/lineas.vue').default);
 Vue.component('sesiones', require('./components/templates/sesion.vue').default);
+Vue.component('proyectos', require('./components/templates/proyectos.vue').default);
+Vue.component('reportesb', require('./components/templates/reportesb.vue').default);
+Vue.component('reportest', require('./components/templates/reportest.vue').default);
+Vue.component('grafica', require('./components/grafica.vue').default);
 Vue.component('v-select', vSelect);
+Vue.component('apexchart', VueApexCharts);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-
+// var component = require('./components/grafica.vue');
 const app = new Vue({
     el: '#app',
+    // components:
+    // {
+    //   component
+    // },
     router
 });
 

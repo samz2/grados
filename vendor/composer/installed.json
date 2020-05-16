@@ -58,6 +58,56 @@
         ]
     },
     {
+        "name": "convertapi/convertapi-php",
+        "version": "v1.1.0",
+        "version_normalized": "1.1.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/ConvertAPI/convertapi-php.git",
+            "reference": "76d523b202ec2bc0b93a939ddd446398a54d7a79"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/ConvertAPI/convertapi-php/zipball/76d523b202ec2bc0b93a939ddd446398a54d7a79",
+            "reference": "76d523b202ec2bc0b93a939ddd446398a54d7a79",
+            "shasum": ""
+        },
+        "require": {
+            "ext-curl": "*",
+            "ext-json": "*",
+            "php": ">=5.4.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "~4.0"
+        },
+        "time": "2018-09-30T08:12:25+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "ConvertApi\\": "lib/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "ConvertAPI and contributors",
+                "homepage": "https://github.com/ConvertAPI/convertapi-php/graphs/contributors"
+            }
+        ],
+        "description": "Convert API PHP Client",
+        "homepage": "https://github.com/ConvertAPI/convertapi-php",
+        "keywords": [
+            "api",
+            "client",
+            "conversion",
+            "convert"
+        ]
+    },
+    {
         "name": "dnoegel/php-xdg-base-dir",
         "version": "v0.1.1",
         "version_normalized": "0.1.1.0",

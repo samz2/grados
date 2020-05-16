@@ -45,6 +45,7 @@ class DocumentosController extends Controller
     }
     public function oficio($id)
     {
+        
         $expeditosb =   Expeditob::join("egresado AS e","expedito.CodigoAlumno","e.Codigo")
                         ->join("sesion AS s","expedito.NumSesion","s.NumSesion")
                         ->join("escuela AS esc","e.IDEscuela","esc.IDEscuela")
@@ -60,7 +61,7 @@ class DocumentosController extends Controller
         $mes  = $this->mes(substr($dato->Fecha,5,2)) ;
         $dia  = substr($dato->Fecha,8,2);
         $pdf = PDF::loadView('templates.oficio',compact("dato","anio","mes","dia"));
-        return $pdf->stream('oficio.pdf');
+        return $pdf->stream($mes.'.pdf');
     }
 
     public function oficio2($id)
@@ -140,11 +141,88 @@ class DocumentosController extends Controller
      * @param  \App\documentos  $documentos
      * @return \Illuminate\Http\Response
      */
-    public function show(documentos $documentos)
+    public function reportBachiller($inicio,$final,$carrera)
     {
-        //
+        $expeditos =   Expeditob::join("egresado AS e","expedito.CodigoAlumno","e.Codigo")
+                        ->join("sesion AS s","expedito.NumSesion","s.NumSesion")
+                        ->join("titulacion AS t","expedito.CodigoAlumno","t.CodAlumno")
+                        ->select("expedito.*","s.*","e.Paterno as Paterno","e.Materno as Materno", "e.Nombre")
+                        ->where([
+                            ["expedito.Tipo","BACHILLER"],
+                            ["expedito.FechaIngreso",">=",$inicio],
+                            ["expedito.FechaIngreso","<=",$final],
+                            ["e.IDEscuela",$carrera],
+                            ])->get();
+        $pdf = PDF::loadView('templates.expeditob',compact("expeditos"));
+        $pdf->setPaper('A4','landscape');
+        return $pdf->stream('reporte.pdf');
+        // return view("templates.expeditob");
     }
-
+    public function reportTitulo($inicio,$final,$carrera)
+    {
+        $expeditos =   Expeditob::join("egresado AS e","expedito.CodigoAlumno","e.Codigo")
+                        ->join("sesion AS s","expedito.NumSesion","s.NumSesion")
+                        ->join("titulacion AS t","expedito.CodigoAlumno","t.CodAlumno")
+                        ->select("expedito.*","s.*","e.Paterno as Paterno","e.Materno as Materno", "e.Nombre")
+                        ->where([
+                            ["expedito.Tipo","TITULO"],
+                            ["expedito.FechaIngreso",">=",$inicio],
+                            ["expedito.FechaIngreso","<=",$final],
+                            ["e.IDEscuela",$carrera],
+                            ])->get();
+        $pdf = PDF::loadView('templates.expeditot',compact("expeditos"));
+        $pdf->setPaper('A4','landscape');
+        return $pdf->stream('reporte.pdf');
+        // return view("templates.expeditob");
+    }
+    public function reportBachillerg($inicio,$final)
+    {
+        // $num        = array();
+        $sistemas =   Expeditob::join("egresado AS e","expedito.CodigoAlumno","e.Codigo")
+                            ->where([
+                            ["expedito.Tipo","BACHILLER"],
+                            ["expedito.FechaIngreso",">=",$inicio],
+                            ["expedito.FechaIngreso","<=",$final],
+                            ["e.IDEscuela",1],
+                            ])->get()->count();
+        $civil =   Expeditob::join("egresado AS e","expedito.CodigoAlumno","e.Codigo")
+                            ->where([
+                            ["expedito.Tipo","BACHILLER"],
+                            ["expedito.FechaIngreso",">=",$inicio],
+                            ["expedito.FechaIngreso","<=",$final],
+                            ["e.IDEscuela",2],
+                            ])->get()->count();                    
+        $nsistemas  = isset($sistemas) ? $sistemas : 0;                    
+        $ncivil     = isset($civil) ? $civil : 0;                    
+        $num[0]     = $nsistemas;    
+        $num[1]     = $ncivil;    
+        return compact('num');
+        // return view("templates.expeditob");
+    }
+    public function reportTitulog($inicio,$final)
+    {
+        // $num        = array();
+        $sistemas =   Expeditob::join("egresado AS e","expedito.CodigoAlumno","e.Codigo")
+                            ->where([
+                            ["expedito.Tipo","TITULO"],
+                            ["expedito.FechaIngreso",">=",$inicio],
+                            ["expedito.FechaIngreso","<=",$final],
+                            ["e.IDEscuela",1],
+                            ])->get()->count();
+        $civil =   Expeditob::join("egresado AS e","expedito.CodigoAlumno","e.Codigo")
+                            ->where([
+                            ["expedito.Tipo","TITULO"],
+                            ["expedito.FechaIngreso",">=",$inicio],
+                            ["expedito.FechaIngreso","<=",$final],
+                            ["e.IDEscuela",2],
+                            ])->get()->count();                    
+        $nsistemas  = isset($sistemas) ? $sistemas : 0;                    
+        $ncivil     = isset($civil) ? $civil : 0;                    
+        $num[0]     = $nsistemas;    
+        $num[1]     = $ncivil;    
+        return compact('num');
+        // return view("templates.expeditob");
+    }
     /**
      * Show the form for editing the specified resource.
      *
