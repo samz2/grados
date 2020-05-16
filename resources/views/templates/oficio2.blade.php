@@ -105,7 +105,7 @@
         <div class="center t16 negrita arial" >FACULTAD DE INGENIERÍA DE SISTEMAS E INGENIERÍA CIVIL</div>
         <div class="center t16 arial">COMISIÓN DE GRADOS y TÍTULOS - FISeIC</div><br>
         <p class="derecho t15 arial">Pucallpa, {{$dia}} {{"de"}} {{$mes}} del {{$anio}}</p>
-        <div class="izquierdo subrayado negrita arial">OFICIO  No        <b class="t17">/{{$anio}}</b> – UNU-FISeIC-CG y T</div>
+        <div class="izquierdo subrayado negrita arial">OFICIO  No        <b class="t17">/{{$anio}}</b> – UNU-FISeIC-CGyT</div>
         <div class="izquierdo t15 arial">Señor {{"Ing. Mg."}}</div>
         <div class="izquierdo t15 arial">{{$dato2->Nombre}}</div>
         <div class="izquierdo t15 arial">Decano de la Facultad de Ingeniería de Sistemas e Ingeniería Civil – UNU</div>

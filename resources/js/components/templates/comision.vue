@@ -122,7 +122,7 @@
                         <div class="card-body">
                             <div class="content table-responsive table-full-width t12">
                                 <v-client-table :data="comisiones" :columns="columns" :options="options">
-                                    <div slot="Acciones" slot-scope="props">
+                                    <div slot="Accion" slot-scope="props">
                                      <button data-target="#exampleModal" class="btn btn-info" data-toggle="modal" v-on:click="edit(props.row.IDComision,props.row.Semestre,props.row.Presidente,props.row.Miembro1,props.row.Miembro2,props.row.FechaInicio,props.row.FechaFin,props.row.Estado)" data-placement="left" title="Editar"><i class="fas fa-edit" style="color: white" aria-hidden="true"></i></button>
                                     </div>
                                 </v-client-table>
@@ -162,7 +162,7 @@
                 FechaFinAux:null,
                 Estado:null,
             }],
-            columns: ["Semestre","auxPresidente","auxMiembro1","auxMiembro2","FechaInicioAux","FechaFinAux","Estado","Acciones"],
+            columns: ["Semestre","auxPresidente","auxMiembro1","auxMiembro2","FechaInicioAux","FechaFinAux","Estado","Accion"],
             options: {
 				headings:
 				{
@@ -228,7 +228,8 @@
 
                     swal({
                         type: 'warning',
-                        title: 'La fecha de inicio no puede ser mayor a la fecha de fin',
+                        title: 'Ha ocurrido un error',
+                        text: 'La fecha de inicio no puede ser mayor a la fecha de fin'
                        
                     });
                     this.comision.inicio = null;
@@ -244,7 +245,7 @@
                         title: data.data.title,
                         text: data.data.text,
                         showConfirmButton: false,
-                        timer: 2000
+                        timer: 3000
                     });
                     this.$Progress.finish();
                     this.getDatos();
@@ -254,8 +255,8 @@
                     console.log(error);	
                     swal({
                         type: 'error',
-                        title: 'Ocurrió un problema',
-                        text: 'Comuniquese con un administrador',
+                        title: 'Ha ocurrido un error',
+                        text: 'Comuníquese con un administrador',
                         showConfirmButton: true,
                     });
                 })
@@ -265,7 +266,8 @@
 
                     swal({
                         type: 'warning',
-                        title: 'La fecha de inicio no puede ser mayor a la fecha de fin',
+                        title: 'Ha ocurrido un error',
+                        text:'La fecha de inicio no puede ser mayor a la fecha de fin'
                        
                     });
                     this.comision.inicio = null;
@@ -281,7 +283,7 @@
                         title: data.data.title,
                         text: data.data.text,
                         showConfirmButton: false,
-                        timer: 2000
+                        timer: 3000
                     });
                     this.$Progress.finish();
                     this.getDatos();
@@ -291,8 +293,8 @@
                     console.log(error);	
                     swal({
                         type: 'error',
-                        title: 'Ocurrió un problema',
-                        text: 'Comuniquese con un administrador',
+                        title: 'Ha ocurrido un error',
+                        text: 'Comuníquese con un administrador',
                         showConfirmButton: true,
                     });
                 })
@@ -334,8 +336,8 @@
             if(this.comision.presidente == this.comision.miembro1)
             {
                 swal({
-                        type: 'error',
-                        //title: 'Error',
+                        type: 'warning',
+                        title: 'Ha ocurrido un error',
                         text: 'Presidente debe ser diferente al Miembro 1',
                         showConfirmButton: true,
                     });
@@ -345,8 +347,8 @@
             if(this.comision.miembro1 == this.comision.miembro2)
             {
                 swal({
-                        type: 'error',
-                        //title: 'Error',
+                        type: 'warning',
+                        title: 'Ha ocurrido un error',
                         text: 'Miembro 1 debe ser diferente al Miembro 2',
                         showConfirmButton: true,
                     });
@@ -356,8 +358,8 @@
             if(this.comision.presidente == this.comision.miembro2)
             {
                 swal({
-                        type: 'error',
-                        //title: 'Error',
+                        type: 'warning',
+                        title: 'Ha ocurrido un error',
                         text: 'Presidente debe ser diferente al Miembro 2',
                         showConfirmButton: true,
                     });

@@ -17,7 +17,7 @@ class ComisionController extends Controller
         $comisiones =   Comision::join("docentes AS d","comision.Presidente","d.DNI")
                         ->join("docentes AS do","comision.Miembro1","do.DNI")
                         ->join("docentes AS doc","comision.Miembro2","doc.DNI")
-                        ->select("comision.*",\DB::raw("concat_ws(' ',d.Apellidos,d.Nombres) as auxPresidente"),\DB::raw("concat_ws(' ',do.Apellidos,do.Nombres) as auxMiembro1"),\DB::raw("concat_ws(' ',doc.Apellidos,doc.Nombres) as auxMiembro2"),\DB::raw("date_format(FechaInicio,'%d-%m-%Y') AS FechaInicioAux"),\DB::raw("date_format(FechaFin,'%d-%m-%Y') AS FechaFinAux"))
+                        ->select("comision.*",\DB::raw("concat_ws(' ',d.Nombres,d.Apellidos) as auxPresidente"),\DB::raw("concat_ws(' ',do.Nombres,do.Apellidos) as auxMiembro1"),\DB::raw("concat_ws(' ',doc.Nombres,doc.Apellidos) as auxMiembro2"),\DB::raw("date_format(FechaInicio,'%d-%m-%Y') AS FechaInicioAux"),\DB::raw("date_format(FechaFin,'%d-%m-%Y') AS FechaFinAux"))
                         ->get();    
         return compact("comisiones");
     }
@@ -50,9 +50,9 @@ class ComisionController extends Controller
         $comision->FechaFin     = $request->comision["fin"];
         $comision->save();
         $type   = "success";
-        //$title  = "Bien";
+        $title  = "¡Buen trabajo!";
         $text   = "Comisión creada con éxito";
-        return compact("type","text");
+        return compact("type","title","text");
     }
 
     /**
@@ -98,14 +98,14 @@ class ComisionController extends Controller
         if($comision)
         {
             $type   = "success";
-            //$title  = "Bien";
-            $text   = "Comisión editada con éxito";
+            $title  = "¡Buen trabajo!";
+            $text   = "Comisión guardada con éxito";
         }else{
             $type   = "warning";
-            //$title  = "Ups";
-            $text   = "Ocurrió un problema";
+            $title  = "Ha ocurrido un error";
+            $text   = "Comuníquese con un administrador";
         }
-        return compact("type","text");
+        return compact("type","title","text");
     }
 
     /**

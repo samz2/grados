@@ -15,7 +15,7 @@ class DecanoController extends Controller
     public function index()
     {
         $decanos =   Decano::join("docentes AS d","decano.CodDocente","d.DNI")
-                        ->select("decano.*",\DB::raw("concat_ws(' ',d.Apellidos,d.Nombres) as auxDecano"),\DB::raw("date_format(PeriodoInicio,'%d-%m-%Y') AS FechaInicioAux"),\DB::raw("date_format(PeriodoFin,'%d-%m-%Y') AS FechaFinAux"))
+                        ->select("decano.*",\DB::raw("concat_ws(' ',d.Nombres,d.Apellidos) as auxDecano"),\DB::raw("date_format(PeriodoInicio,'%d-%m-%Y') AS FechaInicioAux"),\DB::raw("date_format(PeriodoFin,'%d-%m-%Y') AS FechaFinAux"))
                         ->get();    
         return compact("decanos");
     }
@@ -48,14 +48,14 @@ class DecanoController extends Controller
             $decano->Estado         = $request->decano["estado"];
             $decano->save();
             $type   = "success";
-            //$title  = "Bien";
+            $title  = "¡Buen trabajo!";
             $text   = "Decano creado con éxito";
         }else{
             $type   = "warning";
-            //$title  = "Ups...";
+            $title  = "Ha ocurrido un error";
             $text   = "Ya existe un decano para este periodo de tiempo";
         }
-        return compact("type","text");
+        return compact("type","title","text");
     }
 
     /**
@@ -99,14 +99,14 @@ class DecanoController extends Controller
         if($decano)
         {
             $type   = "success";
-            //$title  = "Bien";
-            $text   = "Decano editado con éxito";
+            $title  = "¡Buen trabajo!";
+            $text   = "Decano guardado con éxito";
         }else{
             $type   = "warning";
-            //$title  = "Ups";
-            $text   = "Ocurrió un problema";
+            $title  = "Ha ocurrido un error";
+            $text   = "Comuníquese con un administrador";
         }
-        return compact("type","text");
+        return compact("type","title","text");
     }
 
     /**

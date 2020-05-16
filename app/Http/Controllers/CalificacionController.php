@@ -41,16 +41,16 @@ class CalificacionController extends Controller
             $calificacion->Calificacion = mb_strtoupper($request->calificacion["calificacion"]);
             $calificacion->save();
             $type   = "success";
-            //$title  = "Bien";
-            $text   = "Calificacion creada con éxito";
+            $title  = "¡Buen trabajo!";
+            $text   = "Calificación creada con éxito";
         } catch (\Throwable $th) {
             $type   = "error";
-            //$title  = "Mal";
+            $title  = "Ha ocurrido un error";
             $text   = $th->errorInfo[2];
         }
         
         
-        return compact("type","text");
+        return compact("type","title","text");
     }
 
     /**
@@ -91,14 +91,14 @@ class CalificacionController extends Controller
         if($calificacion)
         {
             $type   = "success";
-            //$title  = "Bien";
-            $text   = "Calificacion actualizada con éxito";
+            $title  = "¡Buen trabajo!";
+            $text   = "Calificación guardada con éxito";
         }else{
             $type   = "warning";
-            //$title  = "Ups";
-            $text   = "Ocurrió un problema";
+            $title  = "Ha ocurrido un error";
+            $text   = "Comuníquese con un administrador";
         }
-        return compact("type","text");
+        return compact("type","title","text");
     }
 
     /**

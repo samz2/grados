@@ -274,7 +274,7 @@
           <div class="card-body">
             <div class="content table-responsive table-full-width">
               <v-client-table :data="docentes" :columns="columns" :options="options">
-                <div slot="Acciones" slot-scope="props">
+                <div slot="Accion" slot-scope="props">
                   <button
                     class="btn btn-info"
                     v-on:click="edit(props.row.DNI,props.row.Codigo,props.row.Nombres,props.row.Apellidos,props.row.Celular,props.row.Correo,props.row.Dedicacion,props.row.Categoria,props.row.IDEscuela)"
@@ -331,7 +331,7 @@ export default {
         "Categoria",
         "Dedicacion",
         "Escuela",
-        "Acciones"
+        "Accion"
       ],
       options: {
         headings: {
@@ -438,7 +438,7 @@ export default {
               title: data.data.title,
               text: data.data.text,
               showConfirmButton: false,
-              timer: 2000
+              timer: 3000
             });
             this.$Progress.finish();
             this.cancelar();
@@ -449,8 +449,8 @@ export default {
             console.log(error);
             swal({
               type: "error",
-              title: "Ocurrió un problema",
-              text: "Comuniquese con un administrador",
+              title: "Ha ocurrido un error",
+              text: "Comuníquese con un administrador",
               showConfirmButton: true
             });
           });
@@ -466,7 +466,7 @@ export default {
               title: data.data.title,
               text: data.data.text,
               showConfirmButton: false,
-              timer: 2000
+              timer: 3000
             });
             this.$Progress.finish();
             this.cancelar();
@@ -477,7 +477,7 @@ export default {
             console.log(error);
             swal({
               type: "error",
-              title: "Ocurrió un problema",
+              title: "Ha ocurrido un error",
               text: "Comuníquese con un administrador",
               showConfirmButton: true
             });

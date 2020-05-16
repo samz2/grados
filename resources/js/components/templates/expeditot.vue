@@ -624,6 +624,10 @@
             this.expedito.ingreso     = null;
             this.expedito.comienzo    = null;
             this.cambiarCancelarTitulo();
+            document.getElementById("chbx1").checked = false;
+            document.getElementById("chbx2").checked = false;
+            document.getElementById("chbx3").checked = false;
+            document.getElementById("chbx4").checked = false;           
             $("#matricula").val("");
             $("#egresado").val("");
             $("#foto").val("");
@@ -737,7 +741,7 @@
                         title: data.data.title,
                         text: data.data.text,
                         showConfirmButton: false,
-                        timer: 2000
+                        timer: 3000
                     });
                     this.$Progress.finish();
                     // setTimeout(() => {
@@ -749,8 +753,8 @@
                     console.log(error);	
                     swal({
                         type: 'error',
-                        //title: 'Error',
-                        text: 'Ocurrió un problema, comuníquese con un administrador',
+                        title: 'Ha ocurrido un error',
+                        text: 'Comuníquese con un administrador',
                         showConfirmButton: true,
                     });
                 })
@@ -794,7 +798,7 @@
             {
                 swal({
                     title: '¿Deseas cambiar el estado de este expedito?',
-                    text: "El estado cambiara a En Proceso!",
+                    text: "El estado cambiara a En Proceso",
                     type: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
@@ -807,8 +811,8 @@
                             .then(data => {
                             if(data.data=="OK"){
                                 swal(
-                                'Actualizado!',
-                                'El Expedito cambio a En Proceso.',
+                                '¡Buen trabajo!',
+                                'El Expedito cambió a En Proceso.',
                                 'success'
                                 );
                             this.$Progress.finish();
@@ -817,7 +821,7 @@
                             }, 2000);
                             }
                             }).catch(error => {
-                                console.log('Ocurrio un error ' + error);
+                                console.log('Ha ocurrido un error ' + error);
                                 this.$Progress.fail();
                             });
                         }
@@ -825,7 +829,7 @@
             }else{
                 swal({
                     title: '¿Deseas cambiar el estado de este expedito?',
-                    text: "El estado cambiara a Finalizado!",
+                    text: "El estado cambiará a Finalizado",
                     type: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
@@ -838,8 +842,8 @@
                             .then(data => {
                             if(data.data=="OK"){
                                 swal(
-                                'Actualizado!',
-                                'El Expedito cambio a Finalizado.',
+                                '¡Buen trabajo!',
+                                'El Expedito cambió a Finalizado',
                                 'success'
                                 );
                             this.$Progress.finish();
@@ -848,7 +852,7 @@
                             }, 2000);
                             }
                             }).catch(error => {
-                                console.log('Ocurrio un error ' + error);
+                                console.log('Ha ocurrido un error ' + error);
                                 this.$Progress.fail();
                             });
                         }
@@ -873,7 +877,7 @@
                e.target.value = '';
                swal({
                         type: 'error',
-                        //title: 'Error',
+                        title: 'Ha ocurrido un error',
                         text: 'El tamaño del archivo debe ser menor o igual a 1mb',
                         showConfirmButton: true,
                     });
@@ -894,7 +898,7 @@
                 this.archivos.matricula = null;
                 swal({
                         type: 'error',
-                        //title: 'Error',
+                        title: 'Ha ocurrido un error',
                         text: 'El archivo debe ser PDF, por favor intente subiendo otro archivo',
                         showConfirmButton: true,
                     });
@@ -911,7 +915,7 @@
                 e.target.value = '';
                 swal({
                         type: 'error',
-                        //title: 'Error',
+                        title: 'Ha ocurrido un error',
                         text: 'El tamaño del archivo debe ser menor o igual a 1mb',
                         showConfirmButton: true,
                     });
@@ -931,7 +935,7 @@
                 e.target.value = '';
                 swal({
                         type: 'error',
-                        //title: 'Error',
+                        title: 'Ha ocurrido un error',
                         text: 'El archivo debe ser PDF, por favor intente subiendo otro archivo',
                         showConfirmButton: true,
                     });
@@ -948,7 +952,7 @@
                 e.target.value = '';
                 swal({
                         type: 'error',
-                        //title: 'Error',
+                        title: 'Ha ocurrido un error',
                         text: 'El tamaño del archivo debe ser menor o igual a 1mb',
                         showConfirmButton: true,
                     });
@@ -969,7 +973,7 @@
                 e.target.value = '';
                 swal({
                         type: 'error',
-                        //title: 'Error',
+                        title: 'Ha ocurrido un error',
                         text: 'El archivo debe ser una imagen, por favor intente subiendo otro archivo',
                         showConfirmButton: true,
                     });
@@ -986,7 +990,7 @@
                 e.target.value = '';
                 swal({
                         type: 'error',
-                        //title: 'Error',
+                        title: 'Ha ocurrido un error',
                         text: 'El tamaño del archivo debe ser menor o igual a 1mb',
                         showConfirmButton: true,
                     });
@@ -1007,7 +1011,7 @@
                 e.target.value = '';
                 swal({
                         type: 'error',
-                        //title: 'Error',
+                        title: 'Ha ocurrido un error',
                         text: 'El archivo debe ser PDF, por favor intente subiendo otro archivo',
                         showConfirmButton: true,
                     });
@@ -1025,7 +1029,7 @@
                 e.target.value = '';
                 swal({
                         type: 'error',
-                        //title: 'Error',
+                        title: 'Ha ocurrido un error',
                         text: 'El tamaño del archivo debe ser menor o igual a 1mb',
                         showConfirmButton: true,
                     });
@@ -1046,7 +1050,7 @@
                 e.target.value = '';
                 swal({
                         type: 'error',
-                        //title: 'Error',
+                        title: 'Ha ocurrido un error',
                         text: 'El archivo debe ser un documento en Word, por favor intente subiendo otro archivo',
                         showConfirmButton: true,
                     });
@@ -1106,9 +1110,10 @@
                 }).then(data=>{
                     swal({
                         type: data.data.type,
+                        title: data.data.title,
                         text: data.data.text,
                         showConfirmButton: false,
-                        timer: 2000
+                        timer: 3000
                     });
                     this.$Progress.finish();
                     // setTimeout(() => {
@@ -1120,8 +1125,8 @@
                     console.log(error);	
                     swal({
                         type: 'error',
-                        //title: 'Error',
-                        text: 'Hay un problema, comuníquese con un administrador',
+                        title: 'Ha ocurrido un error',
+                        text: 'Comuníquese con un administrador',
                         showConfirmButton: true,
                     });
                 })

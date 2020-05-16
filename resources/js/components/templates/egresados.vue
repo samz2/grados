@@ -409,7 +409,7 @@ export default {
               title: data.data.title,
               text: data.data.msj,
               showConfirmButton: false,
-              timer: 2000
+              timer: 3000
             });
             this.$Progress.finish();
             this.cancelar();
@@ -424,8 +424,8 @@ export default {
             console.log(error);
             swal({
               type: "error",
-              title: "Ocurrió un problema",
-              text: "Comuniquese con un administrador",
+              title: "Ha ocurrido un error",
+              text: "Comuníquese con un administrador",
               showConfirmButton: true
             });
           });
@@ -442,7 +442,7 @@ export default {
               title: data.data.title,
               text: data.data.msj,
               showConfirmButton: false,
-              timer: 2000
+              timer: 3000
             });
             this.$Progress.finish();
             this.cancelar();
@@ -454,8 +454,8 @@ export default {
             console.log(error);
             swal({
               type: "error",
-              title: "Ocurrió un problema",
-              text: "Comuniquese con un administrador",
+              title: "Ha ocurrido un error",
+              text: "Comuníquese con un administrador",
               showConfirmButton: true
             });
           });
@@ -495,13 +495,13 @@ export default {
             .get(`/deleteEgresado/${id}`)
             .then(data => {
               if (data.data == "OK") {
-                swal("Egresado eliminado con éxito", "", "success");
+                swal("¡Buen trabajo!", "Egresado eliminado con éxito", "success");
                 this.$Progress.finish();
                 this.getDatos();
               }
             })
             .catch(error => {
-              console.log("Ocurrió un problema " + error);
+              console.log("Ha ocurrido un error " + error);
               this.$Progress.fail();
             });
         }

@@ -51,17 +51,26 @@ class DocumentosController extends Controller
                         ->join("escuela AS esc","e.IDEscuela","esc.IDEscuela")
                         ->select("expedito.*","s.*","e.Paterno as Paterno","e.Materno as Materno", "e.Nombre","esc.Escuela")
                         ->where("expedito.IDExpedito",$id)->get();
-        // $datos = Documentos::join("egresado AS e","documentos.Codigo","e.Codigo")                      CONCAT(UPPER(LEFT(, 1)), LOWER(SUBSTRING(, 2))) ----- \DB::raw("ucwords(e.Nombre,' ') as Nombre")
-        //                                                                                                \DB::raw("concat(upper(left(e.Nombre, 1)), lower(substring(e.Nombre, 2))) as Nombre")
-        // ->join("escuela AS es","e.IDEscuela","es.IDEscuela")
-        // ->select("e.*","documentos.*","es.*")
-        // ->where("IDDocumento",$id)->get();
+        
+        $decanitos = Decano::join("docentes AS d","decano.CodDocente","d.DNI")
+                        ->select(\DB::raw("concat_ws(' ',d.Nombres,d.Apellidos) as Nombre"))
+                        ->where("decano.Estado","ACTIVO")
+                        ->get();
+
+        $comisiones =   Comision::join("docentes AS d","comision.Presidente","d.DNI")
+                        ->select(\DB::raw("concat_ws(' ',d.Nombres,d.Apellidos) as Presidente"))
+                        ->where("comision.Estado","ACTIVO")
+                        ->get(); 
+
         $dato = $expeditosb[0];
+        $dato2 = $decanitos[0];
+        $dato3 = $comisiones[0];
         $anio = substr($dato->Fecha,0,4);
         $mes  = $this->mes(substr($dato->Fecha,5,2)) ;
+        $mes2  = substr($dato->Fecha,5,2) ;
         $dia  = substr($dato->Fecha,8,2);
-        $pdf = PDF::loadView('templates.oficio',compact("dato","anio","mes","dia"));
-        return $pdf->stream($mes.'.pdf');
+        $pdf = PDF::loadView('templates.oficio',compact("dato3","dato2","dato","anio","mes","mes2","dia"));
+        return $pdf->stream('oficio.pdf');
     }
 
     public function oficio2($id)
