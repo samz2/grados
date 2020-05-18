@@ -44,7 +44,7 @@ class ProyectoController extends Controller
     public function store(Request $request)
     {
         $hoy = date("Y-m-d");
-        $nroProyecto = Proyecto::select("IDProyecto")->last();
+        $nroProyecto = Proyecto::all()->last();
         if(isset($nroProyecto))
         {
             $nro = $nroProyecto->IDProyecto + 1; 

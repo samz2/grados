@@ -538,6 +538,7 @@
             this.proyecto.docente       = CodDocente;
             this.proyecto.fecha         = FechaRegistro;
             this.proyecto.porcentaje    = Porcentaje;
+            this.tesistas               = [];
             this.tesistasaux            = Codigos.split(",");
             this.getTesistas();
             // console.log(Codigos.split(","));
