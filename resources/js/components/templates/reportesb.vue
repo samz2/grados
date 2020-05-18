@@ -7,62 +7,98 @@
 	                <div class="card-header text-center" style="background-color: powderblue !important; color:black; font-weight: bold;">
 	                    <h4 class="title">REPORTES EXPEDITOS BACHILLER</h4>  
 	                </div>
+                    <div class="col-md-5">
+                        <label>* Campos obligatorios</label>
+                    </div>
+
+                    <div class="col-md-5" id="labelInicio">
+                        <label>Nota: Llenar los campos solicitados para cada reporte</label>
+                    </div>
 					<div class="card-body">
                         <fieldset class="border p-2">
                             <legend class="w-auto t15"><b>Reporte detallado</b></legend>
                             <div class="form-group row">
-                                <label class="col-md-2 col-form-label">Fecha Inicio* :</label>
-                                <div class="col-md-3">
-                                    <input v-model="reporte.inicio" type="date" class="form-control form-control-sm">
+                                <div class="col-md-2">
+                                    <label>Fecha Inicio*</label>
                                 </div>
-                                <label class="col-md-2 col-form-label">Fecha Inicio* :</label>
                                 <div class="col-md-3">
-                                    <input v-model="reporte.final" type="date" class="form-control form-control-sm">
+                                    <input v-model="reporte.inicio" max="2030-12-31" @change="valida()" type="date" class="form-control form-control-sm">
+                                </div>
+                                <div class="col-md-2">
+                                    <label>Fecha Final*</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <input v-model="reporte.final" max="2030-12-31" @change="valida()" type="date" class="form-control form-control-sm">
                                 </div>
                                 <div class="col-md-2">&nbsp;</div>
-                                <label class="col-md-2 t13 col-form-label">Carrera Profesional* :</label>
+                                <div class="col-md-2">
+                                    <label>Carrera Profesional*</label>
+                                </div>
                                 <div class="col-md-3">
-                                    <select type="text" v-model="reporte.carrera" class="form-control form-control-sm">
+                                    <select type="text" v-model="reporte.carrera" @change="valida()" class="form-control form-control-sm">
                                         <option v-for="e in escuelas" :key="e.IDEscuela" :value="e.IDEscuela">
                                             {{e.Escuela}}
                                         </option>
                                     </select>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-7">&nbsp;</div>
+                                <div class="col-md-3" v-if="validar">
                                     <router-link class="btn btn-success btn-sm" target="_blank" :to="'/reporte_bachiller/'+reporte.inicio+'/'+reporte.final+'/'+reporte.carrera"
-                                    data-toggle="tooltip" data-placement="left">generar reporte
-                                    <!-- <i class="far fa-file-pdf" aria-hidden="true"></i> -->
+                                    data-toggle="tooltip" data-placement="left">Generar Reporte
+                                    <i class="far fa-file-pdf" aria-hidden="true"></i>
                                     </router-link>
-                                    
+                                </div>
+                                <div class="col-md-3" v-if="!validar">
+                                    <button class="btn btn-success btn-sm" disabled>Generar Reporte
+                                    <i class="far fa-file-pdf" aria-hidden="true"></i>
+                                    </button>
                                 </div>
                             </div>
                         </fieldset>
                         <fieldset class="border p-2">
                             <legend class="w-auto t15"><b>Reporte gráfico</b></legend>
                             <div class="form-group row">
-                                <label class="col-md-2 col-form-label">Fecha Inicio* :</label>
+                                <div class="col-md-2">
+                                    <label>Fecha Inicio*</label>
+                                </div>   
                                 <div class="col-md-3">
-                                    <input v-model="reporte.iniciog" type="date" class="form-control form-control-sm">
-                                </div>
-                                <label class="col-md-2 col-form-label">Fecha Inicio* :</label>
-                                <div class="col-md-3">
-                                    <input v-model="reporte.finalg" type="date" class="form-control form-control-sm">
+                                    <input v-model="reporte.iniciog" max="2030-12-31" @change="valida2()" type="date" class="form-control form-control-sm">
                                 </div>
                                 <div class="col-md-2">
-                                    <button @click="getReporte(reporte.iniciog,reporte.finalg)" class="btn btn-success btn-sm">generar reporte
-                                    
+                                    <label>Fecha Final*</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <input v-model="reporte.finalg" max="2030-12-31" @change="valida2()" type="date" class="form-control form-control-sm">
+                                </div>
+                                <div class="col-md-2">
+                                    &nbsp;
+                                </div>
+                                <div class="col-md-2" v-if="!validar2">
+                                    <button class="btn btn-success btn-sm" disabled>Generar Gráfico
+                                    <i class="fas fa-chart-pie"></i>                                 
                                     </button>
-                                    
+                                </div>
+                                 <div class="col-md-2" v-if="validar2">
+                                    <button class="btn btn-success btn-sm" @click="getReporte(reporte.iniciog,reporte.finalg)">Generar Gráfico
+                                    <i class="fas fa-chart-pie"></i>                                 
+                                    </button>
                                 </div>
                             </div>
                         </fieldset>
-                        <button id="print" class="btn btn-success btn-sm" @click="printDiv('graph')" value="guardar"> print
+                        <br>
+                        <button id="print" class="btn btn-info btn-sm" style="color:white" @click="printDiv('graph')" value="guardar"> Imprimir
+                            <i class="far fa-file-pdf" aria-hidden="true"></i>
                         </button>    
                         
-                        <div id="graph"  class="col-md-6" >
-							<apexchart width="500" type="donut" :options="options" :series="series"></apexchart>
-                            <i class="nav-icon fa fa-circle text-primary"></i> Ing. de Sistemas <br>
-                            <i class="nav-icon fa fa-circle text-success"></i> Ing. Civil <br>
+                        <div id="graph" class="form-group row" align="center">
+                            <div class="col-md-4"></div>
+                            <div class="col-md-4">
+                                <apexchart width='300' type="donut" :options="options" :series="series"></apexchart>
+                                <div style="text-align:left"><i class="nav-icon fa fa-circle text-primary"></i> Ingeniería de Sistemas({{sistemas}})</div>
+                                <div style="text-align:left"><i class="nav-icon fa fa-circle text-success"></i> Ingeniería Civil({{civil}})</div> <br>
+                            </div>
+                            <div class="col-md-4"></div>
+							
                         </div>
 
                         
@@ -79,6 +115,10 @@
     data() {
         return {
             lineas:[],
+            validar:false,
+            validar2:false,
+            sistemas:null,
+            civil:null,
 			reporte:{
                 inicio:null,
                 iniciog:null,
@@ -105,23 +145,108 @@
         $("#print").hide();
 	},
     methods: {
+        valida()
+        {
+            if(this.reporte.inicio == null || 
+            this.reporte.final == null || 
+            this.reporte.carrera == null )
+            {
+                return;
+            }else{
+                this.validar = true;
+            }
+
+            if (this.reporte.inicio != null) {
+                var inicio = this.reporte.inicio;
+                var final = "2030-01-01";
+                if (final <= inicio) {
+                swal({
+                    type: "warning",
+                    title: "Ingresar una fecha correcta"
+                });
+                this.reporte.inicio = null;
+                }
+            }
+
+            if (this.reporte.final != null) {
+                var inicio = this.reporte.final;
+                var final = "2030-01-01";
+                if (final <= inicio) {
+                swal({
+                    type: "warning",
+                    title: "Ingresar una fecha correcta"
+                });
+                this.reporte.final = null;
+                }
+            }
+        },
+        valida2()
+        {
+            var c1 = this.reporte.inicio;
+            var c2 = this.reporte.final;
+            var c3 = this.reporte.carrera;
+
+            if(this.reporte.iniciog == null || 
+            this.reporte.finalg == null)
+            {
+                return;
+            }else{
+                this.validar2 = true;
+            }
+
+            if (this.reporte.iniciog != null) {
+                var inicio = this.reporte.iniciog;
+                var final = "2030-01-01";
+                if (final <= inicio) {
+                swal({
+                    type: "warning",
+                    title: "Ingresar una fecha correcta"
+                });
+                this.reporte.iniciog = null;
+                }
+            }
+
+            if (this.reporte.finalg != null) {
+                var inicio = this.reporte.finalg;
+                var final = "2030-01-01";
+                if (final <= inicio) {
+                swal({
+                    type: "warning",
+                    title: "Ingresar una fecha correcta"
+                });
+                this.reporte.finalg = null;
+                }
+            }
+        },
         printDiv(nombreDiv) {
-            var contenido= document.getElementById(nombreDiv).innerHTML;
-            var contenidoOriginal= document.body.innerHTML;
 
-            document.body.innerHTML = contenido;
-
+            var headstr = "<html><head><h1 style='text-align:center; font-weight:bold;'>REPORTE GRÁFICO EXPEDITOS BACHILLER</h1></head><body><div align='center' style='zoom: 1.2;'><br><br>";
+            var footstr = "</div></body>";
+            var contenido = document.getElementById(nombreDiv).innerHTML;
+            var contenidoOriginal = document.body.innerHTML;
+            document.body.innerHTML = headstr+contenido+footstr;
             window.print();
-
+            location.reload();
             document.body.innerHTML = contenidoOriginal;
+           
+            //var contenido= document.getElementById(nombreDiv).innerHTML;
+            //var contenidoOriginal= document.body.innerHTML;            
+            //document.body.innerHTML = contenido;
+            //window.print();
+            //document.body.innerHTML = contenidoOriginal;
         },
         getReporte(inicio,final)
         {
+            
             this.$Progress.start();
             axios.get("reporte_bachiller/"+inicio+"/"+final)
             .then(data=>
             {
                 this.series = data.data.num;
+                this.sistemas = data.data.num[0];
+                this.civil = data.data.num[1];
+                // this.series = [2,5];
+
                 $("#graph").show();
                 $("#print").show();
                 this.$Progress.finish();
@@ -129,6 +254,7 @@
             ).catch(error=>{
                 console.log(error);
             })
+            
         },
         getModalidades()
         {
@@ -186,6 +312,30 @@
             $('#menos').hide();
             $('#mas').show();
         },
+        validafecha() {
+      if (this.expedito.ingreso != null) {
+        var inicio = this.expedito.ingreso;
+        var final = "2022-01-01";
+        if (final <= inicio) {
+          swal({
+            type: "warning",
+            title: "Ingresar una fecha correcta"
+          });
+          this.expedito.ingreso = null;
+        }
+      }
+      if (this.expedito.comienzo != null) {
+        var inicio = this.expedito.comienzo;
+        var final = "2026-01-01";
+        if (final <= inicio) {
+          swal({
+            type: "warning",
+            title: "Ingresar una fecha correcta"
+          });
+          this.expedito.comienzo = null;
+        }
+      }
+    },
         borrar()
         {
             this.alumno.codigo      = null;

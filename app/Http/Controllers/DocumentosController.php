@@ -161,6 +161,7 @@ class DocumentosController extends Controller
                             ["expedito.FechaIngreso",">=",$inicio],
                             ["expedito.FechaIngreso","<=",$final],
                             ["e.IDEscuela",$carrera],
+                            ["expedito.Estado",3]
                             ])->get();
         $pdf = PDF::loadView('templates.expeditob',compact("expeditos"));
         $pdf->setPaper('A4','landscape');
@@ -178,6 +179,7 @@ class DocumentosController extends Controller
                             ["expedito.FechaIngreso",">=",$inicio],
                             ["expedito.FechaIngreso","<=",$final],
                             ["e.IDEscuela",$carrera],
+                            ["expedito.Estado",3]
                             ])->get();
         $pdf = PDF::loadView('templates.expeditot',compact("expeditos"));
         $pdf->setPaper('A4','landscape');
@@ -187,12 +189,13 @@ class DocumentosController extends Controller
     public function reportBachillerg($inicio,$final)
     {
         // $num        = array();
-        $sistemas =   Expeditob::join("egresado AS e","expedito.CodigoAlumno","e.Codigo")
-                            ->where([
-                            ["expedito.Tipo","BACHILLER"],
-                            ["expedito.FechaIngreso",">=",$inicio],
-                            ["expedito.FechaIngreso","<=",$final],
-                            ["e.IDEscuela",1],
+            $sistemas =   Expeditob::join("egresado AS e","expedito.CodigoAlumno","e.Codigo")
+                                ->where([
+                                ["expedito.Tipo","BACHILLER"],
+                                ["expedito.FechaIngreso",">=",$inicio],
+                                ["expedito.FechaIngreso","<=",$final],
+                                ["e.IDEscuela",1],
+                                ["expedito.Estado",3],
                             ])->get()->count();
         $civil =   Expeditob::join("egresado AS e","expedito.CodigoAlumno","e.Codigo")
                             ->where([
@@ -200,6 +203,7 @@ class DocumentosController extends Controller
                             ["expedito.FechaIngreso",">=",$inicio],
                             ["expedito.FechaIngreso","<=",$final],
                             ["e.IDEscuela",2],
+                            ["expedito.Estado",3]
                             ])->get()->count();                    
         $nsistemas  = isset($sistemas) ? $sistemas : 0;                    
         $ncivil     = isset($civil) ? $civil : 0;                    
@@ -217,6 +221,7 @@ class DocumentosController extends Controller
                             ["expedito.FechaIngreso",">=",$inicio],
                             ["expedito.FechaIngreso","<=",$final],
                             ["e.IDEscuela",1],
+                            ["expedito.Estado",3]
                             ])->get()->count();
         $civil =   Expeditob::join("egresado AS e","expedito.CodigoAlumno","e.Codigo")
                             ->where([
@@ -224,6 +229,7 @@ class DocumentosController extends Controller
                             ["expedito.FechaIngreso",">=",$inicio],
                             ["expedito.FechaIngreso","<=",$final],
                             ["e.IDEscuela",2],
+                            ["expedito.Estado",3]
                             ])->get()->count();                    
         $nsistemas  = isset($sistemas) ? $sistemas : 0;                    
         $ncivil     = isset($civil) ? $civil : 0;                    

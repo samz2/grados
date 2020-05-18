@@ -44,7 +44,8 @@ class ProyectoController extends Controller
     public function store(Request $request)
     {
         $hoy = date("Y-m-d");
-        $nroProyecto = Proyecto::select("IDProyecto")->last();
+        $nroProyecto = Proyecto::all()->last();
+        //$nroProyecto = Proyecto::select("IDProyecto")->all();
         if(isset($nroProyecto))
         {
             $nro = $nroProyecto->IDProyecto + 1; 
@@ -67,16 +68,17 @@ class ProyectoController extends Controller
                 $proyecto->Porcentaje   = $request->proyecto["porcentaje"];
                 $proyecto->created_at   = $hoy;
                 $proyecto->save();
-                $msj    = "Proyecto de tesis registrado con éxito";
-                $val    = "success";  
+                $type = "success";
+                $title = "¡Buen trabajo!";
+                $text = "Proyecto de tesis guardado con éxito"; 
             }else
             {
-                $msj    = "Alumno cuenta con proyecto de tesis en trámite";
-                $val    = "warning";  
+                $type = "error";
+                $title = "¡Ocurrió un problema!";
+                $text = "Ya existe un trámite con este(os) tesistas"; 
             }
-        }
-         
-        return compact("msj","val");
+        }         
+        return compact("type","title","text"); 
     }
 
     /**
@@ -128,9 +130,13 @@ class ProyectoController extends Controller
             
            
         }
-        
-        foreach ($request->tesistas as $key) {
-            $objProyecto = Proyecto::where("Codigo",$key[0]["codigo"])
+        $n = 0;
+        foreach ($request->tesistas as $key => $val) {
+            $proAux      =  Proyecto::where("Codigo",$val[0]["codigo"])
+                            ->where("IDProyecto",$request->proyecto["idproyecto"])->get()->count();
+            if($proAux > 0)
+            {
+                $objProyecto = Proyecto::where("Codigo",$val[0]["codigo"])
                            ->where("IDProyecto",$request->proyecto["idproyecto"])
                            ->update(
                                [
@@ -142,12 +148,28 @@ class ProyectoController extends Controller
                                 "Porcentaje"    => $request->proyecto["porcentaje"],
                                 "updated_at"    => $hoy,
                                ]);
-                $msj    = "Proyecto de tesis actualizado con éxito";
-                $val    = "success";  
+            }else{
+                $proyecto = new Proyecto();
+                $proyecto->IDProyecto   = $request->proyecto["idproyecto"];
+                $proyecto->Codigo       = $val[0]["codigo"];
+                $proyecto->IDCarrera    = $request->proyecto["carrera"];
+                $proyecto->NombreTesis  = $request->proyecto["tesis"];
+                $proyecto->IDLinea      = $request->proyecto["linea"];
+                $proyecto->CodDocente   = $request->proyecto["docente"];
+                $proyecto->FechaRegistro   = $request->proyecto["fecha"];
+                $proyecto->Porcentaje   = $request->proyecto["porcentaje"];
+                $proyecto->created_at   = $hoy;
+                $proyecto->save();
+            }
+                        $type = "success";
+                        $title = "¡Buen trabajo!";
+                        $text = "Proyecto de tesis actualizado con éxito"; 
+                        
+                        
            
         }
-         
-        return compact("msj","val");
+        return compact("type","title","text"); 
+        //return compact("msj","val");
     }
 
     /**

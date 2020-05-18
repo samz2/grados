@@ -44,10 +44,10 @@ class LineaController extends Controller
         $linea->Escuela     = $request->linea["escuela"];
         $linea->created_at  = $hoy;
         $linea->save();
-        $type   = "success";
-        //$title  = "Bien";
-        $text   = "Línea de investigación creada con éxito";
-        return compact("type","text");
+        $type = "success";
+        $title = "¡Buen trabajo!";
+        $text = "Línea investigación guardado con éxito"; 
+        return compact("type","title","text");
     }
 
     /**
@@ -90,15 +90,15 @@ class LineaController extends Controller
 
         if($linea)
         {
-            $type   = "success";
-            //$title  = "Bien";
-            $text   = "Linea de investigación actualizada con éxito";
+            $type = "success";
+            $title="¡Buen trabajo!";
+            $text = "Línea investigación guardado con éxito";
         }else{
-            $type   = "warning";
-            //$title  = "Ups";
-            $text   = "Ocurrió un problema";
+            $type = "success";
+            $title="¡Buen trabajo!";
+            $text = "Línea investigación guardado con éxito";
         }
-        return compact("type","text");
+        return compact("type","title","text");
     }
 
     /**

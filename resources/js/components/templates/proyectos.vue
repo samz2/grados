@@ -14,16 +14,16 @@
 				</div>
 	            <div class="card card-default"  id="objetivo">
 	                <div class="card-header text-center" style="background-color: powderblue !important; color:black; font-weight: bold;">
-	                    <h4 class="title">Proyectos de Tesis</h4>  
+	                    <h4 class="title">PROYECTOS DE TESIS</h4>  
 	                </div>
-                    <div class="col-md-5"><label>* Campos obligatorios.</label></div>
+                    <div class="col-md-5"><label>* Campos obligatorios</label></div>
                     
-                    <div class="col-md-5" id="labelInicio"><label>Nota: Primero realizar la búsqueda del(los) tesista(s)</label></div>
+                    <div class="col-md-5" id="labelInicio"><label>Nota: Primero realizar la búsqueda del(s) tesista(s)</label></div>
                     
 					<div class="card-body">
                         <fieldset class="border p-2">
                             <legend class="w-auto">Datos Tesistas 
-                                <button v-if="tesistas.length <= 1" data-target="#exampleModal" id="buscar" @click="borrar()" class="btn btn-primary" data-toggle="modal" data-placement="left">
+                                <button v-if="tesistas.length <= 1" data-target="#exampleModal" @click="borrar()" class="btn btn-primary" data-toggle="modal" data-placement="left">
 								Buscar Tesistas <i class="fas fa-search"></i>
 							    </button>
                             </legend>
@@ -37,7 +37,7 @@
                                             <td width="80">Acción</td>
                                         </tr >   
                                         <tr v-if="tesistas.length == 0">
-                                            <td colspan="4" class="text-center">No ha seleccionado alumnos aún</td>
+                                            <td colspan="4" class="text-center">No se ha seleccionado ningún tesista</td>
                                         </tr>
                                         <tr class="text-center" v-for="t in tesistas" :key="t.DNI">
                                             <td>{{t[0].DNI}}</td>
@@ -54,7 +54,7 @@
                             <legend class="w-auto">Datos del Proyecto de Tesis:</legend>
                             <div class="form-group row">
                                 <label for="tomo" class="col-md-3 col-form-label">Carrera Profesional* :</label>
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     <select type="text" v-model="proyecto.carrera" @change="getLineas(proyecto.carrera)" class="form-control form-control-sm">
                                         <option v-for="e in escuelas" :key="e.IDEscuela" :value="e.IDEscuela">
                                             {{e.Escuela}}
@@ -64,8 +64,8 @@
                             </div>
                             <div class="form-group row">
                                 <label class="col-md-3 col-form-label">Nombre de la Tesis* :</label>
-                                <div class="col-md-9">
-                                    <input type="text"  v-model="proyecto.tesis" onKeyPress="return soloLetras(event)" maxlength="200" class="form-control form-control-sm">
+                                <div class="col-md-8">
+                                    <input type="text"  v-model="proyecto.tesis" onKeyPress="return soloTesis(event)" maxlength="300" class="form-control form-control-sm">
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -89,13 +89,20 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-md-3 col-form-label">Fecha de registro * :</label>
                                 <div class="col-md-3">
-                                    <input type="date" v-model="proyecto.fecha" class="form-control form-control-sm">
+                                    <label>Fecha de registro* :</label>
                                 </div>
-                                <label class="col-md-3 col-form-label">Porcentaje Antiplagio * :</label>
+                                <div class="col-md-3">
+                                    <input type="date" max="2030-12-31" v-model="proyecto.fecha" @change='validafecha()' class="form-control form-control-sm">
+                                </div>
+                                <div class="col-md-3">
+                                    <label>Porcentaje Antiplagio :</label>
+                                </div>
                                 <div class="col-md-1">
                                     <input type="text" v-model="proyecto.porcentaje" onKeyPress="return soloNumeros(event)" maxlength="2" class="form-control form-control-sm">
+                                </div>
+                                <div class="col-md-2">
+                                    <label>%</label>
                                 </div>
                             </div>
                         </fieldset>
@@ -106,7 +113,7 @@
                                 <button class="btn btn-success"  @click="addProyecto(1)">Guardar <i class="fa fa-save"></i></button>
                             </div>
                             <div class="col-md-2"  id="editar" style="text-align: center;">
-                                <button class="btn btn-success" @click="editExpedito()">Guardar <i class="fa fa-edit"></i></button>
+                                <button class="btn btn-primary" @click="editExpedito()">Guardar <i class="fa fa-edit"></i></button>
                             </div>
                             <div class="col-md-2" style="text-align: center;">
                                 <button class="btn btn-danger" @click="cancelar()">Cancelar <i class="fas fa-times"></i></button>
@@ -171,7 +178,7 @@
                 <div class="col-md-12">
                     <div class="card card-default" >
                             <div class="card-header text-center" style="background-color: powderblue !important; color:black; font-weight: bold;">
-                                <h4 class="title">EXPEDITOS TITULACIÓN</h4>  
+                                <h4 class="title">PROYECTOS DE TESIS</h4>  
                             </div>
                         <div class="card-body">
                             <div class="content table-responsive table-full-width t12">
@@ -320,8 +327,9 @@
                 if(data.data.alumnos[0] == null)
                 {
                     swal({
-                        type: 'error',
-                        title: 'No se encontraron registros',
+                        type: "error",
+                        title: "Ha ocurrido un error",
+                        text: "No se encontraron registros"
                     });
                 }else{
                     this.alumnos = data.data.alumnos[0];
@@ -333,6 +341,20 @@
                 console.log(error);
             })
         },
+        validafecha() {
+      if (this.proyecto.fecha != null) {
+        var inicio = this.proyecto.fecha;
+        var final = "2030-01-01";
+        if (final <= inicio) {
+          swal({
+            type: "warning",
+            title: "Ingresar una fecha correcta"
+          });
+          this.proyecto.fecha = null;
+        }
+      }
+      
+    },
         cancelar()
         {
             this.proyecto.idproyecto    = null;
@@ -385,7 +407,7 @@
             {
                 swal({
 					type: 'warning',
-                    title: 'Llenar los datos obligatorios',
+                    title: 'Llenar los campos obligatorios',
                     timer: 3000
                 });
                 return;
@@ -398,11 +420,11 @@
                 }).then(data=>{
                     swal({
                         // position: 'top-end',
-                        type: data.data.val,
-                        // title: data.data.title,
-                        text: data.data.msj,
+                        type: data.data.type,
+                        title: data.data.title,
+                        text: data.data.text,
                         showConfirmButton: false,
-                        timer: 2000
+                        timer: 3000
                     });
                     this.$Progress.finish();
                     // setTimeout(() => {
@@ -413,10 +435,10 @@
                     }).catch(error=>{
                     console.log(error);	
                     swal({
-                        type: 'error',
-                        //title: 'Error',
-                        text: 'Ocurrió un problema, comuníquese con un administrador',
-                        showConfirmButton: true,
+                        type: "error",
+                        title: 'Ha ocurrido un error',
+                        text: "Comuníquese con un administrador",
+                        showConfirmButton: true
                     });
                 })
             }
@@ -458,7 +480,7 @@
             if(tipo == 1)
             {
                 swal({
-                    title: '¿Deseas cambiar el estado de este expedito?',
+                    title: '¿Deseas cambiar el estado de este registro?',
                     text: "El estado cambiara a En Proceso!",
                     type: 'warning',
                     showCancelButton: true,
@@ -489,7 +511,7 @@
                     });        
             }else{
                 swal({
-                    title: '¿Deseas cambiar el estado de este expedito?',
+                    title: '¿Deseas cambiar el estado de este registro?',
                     text: "El estado cambiara a Finalizado!",
                     type: 'warning',
                     showCancelButton: true,
@@ -530,6 +552,7 @@
             $('#mas').hide();
             $('#editar').show();
             $('#guardar').hide();
+            
             this.getLineas(IDCarrera);
             this.proyecto.idproyecto    = IDProyecto;
             this.proyecto.carrera       = IDCarrera;
@@ -540,7 +563,7 @@
             this.proyecto.porcentaje    = Porcentaje;
             this.tesistasaux            = Codigos.split(",");
             this.getTesistas();
-            // console.log(Codigos.split(","));
+            console.log(this.getTesistas());
             // this.tesistasaux
         },
         editExpedito()
@@ -565,12 +588,11 @@
                     tesista:this.tesistasaux2
                 }).then(data=>{
                     swal({
-                        // position: 'top-end',
-                        type: data.data.val,
-                        // title: data.data.title,
-                        text: data.data.msj,
+                        type: data.data.type,
+                        title: data.data.title,
+                        text: data.data.text,
                         showConfirmButton: false,
-                        timer: 2000
+                        timer: 3000
                     });
                     this.$Progress.finish();
                     this.cancelar();
@@ -578,10 +600,10 @@
                     }).catch(error=>{
                     console.log(error);	
                     swal({
-                        type: 'error',
-                        //title: 'Error',
-                        text: 'Ocurrió un problema, comuníquese con un administrador',
-                        showConfirmButton: true,
+                        type: "error",
+                        title: 'Ha ocurrido un error',
+                        text: "Comuníquese con un administrador",
+                        showConfirmButton: true
                     });
                 })
             }
