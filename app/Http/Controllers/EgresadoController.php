@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\egresado;
+use App\proyecto;
+use App\docentes;
 use Illuminate\Http\Request;
 
 class EgresadoController extends Controller
@@ -85,6 +87,43 @@ class EgresadoController extends Controller
         return compact("alumnos");
     }
 
+    public function getTesistas($d,$c)
+    {
+        $tesistas   = [];
+        $ID         = "";
+        $docente    = "";
+        $dni        = "";
+        $objTesistas =  proyecto::join("egresado AS e","proyecto_tesis.Codigo","e.Codigo")
+                    ->join("escuela AS es","e.IDEscuela","es.IDEscuela")
+                    ->select("proyecto_tesis.IDProyecto")
+                    ->where("proyecto_tesis.Estado",1)
+                    ->where(function ($query) use ($c, $d) {
+                        $query->where('e.DNI', $d)
+                              ->orWhere("e.Codigo","LIKE","%$c%");
+                    })->first();
+        // dd($objTesistas);
+        if(isset($objTesistas))
+        {
+            $ID         = $objTesistas->IDProyecto;
+            $tesistas   =   proyecto::join("egresado AS e","proyecto_tesis.Codigo","e.Codigo")
+                            ->join("escuela AS es","e.IDEscuela","es.IDEscuela")
+                            ->select(\DB::raw("concat_ws(' ',e.Nombre,e.Paterno,e.Materno) AS Nombres"),\DB::raw("es.Escuela AS Carrera"))
+                            ->where([["IDProyecto",$ID],["proyecto_tesis.Estado",1]])->get();
+
+            $objDocente =   proyecto::join("docentes AS d","proyecto_tesis.CodDocente","d.DNI")
+                            ->select(\DB::raw("concat_ws(' ',d.Nombres,Apellidos) AS docente"),"d.DNI")
+                            ->first();
+            if(isset($objDocente))
+            {
+                $docente    = $objDocente->docente;
+                $dni        = $objDocente->DNI;
+            }
+        }            
+                    
+                // where("proyecto_tesis.Estado",1)->Where([["e.DNI",$d],["e.Codigo","LIKE","%$c%"]])->get();
+
+        return compact("tesistas","ID","docente","dni");
+    }
     /**
      * Show the form for editing the specified resource.
      *

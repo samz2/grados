@@ -215,7 +215,7 @@
                     </li>
                     <!--<li class="nav-item">
                       <router-link to="usuarios" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
+                        <i class="far fa-circle 0160 nav-icon"></i>
                         <p>Usuarios</p>
                       </router-link>
                     </li>-->
@@ -254,6 +254,11 @@
                         <p>Proyecto de Tesis</p>
                       </router-link>
                     </li>
+                    <li class="nav-item">
+                      <router-link to="gestion-proyecto" class="nav-link">
+                            <i class="fas fa-list"></i>
+                        <p>Gestión</p>
+                      </router-link>
                     </li>
                   </ul>
                 </li>

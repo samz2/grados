@@ -23,9 +23,20 @@ class DocentesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function docentes($id)
     {
-        //
+        $docentes = Docentes::select("DNI",
+                    \DB::raw("concat_ws(' ',Nombres,Apellidos) as Docente"))
+                    ->where("IDEscuela",$id)->get();
+        return compact("docentes");
+    }
+
+    public function docente($dni)
+    {
+        $docentes = Docentes::select(\DB::raw("concat_ws(' ',Nombres,Apellidos) as Docente"))
+                    ->where("DNI",$dni)->first();
+        $docente  = isset($docentes) ? $docentes->Docente : "";
+        return compact("docente");
     }
 
     /**

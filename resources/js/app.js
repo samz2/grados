@@ -34,7 +34,7 @@ Vue.use(VueRouter);
 const routes = [
     { path: '/home', component: require('./components/admin/home.vue').default },
     { path: '/egresados', component: require('./components/admin/egresados.vue').default },
-    { path: '/documentos', component: require('./components/admin/documentos.vue').default },
+    { path: '/gestion-proyecto', component: require('./components/admin/gestionp.vue').default },
     { path: '/docentes', component: require('./components/admin/docentes.vue').default },
     { path: '/expeditobachiller', component: require('./components/admin/expeditob.vue').default },
     { path: '/expeditotitulo', component: require('./components/admin/expeditot.vue').default },
@@ -71,7 +71,7 @@ const router = new VueRouter({
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('egresadosT', require('./components/templates/egresados.vue').default);
 Vue.component('error', require('./components/templates/error.vue').default);
-Vue.component('documento', require('./components/templates/documento.vue').default);
+Vue.component('gestionproyecto', require('./components/templates/gestionproyectos.vue').default);
 Vue.component('docente', require('./components/templates/docente.vue').default);
 Vue.component('expeditob', require('./components/templates/expeditob.vue').default);
 Vue.component('expeditot', require('./components/templates/expeditot.vue').default);

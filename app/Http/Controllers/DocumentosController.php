@@ -6,6 +6,7 @@ use App\documentos;
 use App\expeditob;
 use App\decano;
 use App\comision;
+use App\Mail\GradosyTitulos;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade as PDF;
 
@@ -66,7 +67,7 @@ class DocumentosController extends Controller
         $dato2 = $decanitos[0];
         $dato3 = $comisiones[0];
         $anio = substr($dato->Fecha,0,4);
-        $mes  = $this->mes(substr($dato->Fecha,5,2)) ;
+        $mes  = $this->mes(substr($dato->Fecha,5,2));
         $mes2  = substr($dato->Fecha,5,2) ;
         $dia  = substr($dato->Fecha,8,2);
         $pdf = PDF::loadView('templates.oficio',compact("dato3","dato2","dato","anio","mes","mes2","dia"));
@@ -120,6 +121,7 @@ class DocumentosController extends Controller
         $meses["12"]  = "diciembre";
         $mes = $meses[$indice];
         return $mes;
+        
     }
     /**
      * Store a newly created resource in storage.
@@ -161,6 +163,7 @@ class DocumentosController extends Controller
                             ["expedito.FechaIngreso",">=",$inicio],
                             ["expedito.FechaIngreso","<=",$final],
                             ["e.IDEscuela",$carrera],
+                            ["expedito.Estado",3]
                             ])->get();
         $pdf = PDF::loadView('templates.expeditob',compact("expeditos"));
         $pdf->setPaper('A4','landscape');
@@ -178,6 +181,7 @@ class DocumentosController extends Controller
                             ["expedito.FechaIngreso",">=",$inicio],
                             ["expedito.FechaIngreso","<=",$final],
                             ["e.IDEscuela",$carrera],
+                            ["expedito.Estado",3]
                             ])->get();
         $pdf = PDF::loadView('templates.expeditot',compact("expeditos"));
         $pdf->setPaper('A4','landscape');
@@ -187,12 +191,13 @@ class DocumentosController extends Controller
     public function reportBachillerg($inicio,$final)
     {
         // $num        = array();
-        $sistemas =   Expeditob::join("egresado AS e","expedito.CodigoAlumno","e.Codigo")
-                            ->where([
-                            ["expedito.Tipo","BACHILLER"],
-                            ["expedito.FechaIngreso",">=",$inicio],
-                            ["expedito.FechaIngreso","<=",$final],
-                            ["e.IDEscuela",1],
+            $sistemas =   Expeditob::join("egresado AS e","expedito.CodigoAlumno","e.Codigo")
+                                ->where([
+                                ["expedito.Tipo","BACHILLER"],
+                                ["expedito.FechaIngreso",">=",$inicio],
+                                ["expedito.FechaIngreso","<=",$final],
+                                ["e.IDEscuela",1],
+                                ["expedito.Estado",3],
                             ])->get()->count();
         $civil =   Expeditob::join("egresado AS e","expedito.CodigoAlumno","e.Codigo")
                             ->where([
@@ -200,6 +205,7 @@ class DocumentosController extends Controller
                             ["expedito.FechaIngreso",">=",$inicio],
                             ["expedito.FechaIngreso","<=",$final],
                             ["e.IDEscuela",2],
+                            ["expedito.Estado",3]
                             ])->get()->count();                    
         $nsistemas  = isset($sistemas) ? $sistemas : 0;                    
         $ncivil     = isset($civil) ? $civil : 0;                    
@@ -217,6 +223,7 @@ class DocumentosController extends Controller
                             ["expedito.FechaIngreso",">=",$inicio],
                             ["expedito.FechaIngreso","<=",$final],
                             ["e.IDEscuela",1],
+                            ["expedito.Estado",3]
                             ])->get()->count();
         $civil =   Expeditob::join("egresado AS e","expedito.CodigoAlumno","e.Codigo")
                             ->where([
@@ -224,6 +231,7 @@ class DocumentosController extends Controller
                             ["expedito.FechaIngreso",">=",$inicio],
                             ["expedito.FechaIngreso","<=",$final],
                             ["e.IDEscuela",2],
+                            ["expedito.Estado",3]
                             ])->get()->count();                    
         $nsistemas  = isset($sistemas) ? $sistemas : 0;                    
         $ncivil     = isset($civil) ? $civil : 0;                    
@@ -261,8 +269,36 @@ class DocumentosController extends Controller
      * @param  \App\documentos  $documentos
      * @return \Illuminate\Http\Response
      */
-    public function destroy(documentos $documentos)
+    public function directorio($url)
     {
-        //
+        $carpetas = scandir(public_path()."/Archivos"."/$url");
+        return compact("carpetas");
+        // $dirs = array(public_path()."/Archivos/$url");
+        // $carpetas = documentos::scan($dirs, "pdf");
+        // return compact("carpetas");
+    }
+
+    public function sendMail(Request $request)
+    {
+        $to         = $request->correo["to"];
+        $subject    = $request->correo["subject"];
+        $attach     = $request->adjuntos;
+        $mensaje    = $request->correo["mensaje"];
+        // dd($attach);
+        // \Mail::to("aldairmonrroy@hotmail.com")->send(new GradosyTitulos());
+        \Mail::to("$to")->send(new GradosyTitulos($subject,$attach,$mensaje));
+        return "ok";
+    }
+    public function informe()
+    {
+        $pdf = PDF::loadView('templates.informe');
+        file_put_contents('guardadasalvaje.pdf', $pdf->output());
+     
+    }
+    public function memo()
+    {
+        $pdf = PDF::loadView('templates.memoProyecto');
+        $pdf->setPaper('A4','portrait');
+        return $pdf->stream('reporte.pdf');
     }
 }

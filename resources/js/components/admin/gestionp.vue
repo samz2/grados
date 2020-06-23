@@ -1,7 +1,7 @@
 <template>
     <div class="content">
 	    <div class="container-fluid" v-if="tipo != null && tipo == 1">
-            <documento></documento>
+            <gestionproyecto></gestionproyecto>
         </div>
         <div class="container-fluid" v-if="tipo != null && tipo != 1">
             <error></error>

@@ -48,7 +48,7 @@
                 <div class="col-md-8">
                   <input
                     v-model="linea.linea"
-                    maxlength="40"
+                    maxlength="80"
                     class="form-control form-control-sm"
                     onkeypress="return soloLetras(event)"
                     required
@@ -85,7 +85,7 @@
       </div>
     </div>
 
-    <div class="row t12" id="docentes">
+    <div class="row" id="docentes">
       <div class="col-md-12">
         <div class="card card-default">
           <div
@@ -97,14 +97,14 @@
           <div class="card-body">
             <div class="content table-responsive table-full-width">
               <v-client-table :data="lineas" :columns="columns" :options="options">
-                <div slot="Acciones" slot-scope="props">
+                <div slot="Accion" slot-scope="props">
                   <button
-                    class="btn btn-info altoBoton"
+                    class="btn btn-info"
                     v-on:click="edit(props.row.IDEscuela,props.row.Linea,props.row.IDLinea)"
                     data-placement="left"
-                    title="Editar"
+                    title="Editar"  style="color: white"
                   >
-                    <i class="fas fa-edit" style="color: white" aria-hidden="true"></i>
+                    Editar <i class="fas fa-edit"  aria-hidden="true"></i>
                   </button>
                 </div>
               </v-client-table>
@@ -136,11 +136,11 @@ export default {
       columns: [
         "Escuela",
         "Linea",
-        "Acciones"
+        "Accion"
       ],
       options: {
         headings: {
-          Escuela: "Carrera",
+          Escuela: "Carrera Profesional",
           Linea: "Linea de Investigación",
         },
         sortable: [
@@ -213,10 +213,10 @@ export default {
           .then(data => {
             swal({
               type: data.data.type,
-            //   title: data.data.title,
+              title: data.data.title,
               text: data.data.text,
               showConfirmButton: false,
-              timer: 2000
+              timer: 3000
             });
             this.$Progress.finish();
             this.cancelar();
@@ -241,10 +241,10 @@ export default {
           .then(data => {
             swal({
               type: data.data.type,
-            //   title: data.data.title,
+              title: data.data.title,
               text: data.data.text,
               showConfirmButton: false,
-              timer: 2000
+              timer: 3000
             });
             this.$Progress.finish();
             this.cancelar();
