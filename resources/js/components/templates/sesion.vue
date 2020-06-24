@@ -102,6 +102,21 @@
             }],
             columns: ["NumSesion","Tipo","FechaAux","Accion"],
             options: {
+                texts: {
+                   count: "Mostrando {from} al {to} de {count} registros|{count} registros|Un registro",
+                    first: 'Primero',
+                    last: 'Ultimo',
+                    //filter: "Buscar:                                    ",
+                    filter: "",
+                    filterPlaceholder: "Buscador general..",
+                    limit: "Registros:",
+                    page: "Pagina:",
+                    noResults: "No hay registros",
+                    filterBy: "Filtrar por {column}",
+                    loading: 'Cargando...',
+                    defaultOption: 'Seleccionar {column}',
+                    columns: 'Columnas'
+                    },
 				headings:
 				{
                     NumSesion:"Número de Sesión",

@@ -21,8 +21,8 @@
                 </div>
                 <div class="form-group">
                   <div class="btn btn-default btn-file">
-                    <button data-target="#adjuntos" @click="getDirectorio(id)" title="Enviar Correo" class="btn bg-warning altoBoton" data-toggle="modal" data-placement="left" name="attachment">
-                      <i class="fas fa-paperclip"></i> adjuntar
+                    <button data-target="#adjuntos" @click="getDirectorio(id)" title="Adjuntar archivos" class="btn bg-warning altoBoton" data-toggle="modal" data-placement="left" name="attachment" style="color:black; font-weight: bold;">
+                      <i class="fas fa-paperclip"></i> Adjuntar archivos
                     </button>
                   </div>
                   <div class="row">
@@ -51,14 +51,15 @@
         <div class="modal fade" id="adjuntos" tabindex="-1" role="dialog" aria-labelledby="adjuntoslabel" aria-hidden="true">
               <div class="modal-dialog" role="document">
                   <div class="modal-content">
-                  <div class="modal-header text-center">
+                  <div class="modal-header text-center" style="background-color: powderblue !important; color:black; font-weight: bold;">
                       <h5 class="modal-titler text-center" id="adjuntoslabel">Archivos</h5>
                       <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                       </button> -->
                   </div>
                   <div class="modal-body">
-                      <div v-for="d in directorio" :key="d" >
+                    <div class="col-md-12"><label>Nota: Hacer click en el(los) archivo(s) a adjuntar</label></div><br>
+                      <div class="col-md-12" v-for="d in directorio" :key="d" >
                         <a href="#" @click="adjuntar(d)">{{d}}</a>  
                       </div> 
                   </div>
