@@ -266,7 +266,7 @@
                   <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-folder"></i>
                     <p>
-                      Trámites
+                      Trámites Expeditos
                       <i class="fas fa-angle-left right"></i>
                     </p>
                   </a>
@@ -410,6 +410,11 @@ function cambiarTesisTitulo(){
 function cambiarWordTitulo(){
     var pdrs = document.getElementById('word').files[0].name;
     document.getElementById('info5').innerHTML = pdrs;
+}
+
+function cambiarProyectoArchivo(){
+    var pdrs = document.getElementById('proyectoArchivo').files[0].name;
+    document.getElementById('infoArchivo').innerHTML = pdrs;
 }
 
 function pulsar(e) {

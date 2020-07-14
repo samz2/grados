@@ -10,7 +10,7 @@
                     <div class="col-md-5"><label>* Campos obligatoriamente.</label></div>
                     
                     <div class="col-md-5" id="labelInicio"><label>Nota: Primero realizar la búsqueda del(los) tesista(s)</label></div>
-                    <div class="col-md-12" id="labelInicio"><label>Nota: Fecha de devolución alumno, es para la entrega de observaciones</label></div>
+                    <!--<div class="col-md-12" id="labelInicio"><label>Nota: Fecha de devolución alumno, es para la entrega de observaciones</label></div>-->
                     
 					<div class="card-body">
                         <fieldset class="border p-2">
@@ -38,15 +38,15 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <div class="col-md-2">
-                                    <button data-target="#historial" @click="getHistorial()" class="btn btn-success" data-toggle="modal" data-placement="left" >Historial <i class="fa fa-eye"></i></button>
+                                <div class="col-md-3">
+                                    <button data-target="#historial" @click="getHistorial()" class="btn btn-success" data-toggle="modal" data-placement="left" >Historial revisiones <i class="fa fa-eye"></i></button>
                                 </div>
                             </div>
                         </fieldset>
                         
                         <fieldset class="border p-2">
                             <legend class="w-auto">Asesor</legend>
-                            <div class="form-group row">
+                            <!--<div class="form-group row">
                                 <div class="col-md-3">
                                 <label>Docente Asesor :</label>
                                 </div>
@@ -66,23 +66,23 @@
                                 <div class="col-md-4">
                                     <input type="checkbox" id="edit" @click="editarDocente(proyecto.docentedni)"> 
                                 </div>
-                            </div>
+                            </div>-->
                             <div class="form-group row">
                                 <div class="col-md-3">
-                                <label for="ingreso">Fecha entrega asesor* :</label>
+                                <label for="ingreso">Fecha entrega asesor:</label>
                                 </div>
                                 <div class="col-md-3">
-                                    <input type="date" max="2030-12-31"  v-model="proyecto.dingreso" onKeyPress="return soloNumeros(event)" maxlength="3" class="form-control form-control-sm">
+                                    <input type="date" max="2030-12-31"  @change="validafecha()" v-model="proyecto.dingreso" onKeyPress="return soloNumeros(event)" maxlength="3" class="form-control form-control-sm">
                                 </div>
                                 <div class="col-md-3">
                                 <label for="comienzo">Fecha devolución asesor:</label>
                                 </div>
                                 <div class="col-md-3">
-                                    <input type="date" max="2030-12-31"  v-model="proyecto.ddevolucion" class="form-control form-control-sm">
+                                    <input type="date" max="2030-12-31" @change="validafecha()" v-model="proyecto.ddevolucion" class="form-control form-control-sm">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <div class="col-md-3">
+                                <!--<div class="col-md-3">
                                 <label for="ingreso">Estado :</label>
                                 </div>
                                 <div class="col-md-3">
@@ -91,7 +91,7 @@
                                         <option value="EN PROCESO">EN PROCESO</option>
                                         <option value="FINALIZADO">FINALIZADO</option>
                                     </select>
-                                </div>
+                                </div>-->
                                 <div class="col-md-3">
                                 <label for="comienzo">Sub Estado:</label>
                                 </div>
@@ -108,7 +108,7 @@
                                 <label>Comentarios :</label>
                                 </div>
                                 <div class="col-md-9">
-                                    <input type="text" v-model="proyecto.comentario" onKeyPress="return soloLetras(event)" maxlength="100" class="form-control form-control-sm">
+                                    <input type="text" v-model="proyecto.comentario" maxlength="250" class="form-control form-control-sm">
                                 </div>
                             </div>
                         </fieldset>
@@ -116,16 +116,16 @@
                             <legend class="w-auto">Fechas Alumno</legend>
                             <div class="form-group row">
                                 <div class="col-md-3">
-                                <label for="ingreso">Fecha entrega alumno* :</label>
+                                <label for="ingreso">Fecha entrega alumno:</label>
                                 </div>
                                 <div class="col-md-3">
-                                    <input type="date" max="2030-12-31" id="ingreso" v-model="proyecto.aingreso" onKeyPress="return soloNumeros(event)" maxlength="3" class="form-control form-control-sm">
+                                    <input type="date" max="2030-12-31" @change="validafecha()" id="ingreso" v-model="proyecto.aingreso" onKeyPress="return soloNumeros(event)" maxlength="3" class="form-control form-control-sm">
                                 </div>
                                 <div class="col-md-3">
                                 <label for="comienzo">Fecha devolución alumno:</label>
                                 </div>
                                 <div class="col-md-3">
-                                    <input type="date" max="2030-12-31" id="comienzo" v-model="proyecto.adevolucion" class="form-control form-control-sm">
+                                    <input type="date" max="2030-12-31" @change="validafecha()" id="comienzo" v-model="proyecto.adevolucion" class="form-control form-control-sm">
                                 </div>
                             </div>
                         </fieldset>
@@ -139,7 +139,7 @@
                                 <button class="btn btn-success" @click="editExpedito()">Guardar <i class="fa fa-edit"></i></button>
                             </div>
                             <div class="col-md-2" style="text-align: center;">
-                                <button class="btn btn-danger" @click="cancelar()">Cancelar <i class="fas fa-times"></i></button>
+                                <button class="btn btn-warning" @click="cancelar()">Limpiar <i class="fas fa-broom"></i></button>
                             </div>
                             <div class="col-md-4" style="text-align: center;"></div>
                         </div>
@@ -209,6 +209,14 @@
                         <div class="modal-body">
                             <fieldset class="border p-2" style="border:red;">
                                 <legend class="w-auto text-primary">Historial de revisiones</legend>
+                                <!--<div class="text-center">
+                                    <div v-if="!cargando" class="spinner-border text-primary" role="status">
+                                        <span class="sr-only">Loading...</span>
+                                    </div>
+                                    <label v-if="historial.length == 0 && cargando" class="text-danger">
+                                        Este registro aún no cuenta con revisiones.
+                                    </label>
+                                </div>-->
                                 <div v-for="(h,index) in historial" :key="h.id">
                                     <div class="form-group row">
                                         <div class="col-md-3 t12">
@@ -415,23 +423,9 @@
         validafecha()
         {
             
-            if(this.expedito.ingreso !=null)
+            if(this.proyecto.dingreso !=null)
             {
-                var inicio = this.expedito.ingreso;
-                var final  = '2022-01-01';
-                if(final<=inicio)
-                {
-                    swal({
-                        type: 'warning',
-                        title: 'Ingresar una fecha correcta',
-                       
-                    });
-                    this.expedito.ingreso = null;
-                }
-            }
-             if(this.expedito.comienzo !=null)
-            {
-                var inicio = this.expedito.comienzo;
+                var inicio = this.proyecto.dingreso;
                 var final  = '2026-01-01';
                 if(final<=inicio)
                 {
@@ -440,13 +434,27 @@
                         title: 'Ingresar una fecha correcta',
                        
                     });
-                    this.expedito.comienzo = null;
+                    this.proyecto.dingreso = null;
+                }
+            }
+             if(this.proyecto.ddevolucion !=null)
+            {
+                var inicio = this.proyecto.ddevolucion;
+                var final  = '2026-01-01';
+                if(final<=inicio)
+                {
+                    swal({
+                        type: 'warning',
+                        title: 'Ingresar una fecha correcta',
+                       
+                    });
+                    this.proyecto.ddevolucion = null;
                 }
             }
 
-            if(this.expedito.sustentacion !=null)
+            if(this.proyecto.aingreso !=null)
             {
-                var inicio = this.expedito.sustentacion;
+                var inicio = this.proyecto.aingreso;
                 var final  = '2026-01-01';
                 if(final<=inicio)
                 {
@@ -455,7 +463,22 @@
                         title: 'Ingresar una fecha correcta',
                        
                     });
-                    this.expedito.sustentacion = null;
+                    this.proyecto.aingreso = null;
+                }
+            }
+
+             if(this.proyecto.adevolucion !=null)
+            {
+                var inicio = this.proyecto.adevolucion;
+                var final  = '2026-01-01';
+                if(final<=inicio)
+                {
+                    swal({
+                        type: 'warning',
+                        title: 'Ingresar una fecha correcta',
+                       
+                    });
+                    this.proyecto.adevolucion = null;
                 }
             }
         },
@@ -488,37 +511,14 @@
         },
         cancelar()
         {
-            this.expedito.codigo      = null;
-            this.expedito.dni         = null;
-            this.expedito.alumno      = null;
-            this.expedito.carrera     = null;
-            this.expedito.tomo        = null;
-            this.expedito.folio       = null;
-            this.expedito.asiento     = null;
-            this.expedito.tesis       = null;
-            this.expedito.sustentacion= null;
-            this.expedito.calificacion= null;
-            this.expedito.asesor      = null;
-            this.expedito.modalidad   = null;
-            this.expedito.sesion      = null;
-            this.expedito.sfecha      = null;
-            this.expedito.stipo       = null;
-            this.expedito.ingreso     = null;
-            this.expedito.comienzo    = null;
-            this.cambiarCancelarTitulo();
-            document.getElementById("chbx1").checked = false;
-            document.getElementById("chbx2").checked = false;
-            document.getElementById("chbx3").checked = false;
-            document.getElementById("chbx4").checked = false;           
-            $("#matricula").val("");
-            $("#egresado").val("");
-            $("#foto").val("");
-            $("#tesis").val("");
-            $("#word").val("");
-            $('#objetivo').hide();
-            $('#expeditos').show();	
-            $('#menos').hide();
-            $('#mas').show();
+            this.proyecto.carrera     = null;
+            this.t.Nombres            = null;
+            this.proyecto.subestado   = null;
+            this.proyecto.comentario  = null;
+            this.proyecto.dingreso    = null;
+            this.proyecto.ddevolucion = null;
+            this.proyecto.aingreso    = null;
+            this.proyecto.adevolucion = null;
         },
         borrar()
         {

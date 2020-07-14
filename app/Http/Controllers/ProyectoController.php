@@ -118,18 +118,20 @@ class ProyectoController extends Controller
                 $proyecto->FechaRegistro   = $request->proyecto["fecha"];
                 $proyecto->Porcentaje   = $request->proyecto["porcentaje"];
                 $proyecto->created_at   = $hoy;
+                $proyecto->save();
                 $objPY                  = explode(",",$request->proyecto["archivo"]);
                 $proyecto               = base64_decode($objPY[1]);
-                $proyecto_tesis        = "SISTEMAS_PT_".$codigo."_V1.pdf";
+                $proyecto_tesis        = "SISTEMAS_PT_".$nro."_V1.pdf";
+                
                 // $path = public_path('Archivos bachiller/' . $dni . '/');
                 // if(!Storage::exists(public_path()."proyecto_tesis/$codigo")) {
                 //     Storage::makeDirectory(public_path()."proyecto_tesis/$codigo", 0775, true);
                 // }
-                $path = public_path('proyecto_tesis/'.$codigo.'/');
+                $path = public_path('Archivos/'.$nro.'/');
                 File::makeDirectory($path, 0777, true, true);
-                $rutaProyecto  = public_path('proyecto_tesis/'.$codigo)."/".$proyecto_tesis ;
+                $rutaProyecto  = public_path('Archivos/'.$nro)."/".$proyecto_tesis ;
                 file_put_contents($rutaProyecto,$proyecto);
-                // $proyecto->save();
+                
                 $type = "success";
                 $title = "¡Buen trabajo!";
                 $text = "Proyecto de tesis guardado con éxito"; 

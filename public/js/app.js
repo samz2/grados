@@ -2298,6 +2298,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["id"],
   data: function data() {
@@ -3452,6 +3453,21 @@ __webpack_require__.r(__webpack_exports__);
       }],
       columns: ["IDCalificacion", "Calificacion", "Accion"],
       options: {
+        texts: {
+          count: "Mostrando {from} al {to} de {count} registros|{count} registros|Un registro",
+          first: 'Primero',
+          last: 'Ultimo',
+          //filter: "Buscar:                                    ",
+          filter: "",
+          filterPlaceholder: "Buscador general..",
+          limit: "Registros:",
+          page: "Pagina:",
+          noResults: "No hay registros",
+          filterBy: "Filtrar por {column}",
+          loading: 'Cargando...',
+          defaultOption: 'Seleccionar {column}',
+          columns: 'Columnas'
+        },
         headings: {
           IDCalificacion: "ID",
           Calificacion: "Calificacion"
@@ -3656,6 +3672,21 @@ __webpack_require__.r(__webpack_exports__);
       }],
       columns: ["Escuela", "Accion"],
       options: {
+        texts: {
+          count: "Mostrando {from} al {to} de {count} registros|{count} registros|Un registro",
+          first: 'Primero',
+          last: 'Ultimo',
+          //filter: "Buscar:                                    ",
+          filter: "",
+          filterPlaceholder: "Buscador general..",
+          limit: "Registros:",
+          page: "Pagina:",
+          noResults: "No hay registros",
+          filterBy: "Filtrar por {column}",
+          loading: 'Cargando...',
+          defaultOption: 'Seleccionar {column}',
+          columns: 'Columnas'
+        },
         headings: {
           Escuela: "Nombre Carrera"
         },
@@ -3942,6 +3973,21 @@ __webpack_require__.r(__webpack_exports__);
       }],
       columns: ["Semestre", "auxPresidente", "auxMiembro1", "auxMiembro2", "FechaInicioAux", "FechaFinAux", "Estado", "Accion"],
       options: {
+        texts: {
+          count: "Mostrando {from} al {to} de {count} registros|{count} registros|Un registro",
+          first: 'Primero',
+          last: 'Ultimo',
+          //filter: "Buscar:                                    ",
+          filter: "",
+          filterPlaceholder: "Buscador general..",
+          limit: "Registros:",
+          page: "Pagina:",
+          noResults: "No hay registros",
+          filterBy: "Filtrar por {column}",
+          loading: 'Cargando...',
+          defaultOption: 'Seleccionar {column}',
+          columns: 'Columnas'
+        },
         headings: {
           Semestre: "Semestre",
           auxPresidente: "Presidente",
@@ -4317,6 +4363,21 @@ __webpack_require__.r(__webpack_exports__);
       }],
       columns: ["auxDecano", "FechaInicioAux", "FechaFinAux", "Estado", "Accion"],
       options: {
+        texts: {
+          count: "Mostrando {from} al {to} de {count} registros|{count} registros|Un registro",
+          first: 'Primero',
+          last: 'Ultimo',
+          //filter: "Buscar:                                    ",
+          filter: "",
+          filterPlaceholder: "Buscador general..",
+          limit: "Registros:",
+          page: "Pagina:",
+          noResults: "No hay registros",
+          filterBy: "Filtrar por {column}",
+          loading: 'Cargando...',
+          defaultOption: 'Seleccionar {column}',
+          columns: 'Columnas'
+        },
         headings: {
           auxDecano: "Decano",
           FechaInicioAux: "Fecha de Inicio",
@@ -4848,6 +4909,21 @@ __webpack_require__.r(__webpack_exports__);
       //columns: ["DNI","Codigo","Nombres","Apellidos","Celular","Categoria","Dedicacion","Escuela","Acciones"],
       columns: ["DNI", "Codigo", "NombreAux", "Celular", "Categoria", "Dedicacion", "Escuela", "Accion"],
       options: {
+        texts: {
+          count: "Mostrando {from} al {to} de {count} registros|{count} registros|Un registro",
+          first: 'Primero',
+          last: 'Ultimo',
+          //filter: "Buscar:                                    ",
+          filter: "",
+          filterPlaceholder: "Buscador general..",
+          limit: "Registros:",
+          page: "Pagina:",
+          noResults: "No hay registros",
+          filterBy: "Filtrar por {column}",
+          loading: 'Cargando...',
+          defaultOption: 'Seleccionar {column}',
+          columns: 'Columnas'
+        },
         headings: {
           DNI: "DNI",
           //Apellidos:"Apellidos",
@@ -5304,6 +5380,21 @@ __webpack_require__.r(__webpack_exports__);
       //columns: ["Escuela","DNI","NombreAux","Ingreso","Egreso","Acciones"],
       columns: ["Escuela", "DNI", "NombreAux", "Celular", "Correo", "Ingreso", "Egreso", "Acciones"],
       options: {
+        texts: {
+          count: "Mostrando {from} al {to} de {count} registros|{count} registros|Un registro",
+          first: 'Primero',
+          last: 'Ultimo',
+          //filter: "Buscar:                                    ",
+          filter: "",
+          filterPlaceholder: "Buscador general..",
+          limit: "Registros:",
+          page: "Pagina:",
+          noResults: "No hay registros",
+          filterBy: "Filtrar por {column}",
+          loading: 'Cargando...',
+          defaultOption: 'Seleccionar {column}',
+          columns: 'Columnas'
+        },
         headings: {
           Codigo: "Código",
           DNI: "DNI",
@@ -5692,6 +5783,21 @@ __webpack_require__.r(__webpack_exports__);
       }],
       columns: ["Posicion", "Estado", "Accion"],
       options: {
+        texts: {
+          count: "Mostrando {from} al {to} de {count} registros|{count} registros|Un registro",
+          first: 'Primero',
+          last: 'Ultimo',
+          //filter: "Buscar:                                    ",
+          filter: "",
+          filterPlaceholder: "Buscador general..",
+          limit: "Registros:",
+          page: "Pagina:",
+          noResults: "No hay registros",
+          filterBy: "Filtrar por {column}",
+          loading: 'Cargando...',
+          defaultOption: 'Seleccionar {column}',
+          columns: 'Columnas'
+        },
         headings: {
           Posicion: "Posición",
           Estado: "Estado"
@@ -6342,6 +6448,21 @@ __webpack_require__.r(__webpack_exports__);
       }],
       columns: ["Alumno", "Acta", "NumSesion", "FechaAux", "FechaIngresoAux", "FechaComienzoAux", "Acciones"],
       options: {
+        texts: {
+          count: "Mostrando {from} al {to} de {count} registros|{count} registros|Un registro",
+          first: 'Primero',
+          last: 'Ultimo',
+          //filter: "Buscar:                                    ",
+          filter: "",
+          filterPlaceholder: "Buscador general..",
+          limit: "Registros:",
+          page: "Pagina:",
+          noResults: "No hay registros",
+          filterBy: "Filtrar por {column}",
+          loading: 'Cargando...',
+          defaultOption: 'Seleccionar {column}',
+          columns: 'Columnas'
+        },
         headings: {
           CodigoAlumno: "Código Egresado",
           NumSesion: "Sesión",
@@ -7280,6 +7401,21 @@ __webpack_require__.r(__webpack_exports__);
       }],
       columns: ["Alumno", "Acta", "NumSesion", "FechaAux", "FechaIngresoAux", "FechaComienzoAux", "Acciones"],
       options: {
+        texts: {
+          count: "Mostrando {from} al {to} de {count} registros|{count} registros|Un registro",
+          first: 'Primero',
+          last: 'Ultimo',
+          //filter: "Buscar:                                    ",
+          filter: "",
+          filterPlaceholder: "Buscador general..",
+          limit: "Registros:",
+          page: "Pagina:",
+          noResults: "No hay registros",
+          filterBy: "Filtrar por {column}",
+          loading: 'Cargando...',
+          defaultOption: 'Seleccionar {column}',
+          columns: 'Columnas'
+        },
         headings: {
           CodigoAlumno: "Código",
           NumSesion: "Sesión",
@@ -8197,6 +8333,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -8315,21 +8459,8 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     validafecha: function validafecha() {
-      if (this.expedito.ingreso != null) {
-        var inicio = this.expedito.ingreso;
-        var _final = '2022-01-01';
-
-        if (_final <= inicio) {
-          swal({
-            type: 'warning',
-            title: 'Ingresar una fecha correcta'
-          });
-          this.expedito.ingreso = null;
-        }
-      }
-
-      if (this.expedito.comienzo != null) {
-        var inicio = this.expedito.comienzo;
+      if (this.proyecto.dingreso != null) {
+        var inicio = this.proyecto.dingreso;
         var _final = '2026-01-01';
 
         if (_final <= inicio) {
@@ -8337,12 +8468,12 @@ __webpack_require__.r(__webpack_exports__);
             type: 'warning',
             title: 'Ingresar una fecha correcta'
           });
-          this.expedito.comienzo = null;
+          this.proyecto.dingreso = null;
         }
       }
 
-      if (this.expedito.sustentacion != null) {
-        var inicio = this.expedito.sustentacion;
+      if (this.proyecto.ddevolucion != null) {
+        var inicio = this.proyecto.ddevolucion;
         var _final = '2026-01-01';
 
         if (_final <= inicio) {
@@ -8350,7 +8481,33 @@ __webpack_require__.r(__webpack_exports__);
             type: 'warning',
             title: 'Ingresar una fecha correcta'
           });
-          this.expedito.sustentacion = null;
+          this.proyecto.ddevolucion = null;
+        }
+      }
+
+      if (this.proyecto.aingreso != null) {
+        var inicio = this.proyecto.aingreso;
+        var _final = '2026-01-01';
+
+        if (_final <= inicio) {
+          swal({
+            type: 'warning',
+            title: 'Ingresar una fecha correcta'
+          });
+          this.proyecto.aingreso = null;
+        }
+      }
+
+      if (this.proyecto.adevolucion != null) {
+        var inicio = this.proyecto.adevolucion;
+        var _final = '2026-01-01';
+
+        if (_final <= inicio) {
+          swal({
+            type: 'warning',
+            title: 'Ingresar una fecha correcta'
+          });
+          this.proyecto.adevolucion = null;
         }
       }
     },
@@ -8378,37 +8535,14 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     cancelar: function cancelar() {
-      this.expedito.codigo = null;
-      this.expedito.dni = null;
-      this.expedito.alumno = null;
-      this.expedito.carrera = null;
-      this.expedito.tomo = null;
-      this.expedito.folio = null;
-      this.expedito.asiento = null;
-      this.expedito.tesis = null;
-      this.expedito.sustentacion = null;
-      this.expedito.calificacion = null;
-      this.expedito.asesor = null;
-      this.expedito.modalidad = null;
-      this.expedito.sesion = null;
-      this.expedito.sfecha = null;
-      this.expedito.stipo = null;
-      this.expedito.ingreso = null;
-      this.expedito.comienzo = null;
-      this.cambiarCancelarTitulo();
-      document.getElementById("chbx1").checked = false;
-      document.getElementById("chbx2").checked = false;
-      document.getElementById("chbx3").checked = false;
-      document.getElementById("chbx4").checked = false;
-      $("#matricula").val("");
-      $("#egresado").val("");
-      $("#foto").val("");
-      $("#tesis").val("");
-      $("#word").val("");
-      $('#objetivo').hide();
-      $('#expeditos').show();
-      $('#menos').hide();
-      $('#mas').show();
+      this.proyecto.carrera = null;
+      this.t.Nombres = null;
+      this.proyecto.subestado = null;
+      this.proyecto.comentario = null;
+      this.proyecto.dingreso = null;
+      this.proyecto.ddevolucion = null;
+      this.proyecto.aingreso = null;
+      this.proyecto.adevolucion = null;
     },
     borrar: function borrar() {
       this.alumno.codigo = null;
@@ -9000,6 +9134,21 @@ __webpack_require__.r(__webpack_exports__);
       //columns: ["DNI","Codigo","Nombres","Apellidos","Celular","Categoria","Dedicacion","Escuela","Acciones"],
       columns: ["Escuela", "Linea", "Accion"],
       options: {
+        texts: {
+          count: "Mostrando {from} al {to} de {count} registros|{count} registros|Un registro",
+          first: 'Primero',
+          last: 'Ultimo',
+          //filter: "Buscar:                                    ",
+          filter: "",
+          filterPlaceholder: "Buscador general..",
+          limit: "Registros:",
+          page: "Pagina:",
+          noResults: "No hay registros",
+          filterBy: "Filtrar por {column}",
+          loading: 'Cargando...',
+          defaultOption: 'Seleccionar {column}',
+          columns: 'Columnas'
+        },
         headings: {
           Escuela: "Carrera Profesional",
           Linea: "Linea de Investigación"
@@ -9239,6 +9388,21 @@ __webpack_require__.r(__webpack_exports__);
       }],
       columns: ["IDModalidad", "Modalidad", "Accion"],
       options: {
+        texts: {
+          count: "Mostrando {from} al {to} de {count} registros|{count} registros|Un registro",
+          first: 'Primero',
+          last: 'Ultimo',
+          //filter: "Buscar:                                    ",
+          filter: "",
+          filterPlaceholder: "Buscador general..",
+          limit: "Registros:",
+          page: "Pagina:",
+          noResults: "No hay registros",
+          filterBy: "Filtrar por {column}",
+          loading: 'Cargando...',
+          defaultOption: 'Seleccionar {column}',
+          columns: 'Columnas'
+        },
         headings: {
           IDModalidad: "ID",
           Modalidad: "Modalidad"
@@ -9748,6 +9912,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -9794,13 +9968,15 @@ __webpack_require__.r(__webpack_exports__);
         FechaRegistro: null,
         Estado: null
       }],
+      //columns: ["Tesistas","Carrera profesional","Fecha registro","Estado","Acciones"],
       columns: ["Tesistas", "Carrera", "Fecha", "Estado", "Acciones"],
       options: {
         texts: {
           count: "Mostrando {from} al {to} de {count} registros|{count} registros|Un registro",
           first: 'Primero',
           last: 'Ultimo',
-          filter: "Buscar:                                    ",
+          //filter: "Buscar:                                    ",
+          filter: "",
           filterPlaceholder: "Buscador general..",
           limit: "Registros:",
           page: "Pagina:",
@@ -9811,8 +9987,8 @@ __webpack_require__.r(__webpack_exports__);
           columns: 'Columnas'
         },
         headings: {
-          Carrera: "Carrera",
-          Fecha: "Fecha",
+          Carrera: "Carrera profesional",
+          Fecha: "Fecha registro",
           Tesistas: "Tesistas"
         },
         sortable: ["Tesistas", "Carrera", "Fecha"],
@@ -9846,8 +10022,8 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (data) {
         swal({
           type: "success",
-          // title: data.data.title,
-          text: "Estado actualizado con éxito, se generaron los Documentos",
+          title: "¡Buen trabajo!",
+          text: "Estado actualizado con éxito, se generaron los documentos",
           showConfirmButton: false,
           timer: 3000
         });
@@ -9861,7 +10037,7 @@ __webpack_require__.r(__webpack_exports__);
         console.log(error);
         swal({
           type: "error",
-          title: 'Ha ocurrido un error',
+          title: 'Ha ocurrido un problema',
           text: "Comuníquese con un administrador",
           showConfirmButton: true
         });
@@ -9927,10 +10103,10 @@ __webpack_require__.r(__webpack_exports__);
         swal({
           type: 'error',
           title: 'Ha ocurrido un error',
-          text: 'El tamaño del archivo debe ser menor o igual a 1mb',
+          text: 'El tamaño del archivo debe ser menor o igual a 5mb',
           showConfirmButton: true
         });
-        document.getElementById('info3').innerHTML = 'Ningún archivo seleccionado';
+        document.getElementById('infoArchivo').innerHTML = 'Ningún archivo seleccionado';
         return;
       }
 
@@ -10076,10 +10252,14 @@ __webpack_require__.r(__webpack_exports__);
       this.tesistas = [];
       this.lineas = [];
       this.tesistasaux2 = null;
+      this.cambiarCancelarBachiller();
       $('#objetivo').hide();
       $('#expeditos').show();
       $('#menos').hide();
       $('#mas').show();
+    },
+    cambiarCancelarBachiller: function cambiarCancelarBachiller() {
+      document.getElementById('infoArchivo').innerHTML = 'Ningún archivo seleccionado';
     },
     borrar: function borrar() {
       this.alumno.codigo = null;
@@ -10157,6 +10337,7 @@ __webpack_require__.r(__webpack_exports__);
         $('#menos').show();
         $('#mas').hide();
         $('#labelInicio').show();
+        $('#archivoproyecto').show();
       } else if (id == '2') {
         $('#objetivo').hide();
         $('#archivos').hide();
@@ -10167,6 +10348,7 @@ __webpack_require__.r(__webpack_exports__);
         $('#menos').hide();
         $('#mas').show();
         $('#labelInicio').hide();
+        $('#archivoproyecto').hide();
       }
     },
     estado: function estado(id, tipo) {
@@ -10242,6 +10424,7 @@ __webpack_require__.r(__webpack_exports__);
       $('#mas').hide();
       $('#editar').show();
       $('#guardar').hide();
+      $('#archivoproyecto').hide();
       this.getLineas(IDCarrera);
       this.getDocentes(IDCarrera);
       this.proyecto.idproyecto = IDProyecto;
@@ -11477,6 +11660,21 @@ __webpack_require__.r(__webpack_exports__);
       }],
       columns: ["NumSesion", "Tipo", "FechaAux", "Accion"],
       options: {
+        texts: {
+          count: "Mostrando {from} al {to} de {count} registros|{count} registros|Un registro",
+          first: 'Primero',
+          last: 'Ultimo',
+          //filter: "Buscar:                                    ",
+          filter: "",
+          filterPlaceholder: "Buscador general..",
+          limit: "Registros:",
+          page: "Pagina:",
+          noResults: "No hay registros",
+          filterBy: "Filtrar por {column}",
+          loading: 'Cargando...',
+          defaultOption: 'Seleccionar {column}',
+          columns: 'Columnas'
+        },
         headings: {
           NumSesion: "Número de Sesión",
           FechaAux: "Fecha",
@@ -57863,9 +58061,10 @@ var render = function() {
                   "button",
                   {
                     staticClass: "btn bg-warning altoBoton",
+                    staticStyle: { color: "black", "font-weight": "bold" },
                     attrs: {
                       "data-target": "#adjuntos",
-                      title: "Enviar Correo",
+                      title: "Adjuntar archivos",
                       "data-toggle": "modal",
                       "data-placement": "left",
                       name: "attachment"
@@ -57878,7 +58077,7 @@ var render = function() {
                   },
                   [
                     _c("i", { staticClass: "fas fa-paperclip" }),
-                    _vm._v(" adjuntar\n                ")
+                    _vm._v(" Adjuntar archivos\n                ")
                   ]
                 )
               ]),
@@ -57942,23 +58141,28 @@ var render = function() {
                 _c(
                   "div",
                   { staticClass: "modal-body" },
-                  _vm._l(_vm.directorio, function(d) {
-                    return _c("div", { key: d }, [
-                      _c(
-                        "a",
-                        {
-                          attrs: { href: "#" },
-                          on: {
-                            click: function($event) {
-                              return _vm.adjuntar(d)
+                  [
+                    _vm._m(2),
+                    _c("br"),
+                    _vm._v(" "),
+                    _vm._l(_vm.directorio, function(d) {
+                      return _c("div", { key: d, staticClass: "col-md-12" }, [
+                        _c(
+                          "a",
+                          {
+                            attrs: { href: "#" },
+                            on: {
+                              click: function($event) {
+                                return _vm.adjuntar(d)
+                              }
                             }
-                          }
-                        },
-                        [_vm._v(_vm._s(d))]
-                      )
-                    ])
-                  }),
-                  0
+                          },
+                          [_vm._v(_vm._s(d))]
+                        )
+                      ])
+                    })
+                  ],
+                  2
                 )
               ])
             ]
@@ -57981,15 +58185,36 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header text-center" }, [
-      _c(
-        "h5",
-        {
-          staticClass: "modal-titler text-center",
-          attrs: { id: "adjuntoslabel" }
-        },
-        [_vm._v("Archivos")]
-      )
+    return _c(
+      "div",
+      {
+        staticClass: "modal-header text-center",
+        staticStyle: {
+          "background-color": "powderblue !important",
+          color: "black",
+          "font-weight": "bold"
+        }
+      },
+      [
+        _c(
+          "h5",
+          {
+            staticClass: "modal-titler text-center",
+            attrs: { id: "adjuntoslabel" }
+          },
+          [_vm._v("Archivos")]
+        )
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-12" }, [
+      _c("label", [
+        _vm._v("Nota: Hacer click en el(los) archivo(s) a adjuntar")
+      ])
     ])
   }
 ]
@@ -65479,8 +65704,6 @@ var render = function() {
           _vm._v(" "),
           _vm._m(2),
           _vm._v(" "),
-          _vm._m(3),
-          _vm._v(" "),
           _c("div", { staticClass: "card-body" }, [
             _c(
               "fieldset",
@@ -65536,7 +65759,7 @@ var render = function() {
                 }),
                 _vm._v(" "),
                 _c("div", { staticClass: "form-group row" }, [
-                  _vm._m(4),
+                  _vm._m(3),
                   _vm._v(" "),
                   _c("div", { staticClass: "col-md-7" }, [
                     _vm._v(
@@ -65548,7 +65771,7 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "form-group row" }, [
-                  _c("div", { staticClass: "col-md-2" }, [
+                  _c("div", { staticClass: "col-md-3" }, [
                     _c(
                       "button",
                       {
@@ -65565,7 +65788,7 @@ var render = function() {
                         }
                       },
                       [
-                        _vm._v("Historial "),
+                        _vm._v("Historial revisiones "),
                         _c("i", { staticClass: "fa fa-eye" })
                       ]
                     )
@@ -65579,88 +65802,7 @@ var render = function() {
               _c("legend", { staticClass: "w-auto" }, [_vm._v("Asesor")]),
               _vm._v(" "),
               _c("div", { staticClass: "form-group row" }, [
-                _vm._m(5),
-                _vm._v(" "),
-                _vm.proyecto.docentenombre != null && !_vm.editar
-                  ? _c("div", { staticClass: "col-md-4" }, [
-                      _vm._v(
-                        "\n                                " +
-                          _vm._s(_vm.proyecto.docentenombre) +
-                          "   \n                                "
-                      )
-                    ])
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm.editar
-                  ? _c("div", { staticClass: "col-md-4" }, [
-                      _c(
-                        "select",
-                        {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.proyecto.docentedni,
-                              expression: "proyecto.docentedni"
-                            }
-                          ],
-                          staticClass: "form-control form-control-sm",
-                          on: {
-                            change: function($event) {
-                              var $$selectedVal = Array.prototype.filter
-                                .call($event.target.options, function(o) {
-                                  return o.selected
-                                })
-                                .map(function(o) {
-                                  var val = "_value" in o ? o._value : o.value
-                                  return val
-                                })
-                              _vm.$set(
-                                _vm.proyecto,
-                                "docentedni",
-                                $event.target.multiple
-                                  ? $$selectedVal
-                                  : $$selectedVal[0]
-                              )
-                            }
-                          }
-                        },
-                        _vm._l(_vm.docentes, function(d) {
-                          return _c(
-                            "option",
-                            { key: d.DNI, domProps: { value: d.DNI } },
-                            [
-                              _vm._v(
-                                "\n                                            " +
-                                  _vm._s(d.Nombres) +
-                                  " " +
-                                  _vm._s(d.Apellidos) +
-                                  "\n                                        "
-                              )
-                            ]
-                          )
-                        }),
-                        0
-                      )
-                    ])
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm._m(6),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-md-4" }, [
-                  _c("input", {
-                    attrs: { type: "checkbox", id: "edit" },
-                    on: {
-                      click: function($event) {
-                        return _vm.editarDocente(_vm.proyecto.docentedni)
-                      }
-                    }
-                  })
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group row" }, [
-                _vm._m(7),
+                _vm._m(4),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-md-3" }, [
                   _c("input", {
@@ -65681,6 +65823,9 @@ var render = function() {
                     },
                     domProps: { value: _vm.proyecto.dingreso },
                     on: {
+                      change: function($event) {
+                        return _vm.validafecha()
+                      },
                       input: function($event) {
                         if ($event.target.composing) {
                           return
@@ -65691,7 +65836,7 @@ var render = function() {
                   })
                 ]),
                 _vm._v(" "),
-                _vm._m(8),
+                _vm._m(5),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-md-3" }, [
                   _c("input", {
@@ -65707,6 +65852,9 @@ var render = function() {
                     attrs: { type: "date", max: "2030-12-31" },
                     domProps: { value: _vm.proyecto.ddevolucion },
                     on: {
+                      change: function($event) {
+                        return _vm.validafecha()
+                      },
                       input: function($event) {
                         if ($event.target.composing) {
                           return
@@ -65723,58 +65871,7 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "form-group row" }, [
-                _vm._m(9),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-md-3" }, [
-                  _c(
-                    "select",
-                    {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.proyecto.estado,
-                          expression: "proyecto.estado"
-                        }
-                      ],
-                      staticClass: "form-control form-control-sm",
-                      on: {
-                        change: function($event) {
-                          var $$selectedVal = Array.prototype.filter
-                            .call($event.target.options, function(o) {
-                              return o.selected
-                            })
-                            .map(function(o) {
-                              var val = "_value" in o ? o._value : o.value
-                              return val
-                            })
-                          _vm.$set(
-                            _vm.proyecto,
-                            "estado",
-                            $event.target.multiple
-                              ? $$selectedVal
-                              : $$selectedVal[0]
-                          )
-                        }
-                      }
-                    },
-                    [
-                      _c("option", { attrs: { value: "PENDIENTE" } }, [
-                        _vm._v("PENDIENTE")
-                      ]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "EN PROCESO" } }, [
-                        _vm._v("EN PROCESO")
-                      ]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "FINALIZADO" } }, [
-                        _vm._v("FINALIZADO")
-                      ])
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _vm._m(10),
+                _vm._m(6),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-md-3" }, [
                   _c(
@@ -65831,7 +65928,7 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "form-group row" }, [
-                _vm._m(11),
+                _vm._m(7),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-md-9" }, [
                   _c("input", {
@@ -65844,11 +65941,7 @@ var render = function() {
                       }
                     ],
                     staticClass: "form-control form-control-sm",
-                    attrs: {
-                      type: "text",
-                      onKeyPress: "return soloLetras(event)",
-                      maxlength: "100"
-                    },
+                    attrs: { type: "text", maxlength: "250" },
                     domProps: { value: _vm.proyecto.comentario },
                     on: {
                       input: function($event) {
@@ -65873,7 +65966,7 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "form-group row" }, [
-                _vm._m(12),
+                _vm._m(8),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-md-3" }, [
                   _c("input", {
@@ -65895,6 +65988,9 @@ var render = function() {
                     },
                     domProps: { value: _vm.proyecto.aingreso },
                     on: {
+                      change: function($event) {
+                        return _vm.validafecha()
+                      },
                       input: function($event) {
                         if ($event.target.composing) {
                           return
@@ -65905,7 +66001,7 @@ var render = function() {
                   })
                 ]),
                 _vm._v(" "),
-                _vm._m(13),
+                _vm._m(9),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-md-3" }, [
                   _c("input", {
@@ -65921,6 +66017,9 @@ var render = function() {
                     attrs: { type: "date", max: "2030-12-31", id: "comienzo" },
                     domProps: { value: _vm.proyecto.adevolucion },
                     on: {
+                      change: function($event) {
+                        return _vm.validafecha()
+                      },
                       input: function($event) {
                         if ($event.target.composing) {
                           return
@@ -66001,7 +66100,7 @@ var render = function() {
                   _c(
                     "button",
                     {
-                      staticClass: "btn btn-danger",
+                      staticClass: "btn btn-warning",
                       on: {
                         click: function($event) {
                           return _vm.cancelar()
@@ -66009,8 +66108,8 @@ var render = function() {
                       }
                     },
                     [
-                      _vm._v("Cancelar "),
-                      _c("i", { staticClass: "fas fa-times" })
+                      _vm._v("Limpiar "),
+                      _c("i", { staticClass: "fas fa-broom" })
                     ]
                   )
                 ]
@@ -66092,7 +66191,7 @@ var render = function() {
                 "div",
                 { staticClass: "modal-body" },
                 [
-                  _vm._m(14),
+                  _vm._m(10),
                   _vm._v(" "),
                   _c("div", { staticClass: "form-group row" }, [
                     _c(
@@ -66177,7 +66276,7 @@ var render = function() {
                       "div",
                       { key: a.Nombres, staticClass: "form-group row" },
                       [
-                        _vm._m(15, true),
+                        _vm._m(11, true),
                         _vm._v(" "),
                         _c("div", { staticClass: "col-md-10" }, [
                           _vm._v(
@@ -66277,7 +66376,7 @@ var render = function() {
           { staticClass: "modal-dialog modal-lg", attrs: { role: "document" } },
           [
             _c("div", { staticClass: "modal-content" }, [
-              _vm._m(16),
+              _vm._m(12),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
                 _c(
@@ -66291,7 +66390,7 @@ var render = function() {
                     _vm._l(_vm.historial, function(h, index) {
                       return _c("div", { key: h.id }, [
                         _c("div", { staticClass: "form-group row" }, [
-                          _vm._m(17, true),
+                          _vm._m(13, true),
                           _vm._v(" "),
                           _c("div", { staticClass: "col-md-1 t12" }, [
                             _vm._v(
@@ -66301,7 +66400,7 @@ var render = function() {
                             )
                           ]),
                           _vm._v(" "),
-                          _vm._m(18, true),
+                          _vm._m(14, true),
                           _vm._v(" "),
                           _c("div", { staticClass: "col-md-2 t12" }, [
                             h.Estado == "EN PROCESO"
@@ -66317,7 +66416,7 @@ var render = function() {
                               : _vm._e()
                           ]),
                           _vm._v(" "),
-                          _vm._m(19, true),
+                          _vm._m(15, true),
                           _vm._v(" "),
                           _c("div", { staticClass: "col-md-3 t12" }, [
                             h.SubEstado == "CONFORME"
@@ -66335,7 +66434,7 @@ var render = function() {
                         ]),
                         _vm._v(" "),
                         _c("div", { staticClass: "form-group row" }, [
-                          _vm._m(20, true),
+                          _vm._m(16, true),
                           _vm._v(" "),
                           _c("div", { staticClass: "col-md-2 t12" }, [
                             _vm._v(
@@ -66345,7 +66444,7 @@ var render = function() {
                             )
                           ]),
                           _vm._v(" "),
-                          _vm._m(21, true),
+                          _vm._m(17, true),
                           _vm._v(" "),
                           _c("div", { staticClass: "col-md-2 t12" }, [
                             _vm._v(
@@ -66357,7 +66456,7 @@ var render = function() {
                         ]),
                         _vm._v(" "),
                         _c("div", { staticClass: "form-group row" }, [
-                          _vm._m(22, true),
+                          _vm._m(18, true),
                           _vm._v(" "),
                           _c("div", { staticClass: "col-md-2 t12" }, [
                             _vm._v(
@@ -66367,7 +66466,7 @@ var render = function() {
                             )
                           ]),
                           _vm._v(" "),
-                          _vm._m(23, true),
+                          _vm._m(19, true),
                           _vm._v(" "),
                           _c("div", { staticClass: "col-md-2 t12" }, [
                             _vm._v(
@@ -66379,7 +66478,7 @@ var render = function() {
                         ]),
                         _vm._v(" "),
                         _c("div", { staticClass: "form-group row" }, [
-                          _vm._m(24, true),
+                          _vm._m(20, true),
                           _vm._v(" "),
                           _c("div", { staticClass: "col-md-9 t12" }, [
                             _vm._v(
@@ -66452,22 +66551,6 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "col-md-12", attrs: { id: "labelInicio" } },
-      [
-        _c("label", [
-          _vm._v(
-            "Nota: Fecha de devolución alumno, es para la entrega de observaciones"
-          )
-        ])
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-md-2" }, [
       _c("label", [_vm._v("Carrera Profesional:")])
     ])
@@ -66477,24 +66560,8 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-md-3" }, [
-      _c("label", [_vm._v("Docente Asesor :")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-1" }, [
-      _c("label", [_vm._v("Editar :")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-3" }, [
       _c("label", { attrs: { for: "ingreso" } }, [
-        _vm._v("Fecha entrega asesor* :")
+        _vm._v("Fecha entrega asesor:")
       ])
     ])
   },
@@ -66506,14 +66573,6 @@ var staticRenderFns = [
       _c("label", { attrs: { for: "comienzo" } }, [
         _vm._v("Fecha devolución asesor:")
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-3" }, [
-      _c("label", { attrs: { for: "ingreso" } }, [_vm._v("Estado :")])
     ])
   },
   function() {
@@ -66538,7 +66597,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-md-3" }, [
       _c("label", { attrs: { for: "ingreso" } }, [
-        _vm._v("Fecha entrega alumno* :")
+        _vm._v("Fecha entrega alumno:")
       ])
     ])
   },
@@ -67774,30 +67833,37 @@ var render = function() {
                   _vm._m(6)
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "form-group row" }, [
-                  _vm._m(7),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-md-5" }, [
-                    _vm._m(8),
+                _c(
+                  "div",
+                  {
+                    staticClass: "form-group row",
+                    attrs: { id: "archivoproyecto" }
+                  },
+                  [
+                    _vm._m(7),
                     _vm._v(" "),
-                    _c("input", {
-                      staticStyle: { display: "none" },
-                      attrs: {
-                        id: "foto",
-                        onchange: "cambiarFotoTitulo()",
-                        type: "file",
-                        accept: "application/pdf"
-                      },
-                      on: { change: _vm.validarPY }
-                    }),
+                    _c("div", { staticClass: "col-md-5" }, [
+                      _vm._m(8),
+                      _vm._v(" "),
+                      _c("input", {
+                        staticStyle: { display: "none" },
+                        attrs: {
+                          id: "proyectoArchivo",
+                          onchange: "cambiarProyectoArchivo()",
+                          type: "file",
+                          accept: "application/pdf"
+                        },
+                        on: { change: _vm.validarPY }
+                      }),
+                      _vm._v(" "),
+                      _c("span", { attrs: { id: "infoArchivo" } }, [
+                        _vm._v("Ningún archivo seleccionado")
+                      ])
+                    ]),
                     _vm._v(" "),
-                    _c("span", { attrs: { id: "info3" } }, [
-                      _vm._v("Ningún archivo seleccionado")
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _vm._m(9)
-                ])
+                    _vm._m(9)
+                  ]
+                )
               ]),
               _vm._v(" "),
               _c("br"),
@@ -67845,7 +67911,7 @@ var render = function() {
                     _c(
                       "button",
                       {
-                        staticClass: "btn btn-primary",
+                        staticClass: "btn btn-success",
                         on: {
                           click: function($event) {
                             return _vm.editExpedito()
@@ -68187,6 +68253,9 @@ var render = function() {
                       key: "Acciones",
                       fn: function(props) {
                         return _c("div", {}, [
+                          _vm._v(
+                            "\n<<<<<<< HEAD\n                                        "
+                          ),
                           _c(
                             "button",
                             {
@@ -68269,6 +68338,113 @@ var render = function() {
                               }
                             },
                             [_c("i", { staticClass: "fa fa-eye" })]
+                          ),
+                          _vm._v(" "),
+                          _vm._v(
+                            "\n=======\n                                        "
+                          ),
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn bg-indigo altoBoton",
+                              attrs: {
+                                "data-target": "#datos",
+                                "data-toggle": "modal",
+                                "data-placement": "left",
+                                title: "Cambiar estado del trámite"
+                              },
+                              on: {
+                                click: function($event) {
+                                  return _vm.viewData(
+                                    props.row.IDProyecto,
+                                    props.row.IDCarrera,
+                                    props.row.Carrera,
+                                    props.row.CodDocente,
+                                    props.row.Tesistas,
+                                    props.row.NombreTesis
+                                  )
+                                }
+                              }
+                            },
+                            [
+                              _c("i", {
+                                staticClass: "fa fa-check-double",
+                                attrs: { "aria-hidden": "true" }
+                              })
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-success altoBoton",
+                              attrs: {
+                                "data-target": "#historial",
+                                title: "Ver historial de revisiones",
+                                "data-toggle": "modal",
+                                "data-placement": "left"
+                              },
+                              on: {
+                                click: function($event) {
+                                  return _vm.getHistorial(props.row.IDProyecto)
+                                }
+                              }
+                            },
+                            [_c("i", { staticClass: "fa fa-eye" })]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn bg-warning altoBoton",
+                              attrs: {
+                                "data-target": "#correo",
+                                title: "Enviar correo",
+                                "data-toggle": "modal",
+                                "data-placement": "left"
+                              },
+                              on: {
+                                click: function($event) {
+                                  return _vm.setProyecto(props.row.IDProyecto)
+                                }
+                              }
+                            },
+                            [_c("i", { staticClass: "fa fa-envelope" })]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-primary altoBoton",
+                              attrs: {
+                                "data-placement": "left",
+                                title: "Editar registro"
+                              },
+                              on: {
+                                click: function($event) {
+                                  return _vm.edit(
+                                    props.row.IDProyecto,
+                                    props.row.IDCarrera,
+                                    props.row.NombreTesis,
+                                    props.row.IDLinea,
+                                    props.row.CodDocente,
+                                    props.row.FechaRegistro,
+                                    props.row.Porcentaje,
+                                    props.row.Codigos
+                                  )
+                                }
+                              }
+                            },
+                            [
+                              _c("i", {
+                                staticClass: "fas fa-edit",
+                                staticStyle: { color: "white" },
+                                attrs: { "aria-hidden": "true" }
+                              })
+                            ]
+                          ),
+                          _vm._v(
+                            "\n                                        \n>>>>>>> 5542918ad2fa435f50ce92706f7326a9ae62f038\n                                    "
                           )
                         ])
                       }
@@ -68331,7 +68507,7 @@ var render = function() {
                       _vm.historial.length == 0 && _vm.cargando
                         ? _c("label", { staticClass: "text-danger" }, [
                             _vm._v(
-                              "\n                                        Aun no cuenta con revisiones\n                                    "
+                              "\n                                        Este registro aún no cuenta con revisiones.\n                                    "
                             )
                           ])
                         : _vm._e()
@@ -68504,7 +68680,9 @@ var render = function() {
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
                 _c("fieldset", { staticClass: "border p-2" }, [
-                  _c("legend", { staticClass: "w-auto" }, [_vm._v("Datos")]),
+                  _c("legend", { staticClass: "w-auto" }, [
+                    _vm._v("Datos a registrar")
+                  ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "form-group row" }, [
                     _vm._m(22),
@@ -68679,20 +68857,37 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "row" }, [
-                    _c("div", { staticClass: "col-md-2" }, [
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn bg-indigo",
-                          on: {
-                            click: function($event) {
-                              return _vm.changeStatus()
+                    _c("div", {
+                      staticClass: "col-md-4",
+                      staticStyle: { "text-align": "center" }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "col-md-4",
+                        staticStyle: { "text-align": "center" }
+                      },
+                      [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn bg-success",
+                            on: {
+                              click: function($event) {
+                                return _vm.changeStatus()
+                              }
                             }
-                          }
-                        },
-                        [_vm._v("Procesar")]
-                      )
-                    ])
+                          },
+                          [_vm._v("Procesar trámite")]
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c("div", {
+                      staticClass: "col-md-4",
+                      staticStyle: { "text-align": "center" }
+                    })
                   ])
                 ])
               ])
@@ -68791,17 +68986,21 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("label", { staticClass: "subir", attrs: { for: "foto" } }, [
-      _c("i", { staticClass: "fas fa-cloud-upload-alt" }),
-      _vm._v(" Subir archivo\n                                    ")
-    ])
+    return _c(
+      "label",
+      { staticClass: "subir", attrs: { for: "proyectoArchivo" } },
+      [
+        _c("i", { staticClass: "fas fa-cloud-upload-alt" }),
+        _vm._v(" Subir archivo\n                                    ")
+      ]
+    )
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-md-4" }, [
-      _c("label", [_vm._v("( Formato JPG - Tamaño Max. 1MB )")])
+      _c("label", [_vm._v("( Formato PDF - Tamaño Max. 5MB )")])
     ])
   },
   function() {
@@ -68852,7 +69051,7 @@ var staticRenderFns = [
             staticClass: "modal-titler text-center",
             attrs: { id: "historialLabel" }
           },
-          [_vm._v("Historial proyecto de tesis")]
+          [_vm._v("Historial Proyecto de Tesis")]
         ),
         _vm._v(" "),
         _c(
@@ -68938,26 +69137,35 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header text-center" }, [
-      _c(
-        "h5",
-        { staticClass: "modal-titler text-center", attrs: { id: "Label" } },
-        [_vm._v("Datos")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "close",
-          attrs: {
-            type: "button",
-            "data-dismiss": "modal",
-            "aria-label": "Close"
-          }
-        },
-        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-      )
-    ])
+    return _c(
+      "div",
+      {
+        staticClass: "modal-header text-center",
+        staticStyle: {
+          "background-color": "powderblue !important",
+          color: "black",
+          "font-weight": "bold"
+        }
+      },
+      [
+        _c("h4", { staticClass: "title", attrs: { id: "Label" } }, [
+          _vm._v("Datos")
+        ]),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "close",
+            attrs: {
+              type: "button",
+              "data-dismiss": "modal",
+              "aria-label": "Close"
+            }
+          },
+          [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+        )
+      ]
+    )
   },
   function() {
     var _vm = this

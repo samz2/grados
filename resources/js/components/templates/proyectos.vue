@@ -105,19 +105,19 @@
                                     <label>%</label>
                                 </div>
                             </div>
-                             <div class="form-group row">
+                             <div class="form-group row" id="archivoproyecto">
                                 <div class="col-md-3">
                                 <label>Proyecto de Tesis* :</label>
                                 </div>
                                 <div class="col-md-5">
-                                    <label for="foto" class="subir">
+                                    <label for="proyectoArchivo" class="subir">
                                         <i class="fas fa-cloud-upload-alt"></i> Subir archivo
                                     </label>
-                                    <input id="foto" @change="validarPY" onchange='cambiarFotoTitulo()' type="file" accept="application/pdf" style='display: none;'/>
-                                    <span id="info3">Ningún archivo seleccionado</span>
+                                    <input id="proyectoArchivo" @change='validarPY' onchange='cambiarProyectoArchivo()' type="file" accept="application/pdf" style='display: none;'/>
+                                    <span id="infoArchivo">Ningún archivo seleccionado</span>
                                 </div> 
                                 <div class="col-md-4">
-                                    <label>( Formato JPG - Tamaño Max. 1MB )</label>
+                                    <label>( Formato PDF - Tamaño Max. 5MB )</label>
                                 </div>
                             </div>
                         </fieldset>
@@ -128,7 +128,7 @@
                                 <button class="btn btn-success"  @click="addProyecto(1)">Guardar <i class="fa fa-save"></i></button>
                             </div>
                             <div class="col-md-2"  id="editar" style="text-align: center;">
-                                <button class="btn btn-primary" @click="editExpedito()">Guardar <i class="fa fa-edit"></i></button>
+                                <button class="btn btn-success" @click="editExpedito()">Guardar <i class="fa fa-edit"></i></button>
                             </div>
                             <div class="col-md-2" style="text-align: center;">
                                 <button class="btn btn-danger" @click="cancelar()">Cancelar <i class="fas fa-times"></i></button>
@@ -204,10 +204,18 @@
                                        <label v-else-if="props.row.EstadoTramite == 3" class="text-success">{{"FINALIZADO"}}</label>
                                     </div>
                                     <div slot="Acciones" slot-scope="props">
+<<<<<<< HEAD
                                         <button class="btn btn-primary altoBoton" v-on:click="edit(props.row.IDProyecto,props.row.IDCarrera,props.row.NombreTesis,props.row.IDLinea,props.row.CodDocente,props.row.FechaRegistro,props.row.Porcentaje,props.row.Codigos)" data-placement="left" title="Editar"><i class="fas fa-edit" style="color: white" aria-hidden="true"></i></button>
                                         <button v-if="props.row.EstadoTramite == 1" data-target="#datos" class="btn bg-indigo altoBoton" @click="viewData(props.row.IDProyecto,props.row.IDCarrera,props.row.Carrera,props.row.CodDocente,props.row.Tesistas,props.row.NombreTesis)" data-toggle="modal" data-placement="left" title="Cambiar estado"><i class="fa fa-check-double" aria-hidden="true"></i></button>
                                         <button data-target="#historial" @click="getHistorial(props.row.IDProyecto)" title="Ver Historial" class="btn btn-success altoBoton" data-toggle="modal" data-placement="left" ><i class="fa fa-eye"></i></button>
                                         <!-- <button data-target="#correo" @click="setProyecto(props.row.IDProyecto)" title="Enviar Correo" class="btn bg-warning altoBoton" data-toggle="modal" data-placement="left" ><i class="fa fa-envelope"></i></button> -->
+=======
+                                        <button data-target="#datos" class="btn bg-indigo altoBoton" @click="viewData(props.row.IDProyecto,props.row.IDCarrera,props.row.Carrera,props.row.CodDocente,props.row.Tesistas,props.row.NombreTesis)" data-toggle="modal" data-placement="left" title="Cambiar estado del trámite"><i class="fa fa-check-double" aria-hidden="true"></i></button>
+                                        <button data-target="#historial" @click="getHistorial(props.row.IDProyecto)" title="Ver historial de revisiones" class="btn btn-success altoBoton" data-toggle="modal" data-placement="left" ><i class="fa fa-eye"></i></button>
+                                        <button data-target="#correo" @click="setProyecto(props.row.IDProyecto)" title="Enviar correo" class="btn bg-warning altoBoton" data-toggle="modal" data-placement="left" ><i class="fa fa-envelope"></i></button>
+                                        <button class="btn btn-primary altoBoton" v-on:click="edit(props.row.IDProyecto,props.row.IDCarrera,props.row.NombreTesis,props.row.IDLinea,props.row.CodDocente,props.row.FechaRegistro,props.row.Porcentaje,props.row.Codigos)" data-placement="left" title="Editar registro"><i class="fas fa-edit" style="color: white" aria-hidden="true"></i></button>
+                                        
+>>>>>>> 5542918ad2fa435f50ce92706f7326a9ae62f038
                                     </div>
                                 </v-client-table>
                             </div>
@@ -220,7 +228,7 @@
                     <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content">
                         <div class="modal-header text-center" style="background-color: powderblue !important; color:black; font-weight: bold;">
-                            <h5 class="modal-titler text-center" id="historialLabel">Historial proyecto de tesis</h5>
+                            <h5 class="modal-titler text-center" id="historialLabel">Historial Proyecto de Tesis</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                             </button>
@@ -233,7 +241,7 @@
                                         <span class="sr-only">Loading...</span>
                                     </div>
                                     <label v-if="historial.length == 0 && cargando" class="text-danger">
-                                        Aun no cuenta con revisiones
+                                        Este registro aún no cuenta con revisiones.
                                     </label>
                                 </div>
                                 
@@ -325,15 +333,15 @@
             <div class="modal fade" id="datos" tabindex="-1" role="dialog" aria-labelledby="Label" aria-hidden="true">
                     <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content">
-                        <div class="modal-header text-center">
-                            <h5 class="modal-titler text-center" id="Label">Datos</h5>
+                        <div class="modal-header text-center" style="background-color: powderblue !important; color:black; font-weight: bold;">
+                            <h4 class="title" id="Label">Datos</h4>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
                             <fieldset class="border p-2">
-                            <legend class="w-auto">Datos</legend>
+                            <legend class="w-auto">Datos a registrar</legend>
                             <div class="form-group row">
                                 <div class="col-md-3">
                                 <label for="sesion">Número Sesión* :</label>
@@ -373,9 +381,11 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-2">
-                                    <button @click="changeStatus()" class="btn bg-indigo">Procesar</button>
+                                <div class="col-md-4" style="text-align: center;"></div>
+                                <div class="col-md-4" style="text-align: center;"> 
+                                    <button @click="changeStatus()" class="btn bg-success">Procesar trámite</button>
                                 </div>
+                                <div class="col-md-4" style="text-align: center;"></div>
                             </div>
                             </fieldset>
                         </div>
@@ -432,13 +442,15 @@
                 FechaRegistro:null,
                 Estado:null,
             }],
+            //columns: ["Tesistas","Carrera profesional","Fecha registro","Estado","Acciones"],
             columns: ["Tesistas","Carrera","Fecha","Estado","Acciones"],
             options: {
                 texts: {
                    count: "Mostrando {from} al {to} de {count} registros|{count} registros|Un registro",
                     first: 'Primero',
                     last: 'Ultimo',
-                    filter: "Buscar:                                    ",
+                    //filter: "Buscar:                                    ",
+                    filter: "",
                     filterPlaceholder: "Buscador general..",
                     limit: "Registros:",
                     page: "Pagina:",
@@ -450,8 +462,8 @@
                     },
 				headings:
 				{
-                    Carrera: "Carrera",
-                    Fecha: "Fecha",
+                    Carrera: "Carrera profesional",
+                    Fecha: "Fecha registro",
                     Tesistas: "Tesistas",
 				},
 				sortable    : ["Tesistas","Carrera","Fecha"],
@@ -486,8 +498,8 @@
                 }).then(data=>{
                     swal({
                         type: "success",
-                        // title: data.data.title,
-                        text: "Estado actualizado con éxito, se generaron los Documentos",
+                        title: "¡Buen trabajo!",
+                        text: "Estado actualizado con éxito, se generaron los documentos",
                         showConfirmButton: false,
                         timer: 3000
                     });
@@ -499,7 +511,7 @@
                     console.log(error);	
                     swal({
                         type: "error",
-                        title: 'Ha ocurrido un error',
+                        title: 'Ha ocurrido un problema',
                         text: "Comuníquese con un administrador",
                         showConfirmButton: true
                     });
@@ -566,10 +578,10 @@
                 swal({
                         type: 'error',
                         title: 'Ha ocurrido un error',
-                        text: 'El tamaño del archivo debe ser menor o igual a 1mb',
+                        text: 'El tamaño del archivo debe ser menor o igual a 5mb',
                         showConfirmButton: true,
                     });
-                document.getElementById('info3').innerHTML = 'Ningún archivo seleccionado';
+                document.getElementById('infoArchivo').innerHTML = 'Ningún archivo seleccionado';
                 return;    
             }
             if(type.includes("pdf"))
@@ -729,10 +741,14 @@
             this.tesistas               = [];
             this.lineas                 = [];
             this.tesistasaux2           = null;
+            this.cambiarCancelarBachiller();
             $('#objetivo').hide();
             $('#expeditos').show();	
             $('#menos').hide();
             $('#mas').show();
+        },
+        cambiarCancelarBachiller(){    
+            document.getElementById('infoArchivo').innerHTML = 'Ningún archivo seleccionado';
         },
         borrar()
         {
@@ -817,6 +833,7 @@
                 $('#menos').show();
                 $('#mas').hide();
                 $('#labelInicio').show();
+                $('#archivoproyecto').show();
 			}
 			else if(id == '2')
 			{
@@ -829,6 +846,7 @@
                 $('#menos').hide();
                 $('#mas').show();
                 $('#labelInicio').hide();
+                $('#archivoproyecto').hide();
 			}
 			
         },
@@ -911,6 +929,7 @@
             $('#mas').hide();
             $('#editar').show();
             $('#guardar').hide();
+            $('#archivoproyecto').hide();
             
             this.getLineas(IDCarrera);
             this.getDocentes(IDCarrera);
