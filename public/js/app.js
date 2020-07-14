@@ -68219,36 +68219,38 @@ var render = function() {
                             ]
                           ),
                           _vm._v(" "),
-                          _c(
-                            "button",
-                            {
-                              staticClass: "btn bg-indigo altoBoton",
-                              attrs: {
-                                "data-target": "#datos",
-                                "data-toggle": "modal",
-                                "data-placement": "left",
-                                title: "Cambiar estado"
-                              },
-                              on: {
-                                click: function($event) {
-                                  return _vm.viewData(
-                                    props.row.IDProyecto,
-                                    props.row.IDCarrera,
-                                    props.row.Carrera,
-                                    props.row.CodDocente,
-                                    props.row.Tesistas,
-                                    props.row.NombreTesis
-                                  )
-                                }
-                              }
-                            },
-                            [
-                              _c("i", {
-                                staticClass: "fa fa-check-double",
-                                attrs: { "aria-hidden": "true" }
-                              })
-                            ]
-                          ),
+                          props.row.EstadoTramite == 1
+                            ? _c(
+                                "button",
+                                {
+                                  staticClass: "btn bg-indigo altoBoton",
+                                  attrs: {
+                                    "data-target": "#datos",
+                                    "data-toggle": "modal",
+                                    "data-placement": "left",
+                                    title: "Cambiar estado"
+                                  },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.viewData(
+                                        props.row.IDProyecto,
+                                        props.row.IDCarrera,
+                                        props.row.Carrera,
+                                        props.row.CodDocente,
+                                        props.row.Tesistas,
+                                        props.row.NombreTesis
+                                      )
+                                    }
+                                  }
+                                },
+                                [
+                                  _c("i", {
+                                    staticClass: "fa fa-check-double",
+                                    attrs: { "aria-hidden": "true" }
+                                  })
+                                ]
+                              )
+                            : _vm._e(),
                           _vm._v(" "),
                           _c(
                             "button",
@@ -68267,25 +68269,6 @@ var render = function() {
                               }
                             },
                             [_c("i", { staticClass: "fa fa-eye" })]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "button",
-                            {
-                              staticClass: "btn bg-warning altoBoton",
-                              attrs: {
-                                "data-target": "#correo",
-                                title: "Enviar Correo",
-                                "data-toggle": "modal",
-                                "data-placement": "left"
-                              },
-                              on: {
-                                click: function($event) {
-                                  return _vm.setProyecto(props.row.IDProyecto)
-                                }
-                              }
-                            },
-                            [_c("i", { staticClass: "fa fa-envelope" })]
                           )
                         ])
                       }

@@ -205,9 +205,9 @@
                                     </div>
                                     <div slot="Acciones" slot-scope="props">
                                         <button class="btn btn-primary altoBoton" v-on:click="edit(props.row.IDProyecto,props.row.IDCarrera,props.row.NombreTesis,props.row.IDLinea,props.row.CodDocente,props.row.FechaRegistro,props.row.Porcentaje,props.row.Codigos)" data-placement="left" title="Editar"><i class="fas fa-edit" style="color: white" aria-hidden="true"></i></button>
-                                        <button data-target="#datos" class="btn bg-indigo altoBoton" @click="viewData(props.row.IDProyecto,props.row.IDCarrera,props.row.Carrera,props.row.CodDocente,props.row.Tesistas,props.row.NombreTesis)" data-toggle="modal" data-placement="left" title="Cambiar estado"><i class="fa fa-check-double" aria-hidden="true"></i></button>
+                                        <button v-if="props.row.EstadoTramite == 1" data-target="#datos" class="btn bg-indigo altoBoton" @click="viewData(props.row.IDProyecto,props.row.IDCarrera,props.row.Carrera,props.row.CodDocente,props.row.Tesistas,props.row.NombreTesis)" data-toggle="modal" data-placement="left" title="Cambiar estado"><i class="fa fa-check-double" aria-hidden="true"></i></button>
                                         <button data-target="#historial" @click="getHistorial(props.row.IDProyecto)" title="Ver Historial" class="btn btn-success altoBoton" data-toggle="modal" data-placement="left" ><i class="fa fa-eye"></i></button>
-                                        <button data-target="#correo" @click="setProyecto(props.row.IDProyecto)" title="Enviar Correo" class="btn bg-warning altoBoton" data-toggle="modal" data-placement="left" ><i class="fa fa-envelope"></i></button>
+                                        <!-- <button data-target="#correo" @click="setProyecto(props.row.IDProyecto)" title="Enviar Correo" class="btn bg-warning altoBoton" data-toggle="modal" data-placement="left" ><i class="fa fa-envelope"></i></button> -->
                                     </div>
                                 </v-client-table>
                             </div>
