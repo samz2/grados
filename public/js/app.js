@@ -9916,12 +9916,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -10043,17 +10037,17 @@ __webpack_require__.r(__webpack_exports__);
         });
       });
     },
-    viewData: function viewData(id, idcarrera, carrera, docente, tesistas, tema) {
-      if (docente != null) {
-        this.selectDocente(docente);
+    viewData: function viewData(proyecto) {
+      if (proyecto.CodDocente != null) {
+        this.selectDocente(proyecto.CodDocente);
       }
 
-      this.sesion.idproyecto = id;
-      this.sesion.docente = docente;
-      this.sesion.nombretesis = tema;
-      this.sesion.tesistas = tesistas;
-      this.sesion.carrera = carrera;
-      this.getDocentes(idcarrera);
+      this.sesion.idproyecto = proyecto.IDProyecto;
+      this.sesion.docente = proyecto.CodDocente;
+      this.sesion.nombretesis = proyecto.NombreTesis;
+      this.sesion.tesistas = proyecto.Tesistas;
+      this.sesion.carrera = proyecto.Carrera;
+      this.getDocentes(proyecto.IDCarrera);
     },
     selectDocente: function selectDocente(id) {
       var _this2 = this;
@@ -68253,9 +68247,6 @@ var render = function() {
                       key: "Acciones",
                       fn: function(props) {
                         return _c("div", {}, [
-                          _vm._v(
-                            "\n<<<<<<< HEAD\n                                        "
-                          ),
                           _c(
                             "button",
                             {
@@ -68301,20 +68292,63 @@ var render = function() {
                                   },
                                   on: {
                                     click: function($event) {
-                                      return _vm.viewData(
-                                        props.row.IDProyecto,
-                                        props.row.IDCarrera,
-                                        props.row.Carrera,
-                                        props.row.CodDocente,
-                                        props.row.Tesistas,
-                                        props.row.NombreTesis
-                                      )
+                                      return _vm.viewData(props.row)
                                     }
                                   }
                                 },
                                 [
                                   _c("i", {
                                     staticClass: "fa fa-check-double",
+                                    attrs: { "aria-hidden": "true" }
+                                  })
+                                ]
+                              )
+                            : _vm._e(),
+                          _vm._v(" "),
+                          props.row.EstadoTramite == 2
+                            ? _c(
+                                "a",
+                                {
+                                  staticClass: "btn bg-navy altoBoton",
+                                  attrs: {
+                                    href:
+                                      "Archivos/" +
+                                      props.row.IDProyecto +
+                                      "/memo.pdf",
+                                    download: "Memorandum.pdf",
+                                    target: "_blank",
+                                    "data-placement": "left",
+                                    title: "memo"
+                                  }
+                                },
+                                [
+                                  _c("i", {
+                                    staticClass: "fa fa-file",
+                                    attrs: { "aria-hidden": "true" }
+                                  })
+                                ]
+                              )
+                            : _vm._e(),
+                          _vm._v(" "),
+                          props.row.EstadoTramite == 2
+                            ? _c(
+                                "a",
+                                {
+                                  staticClass: "btn bg-olive altoBoton",
+                                  attrs: {
+                                    href:
+                                      "Archivos/" +
+                                      props.row.IDProyecto +
+                                      "/oficio.pdf",
+                                    download: "Oficio.pdf",
+                                    target: "_blank",
+                                    "data-placement": "left",
+                                    title: "oficio"
+                                  }
+                                },
+                                [
+                                  _c("i", {
+                                    staticClass: "fa fa-file",
                                     attrs: { "aria-hidden": "true" }
                                   })
                                 ]
@@ -68338,113 +68372,6 @@ var render = function() {
                               }
                             },
                             [_c("i", { staticClass: "fa fa-eye" })]
-                          ),
-                          _vm._v(" "),
-                          _vm._v(
-                            "\n=======\n                                        "
-                          ),
-                          _c(
-                            "button",
-                            {
-                              staticClass: "btn bg-indigo altoBoton",
-                              attrs: {
-                                "data-target": "#datos",
-                                "data-toggle": "modal",
-                                "data-placement": "left",
-                                title: "Cambiar estado del trámite"
-                              },
-                              on: {
-                                click: function($event) {
-                                  return _vm.viewData(
-                                    props.row.IDProyecto,
-                                    props.row.IDCarrera,
-                                    props.row.Carrera,
-                                    props.row.CodDocente,
-                                    props.row.Tesistas,
-                                    props.row.NombreTesis
-                                  )
-                                }
-                              }
-                            },
-                            [
-                              _c("i", {
-                                staticClass: "fa fa-check-double",
-                                attrs: { "aria-hidden": "true" }
-                              })
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "button",
-                            {
-                              staticClass: "btn btn-success altoBoton",
-                              attrs: {
-                                "data-target": "#historial",
-                                title: "Ver historial de revisiones",
-                                "data-toggle": "modal",
-                                "data-placement": "left"
-                              },
-                              on: {
-                                click: function($event) {
-                                  return _vm.getHistorial(props.row.IDProyecto)
-                                }
-                              }
-                            },
-                            [_c("i", { staticClass: "fa fa-eye" })]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "button",
-                            {
-                              staticClass: "btn bg-warning altoBoton",
-                              attrs: {
-                                "data-target": "#correo",
-                                title: "Enviar correo",
-                                "data-toggle": "modal",
-                                "data-placement": "left"
-                              },
-                              on: {
-                                click: function($event) {
-                                  return _vm.setProyecto(props.row.IDProyecto)
-                                }
-                              }
-                            },
-                            [_c("i", { staticClass: "fa fa-envelope" })]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "button",
-                            {
-                              staticClass: "btn btn-primary altoBoton",
-                              attrs: {
-                                "data-placement": "left",
-                                title: "Editar registro"
-                              },
-                              on: {
-                                click: function($event) {
-                                  return _vm.edit(
-                                    props.row.IDProyecto,
-                                    props.row.IDCarrera,
-                                    props.row.NombreTesis,
-                                    props.row.IDLinea,
-                                    props.row.CodDocente,
-                                    props.row.FechaRegistro,
-                                    props.row.Porcentaje,
-                                    props.row.Codigos
-                                  )
-                                }
-                              }
-                            },
-                            [
-                              _c("i", {
-                                staticClass: "fas fa-edit",
-                                staticStyle: { color: "white" },
-                                attrs: { "aria-hidden": "true" }
-                              })
-                            ]
-                          ),
-                          _vm._v(
-                            "\n                                        \n>>>>>>> 5542918ad2fa435f50ce92706f7326a9ae62f038\n                                    "
                           )
                         ])
                       }
@@ -68474,9 +68401,12 @@ var render = function() {
       [
         _c(
           "div",
-          { staticClass: "modal-dialog modal-lg", attrs: { role: "document" } },
+          {
+            staticClass: "modal-dialog modal-lg modal-dialog-scrollable",
+            attrs: { role: "document" }
+          },
           [
-            _c("div", { staticClass: "modal-content" }, [
+            _c("div", { staticClass: "modal-content " }, [
               _vm._m(12),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [

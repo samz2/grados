@@ -18,7 +18,7 @@ Route::get('/', function () {
 Route::get('/correo', function () {
     return view('templates.correo');
 });
-Route::get('/informe','DocumentosController@informe');
+Route::get('/oficioproyecto','DocumentosController@oficioProyecto');
 
 Auth::routes();
 
@@ -110,6 +110,7 @@ Route::post('/addProyecto','ProyectoController@store');
 Route::get('/getProyectos','ProyectoController@index');
 Route::post('/updateProyecto','ProyectoController@update');
 Route::post('/statusProyecto','ProyectoController@status');
+Route::get('/statusProyecto/{id}/{fecha}/{docente}','ProyectoController@status');
 
 Route::post('/addHistorial','HistorialproyectoController@store');
 Route::get('/getHistorial/{id}','HistorialproyectoController@show');

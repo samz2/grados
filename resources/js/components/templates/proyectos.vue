@@ -204,18 +204,12 @@
                                        <label v-else-if="props.row.EstadoTramite == 3" class="text-success">{{"FINALIZADO"}}</label>
                                     </div>
                                     <div slot="Acciones" slot-scope="props">
-<<<<<<< HEAD
                                         <button class="btn btn-primary altoBoton" v-on:click="edit(props.row.IDProyecto,props.row.IDCarrera,props.row.NombreTesis,props.row.IDLinea,props.row.CodDocente,props.row.FechaRegistro,props.row.Porcentaje,props.row.Codigos)" data-placement="left" title="Editar"><i class="fas fa-edit" style="color: white" aria-hidden="true"></i></button>
-                                        <button v-if="props.row.EstadoTramite == 1" data-target="#datos" class="btn bg-indigo altoBoton" @click="viewData(props.row.IDProyecto,props.row.IDCarrera,props.row.Carrera,props.row.CodDocente,props.row.Tesistas,props.row.NombreTesis)" data-toggle="modal" data-placement="left" title="Cambiar estado"><i class="fa fa-check-double" aria-hidden="true"></i></button>
+                                        <button v-if="props.row.EstadoTramite == 1" data-target="#datos" class="btn bg-indigo altoBoton" @click="viewData(props.row)" data-toggle="modal" data-placement="left" title="Cambiar estado"><i class="fa fa-check-double" aria-hidden="true"></i></button>
+                                        <a v-if="props.row.EstadoTramite == 2" :href="'Archivos/'+props.row.IDProyecto+'/memo.pdf'" download="Memorandum.pdf" class="btn bg-navy altoBoton" target="_blank" data-placement="left" title="memo"><i class="fa fa-file" aria-hidden="true"></i></a>
+                                        <a v-if="props.row.EstadoTramite == 2" :href="'Archivos/'+props.row.IDProyecto+'/oficio.pdf'" download="Oficio.pdf" class="btn bg-olive altoBoton" target="_blank" data-placement="left" title="oficio"><i class="fa fa-file" aria-hidden="true"></i></a>
                                         <button data-target="#historial" @click="getHistorial(props.row.IDProyecto)" title="Ver Historial" class="btn btn-success altoBoton" data-toggle="modal" data-placement="left" ><i class="fa fa-eye"></i></button>
                                         <!-- <button data-target="#correo" @click="setProyecto(props.row.IDProyecto)" title="Enviar Correo" class="btn bg-warning altoBoton" data-toggle="modal" data-placement="left" ><i class="fa fa-envelope"></i></button> -->
-=======
-                                        <button data-target="#datos" class="btn bg-indigo altoBoton" @click="viewData(props.row.IDProyecto,props.row.IDCarrera,props.row.Carrera,props.row.CodDocente,props.row.Tesistas,props.row.NombreTesis)" data-toggle="modal" data-placement="left" title="Cambiar estado del trámite"><i class="fa fa-check-double" aria-hidden="true"></i></button>
-                                        <button data-target="#historial" @click="getHistorial(props.row.IDProyecto)" title="Ver historial de revisiones" class="btn btn-success altoBoton" data-toggle="modal" data-placement="left" ><i class="fa fa-eye"></i></button>
-                                        <button data-target="#correo" @click="setProyecto(props.row.IDProyecto)" title="Enviar correo" class="btn bg-warning altoBoton" data-toggle="modal" data-placement="left" ><i class="fa fa-envelope"></i></button>
-                                        <button class="btn btn-primary altoBoton" v-on:click="edit(props.row.IDProyecto,props.row.IDCarrera,props.row.NombreTesis,props.row.IDLinea,props.row.CodDocente,props.row.FechaRegistro,props.row.Porcentaje,props.row.Codigos)" data-placement="left" title="Editar registro"><i class="fas fa-edit" style="color: white" aria-hidden="true"></i></button>
-                                        
->>>>>>> 5542918ad2fa435f50ce92706f7326a9ae62f038
                                     </div>
                                 </v-client-table>
                             </div>
@@ -225,8 +219,8 @@
             </div>
             <!-- modal2 @click="changeStatus(props.row)"-->
             <div class="modal fade" id="historial" tabindex="-1" role="dialog" aria-labelledby="historialLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-lg" role="document">
-                        <div class="modal-content">
+                    <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+                        <div class="modal-content ">
                         <div class="modal-header text-center" style="background-color: powderblue !important; color:black; font-weight: bold;">
                             <h5 class="modal-titler text-center" id="historialLabel">Historial Proyecto de Tesis</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -518,18 +512,18 @@
                 })
             
         },
-        viewData(id,idcarrera,carrera,docente,tesistas,tema)
+        viewData(proyecto)
         {
-            if(docente != null)
+            if(proyecto.CodDocente != null)
             {
-                this.selectDocente(docente);
+                this.selectDocente(proyecto.CodDocente);
             }
-            this.sesion.idproyecto      = id;
-            this.sesion.docente         = docente;
-            this.sesion.nombretesis     = tema;
-            this.sesion.tesistas        = tesistas;
-            this.sesion.carrera        = carrera;
-            this.getDocentes(idcarrera);
+            this.sesion.idproyecto  = proyecto.IDProyecto;
+            this.sesion.docente     = proyecto.CodDocente;
+            this.sesion.nombretesis = proyecto.NombreTesis;
+            this.sesion.tesistas    = proyecto.Tesistas;
+            this.sesion.carrera     = proyecto.Carrera;
+            this.getDocentes(proyecto.IDCarrera);
         },
         selectDocente(id)
         {

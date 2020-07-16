@@ -26,15 +26,7 @@ class ProyectoController extends Controller
                         // ->where("proyecto_tesis.Estado","1")
                         ->groupBy("proyecto_tesis.IDProyecto")
                         ->get();
-        // foreach ($proyectos as $key) {
-        //    $historial =  historialproyecto::where("IDProyecto",$key->IDProyecto)->orderBy("id","DESC")->first();
-        //    if(isset($historial))
-        //    {
-        //         $key->Estado    = $historial->Estado; 
-        //    }else{
-        //         $key->Estado    = "PENDIENTE";    
-        //    }
-        // }                
+                
         return compact("proyectos");                
     }
 
@@ -45,7 +37,6 @@ class ProyectoController extends Controller
      */
     public function status(Request $request)
     {
-        
         $sesion     = $request->sesion;
         $dia        = substr($sesion["fecha"],8,2);
         $mes        = $this->mes(substr($sesion["fecha"],5,2));
@@ -58,15 +49,23 @@ class ProyectoController extends Controller
                      "CodDocente"   => $request->sesion["docente"],
                      "EstadoTramite"   => 2,
                     ]);
-        $pdf = PDF::loadView('templates.memoProyecto',compact("sesion","fecha","dia","mes","year"));
-        
-        $path = public_path('Archivos/' . $request->sesion["idproyecto"] . '/');
-        if(!is_dir($path))
-        {
-            \File::makeDirectory($path, 0777, true, true);
-        }                
-        
-        file_put_contents($path."memo.pdf", $pdf->output());
+        try {
+            $pdf = PDF::loadView('templates.memoProyecto',compact("sesion","fecha","dia","mes","year"));
+            $pdf1 = PDF::loadView('templates.oficioProyecto',compact("sesion","fecha","dia","mes","year"));
+            $path = public_path('Archivos/' . $request->sesion["idproyecto"] . '/');
+            if(!is_dir($path))
+            {
+                \File::makeDirectory($path, 0777, true, true);
+            }                
+            file_put_contents($path."memo.pdf", $pdf->output());
+            file_put_contents($path."oficio.pdf", $pdf1->output());
+            $type = "success";
+            $text = "archivos generados con éxito";
+        } catch (\Throwable $th) {
+            $type = "error";
+            $text = "$th";
+        }
+        return compact("type","text");
     }
     public function mes($indice)
     {

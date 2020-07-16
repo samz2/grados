@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Memo</title>
+    <title>OFICIO</title>
 </head>
 <style>
     .opaco
@@ -105,7 +105,6 @@
 </style>
 <body>
     @php
-        // var_dump($Anio);
         // var_dump($numMes);
         // var_dump($dia);
     @endphp
@@ -123,19 +122,15 @@
                 <td class="center t16 arial opaco">COMISIÓN DE GRADOS y TÍTULOS - FISeIC</td>
             </tr>
         </table>
-        
+        <p class="derecho t15 arial">Pucallpa, {{$dia}} de {{$mes}} del {{$year}}</p>
         <br>
-        <div class="center subrayado negrita arial">MEMO  No  <b class="t17">{{"      "}}</b> – UNU-FISeIC-CGyT</div>
+        <div class="izquierdo subrayado negrita arial">OFICIO  No  <b class="t17">{{"      "}}</b> – UNU-FISeIC-CGyT</div>
+        <div class="izquierdo arial">{{"Sr. Ing. Mg."}}</div>
+        <div class="izquierdo negrita arial">{{"ROMEL PINEDO RIOS"}}</div>
+        <div class="izquierdo arial">{{"Decano de la facultad de Ingeniería de Sistemas e Ingeniería Civil - UNU"}}</div>
+        <div class="izquierdo subrayado arial">{{"Presente.-"}}</div>
         <br>
         <table>
-            <tr class="izquierdo t15 arial">
-                <td width="80" class="arriba"><b>DESTINO</b></td>
-                <td width="40" class="arriba"><b>:</b></td>
-                <td class="justificado" style="line-height : 20px;"><b>{{$sesion["zdocente"]}}</b></td>
-            </tr>
-            <tr>
-                <td colspan="3">&nbsp;</td>
-            </tr>
             <tr class="izquierdo t15 arial">
                 <td width="80" class="arriba"><b>ASUNTO</b></td>
                 <td width="40" class="arriba"><b>:</b></td>
@@ -147,33 +142,21 @@
             <tr class="izquierdo t15 arial">
                 <td width="80" class="arriba"><b>REFERENCIA</b></td>
                 <td width="40" class="arriba"><b>:</b></td>
-                <td class="justificado" style="line-height : 20px;"><b>{{$sesion["tipo"]}} N° {{$sesion["sesion"]}} Comisión de Grados y   
+                <td class="justificado" style="line-height : 20px;"><b>ACTA DE {{$sesion["tipo"]}} N° {{$sesion["sesion"]}} Comisión de Grados y   
                     Títulos de la FIS e IC {{$fecha}}
                     </b></td>
             </tr>
-            <tr>
-                <td>&nbsp;</td>
-            </tr>
-            <tr class="izquierdo t15 arial">
-                <td width="80" class="arriba"><b>FECHA</b></td>
-                <td width="40" class="arriba"><b>:</b></td>
-                <td class="justificado" style="line-height : 20px;"><b>Pucallpa, {{$dia}} de {{$mes}} del {{$year}}</b></td>
-            </tr>
         </table>
-        <hr>
-        <p class="justificado t15 arial" style="line-height : 20px;">                              Mediante el presente le comunico a usted, que en sesión de fecha {{$fecha}} de la 
-            Comisión de Grados y Títulos de la FIS e IC, ha sido designado como 
-            <a class="subrayado">Docente Evaluador</a>  para la revisión de la Viabilidad del Proyecto de tesis titulado: 
+        <br>
+        <br>
+        <p class="justificado t15 arial" style="line-height : 20px;">                                         Mediante el presente informo a su despacho que de acuerdo al art. 
+            15 del Reglamento de Grados y Títulos de la FISeIC, el(la) {{$sesion["zdocente"]}} ha sido designado como
+            <a class="subrayado">Docente Evaluador</a>  para la revisión del Proyecto de tesis titulado: 
             <b>{{'"'.mb_strtoupper($sesion["nombretesis"]).'"  '}}</b>, presentado por el(los) bachillere(s): 
             <b>{{str_replace(","," y ",$sesion["tesistas"])}}</b>,  de la Carrera profesional de 
-            {{$sesion["carrera"]}}; de acuerdo al art. 15 del Reglamento de Grados y Títulos 
-            del Proyecto de Tesis. </p>
+            <b>{{$sesion["carrera"]}}</b></p>
         
-        <p class="justificado t15 arial">                              Cabe indicar que como <a class="subrayado">Docente Evaluador</a>, 
-            usted puede realizar las observaciones que considere necesarias, a
-            sí como también validar si el tema elegido esta dentro de las líneas de investigación 
-            definidas por la 
-            Facultad y/o es de relevancia para la Carrera.    
+        <p class="justificado t15 arial">Por lo que solicito su reconocimiento mediante Comité de planeamiento.
         </p>    
         <br><br>
         <table class="centrartabla t15 arial">
@@ -206,9 +189,6 @@
             </tr>            
         </table>
         <div class="center t10 arial">{{"PRESIDENTE"}}</div>
-        {{-- @php
-            print_r($base64 ?? '');
-        @endphp --}}
     </div>
 
 </body>
