@@ -19,6 +19,7 @@ Route::get('/correo', function () {
     return view('templates.correo');
 });
 Route::get('/oficioproyecto','DocumentosController@oficioProyecto');
+Route::get('/informeTesista','DocumentosController@informeTesista');
 
 Auth::routes();
 

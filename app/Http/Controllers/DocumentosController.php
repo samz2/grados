@@ -307,4 +307,11 @@ class DocumentosController extends Controller
         $pdf->setPaper('A4','portrait');
         return $pdf->stream('reporte.pdf');
     }
+
+    public function informeTesista()
+    {
+        $pdf = PDF::loadView('templates.informeTesista');
+        $pdf->setPaper('A4','portrait');
+        return $pdf->stream('reporte.pdf');
+    }
 }
