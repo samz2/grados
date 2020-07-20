@@ -122,10 +122,10 @@
                 <td class="center t16 arial opaco">COMISIÓN DE GRADOS y TÍTULOS - FISeIC</td>
             </tr>
         </table>
-        <p class="derecho t15 arial">Pucallpa, {{$dia}} de {{$mes}} del {{$year}}</p>
+        <p class="derecho t15 arial">Pucallpa, {{"día"}} de {{"mes"}} del {{"año"}}</p>
         <br>
-        <div class="izquierdo subrayado negrita arial">OFICIO  No  <b class="t17">{{"      "}}</b> – UNU-FISeIC-CGyT</div>
-        <div class="izquierdo arial">{{"Sr. Ing. Mg."}}</div>
+        <div class="izquierdo subrayado negrita arial">OFICIO  No  <b class="t17">{{"            "}}</b> – UNU-FISeIC-CGyT</div>
+        <div class="izquierdo arial">{{"Señor. Ing. Mg."}}</div>
         <div class="izquierdo negrita arial">{{"ROMEL PINEDO RIOS"}}</div>
         <div class="izquierdo arial">{{"Decano de la facultad de Ingeniería de Sistemas e Ingeniería Civil - UNU"}}</div>
         <div class="izquierdo subrayado arial">{{"Presente.-"}}</div>
@@ -134,7 +134,10 @@
             <tr class="izquierdo t15 arial">
                 <td width="80" class="arriba"><b>ASUNTO</b></td>
                 <td width="40" class="arriba"><b>:</b></td>
-                <td class="justificado" style="line-height : 20px;"><b>{{"DESIGNACIÓN COMO DOCENTE EVALUADOR DE PROYECTO DE TESIS"}}</b></td>
+                <td class="justificado" style="line-height : 20px;"><b>{{"CONFORMIDAD DE PROYECTO DE TESIS -"}}<br>
+                    Bachiller: TESISTA 1<br>
+                    Bachiller: TESISTA 2</b>
+                </td>
             </tr>
             <tr>
                 <td>&nbsp;</td>
@@ -142,21 +145,23 @@
             <tr class="izquierdo t15 arial">
                 <td width="80" class="arriba"><b>REFERENCIA</b></td>
                 <td width="40" class="arriba"><b>:</b></td>
-                <td class="justificado" style="line-height : 20px;"><b>ACTA DE {{$sesion["tipo"]}} N° {{$sesion["sesion"]}} Comisión de Grados y   
-                    Títulos de la FIS e IC {{$fecha}}
+                <td class="justificado" style="line-height : 20px;"><b>ACTA DE {{"TIPO SESIÓN"}} N° {{"Número"}} Comisión de Grados y   
+                    Títulos de la FIS e IC {{"(Día/Mes/Año)"}}
                     </b></td>
             </tr>
         </table>
         <br>
         <br>
-        <p class="justificado t15 arial" style="line-height : 20px;">                                         Mediante el presente informo a su despacho que de acuerdo al art. 
-            15 del Reglamento de Grados y Títulos de la FISeIC, el(la) {{$sesion["zdocente"]}} ha sido designado como
-            <a class="subrayado">Docente Evaluador</a>  para la revisión del Proyecto de tesis titulado: 
-            <b>{{'"'.mb_strtoupper($sesion["nombretesis"]).'"  '}}</b>, presentado por el(los) bachiller(es): 
-            <b>{{str_replace(","," y ",$sesion["tesistas"])}}</b>,  de la Carrera profesional de 
-            <b>{{$sesion["carrera"]}}</b></p>
+        <p class="justificado t15 arial" style="line-height : 20px;">                                         
+            Mediante el presente informo a su despacho que, de acuerdo al Artículo 16 del Reglamento de 
+            Grados y Títulos, el <b>Docente evaluador</b> ha dado su <b>conformidad al Proyecto de Tesis: 
+            {{'"NOMBRE TESIS"'}}</b>, presentado por el(los) bachiller(es): 
+            <b>{{"TESISTA 1 y TESISTA 2"}}</b>;  de la <b>Carrera Profesional de 
+            {{"NOMBRE CARRERA"}}.</b></p>
         
-        <p class="justificado t15 arial">Por lo que solicito su reconocimiento mediante Comité de planeamiento.
+        <p class="justificado t15 arial">Por lo que que pongo en conocimiento de su despacho para su 
+            reconocimiento a través del Comité de Planeamiento de la Facultad de Ing. de Sistemas e Ing. 
+            Civil.
         </p>    
         <br><br>
         <table class="centrartabla t15 arial">
@@ -184,11 +189,26 @@
                 <td class="center">______________________________</td>
             </tr>
             <tr>
-                <td class="center negrita" style="font-size: 11px">Mg. {{"Diana Margarita Diaz Estrada"}}</td>
+                <td class="center negrita" style="font-size: 11px">Ing. Mg. {{"DIANA MARGARITA DIAZ ESTRADA"}}</td>
                 
             </tr>            
         </table>
         <div class="center t10 arial">{{"PRESIDENTE"}}</div>
+        <br><br>
+        <table class="centrartabla" style="width: 100%;">            
+            <tr>
+                <td class="t8">Cc.</td>
+                <td class="derecho"></td>
+            </tr>
+            <tr>
+                <td class="t8">Decanatura</td>
+                <td class="derecho"></td>
+            </tr>
+            <tr>
+                <td class="t8">ARCHIVO</td>
+                <td class="derecho t9" style="font-style: italic;">DMDE</td>
+            </tr>
+        </table>
     </div>
 
 </body>
