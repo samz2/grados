@@ -93,36 +93,35 @@ class EgresadoController extends Controller
         $ID         = "";
         $docente    = "";
         $dni        = "";
+        $fechaasignacion = "";
         $objTesistas =  proyecto::join("egresado AS e","proyecto_tesis.Codigo","e.Codigo")
-                    ->join("escuela AS es","e.IDEscuela","es.IDEscuela")
-                    ->select("proyecto_tesis.IDProyecto")
-                    ->where("proyecto_tesis.Estado",1)
-                    ->where(function ($query) use ($c, $d) {
-                        $query->where('e.DNI', $d)
+                        ->join("escuela AS es","e.IDEscuela","es.IDEscuela")
+                        ->select("proyecto_tesis.IDProyecto","proyecto_tesis.FechaAsignacion")
+                        ->where([["proyecto_tesis.Estado",1],["proyecto_tesis.EstadoTramite",2]])
+                        ->where(function ($query) use ($c, $d) {
+                            $query->where('e.DNI', $d)
                               ->orWhere("e.Codigo","LIKE","%$c%");
                     })->first();
-        // dd($objTesistas);
+
         if(isset($objTesistas))
         {
+            $fechaasignacion = $objTesistas->FechaAsignacion; 
             $ID         = $objTesistas->IDProyecto;
             $tesistas   =   proyecto::join("egresado AS e","proyecto_tesis.Codigo","e.Codigo")
                             ->join("escuela AS es","e.IDEscuela","es.IDEscuela")
                             ->select(\DB::raw("concat_ws(' ',e.Nombre,e.Paterno,e.Materno) AS Nombres"),\DB::raw("es.Escuela AS Carrera"))
                             ->where([["IDProyecto",$ID],["proyecto_tesis.Estado",1]])->get();
-
             $objDocente =   proyecto::join("docentes AS d","proyecto_tesis.CodDocente","d.DNI")
-                            ->select(\DB::raw("concat_ws(' ',d.Nombres,Apellidos) AS docente"),"d.DNI")
-                            ->first();
+                        ->select(\DB::raw("concat_ws(' ',d.Nombres,Apellidos) AS docente"),"d.DNI")
+                        ->where("proyecto_tesis.IDProyecto",$ID)
+                        ->first();
             if(isset($objDocente))
             {
                 $docente    = $objDocente->docente;
                 $dni        = $objDocente->DNI;
             }
         }            
-                    
-                // where("proyecto_tesis.Estado",1)->Where([["e.DNI",$d],["e.Codigo","LIKE","%$c%"]])->get();
-
-        return compact("tesistas","ID","docente","dni");
+        return compact("tesistas","ID","docente","dni","fechaasignacion");
     }
     /**
      * Show the form for editing the specified resource.

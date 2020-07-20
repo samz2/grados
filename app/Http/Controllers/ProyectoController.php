@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade as PDF;
 use File;
+DEFINE("HOY",date("Y-m-d"));
 
 class ProyectoController extends Controller
 {
@@ -38,9 +39,9 @@ class ProyectoController extends Controller
     public function status(Request $request)
     {
         $sesion     = $request->sesion;
-        $dia        = substr($sesion["fecha"],8,2);
-        $mes        = $this->mes(substr($sesion["fecha"],5,2));
-        $year       = substr($sesion["fecha"],0,4);
+        $dia        = substr(HOY,8,2);
+        $mes        = $this->mes(substr(HOY,5,2));
+        $year       = substr(HOY,0,4);
         $orgDate    = $sesion["fecha"];
         $fecha      = date("d-m-Y", strtotime($orgDate));
         Proyecto::where("IDProyecto",$request->sesion["idproyecto"])
@@ -48,6 +49,7 @@ class ProyectoController extends Controller
                     [
                      "CodDocente"   => $request->sesion["docente"],
                      "EstadoTramite"   => 2,
+                     "FechaAsignacion"   => HOY,
                     ]);
         try {
             $pdf = PDF::loadView('templates.memoProyecto',compact("sesion","fecha","dia","mes","year"));
@@ -93,7 +95,6 @@ class ProyectoController extends Controller
      */
     public function store(Request $request)
     {
-        $hoy = date("Y-m-d");
         $nroProyecto = Proyecto::all()->last();
         if(isset($nroProyecto))
         {
@@ -116,7 +117,7 @@ class ProyectoController extends Controller
                 $proyecto->CodDocente   = $request->proyecto["docente"];
                 $proyecto->FechaRegistro   = $request->proyecto["fecha"];
                 $proyecto->Porcentaje   = $request->proyecto["porcentaje"];
-                $proyecto->created_at   = $hoy;
+                $proyecto->created_at   = HOY;
                 $proyecto->save();
                 $objPY                  = explode(",",$request->proyecto["archivo"]);
                 $proyecto               = base64_decode($objPY[1]);
@@ -175,7 +176,6 @@ class ProyectoController extends Controller
      */
     public function update(Request $request)
     {
-        $hoy = date("Y-m-d");
         if(isset($request->tesista))
         {
             $objEgresado = Egresado::select("Codigo")->where("DNI",$request->tesista)->first();
@@ -187,11 +187,9 @@ class ProyectoController extends Controller
                 ->update(
                     [
                      "Estado"        => 0,
-                     "updated_at"    => $hoy,
+                     "updated_at"    => HOY,
                     ]);
             }
-            
-           
         }
         $n = 0;
         foreach ($request->tesistas as $key => $val) {
@@ -209,7 +207,7 @@ class ProyectoController extends Controller
                                 "CodDocente"    => $request->proyecto["docente"],
                                 "FechaRegistro" => $request->proyecto["fecha"],
                                 "Porcentaje"    => $request->proyecto["porcentaje"],
-                                "updated_at"    => $hoy,
+                                "updated_at"    => HOY,
                                ]);
             }else{
                 $proyecto = new Proyecto();
@@ -221,15 +219,12 @@ class ProyectoController extends Controller
                 $proyecto->CodDocente   = $request->proyecto["docente"];
                 $proyecto->FechaRegistro   = $request->proyecto["fecha"];
                 $proyecto->Porcentaje   = $request->proyecto["porcentaje"];
-                $proyecto->created_at   = $hoy;
+                $proyecto->created_at   = HOY;
                 $proyecto->save();
             }
                         $type = "success";
                         $title = "¡Buen trabajo!";
                         $text = "Proyecto de tesis actualizado con éxito"; 
-                        
-                        
-           
         }
         return compact("type","title","text"); 
         //return compact("msj","val");

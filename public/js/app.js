@@ -8318,29 +8318,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -8527,6 +8504,7 @@ __webpack_require__.r(__webpack_exports__);
           _this5.docente.dni = data.data.dni;
           _this5.docente.nombre = data.data.docente;
           _this5.docente.id = data.data.ID;
+          _this5.proyecto.dingreso = data.data.fechaasignacion;
         }
 
         _this5.$Progress.finish();
@@ -8536,7 +8514,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     cancelar: function cancelar() {
       this.proyecto.carrera = null;
-      this.t.Nombres = null;
+      this.proyecto.Nombres = null;
       this.proyecto.subestado = null;
       this.proyecto.comentario = null;
       this.proyecto.dingreso = null;
@@ -8625,6 +8603,10 @@ __webpack_require__.r(__webpack_exports__);
           });
 
           _this9.$Progress.finish();
+
+          setTimeout(function () {
+            location.reload();
+          }, 2000);
         })["catch"](function (error) {
           console.log(error);
           swal({
@@ -8732,188 +8714,6 @@ __webpack_require__.r(__webpack_exports__);
       this.proyecto.docentenombre = docente.nombre;
       this.proyecto.id = docente.id;
     },
-    validarMatricula: function validarMatricula(e) {
-      var _this11 = this;
-
-      var size = e.target.files[0].size;
-      var type = e.target.files[0].type;
-
-      if (size > 1024001) {
-        e.target.value = '';
-        swal({
-          type: 'error',
-          title: 'Ha ocurrido un error',
-          text: 'El tamaño del archivo debe ser menor o igual a 1mb',
-          showConfirmButton: true
-        });
-        document.getElementById('info').innerHTML = 'Ningún archivo seleccionado';
-        return;
-      }
-
-      if (type.includes("pdf")) {
-        var file = new FileReader();
-        file.readAsDataURL(e.target.files[0]);
-
-        file.onload = function (e) {
-          _this11.archivos.matricula = e.target.result;
-        };
-      } else {
-        e.target.value = '';
-        this.archivos.matricula = null;
-        swal({
-          type: 'error',
-          title: 'Ha ocurrido un error',
-          text: 'El archivo debe ser PDF, por favor intente subiendo otro archivo',
-          showConfirmButton: true
-        });
-        return;
-      }
-    },
-    validarEgresado: function validarEgresado(e) {
-      var _this12 = this;
-
-      var size = e.target.files[0].size;
-      var type = e.target.files[0].type;
-
-      if (size > 1024001) {
-        e.target.value = '';
-        swal({
-          type: 'error',
-          title: 'Ha ocurrido un error',
-          text: 'El tamaño del archivo debe ser menor o igual a 1mb',
-          showConfirmButton: true
-        });
-        document.getElementById('info2').innerHTML = 'Ningún archivo seleccionado';
-        return;
-      }
-
-      if (type.includes("pdf")) {
-        var file = new FileReader();
-        file.readAsDataURL(e.target.files[0]);
-
-        file.onload = function (e) {
-          _this12.archivos.egresado = e.target.result;
-        };
-      } else {
-        e.target.value = '';
-        swal({
-          type: 'error',
-          title: 'Ha ocurrido un error',
-          text: 'El archivo debe ser PDF, por favor intente subiendo otro archivo',
-          showConfirmButton: true
-        });
-        return;
-      }
-    },
-    validarFoto: function validarFoto(e) {
-      var _this13 = this;
-
-      var size = e.target.files[0].size;
-      var type = e.target.files[0].type;
-
-      if (size > 1024001) {
-        e.target.value = '';
-        swal({
-          type: 'error',
-          title: 'Ha ocurrido un error',
-          text: 'El tamaño del archivo debe ser menor o igual a 1mb',
-          showConfirmButton: true
-        });
-        document.getElementById('info3').innerHTML = 'Ningún archivo seleccionado';
-        return;
-      }
-
-      if (type.includes("image")) {
-        var file = new FileReader();
-        file.readAsDataURL(e.target.files[0]);
-
-        file.onload = function (e) {
-          _this13.archivos.foto = e.target.result;
-        };
-      } else {
-        e.target.value = '';
-        swal({
-          type: 'error',
-          title: 'Ha ocurrido un error',
-          text: 'El archivo debe ser una imagen, por favor intente subiendo otro archivo',
-          showConfirmButton: true
-        });
-        return;
-      }
-    },
-    validarTesis: function validarTesis(e) {
-      var _this14 = this;
-
-      var size = e.target.files[0].size;
-      var type = e.target.files[0].type;
-
-      if (size > 5000001) {
-        e.target.value = '';
-        swal({
-          type: 'error',
-          title: 'Ha ocurrido un error',
-          text: 'El tamaño del archivo debe ser menor o igual a 1mb',
-          showConfirmButton: true
-        });
-        document.getElementById('info4').innerHTML = 'Ningún archivo seleccionado';
-        return;
-      }
-
-      if (type.includes("pdf")) {
-        var file = new FileReader();
-        file.readAsDataURL(e.target.files[0]);
-
-        file.onload = function (e) {
-          _this14.archivos.tesis = e.target.result;
-        };
-      } else {
-        e.target.value = '';
-        swal({
-          type: 'error',
-          title: 'Ha ocurrido un error',
-          text: 'El archivo debe ser PDF, por favor intente subiendo otro archivo',
-          showConfirmButton: true
-        });
-        return;
-      }
-    },
-    validarWord: function validarWord(e) {
-      var _this15 = this;
-
-      var size = e.target.files[0].size;
-      var type = e.target.files[0].type;
-      console.log(type);
-
-      if (size > 5000001) {
-        e.target.value = '';
-        swal({
-          type: 'error',
-          title: 'Ha ocurrido un error',
-          text: 'El tamaño del archivo debe ser menor o igual a 1mb',
-          showConfirmButton: true
-        });
-        document.getElementById('info5').innerHTML = 'Ningún archivo seleccionado';
-        return;
-      }
-
-      if (type.includes("word")) {
-        var file = new FileReader();
-        file.readAsDataURL(e.target.files[0]);
-
-        file.onload = function (e) {
-          _this15.archivos.word = e.target.result;
-        };
-      } else {
-        e.target.value = '';
-        swal({
-          type: 'error',
-          title: 'Ha ocurrido un error',
-          text: 'El archivo debe ser un documento en Word, por favor intente subiendo otro archivo',
-          showConfirmButton: true
-        });
-        return;
-      }
-    },
     edit: function edit(IDExpedito, Tipo, CodigoAlumno, Tomo, Folio, Asiento, NumSesion, FechaIngreso, FechaComienzo, IDSesion, Fecha, Escuela, Alumno, DNI, IDModalidad, Modalidad, NombreTesis, Asesor, IDCalificacion, Calificacion, FechaT) {
       $("#objetivo").show();
       $("#expeditos").hide();
@@ -8944,7 +8744,7 @@ __webpack_require__.r(__webpack_exports__);
       this.expedito.modalidad = IDModalidad;
     },
     editExpedito: function editExpedito() {
-      var _this16 = this;
+      var _this11 = this;
 
       if (this.expedito.codigo == null || this.expedito.dni == null || this.expedito.alumno == null || this.expedito.carrera == null || this.expedito.tomo == null || this.expedito.folio == null || this.expedito.asiento == null || this.expedito.sesion == null || this.expedito.sfecha == null || this.expedito.stipo == null || this.expedito.ingreso == null || this.expedito.tesis == null || this.expedito.sustentacion == null || this.expedito.calificacion == null || this.expedito.asesor == null || this.expedito.modalidad == null) {
         swal({
@@ -8967,14 +8767,14 @@ __webpack_require__.r(__webpack_exports__);
             timer: 3000
           });
 
-          _this16.$Progress.finish(); // setTimeout(() => {
+          _this11.$Progress.finish(); // setTimeout(() => {
           //     location.reload();
           // }, 1500);
 
 
-          _this16.cancelar();
+          _this11.cancelar();
 
-          _this16.getExpeditos();
+          _this11.getExpeditos();
         })["catch"](function (error) {
           console.log(error);
           swal({
@@ -65764,6 +65564,20 @@ var render = function() {
                   ])
                 ]),
                 _vm._v(" "),
+                _vm.docente.nombre != null
+                  ? _c("div", { staticClass: "form-group row" }, [
+                      _vm._m(4),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-10" }, [
+                        _vm._v(
+                          "\n                                    " +
+                            _vm._s(_vm.docente.nombre) +
+                            "\n                                "
+                        )
+                      ])
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
                 _c("div", { staticClass: "form-group row" }, [
                   _c("div", { staticClass: "col-md-3" }, [
                     _c(
@@ -65793,10 +65607,12 @@ var render = function() {
             ),
             _vm._v(" "),
             _c("fieldset", { staticClass: "border p-2" }, [
-              _c("legend", { staticClass: "w-auto" }, [_vm._v("Asesor")]),
+              _c("legend", { staticClass: "w-auto" }, [
+                _vm._v("Docente Evaluador")
+              ]),
               _vm._v(" "),
               _c("div", { staticClass: "form-group row" }, [
-                _vm._m(4),
+                _vm._m(5),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-md-3" }, [
                   _c("input", {
@@ -65809,17 +65625,9 @@ var render = function() {
                       }
                     ],
                     staticClass: "form-control form-control-sm",
-                    attrs: {
-                      type: "date",
-                      max: "2030-12-31",
-                      onKeyPress: "return soloNumeros(event)",
-                      maxlength: "3"
-                    },
+                    attrs: { type: "date", readonly: "" },
                     domProps: { value: _vm.proyecto.dingreso },
                     on: {
-                      change: function($event) {
-                        return _vm.validafecha()
-                      },
                       input: function($event) {
                         if ($event.target.composing) {
                           return
@@ -65830,7 +65638,7 @@ var render = function() {
                   })
                 ]),
                 _vm._v(" "),
-                _vm._m(5),
+                _vm._m(6),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-md-3" }, [
                   _c("input", {
@@ -65865,7 +65673,7 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "form-group row" }, [
-                _vm._m(6),
+                _vm._m(7),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-md-3" }, [
                   _c(
@@ -65922,7 +65730,7 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "form-group row" }, [
-                _vm._m(7),
+                _vm._m(8),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-md-9" }, [
                   _c("input", {
@@ -65960,7 +65768,7 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "form-group row" }, [
-                _vm._m(8),
+                _vm._m(9),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-md-3" }, [
                   _c("input", {
@@ -65995,7 +65803,7 @@ var render = function() {
                   })
                 ]),
                 _vm._v(" "),
-                _vm._m(9),
+                _vm._m(10),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-md-3" }, [
                   _c("input", {
@@ -66185,7 +65993,7 @@ var render = function() {
                 "div",
                 { staticClass: "modal-body" },
                 [
-                  _vm._m(10),
+                  _vm._m(11),
                   _vm._v(" "),
                   _c("div", { staticClass: "form-group row" }, [
                     _c(
@@ -66270,7 +66078,7 @@ var render = function() {
                       "div",
                       { key: a.Nombres, staticClass: "form-group row" },
                       [
-                        _vm._m(11, true),
+                        _vm._m(12, true),
                         _vm._v(" "),
                         _c("div", { staticClass: "col-md-10" }, [
                           _vm._v(
@@ -66370,7 +66178,7 @@ var render = function() {
           { staticClass: "modal-dialog modal-lg", attrs: { role: "document" } },
           [
             _c("div", { staticClass: "modal-content" }, [
-              _vm._m(12),
+              _vm._m(13),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
                 _c(
@@ -66384,7 +66192,7 @@ var render = function() {
                     _vm._l(_vm.historial, function(h, index) {
                       return _c("div", { key: h.id }, [
                         _c("div", { staticClass: "form-group row" }, [
-                          _vm._m(13, true),
+                          _vm._m(14, true),
                           _vm._v(" "),
                           _c("div", { staticClass: "col-md-1 t12" }, [
                             _vm._v(
@@ -66394,7 +66202,7 @@ var render = function() {
                             )
                           ]),
                           _vm._v(" "),
-                          _vm._m(14, true),
+                          _vm._m(15, true),
                           _vm._v(" "),
                           _c("div", { staticClass: "col-md-2 t12" }, [
                             h.Estado == "EN PROCESO"
@@ -66410,7 +66218,7 @@ var render = function() {
                               : _vm._e()
                           ]),
                           _vm._v(" "),
-                          _vm._m(15, true),
+                          _vm._m(16, true),
                           _vm._v(" "),
                           _c("div", { staticClass: "col-md-3 t12" }, [
                             h.SubEstado == "CONFORME"
@@ -66428,7 +66236,7 @@ var render = function() {
                         ]),
                         _vm._v(" "),
                         _c("div", { staticClass: "form-group row" }, [
-                          _vm._m(16, true),
+                          _vm._m(17, true),
                           _vm._v(" "),
                           _c("div", { staticClass: "col-md-2 t12" }, [
                             _vm._v(
@@ -66438,7 +66246,7 @@ var render = function() {
                             )
                           ]),
                           _vm._v(" "),
-                          _vm._m(17, true),
+                          _vm._m(18, true),
                           _vm._v(" "),
                           _c("div", { staticClass: "col-md-2 t12" }, [
                             _vm._v(
@@ -66450,7 +66258,7 @@ var render = function() {
                         ]),
                         _vm._v(" "),
                         _c("div", { staticClass: "form-group row" }, [
-                          _vm._m(18, true),
+                          _vm._m(19, true),
                           _vm._v(" "),
                           _c("div", { staticClass: "col-md-2 t12" }, [
                             _vm._v(
@@ -66460,7 +66268,7 @@ var render = function() {
                             )
                           ]),
                           _vm._v(" "),
-                          _vm._m(19, true),
+                          _vm._m(20, true),
                           _vm._v(" "),
                           _c("div", { staticClass: "col-md-2 t12" }, [
                             _vm._v(
@@ -66472,7 +66280,7 @@ var render = function() {
                         ]),
                         _vm._v(" "),
                         _c("div", { staticClass: "form-group row" }, [
-                          _vm._m(20, true),
+                          _vm._m(21, true),
                           _vm._v(" "),
                           _c("div", { staticClass: "col-md-9 t12" }, [
                             _vm._v(
@@ -66553,9 +66361,17 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-2" }, [
+      _c("b", [_vm._v("Docente: ")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-md-3" }, [
       _c("label", { attrs: { for: "ingreso" } }, [
-        _vm._v("Fecha entrega asesor:")
+        _vm._v("Fecha entrega Docente Evaluador:")
       ])
     ])
   },
@@ -66565,7 +66381,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-md-3" }, [
       _c("label", { attrs: { for: "comienzo" } }, [
-        _vm._v("Fecha devolución asesor:")
+        _vm._v("Fecha devolución Docente Evaluador:")
       ])
     ])
   },

@@ -24,8 +24,6 @@
                                     <label>Tesista {{index + 1}}:</label>   
                                 </div>                             
                                 <div class="col-md-7">
-                                    <!-- <input type="text"  readonly class="form-control form-control-sm">
-                                     -->
                                     {{t.Nombres}} 
                                 </div>
                             </div>
@@ -37,6 +35,13 @@
                                     {{proyecto.carrera}}
                                 </div>
                             </div>
+                            <div class="form-group row" v-if="docente.nombre != null">
+                                <div class="col-md-2"><b>Docente: </b></div>
+                                <div class="col-md-10" >
+                                    <!-- <input type="text" value="{{a.Nombres}}" readonly class="form-control form-control-sm"> -->
+                                    {{docente.nombre}}
+                                </div>
+                            </div>
                             <div class="form-group row">
                                 <div class="col-md-3">
                                     <button data-target="#historial" @click="getHistorial()" class="btn btn-success" data-toggle="modal" data-placement="left" >Historial revisiones <i class="fa fa-eye"></i></button>
@@ -45,53 +50,24 @@
                         </fieldset>
                         
                         <fieldset class="border p-2">
-                            <legend class="w-auto">Asesor</legend>
-                            <!--<div class="form-group row">
-                                <div class="col-md-3">
-                                <label>Docente Asesor :</label>
-                                </div>
-                                <div class="col-md-4" v-if="proyecto.docentenombre != null && !editar">
-                                {{proyecto.docentenombre}}   
-                                </div>
-                                <div class="col-md-4" v-if="editar">
-                                <select v-model="proyecto.docentedni" class="form-control form-control-sm">
-                                        <option v-for="d in docentes" :key="d.DNI" :value="d.DNI">
-                                            {{d.Nombres}} {{d.Apellidos}}
-                                        </option>
-                                    </select>
-                                </div>
-                                <div class="col-md-1">
-                                    <label>Editar :</label>
-                                </div>
-                                <div class="col-md-4">
-                                    <input type="checkbox" id="edit" @click="editarDocente(proyecto.docentedni)"> 
-                                </div>
-                            </div>-->
+                            <legend class="w-auto">Docente Evaluador</legend>
+                            
                             <div class="form-group row">
                                 <div class="col-md-3">
-                                <label for="ingreso">Fecha entrega asesor:</label>
+                                <label for="ingreso">Fecha entrega Docente Evaluador:</label>
                                 </div>
                                 <div class="col-md-3">
-                                    <input type="date" max="2030-12-31"  @change="validafecha()" v-model="proyecto.dingreso" onKeyPress="return soloNumeros(event)" maxlength="3" class="form-control form-control-sm">
+                                    <input type="date" readonly v-model="proyecto.dingreso" class="form-control form-control-sm">
                                 </div>
                                 <div class="col-md-3">
-                                <label for="comienzo">Fecha devolución asesor:</label>
+                                <label for="comienzo">Fecha devolución Docente Evaluador:</label>
                                 </div>
                                 <div class="col-md-3">
                                     <input type="date" max="2030-12-31" @change="validafecha()" v-model="proyecto.ddevolucion" class="form-control form-control-sm">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <!--<div class="col-md-3">
-                                <label for="ingreso">Estado :</label>
-                                </div>
-                                <div class="col-md-3">
-                                    <select v-model="proyecto.estado" class="form-control form-control-sm">
-                                        <option value="PENDIENTE">PENDIENTE</option>
-                                        <option value="EN PROCESO">EN PROCESO</option>
-                                        <option value="FINALIZADO">FINALIZADO</option>
-                                    </select>
-                                </div>-->
+                          
                                 <div class="col-md-3">
                                 <label for="comienzo">Sub Estado:</label>
                                 </div>
@@ -179,6 +155,7 @@
                                     {{a.Nombres}}
                                 </div>
                             </div>
+                            
                             
                             <div class="row">
                                 <div class="col-md-4">
@@ -500,7 +477,7 @@
                     this.docente.dni = data.data.dni;
                     this.docente.nombre = data.data.docente;
                     this.docente.id = data.data.ID;
-
+                    this.proyecto.dingreso = data.data.fechaasignacion;
                 }
                 
                 this.$Progress.finish();
@@ -512,7 +489,7 @@
         cancelar()
         {
             this.proyecto.carrera     = null;
-            this.t.Nombres            = null;
+            this.proyecto.Nombres            = null;
             this.proyecto.subestado   = null;
             this.proyecto.comentario  = null;
             this.proyecto.dingreso    = null;
@@ -607,6 +584,9 @@
                         timer: 3000
                     });
                     this.$Progress.finish();
+                    setTimeout(() => {
+                                location.reload();
+                            }, 2000);
                     }).catch(error=>{
                     console.log(error);	
                     swal({
@@ -725,196 +705,6 @@
             this.proyecto.docentedni    = docente.dni;
             this.proyecto.docentenombre = docente.nombre;
             this.proyecto.id            = docente.id;
-        },
-        validarMatricula(e)
-        {
-            var size = e.target.files[0].size;
-            var type = e.target.files[0].type;
-            if(size > 1024001)
-            {
-               e.target.value = '';
-               swal({
-                        type: 'error',
-                        title: 'Ha ocurrido un error',
-                        text: 'El tamaño del archivo debe ser menor o igual a 1mb',
-                        showConfirmButton: true,
-                    });
-                document.getElementById('info').innerHTML = 'Ningún archivo seleccionado';
-                return;    
-            }
-            if(type.includes("pdf"))
-            {
-                var file = new FileReader();
-                file.readAsDataURL(e.target.files[0]);
-                file.onload = (e) =>
-                {
-                    this.archivos.matricula = e.target.result;
-                }
-            }else
-            {
-                e.target.value = '';
-                this.archivos.matricula = null;
-                swal({
-                        type: 'error',
-                        title: 'Ha ocurrido un error',
-                        text: 'El archivo debe ser PDF, por favor intente subiendo otro archivo',
-                        showConfirmButton: true,
-                    });
-                return;     
-            }
-            
-        },
-        validarEgresado(e)
-        {
-            var size = e.target.files[0].size;
-            var type = e.target.files[0].type;
-            if(size > 1024001)
-            {
-                e.target.value = '';
-                swal({
-                        type: 'error',
-                        title: 'Ha ocurrido un error',
-                        text: 'El tamaño del archivo debe ser menor o igual a 1mb',
-                        showConfirmButton: true,
-                    });
-                document.getElementById('info2').innerHTML = 'Ningún archivo seleccionado';
-                return;    
-            }
-            if(type.includes("pdf"))
-            {
-                var file = new FileReader();
-                file.readAsDataURL(e.target.files[0]);
-                file.onload = (e) =>
-                {
-                    this.archivos.egresado = e.target.result;
-                }
-            }else
-            {
-                e.target.value = '';
-                swal({
-                        type: 'error',
-                        title: 'Ha ocurrido un error',
-                        text: 'El archivo debe ser PDF, por favor intente subiendo otro archivo',
-                        showConfirmButton: true,
-                    });
-                return;     
-            }
-            
-        },
-        validarFoto(e)
-        {
-            var size = e.target.files[0].size;
-            var type = e.target.files[0].type;
-            if(size > 1024001)
-            {
-                e.target.value = '';
-                swal({
-                        type: 'error',
-                        title: 'Ha ocurrido un error',
-                        text: 'El tamaño del archivo debe ser menor o igual a 1mb',
-                        showConfirmButton: true,
-                    });
-                document.getElementById('info3').innerHTML = 'Ningún archivo seleccionado';
-                return;    
-            }
-            if(type.includes("image"))
-            {
-                var file = new FileReader();
-                file.readAsDataURL(e.target.files[0]);
-                file.onload = (e) =>
-                {
-                    this.archivos.foto = e.target.result;
-                }
-                
-            }else
-            {
-                e.target.value = '';
-                swal({
-                        type: 'error',
-                        title: 'Ha ocurrido un error',
-                        text: 'El archivo debe ser una imagen, por favor intente subiendo otro archivo',
-                        showConfirmButton: true,
-                    });
-                return;     
-            }
-            
-        },
-        validarTesis(e)
-        {
-            var size = e.target.files[0].size;
-            var type = e.target.files[0].type;
-            if(size > 5000001)
-            {
-                e.target.value = '';
-                swal({
-                        type: 'error',
-                        title: 'Ha ocurrido un error',
-                        text: 'El tamaño del archivo debe ser menor o igual a 1mb',
-                        showConfirmButton: true,
-                    });
-                document.getElementById('info4').innerHTML = 'Ningún archivo seleccionado';
-                return;    
-            }
-            if(type.includes("pdf"))
-            {
-                var file = new FileReader();
-                file.readAsDataURL(e.target.files[0]);
-                file.onload = (e) =>
-                {
-                    this.archivos.tesis = e.target.result;
-                }
-                
-            }else
-            {
-                e.target.value = '';
-                swal({
-                        type: 'error',
-                        title: 'Ha ocurrido un error',
-                        text: 'El archivo debe ser PDF, por favor intente subiendo otro archivo',
-                        showConfirmButton: true,
-                    });
-                return;     
-            }
-            
-        },
-        validarWord(e)
-        {
-            var size = e.target.files[0].size;
-            var type = e.target.files[0].type;
-            console.log(type);
-            if(size > 5000001)
-            {
-                e.target.value = '';
-                swal({
-                        type: 'error',
-                        title: 'Ha ocurrido un error',
-                        text: 'El tamaño del archivo debe ser menor o igual a 1mb',
-                        showConfirmButton: true,
-                    });
-                document.getElementById('info5').innerHTML = 'Ningún archivo seleccionado';
-                return;    
-            }
-            if(type.includes("word"))
-            {
-                var file = new FileReader();
-                file.readAsDataURL(e.target.files[0]);
-                file.onload = (e) =>
-                {
-                    this.archivos.word = e.target.result;
-                }
-                
-            }else
-            {
-                e.target.value = '';
-                swal({
-                        type: 'error',
-                        title: 'Ha ocurrido un error',
-                        text: 'El archivo debe ser un documento en Word, por favor intente subiendo otro archivo',
-                        showConfirmButton: true,
-                    });
-                return;     
-            }
-            
         },
         edit(IDExpedito,Tipo,CodigoAlumno,Tomo,Folio,Asiento,NumSesion,FechaIngreso,FechaComienzo,IDSesion,Fecha,Escuela,Alumno,DNI,IDModalidad,Modalidad,NombreTesis,Asesor,IDCalificacion,Calificacion,FechaT)
         {
