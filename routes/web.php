@@ -20,6 +20,9 @@ Route::get('/correo', function () {
 });
 Route::get('/oficioproyecto','DocumentosController@oficioProyecto');
 Route::get('/informeTesista','DocumentosController@informeTesista');
+Route::get('/memoAsesor','DocumentosController@memoAsesor');
+Route::get('/oficioAsesor','DocumentosController@oficioAsesor');
+Route::get('/oficioConformidad','DocumentosController@oficioConformidad');
 
 Auth::routes();
 

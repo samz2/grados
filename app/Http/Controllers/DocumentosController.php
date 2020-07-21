@@ -314,4 +314,25 @@ class DocumentosController extends Controller
         $pdf->setPaper('A4','portrait');
         return $pdf->stream('reporte.pdf');
     }
+
+    public function memoAsesor()
+    {
+        $pdf = PDF::loadView('templates.memoAsesor');
+        $pdf->setPaper('A4','portrait');
+        return $pdf->stream('reporte.pdf');
+    }
+
+    public function oficioAsesor()
+    {
+        $pdf = PDF::loadView('templates.oficioAsesor');
+        $pdf->setPaper('A4','portrait');
+        return $pdf->stream('reporte.pdf');
+    }
+
+    public function oficioConformidad()
+    {
+        $pdf = PDF::loadView('templates.oficioConformidad');
+        $pdf->setPaper('A4','portrait');
+        return $pdf->stream('reporte.pdf');
+    }
 }
