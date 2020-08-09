@@ -8,6 +8,7 @@ use App\historialproyecto;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade as PDF;
+use App\logs;
 use File;
 DEFINE("HOY",date("Y-m-d"));
 
@@ -38,6 +39,7 @@ class ProyectoController extends Controller
      */
     public function status(Request $request)
     {
+        // dd($request->sesion);
         $sesion     = $request->sesion;
         $dia        = substr(HOY,8,2);
         $mes        = $this->mes(substr(HOY,5,2));
@@ -50,6 +52,7 @@ class ProyectoController extends Controller
                      "CodDocente"   => $request->sesion["docente"],
                      "EstadoTramite"   => 2,
                      "FechaAsignacion"   => HOY,
+                     "IDSesion"     => $sesion["sesion"],
                     ]);
         try {
             $pdf = PDF::loadView('templates.memoProyecto',compact("sesion","fecha","dia","mes","year"));
@@ -107,12 +110,13 @@ class ProyectoController extends Controller
             $objProyecto = Proyecto::where("Codigo",$key[0]["codigo"])->get()->count();
             if($objProyecto == 0)
             {
+                $tema       = $request->proyecto["tesis"];
                 $codigo   = $key[0]["codigo"];
                 $proyecto = new Proyecto();
                 $proyecto->IDProyecto   = $nro;
                 $proyecto->Codigo       = $codigo;
                 $proyecto->IDCarrera    = $request->proyecto["carrera"];
-                $proyecto->NombreTesis  = $request->proyecto["tesis"];
+                $proyecto->NombreTesis  = $tema;
                 $proyecto->IDLinea      = $request->proyecto["linea"];
                 $proyecto->CodDocente   = $request->proyecto["docente"];
                 $proyecto->FechaRegistro   = $request->proyecto["fecha"];
@@ -122,7 +126,12 @@ class ProyectoController extends Controller
                 $objPY                  = explode(",",$request->proyecto["archivo"]);
                 $proyecto               = base64_decode($objPY[1]);
                 $proyecto_tesis        = "SISTEMAS_PT_".$nro."_V1.pdf";
-                
+                $log = new Logs();
+                $log->Descripcion   = "se crea el proyecto de tesis del alumno : $codigo, con tema: $tema";
+                $log->Fecha         = HOY;
+                $log->idProyecto    = $nro;
+                $log->save();
+
                 // $path = public_path('Archivos bachiller/' . $dni . '/');
                 // if(!Storage::exists(public_path()."proyecto_tesis/$codigo")) {
                 //     Storage::makeDirectory(public_path()."proyecto_tesis/$codigo", 0775, true);
@@ -240,4 +249,30 @@ class ProyectoController extends Controller
     {
         //
     }
+
+    public function finalizar(Request $request)
+    {
+        $log = new Logs();
+        $log->Descripcion   = "se finaliza el proyecto de tesis";
+        $log->Fecha         = HOY;
+        $log->idProyecto    = $request->proyecto["idproyecto"];
+        $log->save();
+
+        try {
+            proyecto::where("ID",$request->proyecto["idproyecto"])->update(
+                [
+                    "numeroResolucion"  =>  $request->proyecto["numresolucion"],
+                    "FechaResolucion"   =>  $request->proyecto["fecharesolucion"],
+                    "EstadoTramite"            =>  3
+                ]
+            );
+            $type="success";
+            $text="proyecto finalizado con éxito";
+        } catch (\Throwable $th) {
+            $type="error";
+            $text="error: $th";
+        }
+        return compact("type","text");
+    } 
+    
 }

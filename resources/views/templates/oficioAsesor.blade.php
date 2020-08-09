@@ -104,10 +104,6 @@
     .t25{font-size: 25px;}
 </style>
 <body>
-    @php
-        // var_dump($numMes);
-        // var_dump($dia);
-    @endphp
     <div class="container">
         <table class="centrartabla">
             <tr>
@@ -122,7 +118,7 @@
                 <td class="center t16 arial opaco">COMISIÓN DE GRADOS y TÍTULOS - FISeIC</td>
             </tr>
         </table>
-        <p class="derecho t15 arial">Pucallpa, {{"día"}} de {{"mes"}} del {{"año"}}</p>
+        <p class="derecho t15 arial">Pucallpa, {{$dia}} de {{$mes}} del {{$year}}</p>
         <br>
         <div class="izquierdo subrayado negrita arial">OFICIO  No  <b class="t17">{{"            "}}</b> – UNU-FISeIC-CGyT</div>
         <div class="izquierdo arial">{{"Señor Ing. Mg."}}</div>
@@ -142,9 +138,8 @@
             <tr class="izquierdo t15 arial">
                 <td width="80" class="arriba"><b>REFERENCIA</b></td>
                 <td width="40" class="arriba"><b>:</b></td>
-                <td class="justificado" style="line-height : 20px;"><b>ACTA DE {{"TIPO SESIÓN"}} N° {{"NÚMERO"}} Comisión de Grados y   
-                    Títulos de la FIS e IC {{"(DÍA/MES/AÑO)"}}
-                    </b></td>
+                <td class="justificado" style="line-height : 20px;"><b>ACTA DE {{$sesion->Tipo}} N° {{$sesion->NumSesion}}
+                    Comisión de Grados y Títulos de la FIS e IC ({{$sesion->zFecha}})</b></td>
             </tr>
             <tr>
                 <td>&nbsp;</td>
@@ -157,9 +152,9 @@
         </table>
         <br>
         <p class="justificado t15 arial" style="line-height : 20px;">Mediante el presente informo a su despacho que 
-            el(la) <b>{{"ING. DR. MG. LIC. ASESOR"}}</b>, ha sido designado como <b>Asesor de la tesis: 
-                {{'"NOMBRE DE LA TESIS SALVAJE"'}}</b>, presentado por el(los) Bachiller(es): 
-            <b>{{"TESISTA 1 y TESISTA 2"}}</b>;  de la <b>Carrera Profesional de {{"Nombre Carrera"}}.</b></p>
+            el(la) <b>ING. {{$docente}}</b>, ha sido designado como <b>Asesor de la tesis: 
+                {{'"'.mb_strtoupper($proyecto["NombreTesis"]).'"  '}}</b>, presentado por el(los) Bachiller(es): 
+            <b> {{str_replace(","," y ",$proyecto["egresado"])}}</b>;  de la <b>Carrera Profesional de {{$proyecto["Escuela"]}}.</b></p>
         
         <p class="justificado t15 arial">Por lo cual solicito su reconocimiento por medio de Comité de planeamiento de la FIS e IC.
         </p>    

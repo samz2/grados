@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Memo</title>
+    <title>Oficio</title>
 </head>
 <style>
     .opaco
@@ -131,7 +131,7 @@
             <tr class="izquierdo t15 arial">
                 <td width="80" class="arriba"><b>A</b></td>
                 <td width="40" class="arriba"><b>:</b></td>
-                <td class="justificado" style="line-height : 20px;"><b>Bach. {{"NOMBRE TESISTA"}}</b></td>
+                <td class="justificado" style="line-height : 20px;"><b>Bach. {{str_replace(","," y ",$proyecto["egresado"])}}</b></td>
             </tr>
             <tr>
                 <td colspan="3">&nbsp;</td>
@@ -168,13 +168,13 @@
             <tr class="izquierdo t15 arial">
                 <td width="80" class="arriba"><b>FECHA</b></td>
                 <td width="40" class="arriba"><b>:</b></td>
-                <td class="justificado" style="line-height : 20px;"><b>Pucallpa, {{"Día"}} de {{"Mes"}} del {{"Año"}}</b></td>
+                <td class="justificado" style="line-height : 20px;"><b>Pucallpa, {{$dia}} de {{$mes}} del {{$year}}</b></td>
             </tr>
         </table>
         <hr>
         <p class="justificado t15 arial" style="line-height : 20px;">              Es grato dirigirme a usted, en atención al informe de observaciones recibido por 
             parte de los Jurados de la Tesis titulada: 
-        <b>{{'"TÍTULO TESIS"'}}</b>, de la carrera profesional de {{"Nombre Carrera"}}.
+        <b>{{'"'.mb_strtoupper($proyecto["NombreTesis"]).'"  '}}</b>, de la carrera profesional de {{$proyecto["Escuela"]}}.
         
         <p class="justificado t15 arial">              Se informa que <a class="subrayado negrita">tienen Observaciones</a> y para poder continuar con los trámites 
             correspondientes, deberán subsanar y/o responder al Jurado a través de un informe y presentación correciones. Cabe indicar que cuentan con 

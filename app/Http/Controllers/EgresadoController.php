@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\egresado;
 use App\proyecto;
 use App\docentes;
+use App\historialproyecto;
 use Illuminate\Http\Request;
 
 class EgresadoController extends Controller
@@ -94,6 +95,12 @@ class EgresadoController extends Controller
         $docente    = "";
         $dni        = "";
         $fechaasignacion = "";
+        $fechadevdoc    = null;
+        $fechaentalu    = null;
+        $fechadevalu    = null;
+        $subestado      = null;
+        $comentarios    = null;
+        $historial      = null;
         $objTesistas =  proyecto::join("egresado AS e","proyecto_tesis.Codigo","e.Codigo")
                         ->join("escuela AS es","e.IDEscuela","es.IDEscuela")
                         ->select("proyecto_tesis.IDProyecto","proyecto_tesis.FechaAsignacion")
@@ -107,21 +114,37 @@ class EgresadoController extends Controller
         {
             $fechaasignacion = $objTesistas->FechaAsignacion; 
             $ID         = $objTesistas->IDProyecto;
+
+            $historial  =   historialproyecto::join("proyecto_tesis AS p","historial.IDProyecto","p.IDProyecto")
+                            ->select("historial.*","p.IDCarrera")
+                            ->where("historial.IDProyecto",$ID)->orderBy("id","DESC")->first();
+            if (isset($historial)) 
+            {
+                $fechaasignacion    = $historial->Fecha_Entrega_doc;
+                $fechadevdoc        = $historial->Fecha_Dev_doc;
+                $fechaentalu        = $historial->Fecha_Entrega_alu;
+                $fechadevalu        = $historial->Fecha_Dev_alu;
+                $subestado          = $historial->SubEstado;
+                $comentarios        = $historial->Comentario;
+            }
+
             $tesistas   =   proyecto::join("egresado AS e","proyecto_tesis.Codigo","e.Codigo")
                             ->join("escuela AS es","e.IDEscuela","es.IDEscuela")
                             ->select(\DB::raw("concat_ws(' ',e.Nombre,e.Paterno,e.Materno) AS Nombres"),\DB::raw("es.Escuela AS Carrera"))
                             ->where([["IDProyecto",$ID],["proyecto_tesis.Estado",1]])->get();
+
             $objDocente =   proyecto::join("docentes AS d","proyecto_tesis.CodDocente","d.DNI")
                         ->select(\DB::raw("concat_ws(' ',d.Nombres,Apellidos) AS docente"),"d.DNI")
                         ->where("proyecto_tesis.IDProyecto",$ID)
                         ->first();
+
             if(isset($objDocente))
             {
                 $docente    = $objDocente->docente;
                 $dni        = $objDocente->DNI;
             }
-        }            
-        return compact("tesistas","ID","docente","dni","fechaasignacion");
+        }          
+        return compact("comentarios","subestado","tesistas","ID","docente","dni","fechaasignacion","historial","fechadevdoc","fechaentalu","fechadevalu");
     }
     /**
      * Show the form for editing the specified resource.

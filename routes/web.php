@@ -114,6 +114,7 @@ Route::post('/addProyecto','ProyectoController@store');
 Route::get('/getProyectos','ProyectoController@index');
 Route::post('/updateProyecto','ProyectoController@update');
 Route::post('/statusProyecto','ProyectoController@status');
+Route::post('/finProyecto','ProyectoController@finalizar');
 Route::get('/statusProyecto/{id}/{fecha}/{docente}','ProyectoController@status');
 
 Route::post('/addHistorial','HistorialproyectoController@store');

@@ -131,7 +131,7 @@
             <tr class="izquierdo t15 arial">
                 <td width="80" class="arriba"><b>DESTINO</b></td>
                 <td width="40" class="arriba"><b>:</b></td>
-                <td class="justificado" style="line-height : 20px;"><b>Ing. {{"NOMBRE ASESOR"}}</b></td>
+                <td class="justificado" style="line-height : 20px;"><b>Ing. {{$docente}}</b></td>
             </tr>
             <tr>
                 <td colspan="3">&nbsp;</td>
@@ -147,8 +147,8 @@
             <tr class="izquierdo t15 arial">
                 <td width="80" class="arriba"><b>REFERENCIA</b></td>
                 <td width="40" class="arriba"><b>:</b></td>
-            <td class="justificado" style="line-height : 20px;"><b>ACTA DE {{'"TIPO SESIÓN"'}} N° {{'"NUMBER"'}}
-                Comisión de Grados y Títulos de la FIS e IC (Día/Mes/Año)</b></td>
+            <td class="justificado" style="line-height : 20px;"><b>ACTA DE {{$sesion->Tipo}} N° {{$sesion->NumSesion}}
+                Comisión de Grados y Títulos de la FIS e IC ({{$sesion->zFecha}})</b></td>
             </tr>
             <tr>
                 <td>&nbsp;</td>
@@ -156,15 +156,15 @@
             <tr class="izquierdo t15 arial">
                 <td width="80" class="arriba"><b>FECHA</b></td>
                 <td width="40" class="arriba"><b>:</b></td>
-                <td class="justificado" style="line-height : 20px;"><b>Pucallpa, {{"Día"}} de {{"Mes"}} del {{"Año"}}</b></td>
+                <td class="justificado" style="line-height : 20px;"><b>Pucallpa, {{$dia}} de {{$mes}} del {{$year}}</b></td>
             </tr>
         </table>
         <hr>
         <p class="justificado t15 arial" style="line-height : 20px;">Mediante el presente le comunico
-            a usted, que en sesión de fecha <b>Día/Mes/Año</b> de la Comisión de Grados y Títulos de la
+            a usted, que en sesión de fecha <b>{{$sesion->zFecha}}</b> de la Comisión de Grados y Títulos de la
             FIS e IC, ha sido designado como Asesor de la Tesis titulada:
-        <b>{{'"TÍTULO TESIS"'}}</b>, presentado por los bachilleres: <b>TESISTA 1 y TESISTA 2</b>;
-        de la <b>Carrera Profesional de {{"Nombre Carrera"}}.</b>
+        <b>{{'"'.mb_strtoupper($proyecto["NombreTesis"]).'"  '}}</b>, presentado por los bachilleres: <b>Bach. {{str_replace(","," y ",$proyecto["egresado"])}}</b>;
+        de la <b>Carrera Profesional de {{$proyecto["Escuela"]}}.</b>
 
         <p class="justificado t15 arial">Así mismo de Acuerdo al Art. 28 del Reglamento de Grados y Títulos de la FISeIC, las funciones como Asesor son las siguientes:</p>
         

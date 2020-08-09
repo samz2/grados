@@ -206,10 +206,11 @@
                                     <div slot="Acciones" slot-scope="props">
                                         <button class="btn btn-primary altoBoton" v-on:click="edit(props.row.IDProyecto,props.row.IDCarrera,props.row.NombreTesis,props.row.IDLinea,props.row.CodDocente,props.row.FechaRegistro,props.row.Porcentaje,props.row.Codigos)" data-placement="left" title="Editar"><i class="fas fa-edit" style="color: white" aria-hidden="true"></i></button>
                                         <button v-if="props.row.EstadoTramite == 1" data-target="#datos" class="btn bg-indigo altoBoton" @click="viewData(props.row)" data-toggle="modal" data-placement="left" title="Cambiar estado"><i class="fa fa-check-double" aria-hidden="true"></i></button>
-                                        <a v-if="props.row.EstadoTramite == 2" :href="'Archivos/'+props.row.IDProyecto+'/memo.pdf'" download="Memorandum.pdf" class="btn bg-navy altoBoton" target="_blank" data-placement="left" title="memo"><i class="fa fa-file" aria-hidden="true"></i></a>
-                                        <a v-if="props.row.EstadoTramite == 2" :href="'Archivos/'+props.row.IDProyecto+'/oficio.pdf'" download="Oficio.pdf" class="btn bg-olive altoBoton" target="_blank" data-placement="left" title="oficio"><i class="fa fa-file" aria-hidden="true"></i></a>
-                                        <button data-target="#historial" @click="getHistorial(props.row.IDProyecto)" title="Ver Historial" class="btn btn-success altoBoton" data-toggle="modal" data-placement="left" ><i class="fa fa-eye"></i></button>
-                                        <!-- <button data-target="#correo" @click="setProyecto(props.row.IDProyecto)" title="Enviar Correo" class="btn bg-warning altoBoton" data-toggle="modal" data-placement="left" ><i class="fa fa-envelope"></i></button> -->
+                                        <button v-if="props.row.EstadoTramite == 2" data-target="#resolucion" class="btn bg-olive altoBoton" @click="res(props.row.IDProyecto)" data-toggle="modal" data-placement="left" title="Registrar resolución"><i class="fa fa-sticky-note" aria-hidden="true"></i></button>
+                                        <a v-if="props.row.EstadoTramite == 2 || props.row.EstadoTramite == 3" :href="'Archivos/'+props.row.IDProyecto+'/memo.pdf'" download="Memorandum.pdf" class="btn bg-navy altoBoton" target="_blank" data-placement="left" title="memo"><i class="fa fa-file" aria-hidden="true"></i></a>
+                                        <a v-if="props.row.EstadoTramite == 2 || props.row.EstadoTramite == 3" :href="'Archivos/'+props.row.IDProyecto+'/oficio.pdf'" download="Oficio.pdf" class="btn bg-olive altoBoton" target="_blank" data-placement="left" title="oficio"><i class="fa fa-file" aria-hidden="true"></i></a>
+                                        <!-- <button data-target="#historial" @click="getHistorial(props.row.IDProyecto)" title="Ver Historial" class="btn btn-success altoBoton" data-toggle="modal" data-placement="left" ><i class="fa fa-eye"></i></button> -->
+                                        <!-- <button data-target="#resolucion" @click="setProyecto(props.row.IDProyecto)" title="Enviar resolucion" class="btn bg-warning altoBoton" data-toggle="modal" data-placement="left" ><i class="fa fa-envelope"></i></button> -->
                                     </div>
                                 </v-client-table>
                             </div>
@@ -308,17 +309,44 @@
             </div> 
             <!-- fin modal 2 -->
              <!-- modal2 -->
-            <div class="modal fade" id="correo" tabindex="-1" role="dialog" aria-labelledby="historialLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-lg" role="document">
+            <div class="modal fade" id="resolucion" tabindex="-1" role="dialog" aria-labelledby="historialLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
                         <div class="modal-content">
-                        <!-- <div class="modal-header text-center">
-                            <h5 class="modal-titler text-center" id="historialLabel">Correo</h5>
+                        <div class="modal-header text-center bg-info">
+                            <h5 class="modal-titler text-center" id="historialLabel">Registrar Resolución</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                             </button>
-                        </div> -->
+                        </div>
                         <div class="modal-body">
-                            <example-component :id="idproyecto"></example-component>
+                            <fieldset class="border p-2">
+                            <legend class="w-auto">Datos de Resolución 
+                            </legend>
+                            <div class="form-group row">  
+                                <div class="col-md-6">
+                                    <label for="">Num. Resolución</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" v-model="proyecto.numresolucion" onKeyPress="return soloNumeros(event)" maxlength="4" class="form-control form-control-sm">
+                                </div>                                
+                            </div>
+                            <div class="form-group row">  
+                                <div class="col-md-6">
+                                    <label for="">Fecha Resolución</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="date" v-model="proyecto.fecharesolucion" class="form-control form-control-sm">
+                                </div>                              
+                            </div>
+                            <div class="form-group row">  
+                                <div class="col-md-3">
+                                    <button class="btn bg-success" @click="saveResolucion()">Guardar</button>
+                                </div>
+                                <div class="col-md-3">
+                                    <button class="btn bg-danger">cancelar</button>
+                                </div>                                
+                            </div>
+                        </fieldset>
                         </div>
                     </div>
                 </div>
@@ -342,7 +370,7 @@
                                 </div>
                                 <div class="col-md-2">
                                 <select v-model="sesion.sesion" @change="getSession(sesion.sesion)" class="form-control form-control-sm">
-                                    <option v-for="s in sesiones" :key="s.NumSesion" :value="s.NumSesion">{{s.NumSesion}}</option>
+                                    <option v-for="s in sesiones" :key="s.NumSesion" :value="s.IDSesion">{{s.NumSesion}}</option>
                                 </select>
                                 </div>
                             </div>
@@ -404,6 +432,8 @@
                 fecha:null,
                 porcentaje:null,
                 archivo:null,
+                numresolucion:null,
+                fecharesolucion:null
             },
             sesion:{
                 idproyecto:null,
@@ -480,6 +510,36 @@
         $('#menos').hide();
 	},
     methods: {
+        saveResolucion()
+        {
+            axios.post("finProyecto",{
+                    proyecto:this.proyecto,
+                }).then(data=>{
+                    swal({
+                        type: data.data.type,
+                        // title: "¡Buen trabajo!",
+                        text: data.data.text,
+                        showConfirmButton: false,
+                        timer: 3000
+                    });
+                    this.$Progress.finish();
+                    setTimeout(() => {
+                        location.reload();
+                    }, 1500);
+                    }).catch(error=>{
+                    console.log(error);	
+                    swal({
+                        type: "error",
+                        title: 'Ha ocurrido un problema',
+                        text: "Comuníquese con un administrador",
+                        showConfirmButton: true
+                    });
+                })
+        },
+        res(id)
+        {
+            this.proyecto.idproyecto = id;
+        },
         setProyecto(id)
         {
             this.idproyecto = id;

@@ -21,7 +21,7 @@ class SesionController extends Controller
     }
     public function sessions()
     {
-        $sesiones = Sesion::select("NumSesion")->orderBy("NumSesion","DESC")->get();
+        $sesiones = Sesion::orderBy("NumSesion","DESC")->get();
         return compact("sesiones");
     }
 
@@ -62,7 +62,7 @@ class SesionController extends Controller
      */
     public function show($num)
     {
-        $objSesion  = Sesion::select("Fecha","Tipo")->where("NumSesion",$num)->get();
+        $objSesion  = Sesion::select("Fecha","Tipo")->where("IDSesion",$num)->get();
         $fecha  = "";
         $tipo   = "";
         if(count($objSesion) > 0)
