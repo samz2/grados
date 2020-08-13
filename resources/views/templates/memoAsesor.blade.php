@@ -186,7 +186,7 @@
                 </tr>
                 <tr>
                     <td class="justificado t15 arial">d.<br><br><br></td>
-                    <td class="justificado t15 arial">En el caso de incumplimiento del punto (a) por negligencia comprobada, por un lapso de ciento
+                    <td class="justificado t15 arial">En el caso de incumplimiento del punto (a) por negligencia comprobada, por un lapso de sesenta
                         (60) días, una vez iniciada la ejecución del mismo, el Asesor será reemplazado por otro docente
                         nombrado previo informe a la Decanatura.</td>
                 </tr>
@@ -222,7 +222,7 @@
             </tr>
         </table>
         <div class="center t10 arial">{{"PRESIDENTE"}}</div>
-        <br><br>
+        <!--<br><br>
         <table class="centrartabla" style="width: 100%;">            
             <tr>
                 <td class="t8" style="color:blue">Cc.</td>
@@ -236,7 +236,7 @@
                 <td class="t8" style="color:blue">Archivo</td>
                 <td class="derecho t9" style="font-style: italic;">DMDE</td>
             </tr>
-        </table>
+        </table>-->
         {{-- @php
             print_r($base64 ?? '');
         @endphp --}}

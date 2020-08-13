@@ -13,9 +13,12 @@ class LogsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($idProyecto)
     {
-        //
+        //$logs = logs::where("idProyecto",$idProyecto)->get();
+        $logs = logs::select("*",\DB::raw("date_format(Fecha,'%d/%m/%Y') AS Fecha"))->where("idProyecto",$idProyecto)->get();
+        
+        return compact("logs");
     }
 
     /**

@@ -205,11 +205,15 @@
                                     </div>
                                     <div slot="Acciones" slot-scope="props">
                                         <button class="btn btn-primary altoBoton" v-on:click="edit(props.row.IDProyecto,props.row.IDCarrera,props.row.NombreTesis,props.row.IDLinea,props.row.CodDocente,props.row.FechaRegistro,props.row.Porcentaje,props.row.Codigos)" data-placement="left" title="Editar"><i class="fas fa-edit" style="color: white" aria-hidden="true"></i></button>
+                                        <button v-if="props.row.EstadoTramite == 2" data-target="#resolucion" class="btn bg-indigo altoBoton" @click="res(props.row.IDProyecto)" data-toggle="modal" data-placement="left" title="Registrar resolución y cambiar a estado Finalizado."><i class="fa fa-check-double" aria-hidden="true"></i></button>
                                         <button v-if="props.row.EstadoTramite == 1" data-target="#datos" class="btn bg-indigo altoBoton" @click="viewData(props.row)" data-toggle="modal" data-placement="left" title="Cambiar estado"><i class="fa fa-check-double" aria-hidden="true"></i></button>
-                                        <button v-if="props.row.EstadoTramite == 2" data-target="#resolucion" class="btn bg-olive altoBoton" @click="res(props.row.IDProyecto)" data-toggle="modal" data-placement="left" title="Registrar resolución"><i class="fa fa-sticky-note" aria-hidden="true"></i></button>
-                                        <a v-if="props.row.EstadoTramite == 2 || props.row.EstadoTramite == 3" :href="'Archivos/'+props.row.IDProyecto+'/memo.pdf'" download="Memorandum.pdf" class="btn bg-navy altoBoton" target="_blank" data-placement="left" title="memo"><i class="fa fa-file" aria-hidden="true"></i></a>
-                                        <a v-if="props.row.EstadoTramite == 2 || props.row.EstadoTramite == 3" :href="'Archivos/'+props.row.IDProyecto+'/oficio.pdf'" download="Oficio.pdf" class="btn bg-olive altoBoton" target="_blank" data-placement="left" title="oficio"><i class="fa fa-file" aria-hidden="true"></i></a>
-                                        <!-- <button data-target="#historial" @click="getHistorial(props.row.IDProyecto)" title="Ver Historial" class="btn btn-success altoBoton" data-toggle="modal" data-placement="left" ><i class="fa fa-eye"></i></button> -->
+                                        <a v-if="props.row.EstadoTramite == 2 || props.row.EstadoTramite == 3" :href="'Archivos/'+props.row.IDProyecto+'/memo.pdf'" download="Memorandum.pdf" class="btn bg-navy altoBoton" target="_blank" data-placement="left" title="Memorandum al docente evaluador"><i class="fa fa-file" aria-hidden="true"></i></a>
+                                        <a v-if="props.row.EstadoTramite == 2 || props.row.EstadoTramite == 3" :href="'Archivos/'+props.row.IDProyecto+'/oficio.pdf'" download="Oficio.pdf" class="btn bg-orange altoBoton" target="_blank" data-placement="left" title="Oficio al docente evaluador"><i class="fa fa-file" aria-hidden="true"></i></a>
+                                        <a v-if="props.row.EstadoTramite == 2 || props.row.EstadoTramite == 3" :href="'Archivos/'+props.row.IDProyecto+'/memoAsesor.pdf'" download="MemoAsesor.pdf" class="btn bg-purple altoBoton" target="_blank" data-placement="left" title="Memorandum al asesor"><i class="fa fa-file" aria-hidden="true"></i></a>
+                                        <a v-if="props.row.EstadoTramite == 2 || props.row.EstadoTramite == 3" :href="'Archivos/'+props.row.IDProyecto+'/oficioAsesor.pdf'" download="OficioAsesor.pdf" class="btn bg-maroon altoBoton" target="_blank" data-placement="left" title="Oficio al asesor"><i class="fa fa-file" aria-hidden="true"></i></a>
+                                        <a v-if="props.row.EstadoTramite == 2 || props.row.EstadoTramite == 3" :href="'Archivos/'+props.row.IDProyecto+'/oficioConformidad.pdf'" download="OficioConformidad.pdf" class="btn bg-teal altoBoton" target="_blank" data-placement="left" title="Oficio de conformidad"><i class="fa fa-file" aria-hidden="true"></i></a>
+                                        
+                                        <button data-target="#historial" @click="getLogs(props.row.IDProyecto)" title="Ver Log" class="btn btn-success altoBoton" data-toggle="modal" data-placement="left" ><i class="fa fa-eye"></i></button>
                                         <!-- <button data-target="#resolucion" @click="setProyecto(props.row.IDProyecto)" title="Enviar resolucion" class="btn bg-warning altoBoton" data-toggle="modal" data-placement="left" ><i class="fa fa-envelope"></i></button> -->
                                     </div>
                                 </v-client-table>
@@ -219,88 +223,68 @@
                 </div>
             </div>
             <!-- modal2 @click="changeStatus(props.row)"-->
-            <div class="modal fade" id="historial" tabindex="-1" role="dialog" aria-labelledby="historialLabel" aria-hidden="true">
+                <div class="modal fade" id="historial" tabindex="-1" role="dialog" aria-labelledby="historialLabel" aria-hidden="true">
                     <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
                         <div class="modal-content ">
                         <div class="modal-header text-center" style="background-color: powderblue !important; color:black; font-weight: bold;">
-                            <h5 class="modal-titler text-center" id="historialLabel">Historial Proyecto de Tesis</h5>
+                            <h5 class="modal-titler text-center" id="historialLabel">Proyecto de Tesis</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
                             <fieldset class="border p-2" style="border:red;">
-                                <legend class="w-auto text-primary">Historial de revisiones</legend>
+                                <legend class="w-auto text-primary">Log de la gestión del proyecto de tesis</legend>
                                 <div class="text-center">
                                     <div v-if="!cargando" class="spinner-border text-primary" role="status">
                                         <span class="sr-only">Loading...</span>
                                     </div>
-                                    <label v-if="historial.length == 0 && cargando" class="text-danger">
-                                        Este registro aún no cuenta con revisiones.
+                                    <label v-if="logs.length == 0 && cargando" class="text-danger">
+                                        Este registro aún no tiene log.
                                     </label>
                                 </div>
-                                
-                                <div v-for="(h,index) in historial" :key="h.id">
+                                <!--<div v-for="(h,index) in logs" :key="h.id">-->
+                                <div class="text-left" style="text-align:center;" v-if="cargando">
+                                    <table border="1" v-if="logs.length > 0" style="margin: 0 auto;">
+                                        <tr>
+                                            <th>N°</th>
+                                            <th>Comentario</th>
+                                            <th>Fecha             </th>
+                                        </tr>
+                                        <tr v-for="(h,index) in logs" :key="h.id">
+                                            <td>{{index + 1}}</td>
+                                            <td>{{h.Descripcion}}</td>
+                                            <td>{{h.Fecha}}</td>
+                                        </tr>
+                                    </table>
+                                </div>    
+                                <!--<div v-for="(h,index) in logs" :key="h.id">
                                     <div class="form-group row">
-                                        <div class="col-md-3 t12">
-                                            <label>Revisión</label>
+                                        <div class="col-md-2 t12">
+                                            <label>Nro.</label>
                                         </div>
                                         <div class="col-md-1 t12">
                                             : {{index + 1}}
                                         </div>
-                                        <div class="col-md-1 t12">
-                                            <label>Estado</label>
-                                        </div>
+                                    </div>
+                                    <div class="form-group row">    
                                         <div class="col-md-2 t12">
-                                        <b v-if="h.Estado == 'EN PROCESO'" class="text-primary">: {{h.Estado}}</b> 
-                                        <b v-if="h.Estado == 'FINALIZADO'" class="text-danger">: {{h.Estado}}</b> 
+                                            <label>Comentario</label>
                                         </div>
-                                        <div class="col-md-2 t12">
-                                            <label>Sub Estado</label>
-                                        </div>
-                                        <div class="col-md-3 t12">
-                                        <b v-if="h.SubEstado == 'CONFORME'" class="text-success">: {{h.SubEstado}}</b> 
-                                        <b v-if="h.SubEstado == 'OBSERVADO'" class="text-danger">: {{h.SubEstado}}</b> 
+                                        <div class="col-md-10 t12">
+                                            <b>: {{h.Descripcion}}</b>
                                         </div>
                                     </div>
-                                    <div class="form-group row">
-                                        <div class="col-md-3 t12">
-                                            <label>Fecha Entrega Asesor</label>
-                                        </div>
+                                    <div class="form-group row">       
                                         <div class="col-md-2 t12">
-                                            : {{h.Fecha_Entrega_doc}}
+                                            <label>Fecha: </label>
                                         </div>
                                         <div class="col-md-3 t12">
-                                            <label>Fecha Devolución Asesor</label>
-                                        </div>
-                                        <div class="col-md-2 t12">
-                                            : {{h.Fecha_Dev_doc}}
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <div class="col-md-3 t12">
-                                            <label>Fecha Entrega Alumno</label>
-                                        </div>
-                                        <div class="col-md-2 t12">
-                                            : {{h.Fecha_Entrega_alu}}
-                                        </div>
-                                        <div class="col-md-3 t12">
-                                            <label>Fecha Devolución Alumno</label>
-                                        </div>
-                                        <div class="col-md-2 t12">
-                                            : {{h.Fecha_Dev_alu}}
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <div class="col-md-3 t12">
-                                            <label>Comentarios</label>
-                                        </div>
-                                        <div class="col-md-9 t12">
-                                            : {{h.Comentario}}
+                                            <b>: {{h.Fecha}}</b>
                                         </div>
                                     </div>
                                     <hr>
-                                </div>
+                                </div>  --> 
                             </fieldset>
                             
                         </div>
@@ -324,7 +308,7 @@
                             </legend>
                             <div class="form-group row">  
                                 <div class="col-md-6">
-                                    <label for="">Num. Resolución</label>
+                                    <label for="">Número Resolución</label>
                                 </div>
                                 <div class="col-md-6">
                                     <input type="text" v-model="proyecto.numresolucion" onKeyPress="return soloNumeros(event)" maxlength="4" class="form-control form-control-sm">
@@ -335,16 +319,18 @@
                                     <label for="">Fecha Resolución</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <input type="date" v-model="proyecto.fecharesolucion" class="form-control form-control-sm">
+                                    <input type="date" v-model="proyecto.fecharesolucion" @change='validafecha()' class="form-control form-control-sm">
                                 </div>                              
                             </div>
                             <div class="form-group row">  
-                                <div class="col-md-3">
-                                    <button class="btn bg-success" @click="saveResolucion()">Guardar</button>
+                                <div class="col-md-3" style="text-align: center;"></div>
+                                <div class="col-md-6" style="text-align: center;">
+                                    <button class="btn bg-success" @click="saveResolucion()">Finalizar trámite <i class="fa fa-check"></i></button>
                                 </div>
-                                <div class="col-md-3">
-                                    <button class="btn bg-danger">cancelar</button>
-                                </div>                                
+                                <div class="col-md-3" style="text-align: center;"></div>
+                                <!--<div class="col-md-3">
+                                    <button class="btn bg-danger">Cancelar</button>
+                                </div>           -->                    
                             </div>
                         </fieldset>
                         </div>
@@ -457,6 +443,7 @@
             tesistas:[],
             alumnos:[],
             docentes:[],
+            logs:[],
             historial:[],
             proyectos	:[{
 				IDProyecto: null,
@@ -517,7 +504,7 @@
                 }).then(data=>{
                     swal({
                         type: data.data.type,
-                        // title: "¡Buen trabajo!",
+                        title: data.data.title,
                         text: data.data.text,
                         showConfirmButton: false,
                         timer: 3000
@@ -553,7 +540,7 @@
                     swal({
                         type: "success",
                         title: "¡Buen trabajo!",
-                        text: "Estado actualizado con éxito, se generaron los documentos",
+                        text: "Estado actualizado con éxito, se generó el Memorandum y Oficio al Docente Evaluador",
                         showConfirmButton: false,
                         timer: 3000
                     });
@@ -591,6 +578,20 @@
             axios.get("getDocente/"+id)
             .then(data => {
             this.sesion.zdocente = data.data.docente;
+            this.$Progress.finish();
+            })
+            .catch(error => {
+            console.log(error);
+            });
+        },
+        getLogs(id)
+        {
+            this.cargando = false;
+            this.$Progress.start();
+            axios.get("getLogs/"+id)
+            .then(data => {
+            this.logs = data.data.logs;
+            this.cargando = true;
             this.$Progress.finish();
             })
             .catch(error => {
@@ -778,6 +779,18 @@
                 title: "Ingresar una fecha correcta"
             });
             this.proyecto.fecha = null;
+            }
+        }
+
+        if (this.proyecto.fecharesolucion != null) {
+            var inicio = this.proyecto.fecharesolucion;
+            var final = "2030-01-01";
+            if (final <= inicio) {
+            swal({
+                type: "warning",
+                title: "Ingresar una fecha correcta"
+            });
+            this.proyecto.fecharesolucion = null;
             }
         }
         

@@ -54,6 +54,13 @@ class ProyectoController extends Controller
                      "FechaAsignacion"   => HOY,
                      "IDSesion"     => $sesion["sesion"],
                     ]);
+
+            $log = new Logs();
+            $log->Descripcion   = "Se cambia a estado En Proceso y se crea el Memorandum y Oficio al docente evaluador.";
+            $log->Fecha         = HOY;
+            $log->idProyecto    = $request->sesion["idproyecto"];
+            $log->save();
+
         try {
             $pdf = PDF::loadView('templates.memoProyecto',compact("sesion","fecha","dia","mes","year"));
             $pdf1 = PDF::loadView('templates.oficioProyecto',compact("sesion","fecha","dia","mes","year"));
@@ -65,12 +72,14 @@ class ProyectoController extends Controller
             file_put_contents($path."memo.pdf", $pdf->output());
             file_put_contents($path."oficio.pdf", $pdf1->output());
             $type = "success";
-            $text = "archivos generados con éxito";
+            $title = "¡Buen trabajo!";
+            $text = "Archivos generados con éxito";
         } catch (\Throwable $th) {
             $type = "error";
+            $title = "¡Error!";
             $text = "$th";
         }
-        return compact("type","text");
+        return compact("type","title","text");
     }
     public function mes($indice)
     {
@@ -127,7 +136,7 @@ class ProyectoController extends Controller
                 $proyecto               = base64_decode($objPY[1]);
                 $proyecto_tesis        = "SISTEMAS_PT_".$nro."_V1.pdf";
                 $log = new Logs();
-                $log->Descripcion   = "se crea el proyecto de tesis del alumno : $codigo, con tema: $tema";
+                $log->Descripcion   = "Se crea el proyecto de tesis para el tesista con código universitario: $codigo.";
                 $log->Fecha         = HOY;
                 $log->idProyecto    = $nro;
                 $log->save();
@@ -148,7 +157,7 @@ class ProyectoController extends Controller
             {
                 $type = "error";
                 $title = "¡Ocurrió un problema!";
-                $text = "Ya existe un trámite con este(os) tesistas"; 
+                $text = "Ya existe un trámite con este(os) tesista(s)"; 
             }
         }         
         return compact("type","title","text"); 
@@ -252,11 +261,11 @@ class ProyectoController extends Controller
 
     public function finalizar(Request $request)
     {
-        $log = new Logs();
-        $log->Descripcion   = "se finaliza el proyecto de tesis";
-        $log->Fecha         = HOY;
-        $log->idProyecto    = $request->proyecto["idproyecto"];
-        $log->save();
+            $log = new Logs();
+            $log->Descripcion   = "Se registra el número y fecha de resolución; y se da por Finalizado el proyecto de tesis.";
+            $log->Fecha         = HOY;
+            $log->idProyecto    = $request->proyecto["idproyecto"];
+            $log->save();
 
         try {
             proyecto::where("ID",$request->proyecto["idproyecto"])->update(
@@ -266,13 +275,16 @@ class ProyectoController extends Controller
                     "EstadoTramite"            =>  3
                 ]
             );
+
             $type="success";
-            $text="proyecto finalizado con éxito";
+            $title = "¡Buen trabajo!";
+            $text="Proyecto finalizado con éxito";
         } catch (\Throwable $th) {
             $type="error";
+            $title = "¡Buen trabajo!";
             $text="error: $th";
         }
-        return compact("type","text");
+        return compact("type","title","text");
     } 
     
 }

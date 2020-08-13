@@ -44,6 +44,7 @@ Route::get('/reporte_bachiller/{inicio}/{final}','DocumentosController@reportBac
 Route::get('/reporte_titulo/{inicio}/{final}','DocumentosController@reportTitulog');
 Route::post('/sendMail','DocumentosController@sendMail');
 Route::get('/directorio/{url}','DocumentosController@directorio');
+Route::get('/getLogs/{idProyecto}','LogsController@index');
 
 
 Route::post('/addEgresado','EgresadoController@store');

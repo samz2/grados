@@ -139,7 +139,7 @@
             <tr class="izquierdo t15 arial">
                 <td width="80" class="arriba"><b>ASUNTO</b></td>
                 <td width="40" class="arriba"><b>:</b></td>
-                <td class="justificado" style="line-height : 20px;"><b>{{"DESIGNACIÓN COMO DOCENTE EVALUADOR DE PROYECTO DE TESIS"}}</b></td>
+                <td class="justificado" style="line-height : 20px;"><b>{{"DESIGNACIÓN COMO DOCENTE EVALUADOR DEL PROYECTO DE TESIS"}}</b></td>
             </tr>
             <tr>
                 <td>&nbsp;</td>
@@ -164,7 +164,7 @@
         <p class="justificado t15 arial" style="line-height : 20px;">                              Mediante el presente le comunico a usted, que en sesión de fecha {{$fecha}} de la 
             Comisión de Grados y Títulos de la FIS e IC, ha sido designado como 
             <a class="subrayado">Docente Evaluador</a>  para la revisión de la Viabilidad del Proyecto de tesis titulado: 
-            <b>{{'"'.mb_strtoupper($sesion["nombretesis"]).'"  '}}</b>, presentado por el(los) bachillere(s): 
+            <b>{{'"'.mb_strtoupper($sesion["nombretesis"]).'"  '}}</b>, presentado por el(los) bachiller(es): 
             <b>{{str_replace(","," y ",$sesion["tesistas"])}}</b>,  de la Carrera profesional de 
             {{$sesion["carrera"]}}; de acuerdo al art. 15 del Reglamento de Grados y Títulos 
             del Proyecto de Tesis. </p>

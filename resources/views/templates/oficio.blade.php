@@ -180,12 +180,12 @@
                 <td class="center">______________________________</td>
             </tr>
             <tr>
-                <td class="center negrita" style="font-size: 11px">Ing. Mg. {{$dato3->Presidente}}</td>
-                
+                <!--<td class="center negrita" style="font-size: 11px">Ing. Mg. {{$dato3->Presidente}}</td>-->
+                <td class="center negrita" style="font-size: 11px">Ing. Mg. DIANA MARGARITA DIAZ ESTRADA</td>
             </tr>            
         </table>
         <div class="center t10 arial">{{"PRESIDENTE"}}</div>
-        <table class="centrartabla" style="width: 100%;">            
+        <!--<table class="centrartabla" style="width: 100%;">            
             <tr>
                 <td class="t7">Cc.</td>
                 <td class="derecho"></td>
@@ -198,7 +198,7 @@
                 <td class="t7">ARCHIVO</td>
                 <td class="derecho t9" style="font-style: italic;">DMDE</td>
             </tr>
-        </table>
+        </table>-->
     </div>
 
 </body>

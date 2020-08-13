@@ -189,7 +189,7 @@
             </tr>            
         </table>
         <div class="center t10 arial">{{"PRESIDENTE"}}</div>
-        <br><br>
+        <!--<br><br>
         <table class="centrartabla" style="width: 100%;">            
             <tr>
                 <td class="t8">Cc.</td>
@@ -203,7 +203,7 @@
                 <td class="t8">ARCHIVO</td>
                 <td class="derecho t9" style="font-style: italic;">DMDE</td>
             </tr>
-        </table>
+        </table>-->
     </div>
 
 </body>

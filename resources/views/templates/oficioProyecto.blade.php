@@ -124,7 +124,7 @@
         </table>
         <p class="derecho t15 arial">Pucallpa, {{$dia}} de {{$mes}} del {{$year}}</p>
         <br>
-        <div class="izquierdo subrayado negrita arial">OFICIO  No  <b class="t17">{{"      "}}</b> – UNU-FISeIC-CGyT</div>
+        <div class="izquierdo subrayado negrita arial">OFICIO  No  <b class="t17">{{"      "}}</b> – UNU-FISeIC-CGyT</div>
         <div class="izquierdo arial">{{"Sr. Ing. Mg."}}</div>
         <div class="izquierdo negrita arial">{{"ROMEL PINEDO RIOS"}}</div>
         <div class="izquierdo arial">{{"Decano de la facultad de Ingeniería de Sistemas e Ingeniería Civil - UNU"}}</div>
@@ -134,7 +134,7 @@
             <tr class="izquierdo t15 arial">
                 <td width="80" class="arriba"><b>ASUNTO</b></td>
                 <td width="40" class="arriba"><b>:</b></td>
-                <td class="justificado" style="line-height : 20px;"><b>{{"DESIGNACIÓN COMO DOCENTE EVALUADOR DE PROYECTO DE TESIS"}}</b></td>
+                <td class="justificado" style="line-height : 20px;"><b>{{"DESIGNACIÓN COMO DOCENTE EVALUADOR DEL PROYECTO DE TESIS"}}</b></td>
             </tr>
             <tr>
                 <td>&nbsp;</td>

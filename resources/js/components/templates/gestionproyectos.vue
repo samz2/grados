@@ -43,10 +43,18 @@
                                 </div>
                             </div>
                             <div class="form-group row" v-if="docente.nombre != null">
+                                <div class="col-md-2"><b>Revisión Actual: </b></div>
+                                <div class="col-md-10">
+                                    <!-- <input type="text" value="{{a.Nombres}}" readonly class="form-control form-control-sm"> -->
+                                    {{numHistorial}}
+                                </div>
+                            </div>
+                            <div class="form-group row" v-if="docente.nombre != null">
                                 <div class="col-md-3">
                                     <button data-target="#historial" @click="getHistorial()" class="btn btn-success" data-toggle="modal" data-placement="left" >Historial revisiones <i class="fa fa-eye"></i></button>
                                 </div>
                             </div>
+                            
                         </fieldset>
                         <fieldset class="border p-2">
                             <legend class="w-auto">Docente Evaluador</legend>
@@ -56,7 +64,7 @@
                                 <label for="ingreso">Fecha entrega Docente Evaluador:</label>
                                 </div>
                                 <div class="col-md-3">
-                                    <input type="date" v-model="proyecto.dingreso" class="form-control form-control-sm">
+                                    <input type="date" max="2030-12-31" @change="validafecha()" v-model="proyecto.dingreso" class="form-control form-control-sm">
                                 </div>
                                 <div class="col-md-3">
                                 <label for="comienzo">Fecha devolución Docente Evaluador:</label>
@@ -72,9 +80,8 @@
                                 </div>
                                 <div class="col-md-3">
                                     <select v-model="proyecto.subestado" class="form-control form-control-sm">
-                                        <option value="OBSERVADO">OBSERVADO</option>//EN PROCESO
-                                        <option value="CONFORME">CONFORME</option>//EN PROCESO
-                                        <option value="FINALIZADO">ANULADO</option>
+                                        <option value="OBSERVADO">OBSERVADO</option>
+                                        <option value="CONFORME">CONFORME</option>
                                     </select>
                                 </div>
                             </div>
@@ -87,7 +94,7 @@
                                 </div>
                             </div>
                         </fieldset>
-                        <fieldset class="border p-2">
+                        <fieldset class="border p-2" v-if="proyecto.subestado != 'CONFORME'">
                             <legend class="w-auto">Fechas Alumno</legend>
                             <div class="form-group row">
                                 <div class="col-md-3">
@@ -120,17 +127,33 @@
                             </div>
                         </fieldset>
                         <br>
-                        <div class="row">
-                            <div class="col-md-2" id="guardar" style="text-align: center;">
-                                <button class="btn btn-success"  @click="addHistorial(1)">Guardar <i class="fa fa-save"></i></button>
+
+                       
+                        <div class="row" style="text-align: center;">
+                            <div class="col-md-2" style="text-align: center;"></div>
+                            <div class="col-md-2" id="guardar" style="text-align: center;" v-if="proyecto.subestado != 'CONFORME'">
+                                <button class="btn btn-success" @click="addHistorial(1)">Crear <i class="fa fa-plus"></i></button>
                             </div>
-                            <div class="col-md-2" style="text-align: center;">
+                            <div class="col-md-2" id="guardar" style="text-align: center;" v-if="proyecto.subestado == 'CONFORME'">
+                                <button class="btn btn-success" @click="addHistorial(2)">Finalizar <i class="fa fa-check"></i></button>
+                            </div>
+                            <div class="col-md-2" style="text-align: center;" v-if="proyecto.subestado != 'CONFORME'">
                                 <button class="btn bg-indigo" @click="addHistorial(2)">Actualizar <i class="fa fa-edit"></i></button>
                             </div>
-                            <div class="col-md-2" style="text-align: center;">
+                            <div class="col-md-2" style="text-align: center;" v-if="proyecto.subestado != 'CONFORME'">
                                 <button class="btn btn-warning" @click="cancelar()">Limpiar <i class="fas fa-broom"></i></button>
                             </div>
+                            <div class="col-md-2" style="text-align: center;">
+                                <button class="btn btn-danger" @click="cancelar2()">Cancelar <i class="fas fa-times"></i></button>
+                            </div>
+                            <div class="col-md-2" style="text-align: center;"></div>
                         </div>
+                        <br>
+                         <div class="col-md-12 t12" id="labelInicio" v-if="proyecto.subestado != 'CONFORME'"><label>*Crear: </label> Botón para crear la revisión cuando ya se seleccionó al tesista(s) y se colocó la fecha de entrega al docente evaluador.</div>
+                         <div class="col-md-12 t12" id="labelInicio" v-if="proyecto.subestado == 'CONFORME'"><label>*Finalizar: </label> Botón para finalizar las revisiones cuando se selecciona al asesor.</div>
+                        <div class="col-md-12 t12" id="labelInicio" v-if="proyecto.subestado != 'CONFORME'"><label>*Actualizar: </label> Botón para actualizar los campos de la revisión actual.</div>
+                        <div class="col-md-12 t12" id="labelInicio" v-if="proyecto.subestado != 'CONFORME'"><label>*Limpiar: </label> Botón para limpiar todos los campos actuales para luego poder crear una nueva revisión con el primer botón.</div>
+                    
 	                </div>
 				</div>
 			</div>
@@ -324,6 +347,7 @@
             cargando: false,
             cargando1: true,
             zhistorial:null,
+            numHistorial:null,
            
         }
 	},
@@ -361,6 +385,10 @@
             ).catch(error=>{
                 console.log(error);
             })
+        },
+        validabotones()
+        {
+
         },
         validafecha()
         {
@@ -440,6 +468,7 @@
                         title: 'No se encontraron registros',
                     });
                 }else{
+                    this.numHistorial       = data.data.numHistorial;
                     this.alumnos            = data.data.tesistas;
                     this.docente.dni        = data.data.dni;
                     this.docente.nombre     = data.data.docente;
@@ -465,14 +494,18 @@
         },
         cancelar()
         {
-            this.proyecto.carrera     = null;
-            this.proyecto.Nombres            = null;
             this.proyecto.subestado   = null;
             this.proyecto.comentario  = null;
             this.proyecto.dingreso    = null;
             this.proyecto.ddevolucion = null;
             this.proyecto.aingreso    = null;
             this.proyecto.adevolucion = null;
+        },
+        cancelar2()
+        {
+            setTimeout(() => {
+                                location.reload();
+                            }, 1000);
         },
         borrar()
         {
@@ -509,7 +542,7 @@
                         title: data.data.title,
                         text: data.data.text,
                         showConfirmButton: false,
-                        timer: 3000
+                        timer: 5000
                     });
                     this.$Progress.finish();
                     setTimeout(() => {

@@ -152,7 +152,7 @@
             <tr class="izquierdo t15 arial">
                 <td width="80" class="arriba"><b>ASUNTO</b></td>
                 <td width="40" class="arriba"><b>:</b></td>
-                <td class="justificado" style="line-height : 20px;"><b>{{"Inf. Observaciones de Jurados de Tesis"}}</b></td>
+                <td class="justificado" style="line-height : 20px;"><b>{{"Inf. Observaciones del Docente Evaluador"}}</b></td>
             </tr>
             <tr>
                 <td>&nbsp;</td>
@@ -160,7 +160,7 @@
             <tr class="izquierdo t15 arial">
                 <td width="80" class="arriba"><b>Ref.</b></td>
                 <td width="40" class="arriba"><b></b></td>
-                <td class="justificado subrayado" style="line-height : 20px;"><b>{{"MEMO MÚLTIPLE No              - UNU - FIS e IC - C.G y T."}}</b></td>
+                <td class="justificado subrayado" style="line-height : 20px;"><b>{{"MEMO No              - UNU - FIS e IC - C.G y T."}}</b></td>
             </tr>
             <tr>
                 <td>&nbsp;</td>
@@ -173,14 +173,14 @@
         </table>
         <hr>
         <p class="justificado t15 arial" style="line-height : 20px;">              Es grato dirigirme a usted, en atención al informe de observaciones recibido por 
-            parte de los Jurados de la Tesis titulada: 
+            parte del docente evaluador de la Tesis titulada: 
         <b>{{'"'.mb_strtoupper($proyecto["NombreTesis"]).'"  '}}</b>, de la carrera profesional de {{$proyecto["Escuela"]}}.
         
-        <p class="justificado t15 arial">              Se informa que <a class="subrayado negrita">tienen Observaciones</a> y para poder continuar con los trámites 
-            correspondientes, deberán subsanar y/o responder al Jurado a través de un informe y presentación correciones. Cabe indicar que cuentan con 
+        <p class="justificado t15 arial">              Se informa que <a class="subrayado negrita">tiene Observaciones</a> y para poder continuar con los trámites 
+            correspondientes, deberán subsanar y/o responder al docente evaluador a través de un informe y presentación de correciones. Cabe indicar que cuenta(n) con 
             <a class="subrayado">20 días calendarios</a> para la presentación del levantamiento de sus observaciones.
         </p>  
-        <p class="justificado t15 arial">Sin otro particular y agradeciendo la atención a la presente quedo de ustedes.
+        <p class="justificado t15 arial">Sin otro particular y agradeciendo la atención a la presente quedo de usted(es).
         </p>   
         <br><br>
         <table class="centrartabla t15 arial">

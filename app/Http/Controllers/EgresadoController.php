@@ -118,6 +118,11 @@ class EgresadoController extends Controller
             $historial  =   historialproyecto::join("proyecto_tesis AS p","historial.IDProyecto","p.IDProyecto")
                             ->select("historial.*","p.IDCarrera")
                             ->where("historial.IDProyecto",$ID)->orderBy("id","DESC")->first();
+            $numHistorial   = historialproyecto::where("historial.IDProyecto",$ID)->get()->count();
+            if($numHistorial == 0)
+            {
+                $numHistorial = "No existe revisión creada";
+            }            
             if (isset($historial)) 
             {
                 $fechaasignacion    = $historial->Fecha_Entrega_doc;
@@ -144,7 +149,7 @@ class EgresadoController extends Controller
                 $dni        = $objDocente->DNI;
             }
         }          
-        return compact("comentarios","subestado","tesistas","ID","docente","dni","fechaasignacion","historial","fechadevdoc","fechaentalu","fechadevalu");
+        return compact("numHistorial","comentarios","subestado","tesistas","ID","docente","dni","fechaasignacion","historial","fechadevdoc","fechaentalu","fechadevalu");
     }
     /**
      * Show the form for editing the specified resource.
