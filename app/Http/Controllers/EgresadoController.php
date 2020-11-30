@@ -157,9 +157,10 @@ class EgresadoController extends Controller
      * @param  \App\egresado  $egresado
      * @return \Illuminate\Http\Response
      */
-    public function edit(egresado $egresado)
+    public function egresadoCount()
     {
-        //
+        $egresados = Egresado::get()->count();
+        return compact('egresados');
     }
 
     /**

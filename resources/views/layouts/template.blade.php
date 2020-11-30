@@ -128,7 +128,7 @@
     <!-- Brand Logo -->
     <router-link to="/home" class="brand-link">
         <!--<img src="" alt="GyT" class="brand-image img-circle elevation-3"> -->
-      <span class="brand-text font-weight-light">Grados y Títulos</span>
+      <span class="brand-text font-weight-bold">Grados y Títulos</span>
     </router-link>
 
     <!-- Sidebar -->
@@ -140,7 +140,7 @@
         </div>
         <div class="info">
 			<a href="#" class="d-block">
-			PERFIL
+			ADMIN
 			</a>
         </div>
       </div>
@@ -239,7 +239,7 @@
                     </li>
                   </ul>
                 </li>
-                <li class="nav-item has-treeview">
+                <!-- <li class="nav-item has-treeview">
                   <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-folder"></i>
                     <p>
@@ -261,7 +261,7 @@
                       </router-link>
                     </li>
                   </ul>
-                </li>
+                </li>-->
                 <li class="nav-item has-treeview">
                   <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-folder"></i>

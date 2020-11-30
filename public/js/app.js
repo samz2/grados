@@ -2736,6 +2736,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2744,11 +2755,19 @@ __webpack_require__.r(__webpack_exports__);
         nombre: null,
         tipo: null
       },
-      tipo: null
+      tipo: null,
+      tramites: null,
+      egresados: null,
+      expeditob: null,
+      expeditot: null
     };
   },
   mounted: function mounted() {},
-  created: function created() {},
+  created: function created() {
+    this.countTramites();
+    this.countEgresados();
+    this.countExpeditos();
+  },
   methods: {
     agregar: function agregar() {
       axios.post("addUser", {
@@ -2761,26 +2780,63 @@ __webpack_require__.r(__webpack_exports__);
         console.log(error);
       });
     },
-    getAutenticacion: function getAutenticacion() {
+    countTramites: function countTramites() {
       var _this = this;
 
       this.$Progress.start();
-      axios.get("autenticacion").then(function (data) {
-        _this.tipo = data.data.id;
+      axios.get("numTramites").then(function (data) {
+        _this.tramites = data.data.expeditos;
 
         _this.$Progress.finish();
       })["catch"](function (error) {
         console.log(error);
       });
     },
-    getMatriculados: function getMatriculados() {
+    countEgresados: function countEgresados() {
       var _this2 = this;
 
       this.$Progress.start();
-      axios.get("getNummatriculados").then(function (data) {
-        _this2.matriculados = data.data.cantidad;
+      axios.get("numEgresados").then(function (data) {
+        _this2.egresados = data.data.egresados;
 
         _this2.$Progress.finish();
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    countExpeditos: function countExpeditos() {
+      var _this3 = this;
+
+      this.$Progress.start();
+      axios.get("numExpeditos").then(function (data) {
+        _this3.expeditob = data.data.expeditosb;
+        _this3.expeditot = data.data.expeditost;
+
+        _this3.$Progress.finish();
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    getAutenticacion: function getAutenticacion() {
+      var _this4 = this;
+
+      this.$Progress.start();
+      axios.get("autenticacion").then(function (data) {
+        _this4.tipo = data.data.id;
+
+        _this4.$Progress.finish();
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    getMatriculados: function getMatriculados() {
+      var _this5 = this;
+
+      this.$Progress.start();
+      axios.get("getNummatriculados").then(function (data) {
+        _this5.matriculados = data.data.cantidad;
+
+        _this5.$Progress.finish();
 
         console.log(data.data);
       })["catch"](function (error) {
@@ -53482,91 +53538,163 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "container" }, [
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-lg-3 col-6" }, [
+        _c(
+          "div",
+          { staticClass: "small-box bg-info" },
+          [
+            _c("div", { staticClass: "inner" }, [
+              _c("h3", [_vm._v(_vm._s(_vm.tramites))]),
+              _vm._v(" "),
+              _c("p", [_vm._v("Trámites")])
+            ]),
+            _vm._v(" "),
+            _vm._m(0),
+            _vm._v(" "),
+            _c(
+              "router-link",
+              {
+                staticClass: "small-box-footer",
+                attrs: { to: "#", title: "Trámites en proceso" }
+              },
+              [_c("i", { staticClass: "fas fa-minus-circle" })]
+            )
+          ],
+          1
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-lg-3 col-6" }, [
+        _c(
+          "div",
+          { staticClass: "small-box bg-success" },
+          [
+            _c("div", { staticClass: "inner" }, [
+              _c("h3", [_vm._v(_vm._s(_vm.egresados))]),
+              _vm._v(" "),
+              _c("p", [_vm._v("Egresados")])
+            ]),
+            _vm._v(" "),
+            _vm._m(1),
+            _vm._v(" "),
+            _c(
+              "router-link",
+              {
+                staticClass: "small-box-footer",
+                attrs: {
+                  to: "egresados",
+                  title: "Ir a interfaz de egresados.."
+                }
+              },
+              [
+                _vm._v("\n                Más "),
+                _c("i", { staticClass: "fas fa-arrow-circle-right" })
+              ]
+            )
+          ],
+          1
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-lg-3 col-6" }, [
+        _c(
+          "div",
+          { staticClass: "small-box bg-warning" },
+          [
+            _c("div", { staticClass: "inner" }, [
+              _c("h3", [_vm._v(_vm._s(_vm.expeditob))]),
+              _vm._v(" "),
+              _c("p", [_vm._v("Bachilleres")])
+            ]),
+            _vm._v(" "),
+            _vm._m(2),
+            _vm._v(" "),
+            _c(
+              "router-link",
+              {
+                staticClass: "small-box-footer",
+                attrs: {
+                  to: "expeditobachiller",
+                  title: "Ir a interfaz de expeditos bachiller.."
+                }
+              },
+              [
+                _vm._v("\n                Más "),
+                _c("i", { staticClass: "fas fa-arrow-circle-right" })
+              ]
+            )
+          ],
+          1
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-lg-3 col-6" }, [
+        _c(
+          "div",
+          { staticClass: "small-box bg-indigo" },
+          [
+            _c("div", { staticClass: "inner" }, [
+              _c("h3", [_vm._v(_vm._s(_vm.expeditot))]),
+              _vm._v(" "),
+              _c("p", [_vm._v("Titulados")])
+            ]),
+            _vm._v(" "),
+            _vm._m(3),
+            _vm._v(" "),
+            _c(
+              "router-link",
+              {
+                staticClass: "small-box-footer",
+                attrs: {
+                  to: "expeditotitulo",
+                  title: "Ir a interfaz de expeditos título.."
+                }
+              },
+              [
+                _vm._v("\n                Más "),
+                _c("i", { staticClass: "fas fa-arrow-circle-right" })
+              ]
+            )
+          ],
+          1
+        )
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-lg-3 col-6" }, [
-          _c("div", { staticClass: "small-box bg-info" }, [
-            _c("div", { staticClass: "inner" }, [
-              _c("h3", [_vm._v("150")]),
-              _vm._v(" "),
-              _c("p", [_vm._v("Trámites")])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "icon" }, [
-              _c("i", { staticClass: "ion ion-bag" })
-            ]),
-            _vm._v(" "),
-            _c("a", { staticClass: "small-box-footer", attrs: { href: "#" } }, [
-              _vm._v("Mas "),
-              _c("i", { staticClass: "fas fa-arrow-circle-right" })
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-lg-3 col-6" }, [
-          _c("div", { staticClass: "small-box bg-success" }, [
-            _c("div", { staticClass: "inner" }, [
-              _c("h3", [_vm._v("53")]),
-              _vm._v(" "),
-              _c("p", [_vm._v("Egresados")])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "icon" }, [
-              _c("i", { staticClass: "ion ion-university" })
-            ]),
-            _vm._v(" "),
-            _c("a", { staticClass: "small-box-footer", attrs: { href: "#" } }, [
-              _vm._v("Mas "),
-              _c("i", { staticClass: "fas fa-arrow-circle-right" })
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-lg-3 col-6" }, [
-          _c("div", { staticClass: "small-box bg-warning" }, [
-            _c("div", { staticClass: "inner" }, [
-              _c("h3", [_vm._v("44")]),
-              _vm._v(" "),
-              _c("p", [_vm._v("Bachilleres")])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "icon" }, [
-              _c("i", { staticClass: "ion ion-university" })
-            ]),
-            _vm._v(" "),
-            _c("a", { staticClass: "small-box-footer", attrs: { href: "#" } }, [
-              _vm._v("Mas "),
-              _c("i", { staticClass: "fas fa-arrow-circle-right" })
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-lg-3 col-6" }, [
-          _c("div", { staticClass: "small-box bg-indigo" }, [
-            _c("div", { staticClass: "inner" }, [
-              _c("h3", [_vm._v("65")]),
-              _vm._v(" "),
-              _c("p", [_vm._v("Titulados")])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "icon" }, [
-              _c("i", { staticClass: "ion ion-university" })
-            ]),
-            _vm._v(" "),
-            _c("a", { staticClass: "small-box-footer", attrs: { href: "#" } }, [
-              _vm._v("Mas "),
-              _c("i", { staticClass: "fas fa-arrow-circle-right" })
-            ])
-          ])
-        ])
-      ])
+    return _c("div", { staticClass: "icon" }, [
+      _c("i", { staticClass: "ion ion-clipboard" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "icon" }, [
+      _c("i", { staticClass: "ion ion-person-stalker" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "icon" }, [
+      _c("i", { staticClass: "ion ion-university" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "icon" }, [
+      _c("i", { staticClass: "ion ion-ribbon-a" })
     ])
   }
 ]

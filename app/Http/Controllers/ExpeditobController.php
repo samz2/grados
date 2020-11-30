@@ -183,7 +183,15 @@ class ExpeditobController extends Controller
      */
     public function show(expeditob $expeditob)
     {
-        //
+        $expeditos = Expeditob::where('Estado',2)->get()->count();
+        return compact('expeditos');
+    }
+
+    public function countExpeditos()
+    {
+        $expeditosb = Expeditob::where([['Estado',3],['Tipo','BACHILLER']])->get()->count();
+        $expeditost = Expeditob::where([['Estado',3],['Tipo','TITULO']])->get()->count();
+        return compact('expeditosb','expeditost');
     }
 
     /**

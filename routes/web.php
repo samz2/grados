@@ -18,11 +18,13 @@ Route::get('/', function () {
 Route::get('/correo', function () {
     return view('templates.correo');
 });
+
 Route::get('/oficioproyecto','DocumentosController@oficioProyecto');
 Route::get('/informeTesista','DocumentosController@informeTesista');
 Route::get('/memoAsesor','DocumentosController@memoAsesor');
 Route::get('/oficioAsesor','DocumentosController@oficioAsesor');
 Route::get('/oficioConformidad','DocumentosController@oficioConformidad');
+
 
 Auth::routes();
 
@@ -55,6 +57,7 @@ Route::get('/getTesistas/{d}/{c}','EgresadoController@getTesistas');
 Route::get('/getAlumnos','EgresadoController@alumnos');
 Route::post('/updateEgresado','EgresadoController@update');
 Route::get('/deleteEgresado/{id}','EgresadoController@destroy');
+Route::get('/numEgresados','EgresadoController@egresadoCount');
 
 Route::post('/addDocente','DocentesController@store');
 Route::post('/updateDocente','DocentesController@update');
@@ -75,6 +78,8 @@ Route::get('/getExpeditos','ExpeditobController@index');
 Route::get('/updateExpedito/{id}/{tipo}','ExpeditobController@update');
 Route::post('/updateExpedito','ExpeditobController@edit');
 Route::post('/updateExpeditoT','ExpeditobController@editTitulo');
+Route::get('/numTramites','ExpeditobController@show');
+Route::get('/numExpeditos','ExpeditobController@countExpeditos');
 
 Route::post('/addTramite','TramiteController@store');
 Route::get('/getTramites','TramiteController@index');

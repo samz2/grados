@@ -5,14 +5,19 @@
             <!-- small box -->
             <div class="small-box bg-info">
               <div class="inner">
-                <h3>150</h3>
+                <h3>{{tramites}}</h3>
 
                 <p>Trámites</p>
               </div>
               <div class="icon">
-                <i class="ion ion-bag"></i>
+                <i class="ion ion-clipboard"></i>
               </div>
-              <a href="#" class="small-box-footer">Mas <i class="fas fa-arrow-circle-right"></i></a>
+              <!--<a href="#" class="small-box-footer">-->
+                <router-link to="#" class="small-box-footer" title="Trámites en proceso">
+                    <i class="fas fa-minus-circle"></i>      
+                </router-link>  
+              <!--</a>-->
+              <!--<a href="#" class="small-box-footer"><i class="fas fa-arrow-circle-right"></i></a>-->
             </div>
           </div>
           <!-- ./col -->
@@ -20,14 +25,16 @@
             <!-- small box -->
             <div class="small-box bg-success">
               <div class="inner">
-                <h3>53</h3>
+                <h3>{{egresados}}</h3>
 
                 <p>Egresados</p>
               </div>
               <div class="icon">
-                <i class="ion ion-university"></i>
+                <i class="ion ion-person-stalker"></i>
               </div>
-              <a href="#" class="small-box-footer">Mas <i class="fas fa-arrow-circle-right"></i></a>
+              <router-link to="egresados" class="small-box-footer" title="Ir a interfaz de egresados..">
+                    Más <i class="fas fa-arrow-circle-right"></i>      
+                </router-link>  
             </div>
           </div>
           <!-- ./col -->
@@ -35,14 +42,16 @@
             <!-- small box -->
             <div class="small-box bg-warning">
               <div class="inner">
-                <h3>44</h3>
+                <h3>{{expeditob}}</h3>
 
                 <p>Bachilleres</p>
               </div>
               <div class="icon">
                 <i class="ion ion-university"></i>
               </div>
-              <a href="#" class="small-box-footer">Mas <i class="fas fa-arrow-circle-right"></i></a>
+              <router-link to="expeditobachiller" class="small-box-footer" title="Ir a interfaz de expeditos bachiller..">
+                    Más <i class="fas fa-arrow-circle-right"></i>      
+                </router-link>  
             </div>
           </div>
           <!-- ./col -->
@@ -50,14 +59,16 @@
             <!-- small box -->
             <div class="small-box bg-indigo">
               <div class="inner">
-                <h3>65</h3>
+                <h3>{{expeditot}}</h3>
 
                 <p>Titulados</p>
               </div>
               <div class="icon">
-                <i class="ion ion-university"></i>
+                <i class="ion ion-ribbon-a"></i>
               </div>
-              <a href="#" class="small-box-footer">Mas <i class="fas fa-arrow-circle-right"></i></a>
+              <router-link to="expeditotitulo" class="small-box-footer" title="Ir a interfaz de expeditos título..">
+                    Más <i class="fas fa-arrow-circle-right"></i>      
+                </router-link> 
             </div>
           </div>
           <!-- ./col -->
@@ -74,7 +85,11 @@
               nombre:null,
               tipo:null,
 			      },
-            tipo:null
+            tipo:null,
+            tramites:null,
+            egresados:null,
+            expeditob:null,
+            expeditot:null
 		}
 	},
 	mounted()
@@ -83,7 +98,9 @@
 	},
 	created()
     {
-		
+      this.countTramites();
+      this.countEgresados();
+      this.countExpeditos();
     },
     methods: {
     agregar()
@@ -99,6 +116,46 @@
 				console.log(error);	
 			})
 		},
+    countTramites()
+    {
+            this.$Progress.start();
+                  axios.get("numTramites")
+                  .then(data=>
+                  {
+                      this.tramites = data.data.expeditos;
+                      this.$Progress.finish();
+                  }
+                  ).catch(error=>{
+                      console.log(error);
+                  });
+    },
+    countEgresados()
+    {
+            this.$Progress.start();
+                  axios.get("numEgresados")
+                  .then(data=>
+                  {
+                      this.egresados = data.data.egresados;
+                      this.$Progress.finish();
+                  }
+                  ).catch(error=>{
+                      console.log(error);
+                  });
+    },
+    countExpeditos()
+    {
+            this.$Progress.start();
+                  axios.get("numExpeditos")
+                  .then(data=>
+                  {
+                      this.expeditob = data.data.expeditosb;
+                      this.expeditot = data.data.expeditost;
+                      this.$Progress.finish();
+                  }
+                  ).catch(error=>{
+                      console.log(error);
+                  });
+    },
 		getAutenticacion()
         {
             this.$Progress.start();
