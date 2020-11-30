@@ -62,7 +62,7 @@ class SesionController extends Controller
      */
     public function show($num)
     {
-        $objSesion  = Sesion::select("Fecha","Tipo")->where("IDSesion",$num)->get();
+        $objSesion  = Sesion::select("Fecha","Tipo")->where("NumSesion",$num)->get();
         $fecha  = "";
         $tipo   = "";
         if(count($objSesion) > 0)

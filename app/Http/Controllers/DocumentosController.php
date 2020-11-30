@@ -156,7 +156,7 @@ class DocumentosController extends Controller
     {
         $expeditos =   Expeditob::join("egresado AS e","expedito.CodigoAlumno","e.Codigo")
                         ->join("sesion AS s","expedito.NumSesion","s.NumSesion")
-                        ->join("titulacion AS t","expedito.CodigoAlumno","t.CodAlumno")
+                        //->join("titulacion AS t","expedito.CodigoAlumno","t.CodAlumno")
                         ->select("expedito.*","s.*","e.Paterno as Paterno","e.Materno as Materno", "e.Nombre")
                         ->where([
                             ["expedito.Tipo","BACHILLER"],

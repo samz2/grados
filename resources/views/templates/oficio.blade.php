@@ -180,8 +180,8 @@
                 <td class="center">______________________________</td>
             </tr>
             <tr>
-                <!--<td class="center negrita" style="font-size: 11px">Ing. Mg. {{$dato3->Presidente}}</td>-->
-                <td class="center negrita" style="font-size: 11px">Ing. Mg. DIANA MARGARITA DIAZ ESTRADA</td>
+                <td class="center negrita" style="font-size: 11px">Ing. Mg. {{$dato3->Presidente}}</td>
+                <!--<td class="center negrita" style="font-size: 11px">Ing. Mg. DIANA MARGARITA DIAZ ESTRADA</td>-->
             </tr>            
         </table>
         <div class="center t10 arial">{{"PRESIDENTE"}}</div>
