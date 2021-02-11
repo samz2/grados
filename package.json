@@ -24,7 +24,7 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
-        "apexcharts": "^3.19.0",
+        "apexcharts": "^3.24.0",
         "sweetalert2": "^7.33.1",
         "vue-apexcharts": "^1.5.3",
         "vue-progressbar": "^0.7.5",
